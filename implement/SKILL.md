@@ -30,7 +30,8 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   vérification.
 - **Commandes** : trouver la commande de vérification complète et celle qui lance un seul fichier
   de test (`CLAUDE.md`, `package.json`, `mise.toml`, `Makefile`, `justfile`…). Si elles sont
-  introuvables, les demander avant la première tâche.
+  introuvables, les demander avant la première tâche. Le skill `tdd` en a besoin aussi : les
+  avoir trouvées ici évite de les chercher deux fois.
 - **Arbre de travail** (`git status`) :
   - propre : on continue ;
   - sale : montrer le diff. S'il correspond visiblement à la tâche du point de reprise (une
@@ -67,15 +68,12 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
 
 1. Annoncer la vague et lister ses tâches non cochées.
 2. Pour chaque tâche, dans l'ordre :
-   - **Code : TDD, toujours.** Écrire d'abord le test qui exprime ce que la tâche doit obtenir. Le
-     lancer seul et **constater l'échec pour la bonne raison** : une assertion qui échoue, pas un
-     import manquant (si le code n'existe pas, créer d'abord un squelette vide). Écrire ensuite le
-     code minimal, relancer et constater le succès, puis refactoriser en gardant le test vert.
-     Montrer la commande et la ligne d'échec, puis celle du succès. Un test qui n'a jamais échoué
-     ne prouve rien : c'est pour ça que l'échec doit se voir.
-   - **Correctif** : commencer par le test qui **reproduit** le bug.
+   - **Code : TDD, toujours.** Appeler le Skill tool avec « tdd » (une fois par exécution suffit)
+     et suivre sa boucle pour chaque tâche de code : test rouge vu échouer pour la bonne raison,
+     code minimal, vert, refactorisation. Les interfaces à tester se déduisent de la tâche et de
+     ses critères : le plan étant validé, on ne les redemande pas, sauf réelle ambiguïté.
    - **Nommer le test** d'après le critère ou la règle qu'il prouve, avec son numéro si le plan en
-     donne un (`AC-2`, `COM-04`).
+     donne un (`AC-2`, `COM-04`), pour qu'on retrouve la preuve de chaque critère dans le bilan.
    - **Ce qui ne se teste pas automatiquement** (configuration, documentation, rendu, CSS,
      animation) : faire la vérification que le dépôt prévoit à la place (essai dans le navigateur
      avec captures, détecteur de design, commande de contrôle) et la décrire dans le compte rendu

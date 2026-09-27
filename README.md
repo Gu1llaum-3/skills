@@ -7,6 +7,7 @@ Mes skills personnels pour Claude Code.
 | `brainstorming` | Cadrer un projet et produire un cahier des charges |
 | `design` | Définir la direction visuelle, prototype HTML et DESIGN.md |
 | `implement` | Exécuter un plan validé vague par vague, en TDD |
+| `tdd` | Écrire du code en TDD avec des tests qui valent la peine (appelé par `implement`) |
 | `naming` | Trouver un nom de projet et vérifier sa disponibilité |
 
 ## Installation
@@ -27,3 +28,7 @@ cd ~/git/skills && git pull
 ```
 
 Ajouter un nouveau skill : créer `mon-skill/SKILL.md` dans le dépôt, puis relancer `./install.sh`.
+
+## Crédits
+
+`tdd` est adapté du skill `tdd` de [Matt Pocock](https://github.com/mattpocock/skills) (MIT), voir `tdd/CREDITS.md`.
