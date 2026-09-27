@@ -1,6 +1,6 @@
 ---
 name: tickets
-description: Lire, créer et relier des tickets et des specs dans le gestionnaire du projet — fichiers locaux, GitHub Issues, GitLab Issues, Jira ou un autre outil décrit par l'utilisateur — et configurer ce gestionnaire (section « ## Tickets » du CLAUDE.md). Utilise ce skill dès que l'utilisateur veut créer, lire, lister ou fermer un ticket ou une issue, demande où sont ses tickets ou veut changer de gestionnaire ; et chaque fois qu'un autre skill (to-spec, to-tickets, implement) doit publier ou lire un ticket.
+description: Lire, créer et relier des tickets et des specs dans le gestionnaire du projet — fichiers locaux, GitHub Issues, GitLab Issues, Jira ou un autre outil décrit par l'utilisateur — et configurer ce gestionnaire (section Tickets du CLAUDE.md). Utilise ce skill dès que l'utilisateur veut créer, lire, lister ou fermer un ticket ou une issue, demande où sont ses tickets ou veut changer de gestionnaire ; et chaque fois qu'un autre skill (to-spec, to-tickets, implement) doit publier ou lire un ticket.
 ---
 
 # Tickets

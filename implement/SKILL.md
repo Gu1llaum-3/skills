@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Exécute un plan markdown déjà validé, ou un ticket (fichier local, issue GitHub ou GitLab, Jira) dont il tire un plan, vague par vague. Tout le code s'écrit en TDD, chaque tâche fait un commit avec sa case cochée, et le plan est vérifié et mis en pause à la fin de chaque vague ; on reprend exactement là où on s'est arrêté. Utilise ce skill dès que l'utilisateur veut implémenter, exécuter, dérouler ou reprendre un plan (« implémente le plan », « lance la vague 2 », « on attaque le jalon T2 », « continue le plan », « enchaîne les vagues », « implémente le ticket #42 », « on attaque PROJ-123 »), même s'il ne dit pas « /implement ». Ne pas l'utiliser pour écrire, relire ou modifier un plan.
+description: Exécute un plan markdown déjà validé, ou un ticket (fichier local, issue GitHub ou GitLab, Jira) dont il tire un plan, vague par vague. Tout le code s'écrit en TDD, chaque tâche fait un commit avec sa case cochée, et le plan est vérifié et mis en pause à la fin de chaque vague ; on reprend exactement là où on s'est arrêté. Utilise ce skill dès que l'utilisateur veut implémenter, exécuter, dérouler ou reprendre un plan (« implémente le plan », « lance la vague 2 », « on attaque le jalon T2 », « continue le plan », « enchaîne les vagues », « implémente le ticket 42 », « on attaque PROJ-123 »), même s'il ne dit pas « /implement ». Ne pas l'utiliser pour écrire, relire ou modifier un plan.
 argument-hint: "[chemin du plan | ticket] [turbo]"
 ---
 
