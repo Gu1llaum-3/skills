@@ -24,7 +24,8 @@ for s in "${skills[@]}"; do
   if [ -L "$dst" ]; then
     rm "$dst"
   elif [ -e "$dst" ]; then
-    backup="$dst.bak.$(date +%Y%m%d%H%M%S)"
+    mkdir -p "$HOME/.claude/skills-backup"
+    backup="$HOME/.claude/skills-backup/$s.$(date +%Y%m%d%H%M%S)"
     mv "$dst" "$backup"
     echo "  ancien dossier sauvegardé dans $backup"
   fi
