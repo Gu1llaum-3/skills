@@ -8,6 +8,14 @@ REPO="$(cd "$(dirname "$0")" && pwd)"
 DEST="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 mkdir -p "$DEST"
 
+# Supprime les liens vers des skills du dépôt qui ont été renommés ou supprimés
+for link in "$DEST"/*; do
+  if [ -L "$link" ] && [ ! -e "$link" ] && [[ "$(readlink "$link")" == "$REPO"/* ]]; then
+    rm "$link"
+    echo "  lien cassé supprimé : $(basename "$link")"
+  fi
+done
+
 if [ $# -gt 0 ]; then
   skills=("$@")
 else
