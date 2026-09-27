@@ -1,0 +1,174 @@
+[
+ {
+  "q": "prépare-moi le plan pour l'issue 58, je veux l'attaquer demain matin",
+  "ok": [
+   "plan"
+  ]
+ },
+ {
+  "q": "j'ai le ticket docs/tickets/export-csv/02-filtres.md, regarde le code et dis-moi comment tu t'y prendrais avant qu'on code quoi que ce soit",
+  "ok": [
+   "plan"
+  ]
+ },
+ {
+  "q": "fais le plan du jalon 1 de docs/cahier-des-charges.md",
+  "ok": [
+   "plan"
+  ]
+ },
+ {
+  "q": "on reprend docs/plans/notifications.md là où on s'était arrêté hier",
+  "ok": [
+   "implement"
+  ]
+ },
+ {
+  "q": "vas-y, implémente le ticket PROJ-231, le plan est validé",
+  "ok": [
+   "implement"
+  ]
+ },
+ {
+  "q": "le calcul de TVA est faux quand le panier contient un produit à 5,5 %, corrige-le en commençant par un test qui reproduit le bug",
+  "ok": [
+   "tdd"
+  ]
+ },
+ {
+  "q": "mes tests mockent tout et cassent à chaque refacto alors que rien ne change pour l'utilisateur, aide-moi à les réécrire proprement",
+  "ok": [
+   "tdd"
+  ]
+ },
+ {
+  "q": "ok on a bien discuté de cette histoire de favoris, on ne le fera pas maintenant, garde une trace propre de tout ce qu'on a décidé pour plus tard",
+  "ok": [
+   "to-spec"
+  ]
+ },
+ {
+  "q": "transforme ce qu'on vient de décider sur l'import Shopify en spec",
+  "ok": [
+   "to-spec"
+  ]
+ },
+ {
+  "q": "découpe docs/specs/multi-comptes.md en tickets",
+  "ok": [
+   "to-tickets"
+  ]
+ },
+ {
+  "q": "le cahier des charges est validé, crée-moi les issues GitHub du jalon 2 avec les dépendances entre elles",
+  "ok": [
+   "to-tickets"
+  ]
+ },
+ {
+  "q": "crée un ticket pour ce bug : le bouton d'export ne fait rien sur Safari 17",
+  "ok": [
+   "tickets"
+  ]
+ },
+ {
+  "q": "où est-ce qu'on range les tickets sur ce projet ? je voudrais passer de GitHub à Jira",
+  "ok": [
+   "tickets"
+  ]
+ },
+ {
+  "q": "ferme l'issue 12, c'est réglé depuis le dernier déploiement",
+  "ok": [
+   "tickets"
+  ]
+ },
+ {
+  "q": "j'envisage de réécrire tout le backend Django en Go, challenge-moi sérieusement avant que je me lance",
+  "ok": [
+   "interview"
+  ]
+ },
+ {
+  "q": "pose-moi des questions sur mon idée d'appli de covoiturage pour les clubs de sport, je veux être sûr de ne pas foncer tête baissée",
+  "ok": [
+   "interview"
+  ]
+ },
+ {
+  "q": "compare-moi les bibliothèques de génération de PDF pour Node, gratuites et encore maintenues",
+  "ok": [
+   "research"
+  ]
+ },
+ {
+  "q": "renseigne-toi sur les obligations RGPD et HDS pour stocker des données de santé dans une appli mobile",
+  "ok": [
+   "research"
+  ]
+ },
+ {
+  "q": "on a décidé de passer de MongoDB à Postgres pour les transactions, note cette décision proprement",
+  "ok": [
+   "adr"
+  ]
+ },
+ {
+  "q": "pourquoi on avait choisi SQLite déjà ? je crois qu'on l'avait noté quelque part dans les docs",
+  "ok": [
+   "adr",
+   "none"
+  ]
+ },
+ {
+  "q": "j'ai une idée de feature pour mon appli de recettes : un mode hors ligne",
+  "ok": [
+   "interview",
+   "none"
+  ]
+ },
+ {
+  "q": "explique-moi la différence entre un mock et un stub",
+  "ok": [
+   "none"
+  ]
+ },
+ {
+  "q": "fais un commit avec un message propre pour ce que je viens de changer",
+  "ok": [
+   "none"
+  ]
+ },
+ {
+  "q": "résume-moi ce que fait src/auth/session.ts",
+  "ok": [
+   "none"
+  ]
+ },
+ {
+  "q": "c'est quoi la syntaxe Prisma pour renommer une colonne dans une migration ?",
+  "ok": [
+   "none"
+  ]
+ },
+ {
+  "q": "écris un README pour ce projet",
+  "ok": [
+   "none"
+  ]
+ },
+ {
+  "q": "relis le code de ma PR avant que je merge",
+  "ok": [
+   "none",
+   "autre:code-review"
+  ]
+ },
+ {
+  "q": "ajoute un tri par date sur la liste des commandes, c'est trois lignes",
+  "ok": [
+   "none",
+   "tdd"
+  ]
+ }
+]
