@@ -1,5 +1,5 @@
 ---
-name: design-cadrage
+name: design
 description: Cadrage du design visuel d'une application avant de la coder — site vitrine, landing page, SaaS, back-office, dashboard, application mobile. Pose des questions par tours courts, recherche le secteur et les concurrents sur le web, propose des directions visuelles contrastées, produit un prototype HTML d'une seule page puis un DESIGN.md avec les tokens (couleurs, typos, espacements). Utilise ce skill dès que l'utilisateur veut trouver, définir, choisir ou refaire le design, le look, le style, l'identité visuelle, la charte ou l'UI d'un projet, ou demande une maquette ou un prototype visuel, même s'il ne prononce pas le mot « design ».
 ---
 

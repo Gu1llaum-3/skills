@@ -5,16 +5,16 @@ Mes skills personnels pour Claude Code.
 | Skill | Rôle |
 |---|---|
 | `brainstorming` | Cadrer un projet et produire un cahier des charges |
-| `design-cadrage` | Définir la direction visuelle, prototype HTML et DESIGN.md |
+| `design` | Définir la direction visuelle, prototype HTML et DESIGN.md |
 | `implement` | Exécuter un plan validé vague par vague, en TDD |
-| `nommage` | Trouver un nom de projet et vérifier sa disponibilité |
+| `naming` | Trouver un nom de projet et vérifier sa disponibilité |
 
 ## Installation
 
 ```bash
 git clone git@github.com:Gu1llaum-3/skills.git ~/git/skills
 ~/git/skills/install.sh            # tous les skills
-~/git/skills/install.sh nommage    # ou seulement certains
+~/git/skills/install.sh naming    # ou seulement certains
 ```
 
 Chaque skill est lié par symlink dans `~/.claude/skills/` : une modification

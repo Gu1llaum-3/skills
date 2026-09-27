@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Installe les skills de ce dépôt dans ~/.claude/skills via des liens symboliques.
 # Usage : ./install.sh            -> tous les skills
-#         ./install.sh nommage    -> seulement ceux cités
+#         ./install.sh naming     -> seulement ceux cités
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")" && pwd)"

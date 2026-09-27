@@ -1,5 +1,5 @@
 ---
-name: nommage
+name: naming
 description: Trouver un nom pour un projet — application web, SaaS, application mobile, outil CLI, site, produit, bibliothèque — et vérifier qu'il est réellement disponible. Cadre le besoin (en explorant le projet s'il existe déjà), cartographie les noms du secteur, génère des candidats par familles (mot anglais, mot étranger ou ancien porteur de sens, composé, néologisme…), les filtre et les note, puis vérifie domaines, GitHub, npm et homonymes via un script, et fournit les liens de recherche de marques. Utilise ce skill dès que l'utilisateur cherche un nom, veut renommer un projet, hésite entre plusieurs noms, demande si un nom est libre ou déjà pris, ou cherche un nom de domaine, même s'il ne dit pas explicitement « nommage ».
 ---
 
