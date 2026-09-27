@@ -1,11 +1,13 @@
 ---
 name: brainstorming
-description: Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code. Le skill lit l'existant (POC, maquettes, notes), se documente sur le domaine, présente une synthèse critique, puis mène un entretien interactif par séries de questions à choix (AskUserQuestion). Il termine par un cahier des charges avec les points à valider et les questions ouvertes, puis tranche ces points par des recherches. À utiliser dès que l'utilisateur décrit une idée de projet et veut « réfléchir », « aller plus loin dans le détail », « poser des questions », « cadrer », « faire un cahier des charges » ou « brainstormer ». C'est aussi le bon skill quand il partage un prototype en demandant ce qu'on en pense avant de développer, même s'il ne prononce pas le mot brainstorming.
+description: Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code. Le skill lit l'existant (POC, maquettes, notes), se documente sur le domaine, présente une synthèse critique, puis mène un entretien interactif par séries de questions à choix (AskUserQuestion). Il termine par un cahier des charges avec les points à valider et les questions ouvertes, puis tranche ces points par des recherches. À utiliser dès que l'utilisateur décrit une idée de projet et veut « réfléchir », « aller plus loin dans le détail », « poser des questions », « cadrer », « faire un cahier des charges » ou « brainstormer ». C'est aussi le bon skill quand il partage un prototype en demandant ce qu'on en pense avant de développer, même s'il ne prononce pas le mot brainstorming. Pour une nouvelle fonctionnalité dans un projet qui existe déjà, utiliser plutôt feature.
 ---
 
 # Brainstorming : de l'idée au cahier des charges
 
 L'objectif est d'aider l'utilisateur à transformer une idée, souvent accompagnée d'un prototype, en un **cahier des charges validé**, sans écrire de code. Ce qui a de la valeur : montrer qu'on a compris le domaine mieux qu'une lecture rapide, poser les bonnes questions au bon moment, et rendre chaque décision traçable.
+
+Ce skill sert aux **nouveaux projets**. Pour une idée de fonctionnalité dans un projet existant, appelle le Skill tool avec « feature ».
 
 Réponds dans la langue de l'utilisateur. Le déroulé comporte six étapes. Adapte-le si l'utilisateur en saute une ou en demande une autre.
 

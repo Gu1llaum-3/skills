@@ -1,7 +1,7 @@
 ---
 name: implement
-description: Exécute un plan markdown déjà validé, vague par vague. Tout le code s'écrit en TDD, chaque tâche fait un commit avec sa case cochée, et le plan est vérifié et mis en pause à la fin de chaque vague ; on reprend exactement là où on s'est arrêté. Utilise ce skill dès que l'utilisateur veut implémenter, exécuter, dérouler ou reprendre un plan (« implémente le plan », « lance la vague 2 », « on attaque le jalon T2 », « continue le plan », « enchaîne les vagues »), même s'il ne dit pas « /implement ». Ne pas l'utiliser pour écrire, relire ou modifier un plan.
-argument-hint: "[chemin du plan] [turbo]"
+description: Exécute un plan markdown déjà validé, ou un ticket (fichier local, issue GitHub ou GitLab, Jira) dont il tire un plan, vague par vague. Tout le code s'écrit en TDD, chaque tâche fait un commit avec sa case cochée, et le plan est vérifié et mis en pause à la fin de chaque vague ; on reprend exactement là où on s'est arrêté. Utilise ce skill dès que l'utilisateur veut implémenter, exécuter, dérouler ou reprendre un plan (« implémente le plan », « lance la vague 2 », « on attaque le jalon T2 », « continue le plan », « enchaîne les vagues », « implémente le ticket #42 », « on attaque PROJ-123 »), même s'il ne dit pas « /implement ». Ne pas l'utiliser pour écrire, relire ou modifier un plan.
+argument-hint: "[chemin du plan | ticket] [turbo]"
 ---
 
 # Implémenter un plan
@@ -21,6 +21,16 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   dépôt (`docs/plans/`, `plans/`, ou ce que dit `CLAUDE.md`) les plans qui ont encore des cases non
   cochées, puis `plan.md` à la racine. S'il y a un seul candidat, le prendre et le nommer. S'il y en
   a plusieurs, demander lequel. S'il n'y en a aucun, s'arrêter et le dire.
+- **Partir d'un ticket** : si l'argument désigne un ticket (`#42`, une URL d'issue, `PROJ-123`,
+  un fichier de `docs/tickets/`), appeler le Skill tool avec « tickets » pour le lire, avec sa
+  spec parente.
+  - S'il a des bloquants non terminés, s'arrêter et les citer.
+  - Chercher un plan qui cite déjà ce ticket (reprise) ; sinon en tirer un, dans le dossier de
+    plans du dépôt (par défaut `docs/plans/<slug-du-ticket>.md`) : les critères du ticket
+    deviennent les critères du plan, et chaque tâche en prouve un ou plusieurs. Noter l'origine
+    en tête (`Origine : ticket #42`).
+  - Montrer ce plan et demander le feu vert : c'est lui qui vaut validation. Écrire alors la ligne
+    « Validé par … le … ».
 - **Validé** : une ligne datée du type « Validé par … le … », ou un accord explicite dans la
   conversation. Sinon, s'arrêter : un plan brouillon ne s'exécute pas, parce qu'on coderait des
   décisions que personne n'a prises.
@@ -115,6 +125,10 @@ Quand la dernière vague est verte :
    - ce qui reste hors plan.
    Passer le statut à « terminé » et commiter selon le format du dépôt (par défaut
    `docs: record plan outcome`).
+   **Plan tiré d'un ticket** : en local, passer le ticket à « terminé » et cocher ses critères
+   atteints, dans ce même commit. Sur un gestionnaire distant, ne rien fermer : prévoir
+   `Closes #<numéro>` (ou l'équivalent) dans le résumé de fusion, et proposer un commentaire de
+   bilan sur le ticket.
 2. **Proposer un résumé de fusion**, tiré du plan : trois lignes de résumé, les critères atteints,
    une ligne par décision, le lien vers le plan. Il sert de description de pull request si le dépôt
    en utilise, sinon de récapitulatif avant la fusion.
@@ -146,5 +160,6 @@ Quand la dernière vague est verte :
 - Cocher une tâche dont le test ou la vérification n'a pas tourné.
 - Masquer le code de retour d'une vérification, ou annoncer du vert sans l'avoir lu.
 - Commiter sur la branche principale, sauf demande explicite du propriétaire notée dans le plan.
-- Fusionner dans la branche de départ, pousser ou ouvrir une pull request sans feu vert explicite.
+- Fusionner dans la branche de départ, pousser, ouvrir une pull request, ou commenter ou fermer un
+  ticket distant, sans feu vert explicite.
 - Enchaîner les vagues sans pause quand ce n'est pas demandé.
