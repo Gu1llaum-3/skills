@@ -21,21 +21,20 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   dépôt (`docs/plans/`, `plans/`, ou ce que dit `CLAUDE.md`) les plans qui ont encore des cases non
   cochées, puis `plan.md` à la racine. S'il y a un seul candidat, le prendre et le nommer. S'il y en
   a plusieurs, demander lequel. S'il n'y en a aucun, s'arrêter et le dire.
-- **Partir d'un ticket** : si l'argument désigne un ticket (`#42`, une URL d'issue, `PROJ-123`,
-  un fichier de `docs/tickets/`), appeler le Skill tool avec « tickets » pour le lire, avec sa
-  spec parente.
-  - S'il a des bloquants non terminés, s'arrêter et les citer.
-  - Chercher un plan qui cite déjà ce ticket (reprise) ; sinon en tirer un, dans le dossier de
-    plans du dépôt (par défaut `docs/plans/<slug-du-ticket>.md`) : les critères du ticket
-    deviennent les critères du plan, et chaque tâche en prouve un ou plusieurs. Noter l'origine
-    en tête (`Origine : ticket #42`).
-  - Montrer ce plan et demander le feu vert : c'est lui qui vaut validation. Écrire alors la ligne
-    « Validé par … le … ».
+- **Partir d'un ticket** : si l'argument désigne un ticket (un numéro d'issue, une URL,
+  `PROJ-123`, un fichier de `docs/tickets/`) :
+  - chercher dans le dossier de plans un plan qui cite déjà ce ticket : c'est une reprise, on le
+    prend ;
+  - sinon, appeler le Skill tool avec « tickets » pour le lire. S'il a des bloquants non terminés,
+    s'arrêter et les citer ;
+  - sinon, appeler le Skill tool avec « plan » en lui donnant le ticket. Il confronte le ticket au
+    code, rédige le plan et le fait valider ; on reprend ensuite ici avec ce plan.
 - **Validé** : une ligne datée du type « Validé par … le … », ou un accord explicite dans la
   conversation. Sinon, s'arrêter : un plan brouillon ne s'exécute pas, parce qu'on coderait des
   décisions que personne n'a prises.
 - **Conventions du dépôt** : lire `CLAUDE.md`, `README.md` et les documents qu'ils désignent comme
-  obligatoires pour le type de tâche (par exemple un `DESIGN.md` avant un travail d'interface).
+  obligatoires pour le type de tâche (par exemple `docs/design/DESIGN.md` avant un travail d'interface), et les titres des ADR
+  (`docs/adr/`) pour ne pas contredire une décision passée sans le savoir.
   Relever ce qu'ils disent des branches, des commits, des tests, des essais manuels et de la
   vérification.
 - **Commandes** : trouver la commande de vérification complète et celle qui lance un seul fichier
@@ -44,6 +43,8 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   avoir trouvées ici évite de les chercher deux fois.
 - **Arbre de travail** (`git status`) :
   - propre : on continue ;
+  - seul le plan est nouveau ou modifié (il vient d'être rédigé ou validé) : on continue, il sera
+    commité avec la première tâche ;
   - sale : montrer le diff. S'il correspond visiblement à la tâche du point de reprise (une
     exécution interrompue), proposer de repartir de ce travail ou de l'écarter ; sinon, attendre.
     Ne jamais jeter ni commiter des modifications qu'on n'a pas faites.
@@ -148,6 +149,9 @@ Quand la dernière vague est verte :
   silence : un écart non dit rend le plan faux pour tous ceux qui le reliront.
 - **Une idée en route** : l'écrire en une ligne dans une section « Hors plan » du plan, puis
   continuer. Elle ne se code pas.
+- **Une décision d'architecture prise en route** (difficile à défaire, surprenante sans contexte,
+  issue d'un vrai compromis) : la noter dans le journal du plan et proposer de l'enregistrer en
+  appelant le Skill tool avec « adr ».
 - **Un changement destructeur** (suppression de données, migration irréversible, écriture vers un
   service tiers, réécriture de l'historique) : demander une confirmation explicite, même si le
   plan le prévoit.

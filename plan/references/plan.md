@@ -8,7 +8,7 @@ tient souvent en une seule vague.
 # <Titre de la feature>
 
 > Statut : à valider
-> Origine : <cadrage du JJ/MM/AAAA | ticket #42 | spec docs/specs/<feature>.md>
+> Origine : <cadrage du JJ/MM/AAAA | ticket 42 (lien) | spec docs/specs/<feature>.md | jalon N de docs/cahier-des-charges.md>
 
 ## Objectif
 
@@ -46,5 +46,6 @@ Règles :
   une couche (« le modèle », puis « l'API », puis « l'écran »).
 - Chaque tâche cite le ou les critères qu'elle prouve.
 - Une tâche = un commit : si une tâche paraît demander plusieurs commits, la découper.
+- Les refactorisations préalables repérées dans le code viennent en premières tâches.
 - Plusieurs vagues seulement quand une pause d'essai par l'utilisateur a du sens entre elles.
 - Après l'accord, remplacer « Statut : à valider » par « Validé par <nom> le <JJ/MM/AAAA> ».

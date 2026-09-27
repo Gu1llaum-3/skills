@@ -1,6 +1,6 @@
 # Banque de questions
 
-Pioche, ne déroule pas tout. 3 à 4 questions par tour, toujours avec un défaut proposé.
+Pioche, ne déroule pas tout : 4 questions au maximum par série, toujours avec un défaut proposé.
 Ne pose jamais une question dont la réponse figure déjà dans les fichiers du projet.
 
 ## Communes à tous les projets

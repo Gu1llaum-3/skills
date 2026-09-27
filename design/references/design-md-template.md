@@ -6,7 +6,7 @@ Suis cette structure. Reste concis : c'est une référence que Claude relira à 
 # DESIGN.md — [Nom du projet]
 
 > Référence visuelle du projet. Toute interface doit utiliser ces tokens et respecter ces principes.
-> Prototype de référence : `design/prototype.html`
+> Prototype de référence : `docs/design/prototype.html`
 
 ## Intention
 

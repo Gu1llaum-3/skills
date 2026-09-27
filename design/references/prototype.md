@@ -4,7 +4,7 @@ Le prototype sert à **valider une direction**, pas à livrer du code de product
 
 ## Format
 
-- Fichier unique : `design/prototype.html`. Crée le dossier `design/` si besoin.
+- Fichier unique : `docs/design/prototype.html`. Crée le dossier `docs/design/` si besoin.
 - HTML + CSS + JS vanilla dans le même fichier. Pas de framework, pas de build, pas de CDN hors Google Fonts.
 - Doit s'ouvrir par double-clic, hors connexion (à part les polices).
 

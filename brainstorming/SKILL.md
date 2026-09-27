@@ -1,20 +1,22 @@
 ---
 name: brainstorming
-description: Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code. Le skill lit l'existant (POC, maquettes, notes), se documente sur le domaine, présente une synthèse critique, puis mène un entretien interactif par séries de questions à choix (AskUserQuestion). Il termine par un cahier des charges avec les points à valider et les questions ouvertes, puis tranche ces points par des recherches. À utiliser dès que l'utilisateur décrit une idée de projet et veut « réfléchir », « aller plus loin dans le détail », « poser des questions », « cadrer », « faire un cahier des charges » ou « brainstormer ». C'est aussi le bon skill quand il partage un prototype en demandant ce qu'on en pense avant de développer, même s'il ne prononce pas le mot brainstorming. Pour une nouvelle fonctionnalité dans un projet qui existe déjà, utiliser plutôt feature.
+description: Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code, jusqu'à un cahier des charges validé dans docs/.
+argument-hint: "[idée ou dossier du prototype]"
+disable-model-invocation: true
 ---
 
 # Brainstorming : de l'idée au cahier des charges
 
 L'objectif est d'aider l'utilisateur à transformer une idée, souvent accompagnée d'un prototype, en un **cahier des charges validé**, sans écrire de code. Ce qui a de la valeur : montrer qu'on a compris le domaine mieux qu'une lecture rapide, poser les bonnes questions au bon moment, et rendre chaque décision traçable.
 
-Ce skill sert aux **nouveaux projets**. Pour une idée de fonctionnalité dans un projet existant, appelle le Skill tool avec « feature ».
+Ce skill sert aux **nouveaux projets**. Pour une idée de fonctionnalité dans un projet existant, c'est `/feature` qu'il faut.
 
 Réponds dans la langue de l'utilisateur. Le déroulé comporte six étapes. Adapte-le si l'utilisateur en saute une ou en demande une autre.
 
 ## 1. S'imprégner : l'existant et le domaine
 
 - **Lis en entier** ce que l'utilisateur fournit : prototype, maquettes, notes, code. Un prototype contient souvent des choix implicites (mécaniques, ton, public visé) qu'il faut repérer.
-- **Documente-toi sur le domaine** : méthode, bonnes pratiques, public, contraintes réglementaires. Appuie-toi sur tes connaissances, et fais une recherche web quand un point est pointu ou récent. Cite tes sources quand tu en utilises.
+- **Documente-toi sur le domaine** : méthode, bonnes pratiques, public, contraintes réglementaires. Appuie-toi sur tes connaissances, et appelle le Skill tool avec « research » quand un point est pointu ou récent : la recherche tourne en arrière-plan pendant que tu avances. Cite tes sources.
 - Ne propose pas encore de solution technique, et n'écris pas de code : l'utilisateur veut d'abord être compris.
 
 ## 2. Restituer : une synthèse critique
@@ -28,33 +30,22 @@ Présente en un message court et structuré :
 
 Cette partie crée la confiance. Un écart précis et justifié vaut mieux que dix compliments.
 
-## 3. L'entretien interactif
+## 3. L'entretien
 
-Pose les questions avec l'outil **AskUserQuestion**, par **séries thématiques de 4 questions au maximum**. Enchaîne 3 à 5 séries, de la plus structurante à la plus fine :
+Appelle le Skill tool avec « interview », en 3 à 5 séries thématiques, de la plus structurante à la plus fine :
 
-1. **Contexte** : utilisateur final, niveau de départ, plateformes cibles.
-2. **Cœur du produit** : mécaniques principales, progression, gestion des erreurs, motivation.
-3. **Contenu et expérience** : univers, graphisme, audio, accessibilité, profils.
-4. **Technique et contraintes** : stack, stockage, hors ligne, sécurité, publication prévue ou non.
-5. **Répartition et suite** : qui produit quoi (contenus, visuels, textes), et la prochaine étape (proposer le cahier des charges en recommandé).
+1. **Le besoin** : le problème réel, pour qui, ce qui existe déjà ailleurs, la version la plus simple qui vaudrait le coup.
+2. **Contexte** : utilisateur final, niveau de départ, plateformes cibles.
+3. **Cœur du produit** : mécaniques principales, progression, gestion des erreurs, motivation.
+4. **Contenu et expérience** : univers, graphisme, audio, accessibilité, profils.
+5. **Technique et contraintes** : stack, stockage, hors ligne, sécurité, publication prévue ou non.
+6. **Répartition et suite** : qui produit quoi (contenus, visuels, textes), et la prochaine étape (proposer le cahier des charges en recommandé).
 
-Règles pour rédiger les questions :
-
-- 2 à 4 options, **mutuellement exclusives**, avec une description qui donne le **compromis** (« plus de travail, mais un rendu bien meilleur »).
-- Mets l'option que tu recommandes **en premier**, suivie de « (Recommandé) ». N'en recommande pas quand c'est une vraie affaire de goût.
-- Utilise `multiSelect` seulement quand les choix se cumulent (par exemple la liste des jeux à inclure).
-- N'invente pas d'option « Autre » : l'outil l'ajoute tout seul.
-
-Entre deux séries :
-
-- **Lis attentivement les réponses libres.** C'est là que l'utilisateur livre ses meilleures idées : systèmes de récompense, contraintes cachées, visions à long terme. Reprends-les telles quelles, et fais-en le sujet de la série suivante.
-- **Repère les tensions** entre deux réponses (par exemple « des étoiles de 1 à 3 » et « jamais punitif »). Signale-les en une phrase, puis pose la question qui les résout.
-- Si l'utilisateur demande ton avis (« sauf si tu me le déconseilles »), donne une **recommandation franche en une ou deux lignes** avant la série suivante.
-- Ne repose pas une question déjà tranchée. Si une réponse change la cible (« pars du principe que c'est un débutant, pour d'autres utilisateurs plus tard »), applique-la à tout ce qui suit.
+Saute les thèmes que l'existant a déjà tranchés. Les choix structurants et difficiles à défaire (stack, stockage, hébergement) sont souvent de bons candidats à un ADR : l'entretien les proposera.
 
 ## 4. Rédiger le cahier des charges
 
-Écris `CAHIER_DES_CHARGES.md` à la racine du projet, en suivant la structure de `references/modele-cahier-des-charges.md`. Adapte les sections au projet : un site web n'a pas besoin de système de récompenses.
+Écris `docs/cahier-des-charges.md`, en suivant la structure de `references/modele-cahier-des-charges.md`. Adapte les sections au projet : un site web n'a pas besoin de système de récompenses.
 
 - Transforme chaque réponse en **décision concrète et chiffrée quand c'est possible** : un seuil, une durée, un ordre, un nom de fichier.
 - Là où tu as dû supposer, marque **[À valider]**, et regroupe ces points dans une section « Questions ouvertes » numérotée en fin de document. C'est ce qui permet à l'utilisateur de répondre point par point.
@@ -69,9 +60,7 @@ L'utilisateur répond en général en liste numérotée. Pour chaque point :
 
 - **Décision directe** : intègre-la dans le document.
 - **Point délégué** (« je te laisse rechercher, gratuit si possible ») :
-  - fais une vraie recherche web et compare 2 ou 3 options sur les critères demandés (coût, qualité, licence, hors ligne…) ;
-  - donne **une recommandation, et une solution de repli** ;
-  - cite tes sources ;
+  - appelle le Skill tool avec « research », avec les critères demandés (coût, qualité, licence, hors ligne…) : il compare 2 ou 3 options, donne **une recommandation et une solution de repli**, et laisse une note sourcée dans `docs/research/` ;
   - rends le choix réversible dans l'architecture (une interface, un fichier de configuration) quand l'utilisateur dit qu'il pourra changer.
 - **Réponse ambiguë** : applique l'interprétation la plus plausible, **et dis-la explicitement** dans ta réponse.
 - **Règle permanente** (« ça sera le cas pour toute l'application ! ») : ajoute-la comme section dédiée du cahier des charges et, si possible, en mémoire (de type feedback), pour qu'elle s'applique aux sessions futures.
@@ -90,7 +79,13 @@ Vérifie chaque ressource proposée (bibliothèque, police, voix, image) au mome
 
 ## 6. Proposer la suite
 
-Termine toujours par une ou deux prochaines étapes concrètes, avec celle que tu recommandes. Par exemple : « détailler le contenu étape par étape » ou « initialiser le projet ». N'enchaîne pas sur le développement sans l'accord de l'utilisateur.
+Termine toujours par une ou deux prochaines étapes concrètes, avec celle que tu recommandes. En général :
+
+- **planifier le premier jalon** : appeler le Skill tool avec « plan » sur `docs/cahier-des-charges.md`, puis `implement` ;
+- **découper les jalons en tickets** : appeler le Skill tool avec « to-tickets », si le projet se fera sur de nombreuses sessions ;
+- **définir l'identité visuelle** avec `/design`, ou **trouver un nom** avec `/naming`, si ce n'est pas encore fait.
+
+N'enchaîne pas sur le développement sans l'accord de l'utilisateur.
 
 ## Ton
 

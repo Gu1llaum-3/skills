@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: Transformer ce qui a été décidé dans la conversation (souvent après feature ou brainstorming) en spec, puis en un ou plusieurs tickets dans le gestionnaire du projet — fichiers locaux, GitHub, GitLab, Jira ou autre — et, si le projet en a un, l'inscrire dans ROADMAP.md. Pas de nouvel entretien : une synthèse fidèle de ce qui est déjà tranché. Utilise ce skill dès que l'utilisateur veut « en faire une spec », « en faire un ticket », « mettre ça de côté pour plus tard », « garder une trace de ce qu'on a décidé » ou « préparer le travail pour une autre session ».
+description: Transformer ce qui a été décidé dans la conversation (souvent après feature ou brainstorming) en spec, puis en un ou plusieurs tickets dans le gestionnaire du projet — fichiers locaux, GitHub, GitLab, Jira ou autre — et, si le projet en a un, l'inscrire dans ROADMAP.md. Pas de nouvel entretien, seulement une synthèse fidèle de ce qui est déjà tranché. Utilise ce skill dès que l'utilisateur veut « en faire une spec », « en faire un ticket », « mettre ça de côté pour plus tard », « garder une trace de ce qu'on a décidé » ou « préparer le travail pour une autre session ».
 ---
 
 # To-spec : des décisions à la spec
@@ -18,6 +18,7 @@ Réponds dans la langue de l'utilisateur.
   sources.
 - Si l'utilisateur donne une référence (un ticket, un fichier), la lire en entier.
 - Le code, si ce n'est pas déjà fait : ce qui existe, le vocabulaire du projet, les conventions.
+- Les titres des ADR (`docs/adr/`) : la spec ne contredit pas une décision passée sans le dire.
 - Le gestionnaire de tickets : appeler le Skill tool avec « tickets ». Il lit la section
   `## Tickets` du `CLAUDE.md`, ou la fait configurer la première fois.
 
@@ -54,6 +55,9 @@ Selon la configuration de `tickets` :
   spec.
 
 Sur un gestionnaire distant, rien n'est publié sans accord explicite sur le contenu final.
+
+Une décision de la spec difficile à défaire, surprenante sans contexte et issue d'un vrai
+compromis se propose en ADR, via le skill `adr`.
 
 ## 5. Roadmap et suite
 

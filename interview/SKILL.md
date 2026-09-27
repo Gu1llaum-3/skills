@@ -1,0 +1,79 @@
+---
+name: interview
+description: Mener un entretien critique pour éclaircir une idée, un besoin ou un plan jusqu'à ce que plus rien d'important ne soit supposé en silence — le besoin est questionné avant la solution, les faits sont cherchés (code, docs, web) et seules les décisions sont posées à l'utilisateur, par séries de questions à choix avec une recommandation. Utilise ce skill quand l'utilisateur veut qu'on le challenge, qu'on lui pose des questions sur son idée ou qu'on mette son plan à l'épreuve (« challenge-moi », « pose-moi des questions », « grill me »), et chaque fois qu'un autre skill (brainstorming, feature, design, naming, plan) demande un entretien.
+---
+
+# Entretien
+
+L'entretien sert à atteindre une **compréhension partagée** : ce qu'on construit, pour qui,
+pourquoi, et ce qu'on a décidé de ne pas faire. Il est critique par principe : une idée qui
+ressort de l'entretien sans avoir été questionnée n'a pas été cadrée.
+
+Réponds dans la langue de l'utilisateur. Le skill appelant peut fixer un cadre (nombre de séries,
+thèmes à couvrir) : le respecter.
+
+## 1. Questionner le besoin avant la solution
+
+Avant de parler de comment, s'assurer du quoi et du pourquoi :
+
+- **Le problème réel** : qu'est-ce qui ne va pas aujourd'hui, pour qui, à quelle fréquence ?
+- **Et si on ne le faisait pas ?** Si la réponse est « pas grand-chose », le dire.
+- **La version la plus simple** qui résoudrait l'essentiel du problème.
+- **L'existant** : une fonction du projet, une bibliothèque, un outil qui le fait déjà.
+
+Être franc : si une idée paraît mauvaise, trop coûteuse pour ce qu'elle apporte, ou en conflit
+avec une décision passée (`docs/adr/`), le dire avec la raison, puis proposer mieux. Pas de
+compliments de politesse ; un enthousiasme sincère en une phrase pour une bonne idée, oui.
+
+## 2. Les faits se cherchent, les décisions se demandent
+
+Ne jamais demander à l'utilisateur ce qu'on peut trouver soi-même : dans le code, les docs, les
+ADR, les tickets, sur le web. Pour une recherche qui prend du temps, lancer un sous-agent (code)
+ou appeler le Skill tool avec « research » (web), et **ne pas bloquer** : poser tout de suite
+les questions qui n'en dépendent pas.
+
+Les **décisions** appartiennent à l'utilisateur : chacune lui est posée, et on attend sa réponse.
+
+## 3. Travailler par séries
+
+Voir l'idée comme un **arbre de décisions** : chaque décision ouvre celles qui en dépendent. La
+**frontière**, ce sont les décisions dont tous les prérequis sont tranchés : celles qu'on peut
+poser maintenant sans deviner une réponse qu'on n'a pas encore.
+
+- À chaque série, poser la frontière, de la décision la plus structurante à la plus fine. Une
+  question qui dépend d'une réponse encore ouverte attend la série suivante.
+- Utiliser l'outil **AskUserQuestion**, 4 questions au maximum par appel. Si la frontière en
+  compte plus, garder les plus structurantes.
+- **2 à 4 options mutuellement exclusives**, dont la description donne le **compromis** (« plus
+  de travail, mais un rendu bien meilleur »).
+- **L'option recommandée en premier**, suivie de « (Recommandé) ». Pas de recommandation quand
+  c'est une vraie affaire de goût.
+- `multiSelect` seulement quand les choix se cumulent ; `preview` pour comparer des maquettes,
+  du code ou des schémas. Pas d'option « Autre » : l'outil l'ajoute.
+- Une question vraiment ouverte (« raconte-moi comment tu t'en sers aujourd'hui ») se pose en
+  texte, une ou deux à la fois, jamais sous forme de choix artificiels.
+
+## 4. Entre deux séries
+
+- **Lire attentivement les réponses libres** : c'est là que l'utilisateur livre ses meilleures
+  idées et ses contraintes cachées. Les reprendre telles quelles, et en faire le sujet de la série
+  suivante.
+- **Signaler les tensions** entre deux réponses en une phrase, puis poser la question qui les
+  résout.
+- Si l'utilisateur demande un avis, donner une **recommandation franche** en une ou deux lignes.
+- Ne jamais reposer une question tranchée. Si une réponse change la cible, l'appliquer à tout ce
+  qui suit.
+- **Voie rapide** : si l'utilisateur dit « fais vite » ou « je te fais confiance », résumer les
+  hypothèses restantes en quelques lignes et s'arrêter là.
+
+## 5. Conclure
+
+L'entretien est fini quand la frontière est vide : chaque branche visitée, rien d'important
+supposé en silence. Alors :
+
+1. **Récapituler** les décisions, une ligne chacune, et les questions encore ouvertes.
+2. **Demander confirmation** : « Ai-je bien compris ? » Rien ne s'exécute avant l'accord.
+3. **ADR** : pour chaque décision difficile à défaire, surprenante sans contexte et issue d'un vrai
+   compromis, proposer de l'enregistrer en appelant le Skill tool avec « adr ».
+
+Le skill appelant reprend ensuite la main avec ce récapitulatif.

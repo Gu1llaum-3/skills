@@ -1,9 +1,9 @@
-# Gabarit NOMMAGE.md
+# Gabarit de docs/nommage.md
 
 Concis : c'est la trace de la décision, pour s'en souvenir dans six mois et ne pas rouvrir le débat sans raison. 40 à 80 lignes.
 
 ````markdown
-# NOMMAGE.md — <Nom retenu>
+# Nommage : <Nom retenu>
 
 > Décision du <date>. Nom précédent / nom de code : <le cas échéant>
 
