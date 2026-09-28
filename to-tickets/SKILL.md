@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: Découper une spec, un cahier des charges, un plan ou la conversation en tickets par tranches verticales, chacun avec ses critères d'acceptation et les tickets qui le bloquent, puis les publier dans le gestionnaire du projet (fichiers locaux, GitHub, GitLab, Jira ou autre). Utilise ce skill dès que l'utilisateur veut découper du travail en tickets, en issues ou en tâches à répartir sur plusieurs sessions (« découpe en tickets », « crée les issues », « fais-en des tickets »), et quand to-spec lui passe une spec à découper.
+description: Découper une spec, un cahier des charges, un plan ou la conversation en tickets par tranches verticales, chacun avec ses critères d'acceptation et les tickets qui le bloquent, puis les publier dans le gestionnaire du projet (fichiers locaux, GitHub, GitLab, Jira ou autre) et les ranger dans un jalon de la roadmap. Ce skill fixe aussi le critère de taille (« tient en une session ») auquel les autres skills se réfèrent. Utilise ce skill dès que l'utilisateur veut découper du travail en tickets, en issues ou en tâches à répartir sur plusieurs sessions (« découpe en tickets », « crée les issues », « fais-en des tickets »), et quand to-spec lui passe une spec à découper.
 ---
 
 # To-tickets : découper en tranches verticales
@@ -15,10 +15,26 @@ Réponds dans la langue de l'utilisateur.
 
 - La source : la spec passée par `to-spec`, une référence donnée par l'utilisateur (la lire en
   entier, commentaires compris), un cahier des charges, ou la conversation.
+- **Un cahier des charges sans spec** dit quoi construire, pas comment : découper directement
+  obligerait à inventer les modules et les interfaces en route. Recommander de passer d'abord par
+  `to-spec` (AskUserQuestion), et ne découper le cahier des charges que si l'utilisateur le
+  demande.
 - Le gestionnaire : appeler le Skill tool avec « tickets » pour connaître sa configuration.
 - Le code, si ce n'est pas déjà fait : ce qui existe, et les **refactorisations préalables** qui
   rendraient le travail plus simple. « Rendre le changement facile, puis faire le changement
   facile. »
+
+## Taille : ce qui tient en une session
+
+C'est le critère de référence du dépôt : `brainstorming`, `feature`, `to-spec` et `plan` s'y
+rapportent. Un travail tient en une session quand :
+
+- il se planifie en **un seul plan, d'une à trois vagues** ;
+- son diff se relit en une fois ;
+- rien ne l'arrête en cours de route : ni une décision attendue d'un tiers, ni un autre travail
+  à finir d'abord.
+
+Au-delà, il se découpe en tickets.
 
 ## 2. Découper
 
@@ -27,7 +43,7 @@ Des **tranches verticales** (balles traçantes) :
 - chaque ticket traverse toutes les couches nécessaires (données, logique, API, écran, tests),
   sur un chemin étroit mais complet : jamais « tout le schéma », puis « toute l'API » ;
 - un ticket terminé se montre ou se vérifie seul ;
-- un ticket tient dans une session de travail ;
+- un ticket tient en une session (voir « Taille ») ;
 - les refactorisations préalables viennent en premier ;
 - chaque ticket reprend les critères de la spec qu'il prouve (`AC-n`), et ses interfaces à
   tester.
@@ -56,7 +72,8 @@ Itérer jusqu'à l'accord.
 ## 4. Publier
 
 Avec le skill `tickets`, dans l'ordre des dépendances (bloquants d'abord), en rattachant chaque
-ticket à la spec s'il y en a une. Sur un gestionnaire distant, l'accord donné à l'étape 3 vaut
+ticket à la spec s'il y en a une, et au jalon de la roadmap : celui de la spec (un jalon du
+cahier des charges), sinon celui que l'utilisateur choisit, ou « plus tard ». Sur un gestionnaire distant, l'accord donné à l'étape 3 vaut
 pour ce contenu exact : toute modification ensuite se remontre.
 
 Terminer par la liste des tickets créés (références et liens), en signalant ceux qui peuvent
