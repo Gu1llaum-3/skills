@@ -1,7 +1,7 @@
 ---
 name: plan
-description: Rédiger le plan d'implémentation (vagues, tâches à cocher, critères d'acceptation, interfaces à tester) d'un ticket — fichier local, issue GitHub ou GitLab, Jira — d'une spec, d'un jalon de cahier des charges ou d'une feature qui vient d'être cadrée. Avant d'écrire, le skill confronte la source au code actuel et, si un choix technique reste ouvert, fait une recherche ; il signale ce qui est faux, manquant ou trop gros. Le plan est ensuite exécuté par implement. Utilise ce skill quand l'utilisateur veut planifier ou préparer un ticket (« prépare le plan du ticket 42 », « planifie PROJ-123 », « fais le plan du jalon 1 »), et chaque fois que feature, brainstorming ou implement demandent un plan.
-argument-hint: "[ticket | spec | cahier des charges]"
+description: Rédiger le plan d'implémentation (vagues, tâches à cocher, critères d'acceptation, interfaces à tester) d'un ticket — fichier local, issue GitHub ou GitLab, Jira — d'une spec, d'un jalon de cahier des charges, d'un POC ou d'une feature qui vient d'être cadrée. Avant d'écrire, le skill confronte la source au code actuel, fait une recherche quand le code ne suffit pas à savoir comment faire proprement, et challenge le besoin d'un ticket écrit hors de ces skills (produit, client, bug remonté) ; il signale ce qui est faux, manquant ou trop gros. Le plan est ensuite exécuté par implement. Utilise ce skill quand l'utilisateur veut planifier, préparer ou analyser un ticket avant de coder (« prépare le plan du ticket 42 », « planifie PROJ-123 », « analyse ce ticket de la PO », « fais le plan du jalon 1 »), et chaque fois que feature, brainstorming ou implement demandent un plan.
+argument-hint: "[ticket | spec | cahier des charges | POC]"
 ---
 
 # Plan
@@ -20,6 +20,9 @@ Réponds dans la langue de l'utilisateur.
   pas terminés, le signaler : le plan peut s'écrire, mais `implement` refusera de démarrer.
 - **Spec** ou **cahier des charges** : le lire en entier. Pour un cahier des charges, planifier
   un seul jalon à la fois : celui que l'utilisateur désigne, sinon le premier non réalisé.
+- **POC** (`docs/poc/<slug>.md`, appel depuis `/poc`) : un plan court, une seule vague si
+  possible, dont les tests portent sur l'hypothèse à valider. Le but est de répondre à la
+  question du POC, pas de livrer.
 - **Conversation** (appel depuis `feature`) : la synthèse qui vient d'être validée.
 - **Reprise** : si un plan de `docs/plans/` cite déjà cette source et a des cases non cochées, ne
   pas en écrire un autre : le dire et proposer de reprendre avec `implement`.
@@ -27,24 +30,62 @@ Réponds dans la langue de l'utilisateur.
 Lire aussi `CLAUDE.md`, les ADR (`docs/adr/`) et `docs/design/DESIGN.md` s'il y a de
 l'interface (ou `DESIGN.md` à la racine dans les projets plus anciens).
 
+### Provenance d'un ticket
+
+Un ticket écrit par `to-spec` ou `to-tickets` a été cadré avec le code sous les yeux ; un ticket
+écrit ailleurs (product owner, client, bug remonté) décrit souvent bien le besoin, mais pas
+comment l'implémenter proprement, et sa solution n'a pas été discutée par des devs. Le skill
+[`tickets`](../tickets/SKILL.md) liste les sections qui signent un ticket de ces skills
+(« Reconnaître un ticket écrit par ces skills ») :
+
+- **toutes présentes** : ticket **cadré**, revue normale ;
+- **aucune** : ticket **externe**, revue poussée (étapes 3, 4 et 6) ;
+- **en partie** : demander en une ligne d'où vient le ticket, plutôt que deviner.
+
+Lire aussi les commentaires et, si le gestionnaire le permet, l'historique : un ticket cadré
+dont le périmètre ou un critère a été changé ensuite par quelqu'un d'autre est traité comme
+externe **pour ce point-là**.
+
 ## 2. Confronter au code et au monde
 
 Si l'on vient de `feature` dans la même conversation, l'exploration et la recherche sont déjà
-faites : passer à l'étape 3. Sinon, lancer **dans le même message** :
+faites : passer à l'étape 3. Sinon, d'abord le code, puis la décision de chercher.
 
-- **Toujours, un sous-agent d'exploration du code**, avec pour mission de rapporter :
-  - si l'état de départ décrit par la source est toujours vrai ;
-  - où brancher le travail, et ce qui existe déjà et peut servir ;
-  - les interfaces publiques concernées et les tests voisins qui servent de modèle ;
-  - les refactorisations préalables qui rendraient le travail plus simple ;
-  - les risques : migration de données, impact sur d'autres modules, sécurité.
-- **Seulement si un choix technique reste ouvert** (bibliothèque, approche, domaine pointu que
-  la source ne tranche pas) : appeler le Skill tool avec « research ». Sinon, le dire en une
-  ligne (« pas de recherche : rien d'ouvert ») et ne rien lancer.
+**Toujours, un sous-agent d'exploration du code**, avec pour mission de rapporter :
+
+- si l'état de départ décrit par la source est toujours vrai ;
+- où brancher le travail, et ce qui existe déjà et peut servir ;
+- **si le dépôt a déjà un modèle pour ce type de travail** (un autre formulaire, un autre appel
+  d'API, un autre export), et où ;
+- les interfaces publiques concernées et les tests voisins qui servent de modèle ;
+- les refactorisations préalables qui rendraient le travail plus simple ;
+- les risques : migration de données, impact sur d'autres modules, sécurité.
+
+**Puis la recherche, si le code ne suffit pas** à savoir comment faire proprement. Appeler le
+Skill tool avec « research » dès qu'un de ces signaux apparaît, quelle que soit la provenance :
+
+- **première fois dans le dépôt** : aucun modèle existant (premier upload, premier temps réel,
+  premier paiement) ;
+- **plusieurs approches valables**, et le code ne tranche pas entre elles ;
+- **une dépendance à choisir** ;
+- **un domaine où l'erreur coûte cher** : sécurité, authentification, données personnelles,
+  accessibilité, performance ;
+- **une API externe ou une version récente**, dont le comportement a pu changer ;
+- **un modèle existant douteux** (API dépréciée, contournement) : le copier propagerait le
+  problème.
+
+Sinon, le dire en une ligne en citant le modèle trouvé (« pas de recherche : le dépôt fait déjà
+ça dans <module> »), pour que l'utilisateur puisse demander de chercher quand même. La recherche
+tourne en arrière-plan : commencer l'étape 3 sans l'attendre, et compléter quand elle revient.
+
+**Bug** : l'exploration cherche aussi la cause. Si elle n'est pas trouvée, le dire : le plan
+commencera par la reproduire et la localiser.
 
 ## 3. Restituer, de façon critique
 
-En un message court :
+En un message court. Pour un ticket **externe**, commencer par le besoin : quel problème le
+ticket résout, et si la solution demandée est la bonne réponse à ce problème, vu le code et la
+recherche.
 
 - ✅ ce qui est prêt : critères clairs, état de départ confirmé, briques réutilisables ;
 - ⚠️ ce qui ne va pas, concrètement : un critère manquant ou invérifiable, une contradiction avec
@@ -53,14 +94,21 @@ En un message court :
 - **un verdict** :
   - **prêt** : on planifie ;
   - **à ajuster** : quelques points à trancher, on les tranche à l'étape 4 ;
-  - **trop gros** : il ne tient pas en une session ; proposer de le redécouper avec
-    `to-tickets` ;
-  - **à revoir** : le besoin lui-même n'est pas clair ; proposer de repasser par `feature`.
+  - **trop gros** : il ne tient pas en une session (critère « Taille » de
+    [`to-tickets`](../to-tickets/SKILL.md)) ; proposer de le redécouper avec `to-tickets`. Si la
+    source est un cahier des charges, proposer `to-spec` d'abord, et corriger le verdict
+    d'envergure du cahier des charges (« gros ») pour que la prochaine session ne le rejoue pas ;
+  - **à revoir** : le besoin lui-même n'est pas clair. Ticket cadré : proposer de relancer
+    `/feature`. Ticket externe : les questions vont à celui qui l'a écrit (étape 6).
 
 ## 4. Trancher
 
-Pour les points ouverts, appeler le Skill tool avec « interview », en une ou deux séries au
-maximum : le ticket a déjà été discuté, on ne rouvre que ce qui l'exige.
+Pour les points ouverts, appeler le Skill tool avec « interview » :
+
+- **source cadrée** (ticket de ces skills, spec, juste après `feature`) : une ou deux séries au
+  maximum. Le travail a déjà été discuté, on ne rouvre que ce qui l'exige ;
+- **ticket externe** : sans plafond de séries, en commençant par le besoin. Ce qui ne peut être
+  tranché que par l'auteur du ticket est noté pour le commentaire de l'étape 6, pas deviné.
 
 Si une proposition est acceptée et change le contenu du ticket, proposer de mettre le ticket à
 jour avec le skill `tickets`, pour qu'il reste la référence. Une décision qui coche les trois
@@ -72,11 +120,20 @@ critères d'un ADR se propose via le skill `adr`.
 [references/plan.md](references/plan.md). Le plan ne contient que ce que la source et les
 décisions de l'étape 4 demandent : un ajout se propose, il ne s'y glisse pas.
 
+**Bug** : la première tâche est un test qui reproduit le bug et échoue. Si la cause n'est pas
+connue, une tâche de localisation la précède : réduire le cas, formuler des hypothèses, les
+vérifier une à une. Le test reste ensuite comme test de non-régression.
+
 ## 6. Valider et passer la main
 
 Montrer le plan et demander le feu vert. Une fois l'accord obtenu, remplacer « Statut : à
 valider » par « Validé par <nom> le <JJ/MM/AAAA> ». Le plan n'est pas commité ici : `implement`
 le commite avec la première tâche, sur sa branche.
+
+**Ticket externe** : proposer aussi un commentaire pour l'auteur du ticket, avec les questions
+restées ouvertes, les réserves sur la solution demandée et les choix faits à sa place. Le
+publier avec le skill `tickets`, seulement après accord sur le texte exact. S'il reste des
+questions bloquantes, le plan peut attendre la réponse.
 
 - Appelé par `implement` : lui rendre la main avec le chemin du plan.
 - Sinon : proposer de lancer l'implémentation, et sur accord appeler le Skill tool avec
@@ -85,6 +142,6 @@ le commite avec la première tâche, sur sa branche.
 ## Ce que ce skill ne fait jamais
 
 - Écrire un plan sans avoir confronté la source au code (sauf juste après `feature`).
-- Modifier un ticket en silence, ou le publier sans accord.
+- Modifier ou commenter un ticket en silence, ou le publier sans accord.
 - Ajouter au plan une tâche que ni la source ni l'utilisateur n'ont demandée.
 - Écrire du code.

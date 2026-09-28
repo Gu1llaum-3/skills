@@ -8,7 +8,7 @@ tient souvent en une seule vague.
 # <Titre de la feature>
 
 > Statut : à valider
-> Origine : <cadrage du JJ/MM/AAAA | ticket 42 (lien) | spec docs/specs/<feature>.md | jalon N de docs/cahier-des-charges.md>
+> Origine : <cadrage du JJ/MM/AAAA | ticket 42 (lien) | spec docs/specs/<feature>.md | jalon N de docs/cahier-des-charges.md | POC docs/poc/<slug>.md>
 
 ## Objectif
 
