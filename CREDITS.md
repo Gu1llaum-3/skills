@@ -12,6 +12,7 @@ Les skills suivants sont des adaptations en français de skills de Matt Pocock
 | `to-spec` | `skills/engineering/to-spec` |
 | `to-tickets` | `skills/engineering/to-tickets` |
 | `to-questionnaire` | `skills/productivity/to-questionnaire` |
+| `domain-modeling` | `skills/engineering/domain-modeling` (hors ADR) |
 | `wtf` | `skills/productivity/wait-what` |
 
 Ils sont distribués sous la licence suivante :

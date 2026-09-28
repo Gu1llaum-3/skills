@@ -158,6 +158,18 @@
   ]
  },
  {
+  "q": "dans ce projet on dit tantôt client, tantôt utilisateur, tantôt compte, tranche avec moi et note-le dans le glossaire",
+  "ok": [
+   "domain-modeling"
+  ]
+ },
+ {
+  "q": "ajoute le terme « avoir » au CONTEXT.md : c'est un montant dû au client après un retour",
+  "ok": [
+   "domain-modeling"
+  ]
+ },
+ {
   "q": "j'ai une idée de feature pour mon appli de recettes : un mode hors ligne",
   "ok": [
    "interview",

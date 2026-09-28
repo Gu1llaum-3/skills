@@ -11,6 +11,7 @@ Mes skills personnels pour Claude Code.
 | `/brainstorming` | Cadrer un nouveau projet jusqu'au cahier des charges |
 | `/feature` | Cadrer une idée de fonctionnalité dans un projet existant |
 | `/poc` | Vérifier vite qu'une idée tient debout, sur une seule question |
+| `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
 | `/wtf` | Un message n'est pas passé : le faire reformuler, avec le contexte et les mots du projet |
 | `/design` | Définir l'identité visuelle : prototype HTML et `DESIGN.md` |
 | `/naming` | Trouver un nom et vérifier sa disponibilité |
@@ -26,6 +27,7 @@ Mes skills personnels pour Claude Code.
 | `to-tickets` | Découper en tickets par tranches verticales, avec leurs dépendances |
 | `tickets` | Lire, publier et ranger les tickets et les jalons de la roadmap (local, GitHub, GitLab, Jira) |
 | `interview` | Entretien critique : le besoin d'abord, les faits cherchés, les décisions posées, les questions métier repérées |
+| `domain-modeling` | Tenir le glossaire du domaine (`CONTEXT.md`) : un mot tranché par concept |
 | `to-questionnaire` | Faire remplir par le métier les questions auxquelles tu ne peux pas répondre, puis réintégrer les réponses |
 | `research` | Recherche sur sources primaires, en arrière-plan, notée dans `docs/research/` |
 | `adr` | Enregistrer une décision d'architecture dans `docs/adr/` |
@@ -68,6 +70,8 @@ interview, research, adr et to-questionnaire sont appelés en cours de route.
 
 | Fichier | Produit par |
 |---|---|
+| `CLAUDE.md`, `ARCHITECTURE.md` | `onboard` |
+| `CONTEXT.md` | `domain-modeling`, appelé par `interview` |
 | `docs/cahier-des-charges.md` | `brainstorming` |
 | `docs/poc/` | `poc` |
 | `docs/design/DESIGN.md`, `docs/design/prototype.html` | `design` |
@@ -121,6 +125,6 @@ Les pistes à venir sont dans [TODO.md](TODO.md).
 
 Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
-`domain-modeling`), `research`, `to-spec`, `to-tickets`, `to-questionnaire` et `wtf`
-(d'après `wait-what`). L'organisation en skills qui s'appellent entre eux vient aussi de son
+`domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`
+et `wtf` (d'après `wait-what`). L'organisation en skills qui s'appellent entre eux vient aussi de son
 dépôt. Voir [CREDITS.md](CREDITS.md).
