@@ -11,6 +11,7 @@ Mes skills personnels pour Claude Code.
 | `/brainstorming` | Cadrer un nouveau projet jusqu'au cahier des charges |
 | `/feature` | Cadrer une idée de fonctionnalité dans un projet existant |
 | `/poc` | Vérifier vite qu'une idée tient debout, sur une seule question |
+| `/wtf` | Un message n'est pas passé : le faire reformuler, avec le contexte et les mots du projet |
 | `/design` | Définir l'identité visuelle : prototype HTML et `DESIGN.md` |
 | `/naming` | Trouver un nom et vérifier sa disponibilité |
 
@@ -120,5 +121,6 @@ Les pistes à venir sont dans [TODO.md](TODO.md).
 
 Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
-`domain-modeling`), `research`, `to-spec`, `to-tickets` et `to-questionnaire`. L'organisation en
-skills qui s'appellent entre eux vient aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).
+`domain-modeling`), `research`, `to-spec`, `to-tickets`, `to-questionnaire` et `wtf`
+(d'après `wait-what`). L'organisation en skills qui s'appellent entre eux vient aussi de son
+dépôt. Voir [CREDITS.md](CREDITS.md).
