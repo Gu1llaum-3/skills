@@ -46,7 +46,9 @@ Ce qui est explicitement exclu de cette version, et pourquoi si ce n'est pas év
 
 ## Questions ouvertes
 
-Les points **[À valider]**, numérotés. Section absente s'il n'y en a pas.
+Les points **[À valider]**, numérotés, puis les questions pour le métier au format du skill
+`to-questionnaire` (**[Métier : <destinataire>, bloquante]**, hypothèse, lien vers le
+questionnaire). Section absente s'il n'y en a pas.
 
 ## Notes
 

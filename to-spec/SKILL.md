@@ -27,7 +27,9 @@ Réponds dans la langue de l'utilisateur.
   `## Tickets` du `CLAUDE.md`, ou la fait configurer la première fois.
 
 **Pas d'entretien** sur le quoi. Si une décision essentielle manque (le comportement principal,
-le périmètre), ne pas l'inventer : la marquer **[À valider]** dans la spec et le dire. S'il en
+le périmètre), ne pas l'inventer : la marquer **[À valider]** dans la spec et le dire. Les
+questions renvoyées au métier par `feature` ou `brainstorming` se reportent au format du skill
+`to-questionnaire`. S'il en
 manque beaucoup, proposer de revenir à `feature` ou à `brainstorming` plutôt que de publier une
 spec creuse.
 
@@ -88,6 +90,8 @@ compromis se propose en ADR, via le skill `adr`.
   - sinon : proposer le jalon qui convient, ou « plus tard ». Si le projet n'a pas encore de
     jalons, ne pas en créer pour un seul ticket : le laisser hors jalon.
   - Pour une spec découpée, `to-tickets` range les tickets : lui indiquer le jalon.
+- S'il y a des questions pour le métier sans questionnaire, proposer d'en faire un avec le
+  skill `to-questionnaire`, publiable en commentaire de la spec ou du ticket.
 - Terminer par la référence de ce qui a été créé, et la commande pour s'y mettre :
   `/implement <référence du ticket>`, un ticket par session.
 

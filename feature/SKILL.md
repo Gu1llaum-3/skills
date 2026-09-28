@@ -67,6 +67,7 @@ Dans la conversation, sans écrire de fichier :
 - **Critères d'acceptation** numérotés (`AC-1`, `AC-2`…), vérifiables ;
 - **Interfaces à tester** ;
 - **Hors périmètre** ;
+- **Questions pour le métier**, par destinataire, chacune bloquante ou non avec son hypothèse ;
 - **Taille** : tient-elle en une session, ou en faudra-t-il plusieurs ? (critère « Taille » de
   [`to-tickets`](../to-tickets/SKILL.md))
 
@@ -84,6 +85,11 @@ selon la taille :
   roadmap. Même remise à plus tard, l'idée mérite sa spec maintenant : c'est maintenant que le
   contexte est frais.
 - **Abandonner** : résumer en une ligne pourquoi, pour que la raison ne se perde pas.
+
+**S'il reste une question métier bloquante**, ne pas recommander « maintenant » : le plan ne
+pourrait pas être validé. Recommander « plus tard », pour que `to-spec` écrive les questions
+dans la spec ou le ticket, et proposer un questionnaire avec le skill `to-questionnaire`. Une
+question non bloquante n'empêche rien : le plan avance avec son hypothèse.
 
 ## Ce que ce skill ne fait jamais
 

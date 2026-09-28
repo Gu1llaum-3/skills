@@ -51,6 +51,7 @@ Un tableau : M1 (socle utilisable), M2, M3… jusqu'à la publication. Pour chaq
 
 ## 13. Questions ouvertes
 1. Un point [À valider] par ligne, formulé comme une question avec une proposition par défaut.
+2. **[Métier : <destinataire>, bloquante]** Les questions qui appartiennent au métier, au format du skill `to-questionnaire`, avec le lien vers leur questionnaire.
 ```
 
 ## Règles d'écriture

@@ -107,8 +107,13 @@ Pour les points ouverts, appeler le Skill tool avec « interview » :
 
 - **source cadrée** (ticket de ces skills, spec, juste après `feature`) : une ou deux séries au
   maximum. Le travail a déjà été discuté, on ne rouvre que ce qui l'exige ;
-- **ticket externe** : sans plafond de séries, en commençant par le besoin. Ce qui ne peut être
-  tranché que par l'auteur du ticket est noté pour le commentaire de l'étape 6, pas deviné.
+- **ticket externe** : sans plafond de séries, en commençant par le besoin. `interview` repère
+  ce qui ne peut être tranché que par l'auteur du ticket ou le métier : c'est noté pour le
+  questionnaire de l'étape 6, pas deviné.
+
+Les questions pour le métier qui restent, déjà dans la source ou issues de l'entretien :
+**bloquantes**, elles empêchent de valider le plan ; **non bloquantes**, elles vont dans la
+section « Questions ouvertes » du plan avec l'hypothèse qu'il applique.
 
 Si une proposition est acceptée et change le contenu du ticket, proposer de mettre le ticket à
 jour avec le skill `tickets`, pour qu'il reste la référence. Une décision qui coche les trois
@@ -130,10 +135,12 @@ Montrer le plan et demander le feu vert. Une fois l'accord obtenu, remplacer « 
 valider » par « Validé par <nom> le <JJ/MM/AAAA> ». Le plan n'est pas commité ici : `implement`
 le commite avec la première tâche, sur sa branche.
 
-**Ticket externe** : proposer aussi un commentaire pour l'auteur du ticket, avec les questions
-restées ouvertes, les réserves sur la solution demandée et les choix faits à sa place. Le
-publier avec le skill `tickets`, seulement après accord sur le texte exact. S'il reste des
-questions bloquantes, le plan peut attendre la réponse.
+**Questions pour le métier ou pour l'auteur du ticket** : appeler le Skill tool avec
+« to-questionnaire ». Pour un ticket externe, le questionnaire porte aussi les réserves sur la
+solution demandée et les choix faits à la place de l'auteur, et se publie en commentaire du
+ticket après accord sur le texte exact. **S'il reste une question bloquante**, ne pas demander
+la validation : le plan reste « à valider » jusqu'à la réponse, et on le reprend avec le
+questionnaire rempli.
 
 - Appelé par `implement` : lui rendre la main avec le chemin du plan.
 - Sinon : proposer de lancer l'implémentation, et sur accord appeler le Skill tool avec

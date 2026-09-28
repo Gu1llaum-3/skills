@@ -50,13 +50,14 @@ Saute les thèmes que l'existant a déjà tranchés. Les choix structurants et d
 
 - Transforme chaque réponse en **décision concrète et chiffrée quand c'est possible** : un seuil, une durée, un ordre, un nom de fichier.
 - Là où tu as dû supposer, marque **[À valider]**, et regroupe ces points dans une section « Questions ouvertes » numérotée en fin de document. C'est ce qui permet à l'utilisateur de répondre point par point.
+- Les questions que l'entretien a renvoyées au métier vont dans la même section, marquées **[Métier : <destinataire>, bloquante]** (format du skill `to-questionnaire`).
 - Ajoute un **découpage en jalons**, du socle jouable à la publication.
 - Termine le découpage par un **verdict d'envergure**, avec sa raison en une phrase. Il décide de la suite, et il est écrit pour que les sessions suivantes n'aient pas à le rejouer :
   - **simple** : chaque jalon tient en une session (critère « Taille » de [`to-tickets`](../to-tickets/SKILL.md)). Chaque jalon se planifie directement avec `plan` ; une spec ne ferait que redire le cahier des charges.
   - **gros** : au moins un jalon dépasse une session. Chaque jalon passe par une spec (`to-spec`), puis des tickets rangés dans ce jalon de la roadmap.
 - Si la mémoire persistante est disponible, enregistre les décisions clés du projet (un fichier par fait).
 
-Termine le message par : un résumé en quelques puces, la liste des questions ouvertes, et **une proposition de prochaine étape**.
+Termine le message par : un résumé en quelques puces, la liste des questions ouvertes, et **une proposition de prochaine étape**. S'il y a des questions pour le métier, propose d'en faire un questionnaire par destinataire en appelant le Skill tool avec « to-questionnaire ».
 
 ## 5. Trancher les questions ouvertes
 
@@ -68,6 +69,7 @@ L'utilisateur répond en général en liste numérotée. Pour chaque point :
   - rends le choix réversible dans l'architecture (une interface, un fichier de configuration) quand l'utilisateur dit qu'il pourra changer.
 - **Réponse ambiguë** : applique l'interprétation la plus plausible, **et dis-la explicitement** dans ta réponse.
 - **Règle permanente** (« ça sera le cas pour toute l'application ! ») : ajoute-la comme section dédiée du cahier des charges et, si possible, en mémoire (de type feedback), pour qu'elle s'applique aux sessions futures.
+- **Point pour le métier** (« je ne sais pas, faut voir avec le client ») : marque-le **[Métier : <destinataire>]** au lieu de le supposer, et propose un questionnaire avec le skill `to-questionnaire`. Quand le questionnaire revient rempli, ce skill reporte les réponses dans le cahier des charges.
 - **Nom ou valeur encore inconnu** : prévois qu'il soit centralisé et modifiable (configuration), et propose quelques exemples.
 
 Passe ensuite le document à la version suivante (« v0.2 — décisions du JJ/MM/AAAA intégrées »). Retire les marqueurs **[À valider]** résolus, et ne garde dans les questions ouvertes que ce qui l'est vraiment.
@@ -89,7 +91,7 @@ Termine toujours par une ou deux prochaines étapes concrètes, avec celle que t
 - **gros projet** : écrire la spec du premier jalon, en appelant le Skill tool avec « to-spec » sur `docs/cahier-des-charges.md`. Elle sera découpée en tickets, et chaque ticket se traitera ensuite dans sa propre session avec `/implement <ticket>` ;
 - **définir l'identité visuelle** avec `/design`, ou **trouver un nom** avec `/naming`, si ce n'est pas encore fait.
 
-N'enchaîne pas sur le développement sans l'accord de l'utilisateur.
+N'enchaîne pas sur le développement sans l'accord de l'utilisateur. Une question métier **bloquante** pour un jalon empêche de le planifier : planifie un jalon qui n'en dépend pas, ou attends la réponse.
 
 ## Ton
 
