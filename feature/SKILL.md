@@ -1,6 +1,6 @@
 ---
 name: feature
-description: Cadrer une idée de fonctionnalité dans un projet existant, puis la planifier tout de suite ou en faire une spec, des tickets ou une entrée de roadmap.
+description: Cadrer une idée de fonctionnalité dans un projet existant, puis la planifier tout de suite, ou en faire une spec et des tickets rangés dans la roadmap pour plus tard.
 argument-hint: "[description de l'idée]"
 disable-model-invocation: true
 ---
@@ -18,7 +18,7 @@ Réponds dans la langue de l'utilisateur. Pour un projet qui n'existe pas encore
 ## 1. Lire le projet
 
 - **Documents** : `CLAUDE.md`, `README.md`, `ROADMAP.md`, `docs/cahier-des-charges.md`,
-  `docs/design/DESIGN.md`, les specs, plans et recherches de `docs/`, et les titres des ADR
+  `docs/design/DESIGN.md`, les specs, plans, POC et recherches de `docs/`, et les titres des ADR
   (`docs/adr/`). Dans les projets plus anciens, ces fichiers peuvent être à la racine.
 - **Tickets existants** : si le `CLAUDE.md` a une section « Tickets », appeler le Skill tool avec
   « tickets » pour chercher un ticket proche. Sinon, ne rien configurer maintenant.
@@ -67,23 +67,26 @@ Dans la conversation, sans écrire de fichier :
 - **Critères d'acceptation** numérotés (`AC-1`, `AC-2`…), vérifiables ;
 - **Interfaces à tester** ;
 - **Hors périmètre** ;
-- **Taille** : tient-elle dans une session de travail, ou en faudra-t-il plusieurs ?
+- **Taille** : tient-elle en une session, ou en faudra-t-il plusieurs ? (critère « Taille » de
+  [`to-tickets`](../to-tickets/SKILL.md))
 
 ## 6. Décider de la suite
 
-Poser la question avec AskUserQuestion, en recommandant selon la taille :
+La question est **« maintenant ou plus tard ? »**. La poser avec AskUserQuestion, en recommandant
+selon la taille :
 
-- **Planifier maintenant** (recommandé si ça tient dans une session) : appeler le Skill tool avec
-  « plan ». L'exploration et la recherche sont faites : il passe directement à la rédaction, puis
-  propose de lancer `implement`.
-- **En faire une spec et des tickets** (recommandé si plusieurs sessions, ou si ce n'est pas pour
-  tout de suite) : appeler le Skill tool avec « to-spec ». Tout est dans la conversation.
-- **Juste l'inscrire dans `ROADMAP.md`** (si le fichier existe) : ajouter une entrée dans son
-  format, avec la synthèse en quelques lignes.
+- **Maintenant** (recommandé si ça tient en une session) : appeler le Skill tool avec « plan ».
+  L'exploration et la recherche sont faites : il passe directement à la rédaction, puis propose
+  de lancer `implement`. Si la feature touche plusieurs modules et demande des décisions
+  d'interface qu'on voudra retrouver, passer par `to-spec` d'abord.
+- **Plus tard, ou trop gros pour une session** : appeler le Skill tool avec « to-spec ». Tout
+  est dans la conversation ; il en fait un ticket, ou une spec et des tickets, rangés dans la
+  roadmap. Même remise à plus tard, l'idée mérite sa spec maintenant : c'est maintenant que le
+  contexte est frais.
 - **Abandonner** : résumer en une ligne pourquoi, pour que la raison ne se perde pas.
 
 ## Ce que ce skill ne fait jamais
 
 - Écrire du code pendant le cadrage.
-- Publier un ticket ou modifier `ROADMAP.md` sans que l'utilisateur ait choisi cette suite.
-- Réécrire la roadmap : on y ajoute une entrée, on ne réorganise pas le reste.
+- Publier un ticket ou toucher à la roadmap sans que l'utilisateur ait choisi cette suite.
+- Écrire dans la roadmap lui-même : c'est le rôle de `tickets`, appelé par `to-spec`.
