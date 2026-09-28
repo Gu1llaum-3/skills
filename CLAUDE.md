@@ -13,7 +13,9 @@ lié dans `~/.claude/skills/` par `install.sh`.
 ## Conventions
 
 - Un SKILL.md s'adresse à Claude, à l'infinitif ou à l'impératif ; il parle de « l'utilisateur ».
-  Au-delà de ~150 lignes, déplacer le détail dans `references/`.
+  Son corps reste sous 500 lignes (limite d'Anthropic) ; ce qui ne sert que dans certains cas va
+  dans `references/`, pointé depuis le skill. La description, chargée à chaque tour, reste la plus
+  courte possible.
 - Description : ce que fait le skill, puis « Utilise ce skill quand… » avec des phrases types
   entre guillemets, et les skills qui l'appellent.
 - Un skill que l'utilisateur lance lui-même porte `disable-model-invocation: true` : Claude ne
