@@ -133,6 +133,18 @@
   ]
  },
  {
+  "q": "je ne sais pas quelles règles de remboursement appliquer, prépare-moi des questions à envoyer au service client pour qu'ils me répondent",
+  "ok": [
+   "to-questionnaire"
+  ]
+ },
+ {
+  "q": "la compta a répondu au questionnaire docs/questionnaires/avoirs-compta.md, intègre leurs réponses",
+  "ok": [
+   "to-questionnaire"
+  ]
+ },
+ {
   "q": "on a décidé de passer de MongoDB à Postgres pour les transactions, note cette décision proprement",
   "ok": [
    "adr"

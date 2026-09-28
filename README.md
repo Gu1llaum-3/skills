@@ -24,7 +24,8 @@ Mes skills personnels pour Claude Code.
 | `to-spec` | Transformer les décisions (ou un jalon du cahier des charges) en spec, puis en tickets |
 | `to-tickets` | Découper en tickets par tranches verticales, avec leurs dépendances |
 | `tickets` | Lire, publier et ranger les tickets et les jalons de la roadmap (local, GitHub, GitLab, Jira) |
-| `interview` | Entretien critique : le besoin d'abord, les faits cherchés, les décisions posées |
+| `interview` | Entretien critique : le besoin d'abord, les faits cherchés, les décisions posées, les questions métier repérées |
+| `to-questionnaire` | Faire remplir par le métier les questions auxquelles tu ne peux pas répondre, puis réintégrer les réponses |
 | `research` | Recherche sur sources primaires, en arrière-plan, notée dans `docs/research/` |
 | `adr` | Enregistrer une décision d'architecture dans `docs/adr/` |
 
@@ -42,7 +43,7 @@ Mes skills personnels pour Claude Code.
 
 ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──► plan ──► implement ──► tickets
 
-interview, research et adr sont appelés en cours de route.
+interview, research, adr et to-questionnaire sont appelés en cours de route.
 ```
 
 - **Simple ou gros** : le verdict est écrit dans le cahier des charges. Simple, chaque jalon
@@ -54,6 +55,11 @@ interview, research et adr sont appelés en cours de route.
   `plan` questionne alors le besoin, pousse l'entretien et propose un commentaire pour son
   auteur. La recherche part, pour tous les tickets, quand le code ne suffit pas à savoir comment
   faire.
+- **Les questions métier** : `interview` repère celles qui ne sont pas à toi de trancher
+  (règles métier, juridique, chiffres, priorités produit) et propose « À demander au métier ».
+  Elles vont dans les « Questions ouvertes » du document, puis dans un questionnaire par
+  destinataire (`docs/questionnaires/`). Une question bloquante empêche de valider le plan qui en
+  dépend.
 - Un skill que tu lances (`/brainstorming`, `/feature`, `/poc`) propose les autres, il ne les
   lance pas.
 
@@ -66,6 +72,7 @@ interview, research et adr sont appelés en cours de route.
 | `docs/design/DESIGN.md`, `docs/design/prototype.html` | `design` |
 | `docs/nommage.md` | `naming` |
 | `docs/research/` | `research` |
+| `docs/questionnaires/` | `to-questionnaire` |
 | `docs/adr/` | `adr` |
 | `docs/specs/`, `docs/tickets/`, `ROADMAP.md` | `to-spec`, `to-tickets`, via `tickets` (gestionnaire local) |
 | `docs/plans/` | `plan`, exécutés par `implement` |
@@ -113,5 +120,5 @@ Les pistes à venir sont dans [TODO.md](TODO.md).
 
 Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
-`domain-modeling`), `research`, `to-spec` et `to-tickets`. L'organisation en skills qui
-s'appellent entre eux vient aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).
+`domain-modeling`), `research`, `to-spec`, `to-tickets` et `to-questionnaire`. L'organisation en
+skills qui s'appellent entre eux vient aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).

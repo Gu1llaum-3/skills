@@ -8,7 +8,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 HERE=Path(__file__).parent
 WORKDIR=tempfile.mkdtemp(prefix="triggers-")
-MINE={"plan","implement","tdd","to-spec","to-tickets","tickets","interview","research","adr"}
+MINE={"plan","implement","tdd","to-spec","to-tickets","tickets","interview","research","adr","to-questionnaire"}
 def first_skill(q, timeout=120):
     env={k:v for k,v in os.environ.items() if k!="CLAUDECODE"}
     p=subprocess.Popen(["claude","-p",q,"--output-format","stream-json","--verbose","--model","claude-opus-5-5","--max-turns","4"],

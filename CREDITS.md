@@ -11,6 +11,7 @@ Les skills suivants sont des adaptations en français de skills de Matt Pocock
 | `research` | `skills/engineering/research` |
 | `to-spec` | `skills/engineering/to-spec` |
 | `to-tickets` | `skills/engineering/to-tickets` |
+| `to-questionnaire` | `skills/productivity/to-questionnaire` |
 
 Ils sont distribués sous la licence suivante :
 
