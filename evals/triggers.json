@@ -6,6 +6,12 @@
   ]
  },
  {
+  "q": "la PO a créé PROJ-450 dans Jira pour ajouter un export Excel des commandes, analyse-le et challenge-le avant qu'on s'y mette",
+  "ok": [
+   "plan"
+  ]
+ },
+ {
   "q": "j'ai le ticket docs/tickets/export-csv/02-filtres.md, regarde le code et dis-moi comment tu t'y prendrais avant qu'on code quoi que ce soit",
   "ok": [
    "plan"
@@ -54,6 +60,12 @@
   ]
  },
  {
+  "q": "le cahier des charges est validé et c'est un gros projet, écris la spec du jalon M1",
+  "ok": [
+   "to-spec"
+  ]
+ },
+ {
   "q": "découpe docs/specs/multi-comptes.md en tickets",
   "ok": [
    "to-tickets"
@@ -62,7 +74,8 @@
  {
   "q": "le cahier des charges est validé, crée-moi les issues GitHub du jalon 2 avec les dépendances entre elles",
   "ok": [
-   "to-tickets"
+   "to-tickets",
+   "to-spec"
   ]
  },
  {
@@ -79,6 +92,18 @@
  },
  {
   "q": "ferme l'issue 12, c'est réglé depuis le dernier déploiement",
+  "ok": [
+   "tickets"
+  ]
+ },
+ {
+  "q": "range le ticket export-csv/03 dans le jalon M2 de la roadmap",
+  "ok": [
+   "tickets"
+  ]
+ },
+ {
+  "q": "où en est la roadmap ? montre-moi les jalons et ce qui reste à faire dans chacun",
   "ok": [
    "tickets"
   ]

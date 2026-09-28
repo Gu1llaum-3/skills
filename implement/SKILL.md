@@ -126,8 +126,8 @@ Quand la dernière vague est verte :
    - ce qui reste hors plan.
    Passer le statut à « terminé » et commiter selon le format du dépôt (par défaut
    `docs: record plan outcome`).
-   **Plan tiré d'un ticket** : en local, passer le ticket à « terminé » et cocher ses critères
-   atteints, dans ce même commit. Sur un gestionnaire distant, ne rien fermer : prévoir
+   **Plan tiré d'un ticket** : en local, le terminer avec le skill `tickets` (statut, critères
+   atteints et case de `ROADMAP.md`), dans ce même commit. Sur un gestionnaire distant, ne rien fermer : prévoir
    `Closes #<numéro>` (ou l'équivalent) dans le résumé de fusion, et proposer un commentaire de
    bilan sur le ticket.
 2. **Proposer un résumé de fusion**, tiré du plan : trois lignes de résumé, les critères atteints,

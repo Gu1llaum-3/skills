@@ -10,6 +10,7 @@ Mes skills personnels pour Claude Code.
 |---|---|
 | `/brainstorming` | Cadrer un nouveau projet jusqu'au cahier des charges |
 | `/feature` | Cadrer une idée de fonctionnalité dans un projet existant |
+| `/poc` | Vérifier vite qu'une idée tient debout, sur une seule question |
 | `/design` | Définir l'identité visuelle : prototype HTML et `DESIGN.md` |
 | `/naming` | Trouver un nom et vérifier sa disponibilité |
 
@@ -17,12 +18,12 @@ Mes skills personnels pour Claude Code.
 
 | Skill | Rôle |
 |---|---|
-| `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code |
+| `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code (et challengé, s'il vient d'ailleurs) |
 | `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD |
 | `tdd` | La boucle rouge-vert et ce qui fait un bon test |
-| `to-spec` | Transformer les décisions en spec, puis en un ou plusieurs tickets |
+| `to-spec` | Transformer les décisions (ou un jalon du cahier des charges) en spec, puis en tickets |
 | `to-tickets` | Découper en tickets par tranches verticales, avec leurs dépendances |
-| `tickets` | Lire et publier des tickets (local, GitHub, GitLab, Jira, autre) |
+| `tickets` | Lire, publier et ranger les tickets et les jalons de la roadmap (local, GitHub, GitLab, Jira) |
 | `interview` | Entretien critique : le besoin d'abord, les faits cherchés, les décisions posées |
 | `research` | Recherche sur sources primaires, en arrière-plan, notée dans `docs/research/` |
 | `adr` | Enregistrer une décision d'architecture dans `docs/adr/` |
@@ -30,27 +31,43 @@ Mes skills personnels pour Claude Code.
 ## Enchaînement
 
 ```
-/brainstorming ──► docs/cahier-des-charges.md ──┬──► plan ──► implement ──► tdd
-                                                └──► to-tickets
-/feature ──┬──► plan ──► implement
-           ├──► to-spec ──┬──► 1 ticket
-           │              └──► spec ──► to-tickets ──► N tickets
-           └──► ROADMAP.md
-ticket ──► plan ──► implement
+/brainstorming ──► cahier des charges ──┬── simple ──► plan ──► implement ──► tdd
+                   (verdict d'envergure) └── gros ──► to-spec (un jalon) ──► to-tickets ──► roadmap
+
+/feature ──┬── maintenant ──► plan ──► implement
+           └── plus tard ──► to-spec ──┬──► 1 ticket ─────────────┐
+                                       └──► to-tickets ──► N ──────┴──► roadmap
+
+/poc ──► docs/poc/<slug>.md ──► plan ──► implement ──► verdict ──► /brainstorming ou /feature
+
+ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──► plan ──► implement ──► tickets
 
 interview, research et adr sont appelés en cours de route.
 ```
+
+- **Simple ou gros** : le verdict est écrit dans le cahier des charges. Simple, chaque jalon
+  tient en une session et se planifie directement ; gros, chaque jalon passe par une spec puis
+  des tickets. Le critère de taille est celui de `to-tickets`.
+- **La roadmap** est tenue par `tickets` : `ROADMAP.md` en local, milestones sur GitHub et
+  GitLab, versions sur Jira. Ses jalons sont ceux du cahier des charges.
+- **Un ticket écrit hors de ces skills** (par une PO, un client) se reconnaît à son format :
+  `plan` questionne alors le besoin, pousse l'entretien et propose un commentaire pour son
+  auteur. La recherche part, pour tous les tickets, quand le code ne suffit pas à savoir comment
+  faire.
+- Un skill que tu lances (`/brainstorming`, `/feature`, `/poc`) propose les autres, il ne les
+  lance pas.
 
 ## Où vont les fichiers d'un projet
 
 | Fichier | Produit par |
 |---|---|
 | `docs/cahier-des-charges.md` | `brainstorming` |
+| `docs/poc/` | `poc` |
 | `docs/design/DESIGN.md`, `docs/design/prototype.html` | `design` |
 | `docs/nommage.md` | `naming` |
 | `docs/research/` | `research` |
 | `docs/adr/` | `adr` |
-| `docs/specs/`, `docs/tickets/` | `to-spec`, `to-tickets` (gestionnaire local) |
+| `docs/specs/`, `docs/tickets/`, `ROADMAP.md` | `to-spec`, `to-tickets`, via `tickets` (gestionnaire local) |
 | `docs/plans/` | `plan`, exécutés par `implement` |
 
 Le gestionnaire de tickets se règle par projet, dans une section « Tickets » du `CLAUDE.md`,
