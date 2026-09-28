@@ -1,7 +1,7 @@
 ---
 name: brainstorming
 description: Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code, jusqu'à un cahier des charges validé dans docs/.
-argument-hint: "[idée ou dossier du prototype]"
+argument-hint: "[idée, dossier du prototype ou fichier POC]"
 disable-model-invocation: true
 ---
 
@@ -16,6 +16,7 @@ Réponds dans la langue de l'utilisateur. Le déroulé comporte six étapes. Ada
 ## 1. S'imprégner : l'existant et le domaine
 
 - **Lis en entier** ce que l'utilisateur fournit : prototype, maquettes, notes, code. Un prototype contient souvent des choix implicites (mécaniques, ton, public visé) qu'il faut repérer.
+- **Un fichier POC** (`docs/poc/<slug>.md`, produit par `/poc`) : lis d'abord son verdict. Ses choix sont marqués : **décidé** se reprend tel quel (en le citant dans la synthèse, pour que l'utilisateur puisse le rouvrir), **hypothèse** se rejoue pendant l'entretien, **ouvert** fait partie des questions. Le code du POC est jetable par défaut : ce qu'on en garde se décide pendant l'entretien.
 - **Documente-toi sur le domaine** : méthode, bonnes pratiques, public, contraintes réglementaires. Appuie-toi sur tes connaissances, et appelle le Skill tool avec « research » quand un point est pointu ou récent : la recherche tourne en arrière-plan pendant que tu avances. Cite tes sources.
 - Ne propose pas encore de solution technique, et n'écris pas de code : l'utilisateur veut d'abord être compris.
 
@@ -50,6 +51,9 @@ Saute les thèmes que l'existant a déjà tranchés. Les choix structurants et d
 - Transforme chaque réponse en **décision concrète et chiffrée quand c'est possible** : un seuil, une durée, un ordre, un nom de fichier.
 - Là où tu as dû supposer, marque **[À valider]**, et regroupe ces points dans une section « Questions ouvertes » numérotée en fin de document. C'est ce qui permet à l'utilisateur de répondre point par point.
 - Ajoute un **découpage en jalons**, du socle jouable à la publication.
+- Termine le découpage par un **verdict d'envergure**, avec sa raison en une phrase. Il décide de la suite, et il est écrit pour que les sessions suivantes n'aient pas à le rejouer :
+  - **simple** : chaque jalon tient en une session (critère « Taille » de [`to-tickets`](../to-tickets/SKILL.md)). Chaque jalon se planifie directement avec `plan` ; une spec ne ferait que redire le cahier des charges.
+  - **gros** : au moins un jalon dépasse une session. Chaque jalon passe par une spec (`to-spec`), puis des tickets rangés dans ce jalon de la roadmap.
 - Si la mémoire persistante est disponible, enregistre les décisions clés du projet (un fichier par fait).
 
 Termine le message par : un résumé en quelques puces, la liste des questions ouvertes, et **une proposition de prochaine étape**.
@@ -81,8 +85,8 @@ Vérifie chaque ressource proposée (bibliothèque, police, voix, image) au mome
 
 Termine toujours par une ou deux prochaines étapes concrètes, avec celle que tu recommandes. En général :
 
-- **planifier le premier jalon** : appeler le Skill tool avec « plan » sur `docs/cahier-des-charges.md`, puis `implement` ;
-- **découper les jalons en tickets** : appeler le Skill tool avec « to-tickets », si le projet se fera sur de nombreuses sessions ;
+- **projet simple** : planifier le premier jalon, en appelant le Skill tool avec « plan » sur `docs/cahier-des-charges.md`, puis `implement` ;
+- **gros projet** : écrire la spec du premier jalon, en appelant le Skill tool avec « to-spec » sur `docs/cahier-des-charges.md`. Elle sera découpée en tickets, et chaque ticket se traitera ensuite dans sa propre session avec `/implement <ticket>` ;
 - **définir l'identité visuelle** avec `/design`, ou **trouver un nom** avec `/naming`, si ce n'est pas encore fait.
 
 N'enchaîne pas sur le développement sans l'accord de l'utilisateur.

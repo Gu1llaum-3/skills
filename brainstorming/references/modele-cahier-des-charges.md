@@ -43,7 +43,9 @@ Personnages, textes, ton. Les noms encore inconnus sont centralisés dans la con
 ## 10. Contraintes transverses (durée d'usage, sécurité, RGPD…)
 
 ## 11. Découpage en jalons
-Un tableau : M1 (socle utilisable), M2, M3… jusqu'à la publication.
+Un tableau : M1 (socle utilisable), M2, M3… jusqu'à la publication. Pour chaque jalon : son objectif en une phrase, et ce qu'on pourra montrer à la fin.
+
+**Envergure : simple | gros** — la raison en une phrase (par exemple « chaque jalon tient en une session » ou « M2 demande plusieurs sessions : synchronisation et mode hors ligne »).
 
 ## 12. Licences (règle permanente) — seulement si le projet sera publié
 
