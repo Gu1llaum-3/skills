@@ -27,8 +27,9 @@ Réponds dans la langue de l'utilisateur.
 - **Reprise** : si un plan de `docs/plans/` cite déjà cette source et a des cases non cochées, ne
   pas en écrire un autre : le dire et proposer de reprendre avec `implement`.
 
-Lire aussi `CLAUDE.md`, les ADR (`docs/adr/`) et `docs/design/DESIGN.md` s'il y a de
-l'interface (ou `DESIGN.md` à la racine dans les projets plus anciens).
+Lire aussi `CLAUDE.md`, `CONTEXT.md` s'il existe (le plan nomme les notions avec ses termes),
+les ADR (`docs/adr/`) et `docs/design/DESIGN.md` s'il y a de l'interface (ou `DESIGN.md` à la
+racine dans les projets plus anciens).
 
 ### Provenance d'un ticket
 

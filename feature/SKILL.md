@@ -18,8 +18,8 @@ Réponds dans la langue de l'utilisateur. Pour un projet qui n'existe pas encore
 ## 1. Lire le projet
 
 - **Documents** : `CLAUDE.md`, `README.md`, `ROADMAP.md`, `docs/cahier-des-charges.md`,
-  `docs/design/DESIGN.md`, les specs, plans, POC et recherches de `docs/`, et les titres des ADR
-  (`docs/adr/`). Dans les projets plus anciens, ces fichiers peuvent être à la racine.
+  `docs/design/DESIGN.md`, `CONTEXT.md` (le glossaire, s'il existe), les specs, plans, POC et
+  recherches de `docs/`, et les titres des ADR (`docs/adr/`). Dans les projets plus anciens, ces fichiers peuvent être à la racine.
 - **Tickets existants** : si le `CLAUDE.md` a une section « Tickets », appeler le Skill tool avec
   « tickets » pour chercher un ticket proche. Sinon, ne rien configurer maintenant.
 - **Code** : la partie que l'idée touche, les modèles de données, les interfaces publiques, les
