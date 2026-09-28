@@ -2,6 +2,8 @@
 
 Mes skills personnels pour Claude Code.
 
+## Skills
+
 ### À lancer toi-même
 
 | Commande | Rôle |
@@ -59,7 +61,7 @@ proposée automatiquement la première fois.
 ```bash
 git clone git@github.com:Gu1llaum-3/skills.git ~/git/skills
 ~/git/skills/install.sh            # tous les skills
-~/git/skills/install.sh naming    # ou seulement certains
+~/git/skills/install.sh naming     # ou seulement certains
 ```
 
 Chaque skill est lié par symlink dans `~/.claude/skills/` : une modification
@@ -68,11 +70,31 @@ dans le dépôt est immédiatement prise en compte par Claude Code.
 ## Mise à jour
 
 ```bash
-cd ~/git/skills && git pull
+cd ~/git/skills && git pull && ./install.sh
 ```
+
+Le `git pull` suffit pour les skills déjà installés, puisque les liens pointent vers le dépôt.
+`./install.sh` n'est utile que si des skills ont été ajoutés ou renommés : il crée les nouveaux
+liens et supprime ceux devenus cassés. Le relancer à chaque fois ne coûte rien.
 
 Ajouter un nouveau skill : créer `mon-skill/SKILL.md` dans le dépôt, puis relancer `./install.sh`.
 
+## Tester les déclencheurs
+
+```bash
+python3 evals/run_triggers.py
+```
+
+Envoie les phrases de `evals/triggers.json` à `claude -p`, avec les skills réellement installés,
+et vérifie quel skill part en premier, y compris sur des pièges qui ne doivent rien déclencher.
+À relancer après chaque changement de description. Pour une mesure plus fiable, passer le
+nombre de passages par phrase en argument (`python3 evals/run_triggers.py 3`).
+
+Les pistes à venir sont dans [TODO.md](TODO.md).
+
 ## Crédits
 
-`tdd` est adapté du skill `tdd` de [Matt Pocock](https://github.com/mattpocock/skills) (MIT), voir `tdd/CREDITS.md`.
+Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
+(licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
+`domain-modeling`), `research`, `to-spec` et `to-tickets`. L'organisation en skills qui
+s'appellent entre eux vient aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).
