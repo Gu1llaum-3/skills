@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: Transformer ce qui a été décidé — dans la conversation après feature, ou dans le cahier des charges d'un gros projet, un jalon à la fois — en spec, puis en un ou plusieurs tickets dans le gestionnaire du projet (fichiers locaux, GitHub, GitLab, Jira ou autre), rangés dans un jalon de la roadmap. Après feature, pas de nouvel entretien : une synthèse fidèle de ce qui est tranché ; depuis un cahier des charges, seulement les questions techniques qu'il laisse ouvertes. Utilise ce skill dès que l'utilisateur veut « en faire une spec », « en faire un ticket », « mettre ça de côté pour plus tard », « garder une trace de ce qu'on a décidé », « préparer le travail pour une autre session » ou « faire la spec du jalon 1 ».
+description: Transformer ce qui a été décidé dans la conversation (souvent après feature) en spec, puis en un ou plusieurs tickets dans le gestionnaire du projet — fichiers locaux, GitHub, GitLab, Jira ou autre — rangés dans un jalon de la roadmap. Pas de nouvel entretien, seulement une synthèse fidèle de ce qui est déjà tranché. Sert aussi à écrire la spec d'un jalon du cahier des charges d'un gros projet. Utilise ce skill dès que l'utilisateur veut « en faire une spec », « en faire un ticket », « mettre ça de côté pour plus tard », « garder une trace de ce qu'on a décidé », « préparer le travail pour une autre session » ou « faire la spec du jalon 1 ».
 ---
 
 # To-spec : des décisions à la spec

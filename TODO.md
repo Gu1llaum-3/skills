@@ -3,7 +3,11 @@
 - [ ] **`/guide`**, un routeur façon `ask-matt` : « je suis dans telle situation, quel skill ? ».
   Le schéma d'enchaînement du README en est la base.
 - [x] **Évaluations des déclencheurs** : `python3 evals/run_triggers.py`, à relancer après chaque
-  changement de description (32/32 le 28/09/2026, un passage par phrase).
+  changement de description (33/34 le 28/09/2026, un passage par phrase).
+  Deux phrases de `to-spec` sont instables (« garde une trace… », « transforme ce qu'on vient de
+  décider… ») : de 0 à 3 réussites sur 6 en trois passages, y compris avec la description de
+  `main`. Dans un dossier vide et sans conversation, rien n'a été décidé : Claude explore au lieu
+  de lancer le skill. Réécrire ces phrases avec un contexte, ou tester dans une conversation.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [ ] **Relecture de code** en fin d'`implement`, comme le `code-review` de Matt (conformité aux
