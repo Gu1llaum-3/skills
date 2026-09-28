@@ -44,21 +44,23 @@ plus besoin de code : passer directement au verdict.
 
 Écrire `docs/poc/<slug>.md` en suivant [references/poc.md](references/poc.md). Chaque choix est
 marqué **décidé**, **hypothèse** ou **ouvert** : c'est ce qui permettra à `/brainstorming` de
-savoir quoi reprendre tel quel et quoi rejouer. Le montrer et le faire valider.
+savoir quoi reprendre tel quel et quoi rejouer. Le montrer et le faire valider, puis passer son
+statut à `> Statut : en cours`.
 
 ## 4. Construire
 
-- Appeler le Skill tool avec « plan » en lui donnant le fichier POC : il fait un plan court, dont
-  les tests portent sur l'hypothèse.
-- Puis appeler le Skill tool avec « implement » sur ce plan. Proposer une branche dédiée
-  (`poc/<slug>`) : le code n'a pas vocation à être fusionné.
+Proposer de construire, et sur accord appeler le Skill tool avec « plan » en lui donnant le
+fichier POC. Il fait un plan court, sur une branche `poc/<slug>` (le code n'a pas vocation à être
+fusionné), puis propose lui-même `implement` ; à la fin, `implement` renvoie ici pour le
+verdict.
 
 ## 5. Écrire le verdict
 
 Une fois le code fini, ajouter la section « Verdict » du fichier : le résultat au regard du
 critère de réussite, ce qui marche, ce qui casse, les surprises, et une recommandation
 (**approfondir**, **abandonner**, ou **refaire autrement** avec ce qu'il faudrait changer). Un
-verdict négatif est un résultat : l'écrire avec le même soin.
+verdict négatif est un résultat : l'écrire avec le même soin. Passer ensuite le statut à
+`> Statut : terminé`.
 
 ## 6. Proposer la suite
 

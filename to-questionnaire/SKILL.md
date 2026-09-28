@@ -58,6 +58,9 @@ Vérifier que chaque élément de la liste de l'étape 1 est couvert, puis montr
 - Sinon : donner le chemin du fichier. Il s'envoie par mail, par message, ou se remplit en
   réunion.
 
+Une fois le questionnaire publié ou le chemin donné, écrire `> Statut : envoyé le JJ/MM/AAAA` en
+tête du fichier : c'est ce qui dit, à la reprise, qu'une réponse est attendue.
+
 Dans le document d'origine (cahier des charges, spec, plan), faire pointer chaque question vers
 le questionnaire.
 

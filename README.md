@@ -65,8 +65,9 @@ Perdu en chemin ? /next dit quel skill lancer.
   Elles vont dans les « Questions ouvertes » du document, puis dans un questionnaire par
   destinataire (`docs/questionnaires/`). Une question bloquante empêche de valider le plan qui en
   dépend.
-- Un skill que tu lances (`/brainstorming`, `/feature`, `/poc`) propose les autres, il ne les
-  lance pas.
+- Un skill propose la suite et n'en lance un autre qu'après ton accord. Ceux que tu lances
+  toi-même (`/brainstorming`, `/feature`, `/poc`…) ne peuvent pas être lancés par Claude : il te
+  donne la commande à taper.
 
 ## Où vont les fichiers d'un projet
 

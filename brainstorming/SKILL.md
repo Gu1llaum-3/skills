@@ -85,6 +85,8 @@ Vérifie chaque ressource proposée (bibliothèque, police, voix, image) au mome
 
 ## 6. Proposer la suite
 
+Commence par proposer de créer les jalons du cahier des charges dans la roadmap, en appelant le Skill tool avec « tickets » (`ROADMAP.md` en local), quelle que soit l'envergure : c'est la roadmap qui dira ensuite quel jalon est réalisé.
+
 Termine toujours par une ou deux prochaines étapes concrètes, avec celle que tu recommandes. En général :
 
 - **projet simple** : planifier le premier jalon, en appelant le Skill tool avec « plan » sur `docs/cahier-des-charges.md`, puis `implement` ;

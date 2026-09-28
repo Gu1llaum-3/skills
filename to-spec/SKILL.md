@@ -86,8 +86,8 @@ compromis se propose en ADR, via le skill `adr`.
 ## 5. Roadmap et suite
 
 - **Ranger le travail dans la roadmap**, avec le skill `tickets` :
-  - depuis un cahier des charges : dans le jalon traité. La première fois, créer les jalons du
-    cahier des charges, après accord sur la liste ;
+  - depuis un cahier des charges : dans le jalon traité. S'ils n'existent pas encore, créer les
+    jalons du cahier des charges, après accord sur la liste ;
   - sinon : proposer le jalon qui convient, ou « plus tard ». Si le projet n'a pas encore de
     jalons, ne pas en créer pour un seul ticket : le laisser hors jalon.
   - Pour une spec découpée, `to-tickets` range les tickets : lui indiquer le jalon.

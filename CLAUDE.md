@@ -16,8 +16,9 @@ lié dans `~/.claude/skills/` par `install.sh`.
   Au-delà de ~150 lignes, déplacer le détail dans `references/`.
 - Description : ce que fait le skill, puis « Utilise ce skill quand… » avec des phrases types
   entre guillemets, et les skills qui l'appellent.
-- Un skill que l'utilisateur lance lui-même porte `disable-model-invocation: true` ; il propose
-  les skills suivants, il ne les lance pas.
+- Un skill que l'utilisateur lance lui-même porte `disable-model-invocation: true` : Claude ne
+  peut pas le lancer, il le propose avec sa commande. Un skill propose la suite et n'en lance un
+  autre qu'après accord explicite de l'utilisateur.
 - Un skill en appelle un autre avec « appeler le Skill tool avec « nom » », et pointe ses fichiers
   par un lien relatif (`../tickets/SKILL.md`).
 

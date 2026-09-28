@@ -19,10 +19,12 @@ Réponds dans la langue de l'utilisateur.
   avec « tickets » pour le lire, commentaires et spec parente compris. Si des bloquants ne sont
   pas terminés, le signaler : le plan peut s'écrire, mais `implement` refusera de démarrer.
 - **Spec** ou **cahier des charges** : le lire en entier. Pour un cahier des charges, planifier
-  un seul jalon à la fois : celui que l'utilisateur désigne, sinon le premier non réalisé.
+  un seul jalon à la fois : celui que l'utilisateur désigne, sinon le premier non réalisé de la
+  roadmap (skill `tickets`).
 - **POC** (`docs/poc/<slug>.md`, appel depuis `/poc`) : un plan court, une seule vague si
-  possible, dont les tests portent sur l'hypothèse à valider. Le but est de répondre à la
-  question du POC, pas de livrer.
+  possible, avec `> Branche : poc/<slug>`. Chaque tâche prévoit l'essai ou le test ciblé qui
+  tranche l'hypothèse, sans TDD complet : le but est de répondre à la question du POC, pas de
+  livrer.
 - **Conversation** (appel depuis `feature`) : la synthèse qui vient d'être validée.
 - **Reprise** : si un plan de `docs/plans/` cite déjà cette source et a des cases non cochées, ne
   pas en écrire un autre : le dire et proposer de reprendre avec `implement`.
@@ -113,8 +115,9 @@ Pour les points ouverts, appeler le Skill tool avec « interview » :
   questionnaire de l'étape 6, pas deviné.
 
 Les questions pour le métier qui restent, déjà dans la source ou issues de l'entretien :
-**bloquantes**, elles empêchent de valider le plan ; **non bloquantes**, elles vont dans la
-section « Questions ouvertes » du plan avec l'hypothèse qu'il applique.
+**bloquantes**, elles vont dans la section « Questions ouvertes » du plan avec le lien vers leur
+questionnaire, et empêchent de le valider ; **non bloquantes**, elles y vont avec l'hypothèse
+qu'il applique.
 
 Si une proposition est acceptée et change le contenu du ticket, proposer de mettre le ticket à
 jour avec le skill `tickets`, pour qu'il reste la référence. Une décision qui coche les trois
@@ -132,8 +135,9 @@ vérifier une à une. Le test reste ensuite comme test de non-régression.
 
 ## 6. Valider et passer la main
 
-Montrer le plan et demander le feu vert. Une fois l'accord obtenu, remplacer « Statut : à
-valider » par « Validé par <nom> le <JJ/MM/AAAA> ». Le plan n'est pas commité ici : `implement`
+Montrer le plan et demander le feu vert. Une fois l'accord obtenu, passer la ligne de statut à
+`> Statut : validé par <nom> le <JJ/MM/AAAA>`. Le plan d'un jalon sans tickets se rattache
+ensuite à ce jalon avec le skill `tickets`. Le plan n'est pas commité ici : `implement`
 le commite avec la première tâche, sur sa branche.
 
 **Questions pour le métier ou pour l'auteur du ticket** : appeler le Skill tool avec

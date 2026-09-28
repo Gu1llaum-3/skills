@@ -1,6 +1,6 @@
 # /next : quel skill lancer ensuite
 
-> Validé par Guillaume le 28/09/2026 ; statut : terminé
+> Statut : terminé le 28/09/2026
 > Origine : cadrage du 28/09/2026 (`/feature` dans la conversation)
 
 ## Objectif

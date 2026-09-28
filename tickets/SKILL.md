@@ -88,7 +88,10 @@ Les opérations dont les autres skills ont besoin :
 - **Commenter un ticket**, par exemple pour poser des questions à celui qui l'a écrit.
 - **Marquer un ticket terminé.**
 - **Créer les jalons**, d'après le découpage en jalons du cahier des charges.
-- **Rattacher un ticket à un jalon**, ou le laisser hors jalon (« plus tard »).
+- **Rattacher un ticket à un jalon**, ou le laisser hors jalon (« plus tard »). Le plan d'un
+  jalon sans tickets (projet « simple ») s'y rattache en local ; ailleurs, le jalon reste vide.
+- **Marquer un jalon réalisé** : en local, il l'est quand toutes ses lignes sont cochées ;
+  ailleurs, fermer le milestone ou publier la version, après accord.
 - **Montrer la roadmap** : les jalons dans l'ordre, et pour chacun ses tickets et leur statut.
 
 Règles communes :

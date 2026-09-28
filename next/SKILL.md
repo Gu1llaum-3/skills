@@ -28,14 +28,22 @@ Réponds dans la langue de l'utilisateur.
 
 **Si la conversation est vide** (début de session, juste après `/clear`), lire l'état du projet :
 
-- `docs/plans/` : un plan validé avec des cases `- [ ]` → le reprendre avec `implement`, en
-  citant la vague et la première tâche non cochée ; un plan « à valider » → le faire valider ;
-- `docs/questionnaires/` : un questionnaire « envoyé » → la réponse est-elle revenue ? Si oui,
+- `docs/plans/`, d'après la ligne `> Statut :` :
+  - `validé par …` avec des cases `- [ ]` → le reprendre avec `implement`, en citant la vague et
+    la première tâche non cochée ;
+  - `à valider` → s'il porte une question `[Métier : …, bloquante]`, le plan attend la réponse à
+    son questionnaire ; sinon, le faire valider ;
+  - `terminé le …` d'origine POC, alors que le POC n'a pas de verdict → `/poc <fichier>` ;
+- `docs/questionnaires/` : `> Statut : envoyé le …` → la réponse est-elle revenue ? Si oui,
   `to-questionnaire` la réintègre ; sinon, le travail qui en dépend attend ;
-- `ROADMAP.md` et `docs/tickets/` : un ticket « prêt » dont les bloquants sont terminés ;
-- `docs/cahier-des-charges.md` : le premier jalon non réalisé, et son envergure (« simple » :
-  `plan` ; « gros » : `to-spec`) ;
-- `docs/poc/` : un POC « en cours », ou terminé avec un verdict qui n'a pas encore de suite.
+- `docs/tickets/` : un ticket `en cours` → le reprendre ; sinon un ticket `prêt` dont les
+  bloquants sont `terminé` ;
+- `ROADMAP.md` (ou les jalons du gestionnaire, avec `tickets`) : le premier jalon qui a des
+  lignes non cochées, ou aucune ligne. Sans ligne, son envergure dans le cahier des charges
+  décide : « simple » → `plan` du jalon ; « gros » → `to-spec` du jalon. Un cahier des charges
+  sans roadmap → la créer avec `tickets` ;
+- `docs/poc/` : `> Statut : en cours` → reprendre ; `terminé` avec un verdict qui n'a pas encore
+  de suite → la proposer.
 
 Ne citer que ce qui a été lu. S'il n'y a rien, ni dans la conversation ni dans le projet, poser
 une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter avec la réponse.

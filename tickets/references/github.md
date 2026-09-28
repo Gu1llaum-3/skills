@@ -62,6 +62,7 @@ compte rendu.
 - **Créer** : `gh api repos/{owner}/{repo}/milestones -X POST -f title="M1 : <nom>" -f description="<objectif>"`.
 - **Rattacher** : `--milestone "<titre>"` à la création, ou
   `gh issue edit <numéro> --milestone "<titre>"` ensuite.
+- **Marquer réalisé** : `gh api repos/{owner}/{repo}/milestones/<numéro> -X PATCH -f state=closed`.
 - **Montrer la roadmap** :
   `gh api repos/{owner}/{repo}/milestones --jq '.[] | "\(.title) : \(.closed_issues)/\(.open_issues + .closed_issues)"'`,
   puis `gh issue list --milestone "<titre>" --state all` pour le détail d'un jalon.

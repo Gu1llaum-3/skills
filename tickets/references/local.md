@@ -86,13 +86,17 @@ roadmap sert aussi d'historique.
 - **Lister les ouverts** : les fichiers de `docs/tickets/` dont le statut n'est pas « terminé »
   (`grep -L "Statut :\*\* terminé" -r docs/tickets`).
 - **Statuts** : `prêt` → `en cours` → `terminé`. Un ticket est démarrable quand tous ses
-  bloquants sont `terminé`.
+  bloquants sont `terminé`. Sa spec suit : `en cours` dès qu'un de ses tickets l'est, `terminée`
+  quand le dernier l'est.
 - **Commenter** : ajouter en fin de fichier une section `## Commentaires`, puis une entrée datée
   par commentaire (`- JJ/MM/AAAA : …`).
 - **Terminer** : passer le statut à `terminé`, cocher les critères atteints et la case du ticket
   dans `ROADMAP.md`, dans le même commit que le code ou juste après.
 - **Créer les jalons** : créer `ROADMAP.md` s'il n'existe pas, avec une section par jalon.
 - **Rattacher à un jalon** : ajouter la ligne du ticket sous son jalon, ou sous « Plus tard ».
+  Le plan d'un jalon sans tickets s'y rattache de la même façon :
+  `- [ ] [plan : <titre>](docs/plans/<slug>.md)`, cochée quand le plan est terminé. Un jalon est
+  réalisé quand toutes ses lignes sont cochées.
   Un ticket n'apparaît qu'à un seul endroit.
 - **Montrer la roadmap** : lire `ROADMAP.md`, puis vérifier que chaque case correspond au statut
   du ticket. Un écart se signale et se corrige après accord : c'est le ticket qui fait foi.

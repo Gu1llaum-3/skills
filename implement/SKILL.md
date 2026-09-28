@@ -29,8 +29,9 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
     s'arrêter et les citer ;
   - sinon, appeler le Skill tool avec « plan » en lui donnant le ticket. Il confronte le ticket au
     code, rédige le plan et le fait valider ; on reprend ensuite ici avec ce plan.
-- **Validé** : une ligne datée du type « Validé par … le … », ou un accord explicite dans la
-  conversation. Sinon, s'arrêter : un plan brouillon ne s'exécute pas, parce qu'on coderait des
+- **Validé** : la ligne `> Statut : validé par … le …`, ou un accord explicite dans la
+  conversation (écrire alors cette ligne dans le plan). Une question marquée « bloquante » dans
+  le plan interdit aussi de démarrer. Sinon, s'arrêter : un plan brouillon ne s'exécute pas, parce qu'on coderait des
   décisions que personne n'a prises.
 - **Conventions du dépôt** : lire `CLAUDE.md`, `README.md` et les documents qu'ils désignent comme
   obligatoires pour le type de tâche (par exemple `docs/design/DESIGN.md` avant un travail d'interface), et les titres des ADR
@@ -46,7 +47,11 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   - propre : on continue ;
   - seul le plan est nouveau ou modifié (il vient d'être rédigé ou validé) : on continue, il sera
     commité avec la première tâche ;
-  - sale : montrer le diff. S'il correspond visiblement à la tâche du point de reprise (une
+  - en plus du plan, des fichiers **nouveaux** écrits par les skills du parcours
+    (`docs/research/`, `docs/questionnaires/`, `docs/poc/`, `docs/specs/`, `docs/tickets/`,
+    `docs/design/`, `docs/cahier-des-charges.md`, `ROADMAP.md`) : les nommer, puis les commiter
+    avec la première tâche ;
+  - toute autre modification : montrer le diff. S'il correspond visiblement à la tâche du point de reprise (une
     exécution interrompue), proposer de repartir de ce travail ou de l'écarter ; sinon, attendre.
     Ne jamais jeter ni commiter des modifications qu'on n'a pas faites.
 - **Plan hors du dépôt** (convention qui interdit ces fichiers) : ne jamais le commiter, mais y
@@ -66,13 +71,12 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
 3. Résumer en quelques lignes : les vagues, les tâches de chaque vague, et le **point de reprise**
    (première tâche non cochée de la première vague incomplète). Les tâches cochées sont faites : on
    ne les refait pas.
-4. **Branche** : celle que nomme le plan, sinon celle qu'impose la convention du dépôt, sinon une
+4. **Branche** : celle que nomme le plan (`> Branche :`), sinon celle qu'impose la convention du dépôt, sinon une
    branche pour tout le plan, créée depuis la branche de départ et au nom court
    (`feat/<slug>`, `fix/<slug>`, `chore/<slug>`). En reprise, retourner sur cette branche.
    **Jamais sur la branche principale** (`main`, `master`, ou celle que le dépôt désigne comme
-   telle), même si une convention semble le permettre : la fusion y a lieu sur feu vert, pas au fil
-   des tâches. Seule exception : le propriétaire le demande explicitement pour ce plan, et on le
-   note dans le plan.
+   telle), sauf si la convention écrite du dépôt (`CLAUDE.md`) dit d'y commiter : la fusion y a
+   lieu sur feu vert, pas au fil des tâches.
 5. **Mode turbo** : si l'utilisateur demande d'enchaîner (argument `turbo`, « enchaîne les vagues
    2 et 3 »), noter quelles vagues sont concernées. Hors de ces vagues, la pause reste de règle.
 
@@ -84,6 +88,8 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
      et suivre sa boucle pour chaque tâche de code : test rouge vu échouer pour la bonne raison,
      code minimal, vert, refactorisation. Les interfaces à tester se déduisent de la tâche et de
      ses critères : le plan étant validé, on ne les redemande pas, sauf réelle ambiguïté.
+     **Plan d'origine POC** : pas de TDD complet ; chaque tâche se vérifie par l'essai ou le test
+     ciblé que le plan prévoit pour trancher l'hypothèse.
    - **Nommer le test** d'après le critère ou la règle qu'il prouve, avec son numéro si le plan en
      donne un (`AC-2`, `COM-04`), pour qu'on retrouve la preuve de chaque critère dans le bilan.
    - **Ce qui ne se teste pas automatiquement** (configuration, documentation, rendu, CSS,
@@ -91,13 +97,15 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
      avec captures, détecteur de design, commande de contrôle) et la décrire dans le compte rendu
      de la tâche. Écrire « non testable » sans rien vérifier ne suffit pas.
    - **Une fois la tâche verte** : vérifier la branche courante (`git branch --show-current`) ; si
-     c'est la branche principale sans exception notée dans le plan, s'arrêter et le dire. Cocher
+     c'est la branche principale sans convention écrite qui l'autorise, s'arrêter et le dire. Cocher
      ensuite la case sans toucher au reste du texte du plan, puis commiter le code **et** le plan
      ensemble. Le message suit le format du dépôt (langue, préfixe,
      corps qui explique le pourquoi, lignes d'attribution) et, par défaut, un message
      conventionnel. Le corps contient `Refs: <chemin du plan>`, pour que `git log` ramène au
      contexte. Une tâche = un commit, case comprise : ainsi, une reprise ne refait jamais une tâche
      déjà commitée.
+   - **Première tâche d'un plan tiré d'un ticket local** : dans ce même commit, passer le ticket
+     « en cours » avec le skill `tickets`.
 3. **Fin de vague** : lancer la vérification complète et **lire son code de retour**. Ne jamais
    faire passer la sortie par un pipe (`| tail`, `| grep`) dans la commande qui sert de
    vérification, car le pipe remplace le code de retour et masque l'échec. Rediriger vers un
@@ -125,8 +133,13 @@ Quand la dernière vague est verte :
    - les écarts au plan et leur raison ;
    - les tâches ajoutées ou retirées ;
    - ce qui reste hors plan.
-   Passer le statut à « terminé » et commiter selon le format du dépôt (par défaut
-   `docs: record plan outcome`).
+   Passer la ligne de statut à `> Statut : terminé le <JJ/MM/AAAA>` et commiter selon le format
+   du dépôt (par défaut `docs: record plan outcome`).
+   **Plan d'un jalon** (`Origine : jalon N`) : dans ce même commit, cocher sa ligne dans la
+   roadmap avec le skill `tickets`. Sur un gestionnaire distant, proposer de marquer le jalon
+   réalisé.
+   **Plan d'origine POC** : s'arrêter là, sans résumé de fusion ni suite Git, et proposer
+   `/poc docs/poc/<slug>.md` pour écrire le verdict.
    **Plan tiré d'un ticket** : en local, le terminer avec le skill `tickets` (statut, critères
    atteints et case de `ROADMAP.md`), dans ce même commit. Sur un gestionnaire distant, ne rien fermer : prévoir
    `Closes #<numéro>` (ou l'équivalent) dans le résumé de fusion, et proposer un commentaire de
@@ -164,7 +177,7 @@ Quand la dernière vague est verte :
   ignorer un test.
 - Cocher une tâche dont le test ou la vérification n'a pas tourné.
 - Masquer le code de retour d'une vérification, ou annoncer du vert sans l'avoir lu.
-- Commiter sur la branche principale, sauf demande explicite du propriétaire notée dans le plan.
+- Commiter sur la branche principale, sauf convention écrite du dépôt qui le demande.
 - Fusionner dans la branche de départ, pousser, ouvrir une pull request, ou commenter ou fermer un
   ticket distant, sans feu vert explicite.
 - Enchaîner les vagues sans pause quand ce n'est pas demandé.

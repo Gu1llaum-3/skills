@@ -31,6 +31,8 @@ déjà les specs.
   l'utilisateur la liste des versions à créer (nom et objectif), qu'il crée dans les réglages du
   projet Jira, puis vérifier qu'elles existent.
 - **Rattacher** : renseigner le champ `fixVersions` de l'issue.
+- **Marquer réalisé** : marquer la version publiée (released) avec le connecteur s'il le
+  permet ; sinon, demander à l'utilisateur de le faire dans les réglages du projet.
 - **Montrer la roadmap** : une recherche JQL par version,
   `project = PROJ AND fixVersion = "<nom>" ORDER BY status`, et
   `project = PROJ AND fixVersion is EMPTY AND statusCategory != Done` pour ce qui n'a pas de

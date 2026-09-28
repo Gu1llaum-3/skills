@@ -38,6 +38,7 @@ Si un lien échoue, s'en tenir au texte du corps et le signaler.
 - **Créer** : `glab api --method POST projects/:id/milestones -f title="M1 : <nom>" -f description="<objectif>"`.
 - **Rattacher** : `--milestone "<titre>"` à la création, ou
   `glab issue update <iid> --milestone "<titre>"` ensuite.
+- **Marquer réalisé** : `glab api --method PUT projects/:id/milestones/<id> -f state_event=close`.
 - **Montrer la roadmap** : `glab api projects/:id/milestones` pour la liste, puis
   `glab issue list --milestone "<titre>" --all` pour le détail d'un jalon.
 
