@@ -31,8 +31,8 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
     code, rédige le plan et le fait valider ; on reprend ensuite ici avec ce plan.
 - **Validé** : la ligne `> Statut : validé par … le …`, ou un accord explicite dans la
   conversation (écrire alors cette ligne dans le plan). Une question marquée « bloquante » dans
-  le plan interdit aussi de démarrer. Sinon, s'arrêter : un plan brouillon ne s'exécute pas, parce qu'on coderait des
-  décisions que personne n'a prises.
+  le plan interdit aussi de démarrer. Sinon, s'arrêter : un plan brouillon ne s'exécute pas,
+  parce qu'on coderait des décisions que personne n'a prises.
 - **Conventions du dépôt** : lire `CLAUDE.md`, `README.md` et les documents qu'ils désignent comme
   obligatoires pour le type de tâche (par exemple `docs/design/DESIGN.md` avant un travail d'interface), et les titres des ADR
   (`docs/adr/`) pour ne pas contredire une décision passée sans le savoir. `CONTEXT.md`, s'il
@@ -51,8 +51,9 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
     (`docs/research/`, `docs/questionnaires/`, `docs/poc/`, `docs/specs/`, `docs/tickets/`,
     `docs/design/`, `docs/cahier-des-charges.md`, `ROADMAP.md`) : les nommer, puis les commiter
     avec la première tâche ;
-  - toute autre modification : montrer le diff. S'il correspond visiblement à la tâche du point de reprise (une
-    exécution interrompue), proposer de repartir de ce travail ou de l'écarter ; sinon, attendre.
+  - toute autre modification : montrer le diff. S'il correspond visiblement à la tâche du point
+    de reprise (une exécution interrompue), proposer de repartir de ce travail ou de l'écarter ;
+    sinon, attendre.
     Ne jamais jeter ni commiter des modifications qu'on n'a pas faites.
 - **Plan hors du dépôt** (convention qui interdit ces fichiers) : ne jamais le commiter, mais y
   cocher les cases et y écrire le bilan quand même.
@@ -71,8 +72,8 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
 3. Résumer en quelques lignes : les vagues, les tâches de chaque vague, et le **point de reprise**
    (première tâche non cochée de la première vague incomplète). Les tâches cochées sont faites : on
    ne les refait pas.
-4. **Branche** : celle que nomme le plan (`> Branche :`), sinon celle qu'impose la convention du dépôt, sinon une
-   branche pour tout le plan, créée depuis la branche de départ et au nom court
+4. **Branche** : celle que nomme le plan (`> Branche :`), sinon celle qu'impose la convention du
+   dépôt, sinon une branche pour tout le plan, créée depuis la branche de départ et au nom court
    (`feat/<slug>`, `fix/<slug>`, `chore/<slug>`). En reprise, retourner sur cette branche.
    **Jamais sur la branche principale** (`main`, `master`, ou celle que le dépôt désigne comme
    telle), sauf si la convention écrite du dépôt (`CLAUDE.md`) dit d'y commiter : la fusion y a
@@ -97,10 +98,10 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
      avec captures, détecteur de design, commande de contrôle) et la décrire dans le compte rendu
      de la tâche. Écrire « non testable » sans rien vérifier ne suffit pas.
    - **Une fois la tâche verte** : vérifier la branche courante (`git branch --show-current`) ; si
-     c'est la branche principale sans convention écrite qui l'autorise, s'arrêter et le dire. Cocher
-     ensuite la case sans toucher au reste du texte du plan, puis commiter le code **et** le plan
-     ensemble. Le message suit le format du dépôt (langue, préfixe,
-     corps qui explique le pourquoi, lignes d'attribution) et, par défaut, un message
+     c'est la branche principale sans convention écrite qui l'autorise, s'arrêter et le dire.
+     Cocher ensuite la case sans toucher au reste du texte du plan, puis commiter le code **et**
+     le plan ensemble. Le message suit le format du dépôt (langue, préfixe, corps qui explique le
+     pourquoi, lignes d'attribution) et, par défaut, un message
      conventionnel. Le corps contient `Refs: <chemin du plan>`, pour que `git log` ramène au
      contexte. Une tâche = un commit, case comprise : ainsi, une reprise ne refait jamais une tâche
      déjà commitée.
@@ -127,7 +128,12 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
 
 Quand la dernière vague est verte :
 
-1. **Écrire le bilan dans le plan**, pour le relecteur : dans la section « Réalisé » si le plan en
+1. **Faire relire** (sauf plan d'origine POC) : appeler le Skill tool avec « review », avec le
+   plan pour spec. Écrire ses remarques `R-n` dans le journal et demander lesquelles corriger.
+   Les retenues deviennent les tâches d'une vague « Retours de revue », exécutée en TDD comme
+   les autres ; les écartées sont notées avec leur raison. Puis passer au bilan, sans nouvelle
+   revue.
+2. **Écrire le bilan dans le plan**, pour le relecteur : dans la section « Réalisé » si le plan en
    a une, sinon dans une section ajoutée en fin de fichier. Y mettre :
    - chaque critère, atteint (avec le test qui le prouve) ou non, et pourquoi ;
    - les écarts au plan et leur raison ;
@@ -144,10 +150,10 @@ Quand la dernière vague est verte :
    atteints et case de `ROADMAP.md`), dans ce même commit. Sur un gestionnaire distant, ne rien fermer : prévoir
    `Closes #<numéro>` (ou l'équivalent) dans le résumé de fusion, et proposer un commentaire de
    bilan sur le ticket.
-2. **Proposer un résumé de fusion**, tiré du plan : trois lignes de résumé, les critères atteints,
+3. **Proposer un résumé de fusion**, tiré du plan : trois lignes de résumé, les critères atteints,
    une ligne par décision, le lien vers le plan. Il sert de description de pull request si le dépôt
    en utilise, sinon de récapitulatif avant la fusion.
-3. **Proposer, sans l'exécuter**, la suite Git habituelle du dépôt (fusion dans la branche de
+4. **Proposer, sans l'exécuter**, la suite Git habituelle du dépôt (fusion dans la branche de
    départ, en avance rapide si c'est la convention, ou pull request) et le push s'il existe un
    dépôt distant. Ces étapes attendent un feu vert explicite.
 

@@ -60,6 +60,8 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 | Une spec ou un cahier des charges à découper en tickets | `/to-tickets` |
 | Un ticket (des skills, d'une PO, d'un client) à analyser avant de coder | `/plan <ticket>` |
 | Un plan validé, ou un ticket à attaquer directement | `/implement <plan ou ticket>` |
+| Une branche ou un travail à relire contre sa spec et les conventions | `/review` |
+| Des bugs à chercher dans un diff | `/code-review` |
 | Un bug dont la cause est connue | `/tdd` |
 | Un bug qui résiste | `/plan` (tâche de localisation d'abord) |
 | Des tests à écrire ou à réécrire | `/tdd` |

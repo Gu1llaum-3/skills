@@ -10,8 +10,8 @@
   de lancer le skill. Réécrire ces phrases avec un contexte, ou tester dans une conversation.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
-- [ ] **Relecture de code** en fin d'`implement`, comme le `code-review` de Matt (conformité aux
-  conventions du dépôt, et fidélité à la spec ou au ticket).
+- [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt
+  (fidélité à la spec ou au ticket, et conformité aux conventions du dépôt).
 - [x] **Glossaire du domaine** : `domain-modeling`, appelé par `interview`, et vérifié par
   `onboard`.
 - [ ] Essayer `/onboard` sur un projet existant qui a déjà un `CLAUDE.md`, pour voir si la mise à

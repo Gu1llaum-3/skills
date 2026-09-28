@@ -6,9 +6,9 @@ lié dans `~/.claude/skills/` par `install.sh`.
 ## Commandes
 
 - Installer ou relier les skills : `./install.sh` (après un ajout ou un renommage)
-- Banc d'essai des déclencheurs : `python3 evals/run_triggers.py [passages]`. Il lance 36 appels
-  à `claude -p` : le proposer après chaque changement de description, le lancer seulement après
-  accord.
+- Banc d'essai des déclencheurs : `python3 evals/run_triggers.py [passages]`. Il lance un appel à
+  `claude -p` par phrase : le proposer après chaque changement de description, le lancer
+  seulement après accord.
 
 ## Conventions
 
@@ -17,8 +17,10 @@ lié dans `~/.claude/skills/` par `install.sh`.
 - Description : ce que fait le skill, puis « Utilise ce skill quand… » avec des phrases types
   entre guillemets, et les skills qui l'appellent.
 - Un skill que l'utilisateur lance lui-même porte `disable-model-invocation: true` : Claude ne
-  peut pas le lancer, il le propose avec sa commande. Un skill propose la suite et n'en lance un
-  autre qu'après accord explicite de l'utilisateur.
+  peut pas le lancer, il le propose avec sa commande.
+- Passer d'une étape du parcours à la suivante (cadrage → `plan` → `implement`, ou `to-spec`) se
+  fait après accord explicite de l'utilisateur. Les skills appelés en cours de route (`tdd`,
+  `interview`, `research`, `review`, `tickets`…) n'en demandent pas.
 - Un skill en appelle un autre avec « appeler le Skill tool avec « nom » », et pointe ses fichiers
   par un lien relatif (`../tickets/SKILL.md`).
 

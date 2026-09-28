@@ -15,6 +15,7 @@ Les skills suivants sont des adaptations en français de skills de Matt Pocock
 | `domain-modeling` | `skills/engineering/domain-modeling` (hors ADR) |
 | `wtf` | `skills/productivity/wait-what` |
 | `next` | `skills/engineering/ask-matt` |
+| `review` | `skills/engineering/code-review` |
 
 Ils sont distribués sous la licence suivante :
 

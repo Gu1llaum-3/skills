@@ -219,5 +219,24 @@
    "none",
    "tdd"
   ]
+ },
+ {
+  "q": "relis la branche feat/export-csv avant que je la merge, par rapport à son plan et aux conventions du projet",
+  "ok": [
+   "review"
+  ]
+ },
+ {
+  "q": "vérifie que ce que j'ai codé colle bien au ticket 42, ni plus ni moins",
+  "ok": [
+   "review"
+  ]
+ },
+ {
+  "q": "cherche les bugs dans mon diff actuel, je veux juste savoir si quelque chose va casser",
+  "ok": [
+   "autre:code-review",
+   "none"
+  ]
  }
 ]

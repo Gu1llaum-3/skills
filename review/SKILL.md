@@ -1,0 +1,93 @@
+---
+name: review
+description: "Relire un diff (une branche, une PR, le travail en cours, ou ce qu'implement vient de livrer) sur deux axes séparés : la spec (ce que le plan, le ticket ou la spec demandaient : manques, dépassements, erreurs) et les conventions du dépôt (CLAUDE.md, CONTEXT.md, ADR, DESIGN.md, odeurs de code). Deux sous-agents au contexte vierge, deux rapports côte à côte. Utilise ce skill quand l'utilisateur veut faire relire son travail (« relis la branche », « fais une review de ce que j'ai fait », « vérifie que ça colle au ticket 42 », « review depuis main »), et quand implement termine un plan. Pas pour chercher des bugs : c'est /code-review."
+argument-hint: "[point fixe : branche, commit, main] [spec : plan, ticket, chemin]"
+---
+
+# Review : la spec et les conventions
+
+Un diff peut respecter toutes les conventions et faire autre chose que ce qui était demandé, ou
+faire exactement ce qui était demandé en cassant les conventions. Ce skill relit les deux
+séparément, dans deux sous-agents au contexte vierge, pour qu'un axe ne masque pas l'autre. Il ne
+modifie rien : il rapporte.
+
+## 1. Choisir le point fixe
+
+- Le point fixe est celui que donne l'utilisateur ou l'appelant (branche, commit, tag, `main`).
+  Sinon, la branche principale ; si l'on est dessus, le commit qui précède le premier commit du
+  travail (`Refs:` du plan dans `git log`), sinon demander.
+- Le diff part de `git merge-base <point fixe> HEAD` : `git diff <merge-base>` (il inclut le
+  travail non commité), plus les fichiers nouveaux non suivis, que `git diff` ne montre pas
+  (`git ls-files --others --exclude-standard`) et que les sous-agents lisent en entier. Noter
+  aussi `git log <merge-base>..HEAD --oneline`.
+- Vérifier que le point fixe existe (`git rev-parse`) et qu'il y a quelque chose à relire ;
+  sinon s'arrêter ici et le dire, plutôt que dans deux sous-agents.
+
+## 2. Trouver la spec
+
+Dans cet ordre :
+
+1. le chemin ou le ticket donnés par l'utilisateur ou l'appelant ;
+2. un plan cité par `Refs:` dans les commits, ou le plan qu'`implement` exécute ;
+3. un ticket cité dans les commits (`#42`, `PROJ-123`), et sa spec : appeler le Skill tool avec
+   « tickets » pour les lire ;
+4. une spec de `docs/specs/` ou un plan de `docs/plans/` qui correspond à la branche.
+
+Si rien ne vient, demander. S'il n'y en a pas, l'axe spec est sauté et le rapport le dit.
+
+## 3. Trouver les conventions
+
+Ce que le dépôt écrit sur la façon de coder : `CLAUDE.md` (et ceux des sous-dossiers touchés),
+`CONTEXT.md` (les termes du domaine), les ADR de `docs/adr/`, `docs/design/DESIGN.md` si le diff
+touche l'interface, `CONTRIBUTING.md` s'il existe. S'y ajoute la base d'odeurs de
+[references/odeurs.md](references/odeurs.md), qu'on colle en entier dans le brief du sous-agent :
+il n'y a pas accès autrement.
+
+## 4. Lancer les deux sous-agents, en parallèle
+
+Dans un seul message, deux sous-agents d'exploration.
+
+**Spec** : la commande du diff, les fichiers non suivis, la liste des commits, la source de la
+spec (chemin ou contenu).
+Brief :
+
+> Rapporte : (a) ce que la spec demande et qui manque ou n'est fait qu'en partie ; (b) ce que le
+> diff fait sans que ce soit demandé, y compris ce que la spec met hors périmètre ; (c) ce qui
+> paraît fait mais de travers. Cite pour chaque remarque la ligne de la spec (le critère `AC-n`
+> s'il y en a). Moins de 400 mots.
+
+**Conventions** : la commande du diff, les fichiers non suivis, la liste des commits, les
+fichiers de l'étape 3 et la base d'odeurs. Brief :
+
+> Rapporte, par fichier ou par morceau du diff : (a) les **violations** : chaque écart à une
+> règle écrite du dépôt, en citant le fichier et la règle ; (b) les **jugements** : chaque odeur
+> de la base repérée, sous la forme « possible <odeur> », avec l'extrait. Une règle du dépôt
+> l'emporte sur une odeur. Moins de 400 mots.
+
+## 5. Rapporter
+
+```markdown
+## Spec
+
+<le rapport du sous-agent, à peine nettoyé ; ou « pas de spec : axe sauté »>
+
+## Conventions
+
+### Violations
+<les écarts aux règles écrites>
+
+### Jugements
+<les odeurs possibles>
+
+**En bref** :
+- Spec : <n> remarques, la plus grave : ….
+- Conventions : <n> violations et <n> jugements, le plus grave : ….
+
+Pour les bugs : `/code-review`.
+```
+
+- Ne pas fusionner ni reclasser les remarques entre les deux axes : c'est ce que la séparation
+  empêche.
+- **Appelé par `implement`** : numéroter les remarques `R-1`, `R-2`… à travers les deux axes, et
+  lui rendre la main avec le rapport.
+- **Lancé seul** : s'arrêter au rapport ; l'utilisateur décide de la suite.

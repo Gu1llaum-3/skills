@@ -22,7 +22,8 @@ Mes skills personnels pour Claude Code.
 | Skill | Rôle |
 |---|---|
 | `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code (et challengé, s'il vient d'ailleurs) |
-| `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD |
+| `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD, puis le faire relire |
+| `review` | Relire un diff sur deux axes séparés : la spec (plan, ticket) et les conventions du dépôt |
 | `tdd` | La boucle rouge-vert et ce qui fait un bon test |
 | `to-spec` | Transformer les décisions (ou un jalon du cahier des charges) en spec, puis en tickets |
 | `to-tickets` | Découper en tickets par tranches verticales, avec leurs dépendances |
@@ -48,6 +49,7 @@ Mes skills personnels pour Claude Code.
 ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──► plan ──► implement ──► tickets
 
 interview, research, adr et to-questionnaire sont appelés en cours de route.
+implement écrit le code avec tdd, puis le fait relire par review avant son bilan.
 Perdu en chemin ? /next dit quel skill lancer.
 ```
 
@@ -65,9 +67,10 @@ Perdu en chemin ? /next dit quel skill lancer.
   Elles vont dans les « Questions ouvertes » du document, puis dans un questionnaire par
   destinataire (`docs/questionnaires/`). Une question bloquante empêche de valider le plan qui en
   dépend.
-- Un skill propose la suite et n'en lance un autre qu'après ton accord. Ceux que tu lances
-  toi-même (`/brainstorming`, `/feature`, `/poc`…) ne peuvent pas être lancés par Claude : il te
-  donne la commande à taper.
+- Passer d'une étape à la suivante (du cadrage au plan, du plan à `implement`) se fait après ton
+  accord ; les skills appelés en cours de route (`tdd`, `interview`, `research`, `review`…) n'en
+  demandent pas. Ceux que tu lances toi-même (`/brainstorming`, `/feature`, `/poc`…) ne peuvent
+  pas être lancés par Claude : il te donne la commande à taper.
 
 ## Où vont les fichiers d'un projet
 
@@ -129,5 +132,6 @@ Les pistes à venir sont dans [TODO.md](TODO.md).
 Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
 `domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
-`wtf` (d'après `wait-what`) et `next` (d'après `ask-matt`). L'organisation en skills qui
-s'appellent entre eux vient aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).
+`wtf` (d'après `wait-what`), `next` (d'après `ask-matt`) et `review` (d'après `code-review`).
+L'organisation en skills qui s'appellent entre eux vient aussi de son dépôt. Voir
+[CREDITS.md](CREDITS.md).
