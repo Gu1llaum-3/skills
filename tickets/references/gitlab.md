@@ -33,9 +33,18 @@ L'identifiant du projet s'obtient avec `glab api projects/:id | jq .id`. Si une 
 option n'existe pas dans la version installée de `glab`, vérifier avec `glab <commande> --help`.
 Si un lien échoue, s'en tenir au texte du corps et le signaler.
 
-## Lire, lister, terminer
+## Jalons (milestones)
+
+- **Créer** : `glab api --method POST projects/:id/milestones -f title="M1 : <nom>" -f description="<objectif>"`.
+- **Rattacher** : `--milestone "<titre>"` à la création, ou
+  `glab issue update <iid> --milestone "<titre>"` ensuite.
+- **Montrer la roadmap** : `glab api projects/:id/milestones` pour la liste, puis
+  `glab issue list --milestone "<titre>" --all` pour le détail d'un jalon.
+
+## Lire, lister, commenter, terminer
 
 - **Lire** : `glab issue view <iid> --comments`.
 - **Lister les ouverts** : `glab issue list --search "<mots-clés>"`.
+- **Commenter**, après feu vert : `glab issue note <iid> --message "<commentaire>"`.
 - **Terminer** : de préférence par la merge request, avec `Closes #<iid>` dans sa description.
   Sinon, après feu vert : `glab issue close <iid>`.

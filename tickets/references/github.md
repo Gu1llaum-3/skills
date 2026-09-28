@@ -57,9 +57,19 @@ Si un appel échoue (fonction absente de ce dépôt, droits insuffisants), ne pa
 section « Bloqué par » et la mention de la spec dans le corps suffisent. Le signaler dans le
 compte rendu.
 
-## Lire, lister, terminer
+## Jalons (milestones)
+
+- **Créer** : `gh api repos/{owner}/{repo}/milestones -X POST -f title="M1 : <nom>" -f description="<objectif>"`.
+- **Rattacher** : `--milestone "<titre>"` à la création, ou
+  `gh issue edit <numéro> --milestone "<titre>"` ensuite.
+- **Montrer la roadmap** :
+  `gh api repos/{owner}/{repo}/milestones --jq '.[] | "\(.title) : \(.closed_issues)/\(.open_issues + .closed_issues)"'`,
+  puis `gh issue list --milestone "<titre>" --state all` pour le détail d'un jalon.
+
+## Lire, lister, commenter, terminer
 
 - **Lire** : `gh issue view <numéro> --comments`, puis la spec parente si elle est citée.
 - **Lister les ouverts** : `gh issue list --state open --search "<mots-clés>"`.
+- **Commenter**, après feu vert : `gh issue comment <numéro> --body-file <fichier>`.
 - **Terminer** : de préférence par la pull request, avec `Closes #<numéro>` dans sa description.
   Sinon, après feu vert : `gh issue close <numéro> --comment "<bilan court>"`.
