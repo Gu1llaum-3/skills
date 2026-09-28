@@ -1,6 +1,6 @@
 ---
 name: interview
-description: Mener un entretien critique pour éclaircir une idée, un besoin ou un plan jusqu'à ce que plus rien d'important ne soit supposé en silence — le besoin est questionné avant la solution, les faits sont cherchés (code, docs, web) et seules les décisions sont posées à l'utilisateur, par séries de questions à choix avec une recommandation. Utilise ce skill quand l'utilisateur veut qu'on le challenge, qu'on lui pose des questions sur son idée ou qu'on mette son plan à l'épreuve (« challenge-moi », « pose-moi des questions », « grill me »), et chaque fois qu'un autre skill (brainstorming, feature, design, naming, plan) demande un entretien.
+description: Mener un entretien critique pour éclaircir une idée, un besoin ou un plan jusqu'à ce que plus rien d'important ne soit supposé en silence — le besoin est questionné avant la solution, les faits sont cherchés (code, docs, web), seules les décisions sont posées à l'utilisateur, par séries de questions à choix avec une recommandation, et celles qui appartiennent au métier sont repérées et mises de côté pour un questionnaire. Utilise ce skill quand l'utilisateur veut qu'on le challenge, qu'on lui pose des questions sur son idée ou qu'on mette son plan à l'épreuve (« challenge-moi », « pose-moi des questions », « grill me »), et chaque fois qu'un autre skill (brainstorming, feature, design, naming, plan) demande un entretien.
 ---
 
 # Entretien
@@ -32,7 +32,21 @@ ADR, les tickets, sur le web. Pour une recherche qui prend du temps, lancer un s
 ou appeler le Skill tool avec « research » (web), et **ne pas bloquer** : poser tout de suite
 les questions qui n'en dépendent pas.
 
-Les **décisions** appartiennent à l'utilisateur : chacune lui est posée, et on attend sa réponse.
+Les **décisions** sont posées à l'utilisateur, et on attend sa réponse.
+
+Certaines décisions ne lui appartiennent pas : elles relèvent du **métier** (client, product
+owner, juridique, opérationnels). Les signaux :
+
+- une **règle métier** : tarif, remise, remboursement, droit d'accès, délai contractuel ;
+- le **juridique ou la conformité** : durée de conservation, mention obligatoire, consentement ;
+- un **chiffre que seuls les opérationnels connaissent** : volume, fréquence, pic saisonnier ;
+- une **priorité produit** ou un arbitrage entre équipes ou entre clients ;
+- une zone floue d'un **ticket écrit par quelqu'un d'autre** : c'est à son auteur d'y répondre ;
+- l'utilisateur a déjà répondu « c'est au métier » sur un sujet voisin.
+
+Une telle question se pose quand même à l'utilisateur, qui connaît peut-être la réponse, mais
+avec l'option **« À demander au métier »** (voir la série). Pas d'option sur les autres
+questions : elle deviendrait une porte de sortie.
 
 ## 3. Travailler par séries
 
@@ -48,6 +62,8 @@ poser maintenant sans deviner une réponse qu'on n'a pas encore.
   de travail, mais un rendu bien meilleur »).
 - **L'option recommandée en premier**, suivie de « (Recommandé) ». Pas de recommandation quand
   c'est une vraie affaire de goût.
+- Sur une question qui présente un signal métier, la dernière option est **« À demander au
+  métier »**, avec en description l'hypothèse qu'on retiendrait en attendant.
 - `multiSelect` seulement quand les choix se cumulent ; `preview` pour comparer des maquettes,
   du code ou des schémas. Pas d'option « Autre » : l'outil l'ajoute.
 - Une question vraiment ouverte (« raconte-moi comment tu t'en sers aujourd'hui ») se pose en
@@ -63,17 +79,27 @@ poser maintenant sans deviner une réponse qu'on n'a pas encore.
 - Si l'utilisateur demande un avis, donner une **recommandation franche** en une ou deux lignes.
 - Ne jamais reposer une question tranchée. Si une réponse change la cible, l'appliquer à tout ce
   qui suit.
+- **Question renvoyée au métier** (l'option, ou une réponse comme « je ne sais pas, faut voir
+  avec la compta ») : ne pas la deviner. La noter avec son destinataire s'il est connu, ce que
+  la réponse change, et l'hypothèse de travail. Elle est **bloquante** si d'autres décisions en
+  dépendent ou si le comportement principal en dépend, sinon on avance avec l'hypothèse. Les
+  branches qui en dépendent attendent ; les autres continuent.
 - **Voie rapide** : si l'utilisateur dit « fais vite » ou « je te fais confiance », résumer les
-  hypothèses restantes en quelques lignes et s'arrêter là.
+  hypothèses restantes en quelques lignes et s'arrêter là. Les questions métier restent des
+  questions : la voie rapide ne les transforme pas en hypothèses silencieuses.
 
 ## 5. Conclure
 
 L'entretien est fini quand la frontière est vide : chaque branche visitée, rien d'important
 supposé en silence. Alors :
 
-1. **Récapituler** les décisions, une ligne chacune, et les questions encore ouvertes.
+1. **Récapituler** les décisions, une ligne chacune, les questions encore ouvertes, et à part
+   les **questions pour le métier**, par destinataire, chacune marquée bloquante ou non avec son
+   hypothèse.
 2. **Demander confirmation** : « Ai-je bien compris ? » Rien ne s'exécute avant l'accord.
 3. **ADR** : pour chaque décision difficile à défaire, surprenante sans contexte et issue d'un vrai
    compromis, proposer de l'enregistrer en appelant le Skill tool avec « adr ».
 
-Le skill appelant reprend ensuite la main avec ce récapitulatif.
+Le skill appelant reprend ensuite la main avec ce récapitulatif. S'il y a des questions pour le
+métier, il les écrit dans son document et propose d'en faire un questionnaire avec le skill
+`to-questionnaire`.
