@@ -1,3 +1,4 @@
 .DS_Store
 *.bak.*
 evals/results.json
+__pycache__/

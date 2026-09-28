@@ -1,7 +1,7 @@
 # TODO
 
-- [ ] **`/guide`**, un routeur façon `ask-matt` : « je suis dans telle situation, quel skill ? ».
-  Le schéma d'enchaînement du README en est la base.
+- [x] **`/next`** (d'abord noté `/guide`), un routeur façon `ask-matt` : lit la conversation, ou
+  l'état du projet, et dit quel skill lancer.
 - [x] **Évaluations des déclencheurs** : `python3 evals/run_triggers.py`, à relancer après chaque
   changement de description (34/36 le 28/09/2026, un passage par phrase).
   Deux phrases de `to-spec` sont instables (« garde une trace… », « transforme ce qu'on vient de

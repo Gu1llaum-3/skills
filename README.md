@@ -12,6 +12,7 @@ Mes skills personnels pour Claude Code.
 | `/feature` | Cadrer une idée de fonctionnalité dans un projet existant |
 | `/poc` | Vérifier vite qu'une idée tient debout, sur une seule question |
 | `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
+| `/next` | Quel skill lancer maintenant : lit la conversation, ou l'état du projet |
 | `/wtf` | Un message n'est pas passé : le faire reformuler, avec le contexte et les mots du projet |
 | `/design` | Définir l'identité visuelle : prototype HTML et `DESIGN.md` |
 | `/naming` | Trouver un nom et vérifier sa disponibilité |
@@ -47,6 +48,7 @@ Mes skills personnels pour Claude Code.
 ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──► plan ──► implement ──► tickets
 
 interview, research, adr et to-questionnaire sont appelés en cours de route.
+Perdu en chemin ? /next dit quel skill lancer.
 ```
 
 - **Simple ou gros** : le verdict est écrit dans le cahier des charges. Simple, chaque jalon
@@ -125,6 +127,6 @@ Les pistes à venir sont dans [TODO.md](TODO.md).
 
 Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
-`domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`
-et `wtf` (d'après `wait-what`). L'organisation en skills qui s'appellent entre eux vient aussi de son
-dépôt. Voir [CREDITS.md](CREDITS.md).
+`domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
+`wtf` (d'après `wait-what`) et `next` (d'après `ask-matt`). L'organisation en skills qui
+s'appellent entre eux vient aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).

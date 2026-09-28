@@ -35,7 +35,8 @@ lié dans `~/.claude/skills/` par `install.sh`.
 
 - Ajouter ou modifier un skill, c'est aussi mettre à jour, selon le cas : les tableaux et le
   schéma du `README.md`, `CREDITS.md` (skill adapté de Matt Pocock), `evals/triggers.json` (avec
-  des pièges qui ne doivent rien déclencher), `TODO.md`. Vérifier les skills qui l'appellent.
+  des pièges qui ne doivent rien déclencher), `TODO.md`, la carte de `next/SKILL.md`. Vérifier les
+  skills qui l'appellent.
 - Un changement de comportement se termine par un scénario d'essai proposé à l'utilisateur :
   quoi lancer, dans quel projet, ce qu'il faut observer.
 - Commits en français, directement sur `main`, un seul commit par changement (skill et fichiers
