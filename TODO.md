@@ -18,7 +18,6 @@
   l'épreuve trouve de vrais problèmes sans noyer sous les remarques.
 - [ ] Tester `tickets` en vrai sur GitHub (sous-issues, « bloqué par », milestones), GitLab et
   Jira (versions : le connecteur sait-il les créer ?).
-- [ ] **`debug`**, d'après `diagnosing-bugs` de Matt : boucle reproduire, réduire, hypothèses,
-  instrumenter, pour les bugs dont la cause résiste. En attendant, `plan` prévoit une tâche de
-  localisation avant le test rouge.
+- [x] **`debug`**, d'après `diagnosing-bugs` de Matt : une boucle qui échoue avant toute
+  hypothèse, pour les bugs dont la cause résiste ; `plan` l'appelle pour un bug de cause inconnue.
 - [ ] Essayer la revue d'un ticket externe de `plan` sur un vrai ticket Jira écrit par la PO.

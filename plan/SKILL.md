@@ -81,8 +81,9 @@ Sinon, le dire en une ligne en citant le modèle trouvé (« pas de recherche : 
 ça dans <module> »), pour que l'utilisateur puisse demander de chercher quand même. La recherche
 tourne en arrière-plan : commencer l'étape 3 sans l'attendre, et compléter quand elle revient.
 
-**Bug** : l'exploration cherche aussi la cause. Si elle n'est pas trouvée, le dire : le plan
-commencera par la reproduire et la localiser.
+**Bug** : l'exploration cherche aussi la cause. Si elle n'est pas trouvée, appeler le Skill tool
+avec « debug » : il la diagnostique, et corrige lui-même si le correctif tient en une tâche (le
+plan n'a alors plus lieu d'être). Sinon, le plan part de son diagnostic.
 
 ## 3. Restituer, de façon critique
 
@@ -129,9 +130,8 @@ critères d'un ADR se propose via le skill `adr`.
 [references/plan.md](references/plan.md). Le plan ne contient que ce que la source et les
 décisions de l'étape 4 demandent : un ajout se propose, il ne s'y glisse pas.
 
-**Bug** : la première tâche est un test qui reproduit le bug et échoue. Si la cause n'est pas
-connue, une tâche de localisation la précède : réduire le cas, formuler des hypothèses, les
-vérifier une à une. Le test reste ensuite comme test de non-régression.
+**Bug** : la première tâche est un test qui reproduit le bug et échoue, à partir du cas réduit
+par `debug` s'il est passé par là. Le test reste ensuite comme test de non-régression.
 
 ## 6. Valider et passer la main
 

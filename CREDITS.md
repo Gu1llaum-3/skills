@@ -16,6 +16,7 @@ Les skills suivants sont des adaptations en français de skills de Matt Pocock
 | `wtf` | `skills/productivity/wait-what` |
 | `next` | `skills/engineering/ask-matt` |
 | `review` | `skills/engineering/code-review` |
+| `debug` | `skills/engineering/diagnosing-bugs` |
 
 Ils sont distribués sous la licence suivante :
 

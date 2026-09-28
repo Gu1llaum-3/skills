@@ -63,7 +63,7 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 | Une branche ou un travail à relire contre sa spec et les conventions | `/review` |
 | Des bugs à chercher dans un diff | `/code-review` |
 | Un bug dont la cause est connue | `/tdd` |
-| Un bug qui résiste | `/plan` (tâche de localisation d'abord) |
+| Un bug qui résiste : intermittent, régression, cause introuvable | `/debug` |
 | Des tests à écrire ou à réécrire | `/tdd` |
 | Se faire challenger sur une idée ou un plan | `/interview` |
 | Un mot flou, deux mots pour la même chose | `/domain-modeling` |
@@ -80,10 +80,10 @@ Le parcours principal : `/brainstorming` ou `/feature` → `/plan` → `/impleme
 code avec `tdd`). Pour un gros travail, `/to-spec` → `/to-tickets` → un `/implement` par
 ticket. `interview`, `research`, `adr` et `to-questionnaire` se glissent en cours de route.
 
-**Ce que la carte ne couvre pas** (aucun skill ne diagnostique un bug qui résiste, par exemple) :
-le dire en une ligne, puis proposer ce qui s'en approche le plus. Ne recommander que des skills
-présents dans la liste de la session ; un skill de la carte absent se signale (« lance
-`./install.sh` dans le dépôt de skills »).
+**Ce que la carte ne couvre pas** (par exemple une amélioration d'architecture, sans bug ni
+fonctionnalité) : le dire en une ligne, puis proposer ce qui s'en approche le plus. Ne
+recommander que des skills présents dans la liste de la session ; un skill de la carte absent se
+signale (« lance `./install.sh` dans le dépôt de skills »).
 
 ## 3. Répondre
 

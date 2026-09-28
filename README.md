@@ -25,6 +25,7 @@ Mes skills personnels pour Claude Code.
 | `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD, puis le faire relire |
 | `review` | Relire un diff sur deux axes séparés : la spec (plan, ticket) et les conventions du dépôt |
 | `tdd` | La boucle rouge-vert et ce qui fait un bon test |
+| `debug` | Diagnostiquer un bug qui résiste : une boucle qui échoue d'abord, puis hypothèses, cause confirmée, correctif |
 | `to-spec` | Transformer les décisions (ou un jalon du cahier des charges) en spec, puis en tickets |
 | `to-tickets` | Découper en tickets par tranches verticales, avec leurs dépendances |
 | `tickets` | Lire, publier et ranger les tickets et les jalons de la roadmap (local, GitHub, GitLab, Jira) |
@@ -47,6 +48,9 @@ Mes skills personnels pour Claude Code.
 /poc ──► docs/poc/<slug>.md ──► plan ──► implement ──► verdict ──► /brainstorming ou /feature
 
 ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──► plan ──► implement ──► tickets
+
+bug qui résiste ──► debug ──┬── petit correctif ──► test de non-régression, commit
+                            └── plus gros ──► plan ──► implement
 
 interview, research, adr et to-questionnaire sont appelés en cours de route.
 implement écrit le code avec tdd, puis le fait relire par review avant son bilan.
@@ -132,6 +136,6 @@ Les pistes à venir sont dans [TODO.md](TODO.md).
 Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
 `domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
-`wtf` (d'après `wait-what`), `next` (d'après `ask-matt`) et `review` (d'après `code-review`).
-L'organisation en skills qui s'appellent entre eux vient aussi de son dépôt. Voir
-[CREDITS.md](CREDITS.md).
+`wtf` (d'après `wait-what`), `next` (d'après `ask-matt`), `review` (d'après `code-review`) et
+`debug` (d'après `diagnosing-bugs`). L'organisation en skills qui s'appellent entre eux vient
+aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).

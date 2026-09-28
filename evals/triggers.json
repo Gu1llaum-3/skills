@@ -238,5 +238,24 @@
    "autre:code-review",
    "none"
   ]
+ },
+ {
+  "q": "l'export PDF plante une fois sur dix en prod et je n'arrive pas à comprendre pourquoi, débogue ça",
+  "ok": [
+   "debug"
+  ]
+ },
+ {
+  "q": "depuis la mise à jour d'hier la page des commandes met 8 secondes à charger au lieu d'une, trouve pourquoi",
+  "ok": [
+   "debug"
+  ]
+ },
+ {
+  "q": "j'ai « TypeError: Cannot read properties of undefined (reading 'id') » à la ligne 42 de cart.js, ça veut dire quoi ?",
+  "ok": [
+   "none",
+   "debug"
+  ]
  }
 ]
