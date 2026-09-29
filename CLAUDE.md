@@ -31,7 +31,9 @@ lié dans `~/.claude/skills/` par `install.sh`.
   fait après accord explicite de l'utilisateur. Les skills appelés en cours de route (`tdd`,
   `interview`, `research`, `review`, `tickets`…) n'en demandent pas.
 - Un skill en appelle un autre avec « appeler le Skill tool avec « nom » », et pointe ses fichiers
-  par un lien relatif (`../tickets/SKILL.md`).
+  par un lien relatif (`../tickets/SKILL.md`). Un appel par skill : deux skills, c'est « appeler
+  deux fois le Skill tool ». Un skill que l'utilisateur lance lui-même ne s'appelle jamais ainsi :
+  écrire « proposer à l'utilisateur de lancer `/nom` ».
 
 ## Pièges
 
