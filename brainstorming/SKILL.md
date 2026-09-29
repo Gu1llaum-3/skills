@@ -101,7 +101,7 @@ Vérifie chaque ressource proposée (bibliothèque, police, voix, image) au mome
 
 Cette étape suit le cahier des charges ; un petit outil s'arrête à sa synthèse et à `plan` (étape 2).
 
-Commence par proposer de créer les jalons du cahier des charges dans la roadmap, en appelant le Skill tool avec « tickets » (`ROADMAP.md` en local), que le projet soit simple ou gros : c'est la roadmap qui dira ensuite quel jalon est réalisé.
+Commence par proposer de créer les jalons du cahier des charges dans la roadmap, en appelant le Skill tool avec « tickets » (`ROADMAP.md` en local), que le projet soit simple ou gros : c'est la roadmap qui dira ensuite quel jalon est réalisé. Précise-le à l'utilisateur, car un jalon passe facilement pour une epic : c'est une étape de livraison, vide au départ ; dans un gros projet, l'epic, c'est sa spec, dont les tickets se rangent dans le jalon ; dans un projet simple, c'est son plan qui s'y rattache (en local).
 
 Termine toujours par une ou deux prochaines étapes concrètes, avec celle que tu recommandes. En général :
 
