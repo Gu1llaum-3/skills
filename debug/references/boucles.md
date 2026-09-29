@@ -21,7 +21,9 @@
    configurations), et comparer les sorties.
 10. **Avec l'utilisateur**, en dernier recours : s'il faut une action humaine (cliquer, se
     connecter), lui donner la commande exacte à lancer et ce qu'il doit coller en retour, étape
-    par étape, pour que la boucle reste structurée.
+    par étape, pour que la boucle reste structurée. Ce qu'il colle, l'agent le lit : lui faire
+    rapporter des observations, jamais un identifiant. Se connecter reste une étape qu'il fait
+    seul, sans rien coller.
 
 ## Resserrer la boucle
 

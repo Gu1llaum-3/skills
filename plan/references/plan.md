@@ -51,6 +51,12 @@ Règles :
 
 - **Tranches verticales** : chaque tâche livre un morceau de comportement de bout en bout, pas
   une couche (« le modèle », puis « l'API », puis « l'écran »).
+  **Exception** : un changement mécanique très large (renommer une colonne, changer un type
+  partagé) ne passe pas au vert par tranche. Le découper en *expand–contract*, comme dans
+  [`to-tickets`](../../to-tickets/SKILL.md) : une tâche ajoute la nouvelle forme à côté de
+  l'ancienne, une tâche par lot migre les appels, une dernière supprime l'ancienne forme.
+- **Interfaces à tester** : celles qui existent déjà d'abord, les plus hautes possibles, le moins
+  possible. Celles d'une spec ou d'un ticket se reprennent telles quelles.
 - Chaque tâche cite le ou les critères qu'elle prouve.
 - Une tâche = un commit : si une tâche paraît demander plusieurs commits, la découper.
 - Les refactorisations préalables repérées dans le code viennent en premières tâches.

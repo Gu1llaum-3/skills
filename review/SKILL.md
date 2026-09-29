@@ -62,7 +62,8 @@ fichiers de l'étape 3 et la base d'odeurs. Brief :
 > Rapporte, par fichier ou par morceau du diff : (a) les **violations** : chaque écart à une
 > règle écrite du dépôt, en citant le fichier et la règle ; (b) les **jugements** : chaque odeur
 > de la base repérée, sous la forme « possible <odeur> », avec l'extrait. Une règle du dépôt
-> l'emporte sur une odeur. Moins de 400 mots.
+> l'emporte sur une odeur. Ce que l'outillage impose déjà (linter, formateur, typage) ne se
+> signale pas. Moins de 400 mots.
 
 ## 5. Rapporter
 

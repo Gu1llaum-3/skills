@@ -61,7 +61,7 @@ poser maintenant sans deviner une réponse qu'on n'a pas encore.
 - À chaque série, poser la frontière, de la décision la plus structurante à la plus fine. Une
   question qui dépend d'une réponse encore ouverte attend la série suivante.
 - Utiliser l'outil **AskUserQuestion**, 4 questions au maximum par appel. Si la frontière en
-  compte plus, garder les plus structurantes.
+  compte plus, poser les plus structurantes ; les autres passent à la série suivante.
 - **2 à 4 options mutuellement exclusives**, dont la description donne le **compromis** (« plus
   de travail, mais un rendu bien meilleur »).
 - **L'option recommandée en premier**, suivie de « (Recommandé) ». Pas de recommandation quand

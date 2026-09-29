@@ -53,8 +53,11 @@ réelles : plus il y a de tickets démarrables en parallèle, mieux c'est.
 **Exception : le changement mécanique très large** (renommer une colonne, changer un type
 partagé), qui casse tout d'un coup et ne peut pas passer au vert par tranche. Le séquencer en
 *expand–contract* : ajouter la nouvelle forme à côté de l'ancienne, migrer les appels par lots
-(un ticket par lot), puis supprimer l'ancienne forme dans un dernier ticket bloqué par tous les
-lots.
+dimensionnés selon ce qu'ils touchent (par paquet, par dossier), un ticket par lot, la CI restant
+verte d'un lot à l'autre puisque l'ancienne forme existe encore ; puis supprimer l'ancienne forme
+dans un dernier ticket bloqué par tous les lots. Si même un lot ne peut pas passer au vert seul,
+garder la séquence, mais sur une branche d'intégration commune, avec un ticket final qui intègre
+et vérifie le tout : le vert n'est promis qu'à la fin.
 
 ## 3. Faire valider
 

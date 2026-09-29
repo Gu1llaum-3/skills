@@ -26,6 +26,8 @@ S'il en manque une, pas d'ADR : une décision facile à défaire, on la défera 
 Ce qui en mérite souvent un :
 
 - la forme de l'architecture (monorepo, séparation lecture et écriture, rendu serveur) ;
+- la façon dont deux domaines ou modules communiquent (« Commandes et Facturation passent par
+  des événements, pas par des appels HTTP directs ») ;
 - les choix techniques qui enferment : base de données, authentification, hébergement, bus de
   messages. Pas chaque bibliothèque, seulement celles qu'on mettrait des semaines à remplacer ;
 - les frontières et le périmètre : « les données client appartiennent au module Client, les autres

@@ -42,9 +42,9 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   existe : les noms du code et des tests reprennent ses termes.
   Relever ce qu'ils disent des branches, des commits, des tests, des essais manuels et de la
   vérification.
-- **Commandes** : trouver la commande de vérification complète et celle qui lance un seul fichier
-  de test (`CLAUDE.md`, `package.json`, `mise.toml`, `Makefile`, `justfile`…). Si elles sont
-  introuvables, les demander avant la première tâche. Le skill `tdd` en a besoin aussi : les
+- **Commandes** : trouver la commande de vérification complète, celle qui lance un seul fichier
+  de test, et celle du typage s'il y en a un (`CLAUDE.md`, `package.json`, `mise.toml`,
+  `Makefile`, `justfile`…). Si elles sont introuvables, les demander avant la première tâche. Le skill `tdd` en a besoin aussi : les
   avoir trouvées ici évite de les chercher deux fois.
 - **Arbre de travail** (`git status`) :
   - propre : on continue ;
@@ -91,7 +91,9 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
    - **Code : TDD, toujours.** Appeler le Skill tool avec « tdd » (une fois par exécution suffit)
      et suivre sa boucle pour chaque tâche de code : test rouge vu échouer pour la bonne raison,
      code minimal, vert, refactorisation. Les interfaces à tester se déduisent de la tâche et de
-     ses critères : le plan étant validé, on ne les redemande pas, sauf réelle ambiguïté.
+     ses critères : le plan étant validé, on ne les redemande pas, sauf réelle ambiguïté. En
+     cours de tâche, lancer souvent le typage (s'il existe) et le fichier de test concerné ; la
+     suite complète attend la fin de vague.
      **Plan d'origine POC** : pas de TDD complet ; chaque tâche se vérifie par l'essai ou le test
      ciblé que le plan prévoit pour trancher l'hypothèse.
    - **Nommer le test** d'après le critère ou la règle qu'il prouve, avec son numéro si le plan en
