@@ -8,10 +8,13 @@
   décider… ») : de 0 à 3 réussites sur 6 en trois passages, y compris avec la description de
   `main`. Dans un dossier vide et sans conversation, rien n'a été décidé : Claude explore au lieu
   de lancer le skill. Réécrire ces phrases avec un contexte, ou tester dans une conversation.
-- [ ] **Comparer `brainstorming` avec celui de superpowers**
-  ([obra/superpowers](https://github.com/obra/superpowers/tree/main/skills/brainstorming)) : il
-  semble utilisable à tout moment, alors que le mien mène toujours à un cahier des charges. À
-  étudier : sortir le cahier des charges dans un sous-skill appelé à la demande.
+- [x] **Comparer `brainstorming` avec celui de superpowers**
+  ([obra/superpowers](https://github.com/obra/superpowers/tree/main/skills/brainstorming)) : pas
+  de sous-skill pour le cahier des charges (ses trois chemins existent déjà : `/poc`, `/feature`,
+  `/brainstorming`), mais un chemin annoncé avec un chemin court pour un petit outil, le
+  découpage d'emblée, le dit et le supposé, les approches et la relecture du document.
+- [ ] Essayer `/brainstorming` sur un petit script (chemin du petit outil attendu), puis sur une
+  plateforme à plusieurs sous-systèmes (découpage signalé à l'étape 2).
 - [ ] **Étudier `differential-review` de Trail of Bits**
   ([trailofbits/skills](https://github.com/trailofbits/skills/tree/main/plugins/differential-review/skills/differential-review)) :
   à intégrer quelque part (`review` ?) ou à garder en skill à part.

@@ -26,7 +26,8 @@ code s'écrit ensuite avec `implement`.
   possible, avec `> Branche : poc/<slug>`. Chaque tâche prévoit l'essai ou le test ciblé qui
   tranche l'hypothèse, sans TDD complet : le but est de répondre à la question du POC, pas de
   livrer.
-- **Conversation** (appel depuis `feature`) : la synthèse qui vient d'être validée.
+- **Conversation** (appel depuis `feature`, ou depuis `brainstorming` pour un petit outil) : la
+  synthèse qui vient d'être validée.
 - **Reprise** : si un plan de `docs/plans/` cite déjà cette source et a des cases non cochées, ne
   pas en écrire un autre : le dire et proposer de reprendre avec `implement`.
 
@@ -36,8 +37,8 @@ racine dans les projets plus anciens).
 
 ## 2. Confronter au code et au monde
 
-Si l'on vient de `feature` dans la même conversation, l'exploration et la recherche sont déjà
-faites : passer à l'étape 3. Sinon, d'abord le code, puis la décision de chercher.
+Si l'on vient de `feature`, ou de `brainstorming` pour un petit outil, dans la même conversation,
+l'exploration et la recherche sont déjà faites : passer à l'étape 3. Sinon, d'abord le code, puis la décision de chercher.
 
 **Toujours, un sous-agent d'exploration du code**, avec pour mission de rapporter :
 

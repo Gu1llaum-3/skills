@@ -8,7 +8,7 @@ Mes skills personnels pour Claude Code.
 
 | Commande | Rôle |
 |---|---|
-| `/brainstorming` | Cadrer un nouveau projet jusqu'au cahier des charges |
+| `/brainstorming` | Cadrer un nouveau projet jusqu'au cahier des charges (ou une synthèse à planifier pour un petit outil) |
 | `/feature` | Cadrer une idée de fonctionnalité dans un projet existant |
 | `/poc` | Vérifier vite qu'une idée tient debout, sur une seule question |
 | `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
@@ -38,12 +38,15 @@ Mes skills personnels pour Claude Code.
 ## Enchaînement
 
 ```
-/brainstorming ──► cahier des charges ──┬── simple ──► plan ──► implement ──► tdd
-                   (verdict d'envergure) └── gros ──► to-spec (un jalon) ──► to-tickets ──► roadmap
+/brainstorming ──┬── cahier des charges ──┬── simple ──► plan ──► implement ──► tdd
+                 │  (verdict d'envergure) └── gros ──► to-spec (un jalon) ──► to-tickets ──► roadmap
+                 ├── petit outil ──► synthèse dans la conversation ──► plan ──► implement
+                 └── question de faisabilité ──► /poc
 
 /feature ──┬── maintenant ──► plan ──► implement
-           └── plus tard ──► to-spec ──┬──► 1 ticket ─────────────┐
-                                       └──► to-tickets ──► N ──────┴──► roadmap
+           ├── plus tard ──► to-spec ──┬──► 1 ticket ─────────────┐
+           │                           └──► to-tickets ──► N ──────┴──► roadmap
+           └── question de faisabilité ──► /poc
 
 /poc ──► docs/poc/<slug>.md ──► plan ──► implement ──► verdict ──► /brainstorming ou /feature
 

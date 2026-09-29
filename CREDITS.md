@@ -43,3 +43,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Idées reprises
+
+Sans traduction, quelques idées du skill `brainstorming` de superpowers, de Jesse Vincent
+(https://github.com/obra/superpowers, licence MIT) : le chemin annoncé au départ, qu'on ne fait
+que monter, le découpage d'emblée en sous-systèmes, la reformulation qui sépare le dit du
+supposé, les 2 ou 3 approches et la relecture du document avant de le montrer. Elles sont dans
+`brainstorming`, `feature` et `to-spec`.

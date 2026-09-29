@@ -41,6 +41,10 @@ En un message court :
    - ✅ ce qui la rend simple (briques existantes, cohérence avec la roadmap) ;
    - ⚠️ les frottements concrets : doublon avec une fonction ou un ticket, conflit avec la
      roadmap ou un ADR, migration de données, performance, sécurité, accessibilité.
+4. **Le chemin**, annoncé pour que l'utilisateur puisse le corriger : si l'idée est surtout une
+   question de faisabilité (« est-ce que la bibliothèque X tient la charge ? »), c'est `/poc` :
+   donner la commande et s'arrêter là. Sinon, le cadrage continue ; la taille, qui décide entre
+   maintenant et plus tard, se juge à la synthèse.
 
 Un écart précis et justifié vaut mieux qu'un résumé flatteur.
 

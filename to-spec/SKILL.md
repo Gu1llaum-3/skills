@@ -64,8 +64,16 @@ que la prochaine session ne le rejoue pas.
 
 ## 3. Rédiger
 
-Suivre [references/spec.md](references/spec.md). Montrer le brouillon et laisser l'utilisateur le
-corriger avant toute publication.
+Suivre [references/spec.md](references/spec.md). Avant de montrer le brouillon, le relire d'un
+œil neuf et corriger sans le signaler :
+
+- **les trous** : « à définir », TODO, section vide, critère invérifiable ;
+- **les contradictions** entre sections, par exemple une décision que le hors périmètre exclut ;
+- **les phrases qu'on peut lire de deux façons** : écrire la lecture que la conversation a
+  tranchée, sinon la marquer **[À valider]** ;
+- **la taille** : si elle ne correspond plus à la forme choisie à l'étape 2, le dire.
+
+Montrer ensuite le brouillon et laisser l'utilisateur le corriger avant toute publication.
 
 ## 4. Publier
 

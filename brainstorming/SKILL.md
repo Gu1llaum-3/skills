@@ -1,13 +1,13 @@
 ---
 name: brainstorming
-description: Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code, jusqu'à un cahier des charges validé dans docs/.
+description: Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code, jusqu'à un cahier des charges validé dans docs/, ou une synthèse à planifier directement pour un petit outil.
 argument-hint: "[idée, dossier du prototype ou fichier POC]"
 disable-model-invocation: true
 ---
 
-# Brainstorming : de l'idée au cahier des charges
+# Brainstorming : de l'idée au cadrage d'un nouveau projet
 
-L'objectif est d'aider l'utilisateur à transformer une idée, souvent accompagnée d'un prototype, en un **cahier des charges validé**, sans écrire de code. Ce qui a de la valeur : montrer qu'on a compris le domaine mieux qu'une lecture rapide, poser les bonnes questions au bon moment, et rendre chaque décision traçable.
+L'objectif est d'aider l'utilisateur à transformer une idée, souvent accompagnée d'un prototype, en un **cadrage validé**, sans écrire de code : un cahier des charges, ou une synthèse à planifier pour un petit outil. Ce qui a de la valeur : montrer qu'on a compris le domaine mieux qu'une lecture rapide, poser les bonnes questions au bon moment, et rendre chaque décision traçable. Le cahier des charges est le chemin par défaut ; un petit outil ou une question de faisabilité en prennent un plus court (étape 2).
 
 Ce skill sert aux **nouveaux projets**. Pour une idée de fonctionnalité dans un projet existant, c'est `/feature` qu'il faut.
 
@@ -24,23 +24,31 @@ Le déroulé comporte six étapes. Adapte-le si l'utilisateur en saute une ou en
 
 Présente en un message court et structuré :
 
-1. **Ce que je retiens du domaine** : les 4 à 6 principes qui vont vraiment conditionner le produit, chacun avec son « pourquoi ».
-2. **Ce que j'observe dans l'existant** :
+1. **Ce que je comprends de l'intention** : le résultat attendu, pour qui, et à quoi on verra que c'est réussi. Sépare **ce que l'utilisateur a dit** de **ce que tu supposes**, pour qu'il puisse corriger les suppositions.
+2. **Ce que je retiens du domaine** : les 4 à 6 principes qui vont vraiment conditionner le produit, chacun avec son « pourquoi ».
+3. **Ce que j'observe dans l'existant** :
    - ✅ ce qui va déjà dans le bon sens ;
    - ⚠️ les écarts avec les bonnes pratiques et les risques, de façon concrète (« le mot X utilise Y, qui n'a pas été vu »), pas « à améliorer ».
 
-Cette partie crée la confiance. Un écart précis et justifié vaut mieux que dix compliments.
+   Cette partie crée la confiance. Un écart précis et justifié vaut mieux que dix compliments.
+4. **Le découpage**, si l'idée réunit plusieurs sous-systèmes indépendants (« un chat, des paiements et des statistiques ») : signale-le maintenant, avant les questions de détail, et propose un ordre. L'entretien cadre le premier en profondeur ; les autres deviennent des jalons.
+5. **Le chemin**, annoncé pour que l'utilisateur puisse le corriger :
+   - **une question de faisabilité** (« est-ce que c'est possible ? ») : c'est `/poc`. Donne la commande et arrête-toi là ;
+   - **un petit outil** qui tient en une session (critère « Taille » de [`to-tickets`](../to-tickets/SKILL.md)) : l'entretien en 1 ou 2 séries, puis, au lieu des étapes 4 à 6, une synthèse dans la conversation (problème et solution, décisions, critères d'acceptation `AC-n`, interfaces à tester, hors périmètre, questions pour le métier), relue d'abord comme le cahier des charges à l'étape 4 (trous, contradictions, phrases à double lecture). Sur accord, appelle le Skill tool avec « plan » sur cette synthèse. Ni cahier des charges ni roadmap ;
+   - **sinon, le cahier des charges** (étapes 3 à 6).
+
+   Dans le doute, prends le chemin le plus lourd. En cours de route, on peut monter (le petit outil s'avère plus gros : dis-le, et passe au cahier des charges), jamais redescendre.
 
 ## 3. L'entretien
 
-Appelle le Skill tool avec « interview », en 3 à 5 séries thématiques, de la plus structurante à la plus fine :
+Appelle le Skill tool avec « interview », en 3 à 5 séries thématiques (1 ou 2 pour un petit outil), de la plus structurante à la plus fine :
 
 1. **Le besoin** : le problème réel, pour qui, ce qui existe déjà ailleurs, la version la plus simple qui vaudrait le coup.
 2. **Contexte** : utilisateur final, niveau de départ, plateformes cibles.
 3. **Cœur du produit** : mécaniques principales, progression, gestion des erreurs, motivation.
 4. **Contenu et expérience** : univers, graphisme, audio, accessibilité, profils.
-5. **Technique et contraintes** : stack, stockage, hors ligne, sécurité, publication prévue ou non.
-6. **Répartition et suite** : qui produit quoi (contenus, visuels, textes), et la prochaine étape (proposer le cahier des charges en recommandé).
+5. **Technique et contraintes** : d'abord 2 ou 3 approches d'ensemble (web, mobile ou bureau ; données locales ou serveur…), chacune avec son compromis, la recommandée en premier ; puis stack, stockage, hors ligne, sécurité, publication prévue ou non. Les approches restent au niveau des choix structurants : le découpage en modules se décide ensuite avec `to-spec` ou `plan`.
+6. **Répartition et suite** : qui produit quoi (contenus, visuels, textes), et la prochaine étape (le cahier des charges en recommandé, ou la synthèse pour un petit outil).
 
 Saute les thèmes que l'existant a déjà tranchés. Les choix structurants et difficiles à défaire (stack, stockage, hébergement) sont souvent de bons candidats à un ADR : l'entretien les proposera.
 
@@ -57,6 +65,13 @@ Saute les thèmes que l'existant a déjà tranchés. Les choix structurants et d
   - **gros** : au moins un jalon dépasse une session. Chaque jalon passe par une spec (`to-spec`), puis des tickets rangés dans ce jalon de la roadmap.
 - Si la mémoire persistante est disponible, enregistre les décisions clés du projet (un fichier par fait).
 
+Avant de montrer le document, relis-le d'un œil neuf et corrige sans le signaler :
+
+- **les trous** : « à définir », TODO, section vide, exigence vague (« rapide », « simple ») ;
+- **les contradictions** entre sections, par exemple une plateforme exclue qui revient dans un jalon ;
+- **les phrases qu'on peut lire de deux façons** : choisis la lecture la plus plausible et écris-la, ou marque-la **[À valider]** ;
+- **la taille** : un jalon qui dépasse visiblement une session doit être compté dans le verdict d'envergure.
+
 Termine le message par : un résumé en quelques puces, la liste des questions ouvertes, et **une proposition de prochaine étape**. S'il y a des questions pour le métier, propose d'en faire un questionnaire par destinataire en appelant le Skill tool avec « to-questionnaire ».
 
 ## 5. Trancher les questions ouvertes
@@ -72,7 +87,7 @@ L'utilisateur répond en général en liste numérotée. Pour chaque point :
 - **Point pour le métier** (« je ne sais pas, faut voir avec le client ») : marque-le **[Métier : <destinataire>]** au lieu de le supposer, et propose un questionnaire avec le skill `to-questionnaire`. Quand le questionnaire revient rempli, ce skill reporte les réponses dans le cahier des charges.
 - **Nom ou valeur encore inconnu** : prévois qu'il soit centralisé et modifiable (configuration), et propose quelques exemples.
 
-Passe ensuite le document à la version suivante (« v0.2 — décisions du JJ/MM/AAAA intégrées »). Retire les marqueurs **[À valider]** résolus, et ne garde dans les questions ouvertes que ce qui l'est vraiment.
+Passe ensuite le document à la version suivante (« v0.2 — décisions du JJ/MM/AAAA intégrées »), après la même relecture qu'à l'étape 4. Retire les marqueurs **[À valider]** résolus, et ne garde dans les questions ouvertes que ce qui l'est vraiment.
 
 ### Licences, si le projet sera publié
 
@@ -85,7 +100,9 @@ Vérifie chaque ressource proposée (bibliothèque, police, voix, image) au mome
 
 ## 6. Proposer la suite
 
-Commence par proposer de créer les jalons du cahier des charges dans la roadmap, en appelant le Skill tool avec « tickets » (`ROADMAP.md` en local), quelle que soit l'envergure : c'est la roadmap qui dira ensuite quel jalon est réalisé.
+Cette étape suit le cahier des charges ; un petit outil s'arrête à sa synthèse et à `plan` (étape 2).
+
+Commence par proposer de créer les jalons du cahier des charges dans la roadmap, en appelant le Skill tool avec « tickets » (`ROADMAP.md` en local), que le projet soit simple ou gros : c'est la roadmap qui dira ensuite quel jalon est réalisé.
 
 Termine toujours par une ou deux prochaines étapes concrètes, avec celle que tu recommandes. En général :
 
