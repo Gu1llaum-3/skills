@@ -258,5 +258,12 @@
    "none",
    "debug"
   ]
+ },
+ {
+  "q": "le module de facturation est devenu impossible à tester, regarde comment on pourrait mieux découper le code",
+  "ok": [
+   "none",
+   "interview"
+  ]
  }
 ]

@@ -12,6 +12,7 @@ Mes skills personnels pour Claude Code.
 | `/feature` | Cadrer une idée de fonctionnalité dans un projet existant |
 | `/poc` | Vérifier vite qu'une idée tient debout, sur une seule question |
 | `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
+| `/architecture` | Chercher où approfondir les modules d'un projet existant : rapport HTML, puis entretien sur la piste choisie |
 | `/next` | Quel skill lancer maintenant : lit la conversation, ou l'état du projet |
 | `/wtf` | Un message n'est pas passé : le faire reformuler, avec le contexte et les mots du projet |
 | `/design` | Définir l'identité visuelle : prototype HTML et `DESIGN.md` |
@@ -54,6 +55,9 @@ ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──►
 
 bug qui résiste ──► debug ──┬── petit correctif ──► test de non-régression, commit
                             └── plus gros ──► plan ──► implement
+
+/architecture ──► rapport HTML ──► une piste choisie ──┬── maintenant ──► plan ──► implement
+                                                       └── plus tard ──► to-spec
 
 interview, research, adr et to-questionnaire sont appelés en cours de route.
 implement écrit le code avec tdd, puis le fait relire par review avant son bilan.
@@ -152,5 +156,6 @@ Plusieurs skills adaptent en français le travail de [Matt Pocock](https://githu
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
 `domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
 `wtf` (d'après `wait-what`), `next` (d'après `ask-matt`), `review` (d'après `code-review`) et
-`debug` (d'après `diagnosing-bugs`). L'organisation en skills qui s'appellent entre eux vient
+`debug` (d'après `diagnosing-bugs`) et `architecture` (d'après `improve-codebase-architecture` et
+`codebase-design`). L'organisation en skills qui s'appellent entre eux vient
 aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).

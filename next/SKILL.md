@@ -71,6 +71,7 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 | L'identité visuelle, avant de coder l'interface | `/design` |
 | Un nom à trouver | `/naming` |
 | Un projet existant sans `CLAUDE.md`, ou avec un `CLAUDE.md` douteux | `/onboard` |
+| Un code difficile à changer ou à tester, sans bug ni fonctionnalité en vue | `/architecture` |
 | Voir la roadmap, lire ou ranger des tickets | `/tickets` |
 | Le dernier message n'est pas compris | `/wtf` |
 
@@ -78,8 +79,7 @@ Le parcours principal : `/brainstorming` ou `/feature` → `/plan` → `/impleme
 code avec `tdd`). Pour un gros travail, `/to-spec` → `/to-tickets` → un `/implement` par
 ticket. `interview`, `research`, `adr` et `to-questionnaire` se glissent en cours de route.
 
-**Ce que la carte ne couvre pas** (par exemple une amélioration d'architecture, sans bug ni
-fonctionnalité) : le dire en une ligne, puis proposer ce qui s'en approche le plus. Ne
+**Ce que la carte ne couvre pas** : le dire en une ligne, puis proposer ce qui s'en approche le plus. Ne
 recommander que des skills présents dans la liste de la session ; un skill de la carte absent se
 signale (« lance `./install.sh` dans le dépôt de skills »).
 

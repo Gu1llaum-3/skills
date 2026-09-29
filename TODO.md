@@ -39,3 +39,7 @@
 - [x] **`debug`**, d'après `diagnosing-bugs` de Matt : une boucle qui échoue avant toute
   hypothèse, pour les bugs dont la cause résiste ; `plan` l'appelle pour un bug de cause inconnue.
 - [ ] Essayer la revue d'un ticket externe de `plan` sur un vrai ticket Jira écrit par la PO.
+- [x] **`/architecture`**, d'après `improve-codebase-architecture` et `codebase-design` de Matt :
+  le vocabulaire des modules profonds va dans ses `references/`, sans skill à part.
+- [ ] Essayer `/architecture` sur un projet existant qui a un historique git fourni : les pistes
+  viennent-elles des zones qui changent, et le rapport HTML s'ouvre-t-il ?
