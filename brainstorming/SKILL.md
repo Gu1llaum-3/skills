@@ -54,7 +54,9 @@ Saute les thèmes que l'existant a déjà tranchés. Les choix structurants et d
 
 ## 4. Rédiger le cahier des charges
 
-Écris `docs/cahier-des-charges.md`, en suivant la structure de `references/modele-cahier-des-charges.md`. Adapte les sections au projet : un site web n'a pas besoin de système de récompenses.
+Écris `docs/requirements.md`, en suivant la structure de `references/spec-template.md`. Un
+`docs/cahier-des-charges.md` existant est le même document sous son ancien nom : le reprendre, et
+proposer de le renommer avec `git mv`. Adapte les sections au projet : un site web n'a pas besoin de système de récompenses.
 
 - Transforme chaque réponse en **décision concrète et chiffrée quand c'est possible** : un seuil, une durée, un ordre, un nom de fichier.
 - Là où tu as dû supposer, marque **[À valider]**, et regroupe ces points dans une section « Questions ouvertes » numérotée en fin de document. C'est ce qui permet à l'utilisateur de répondre point par point.
@@ -105,8 +107,8 @@ Commence par proposer de créer les jalons du cahier des charges dans la roadmap
 
 Termine toujours par une ou deux prochaines étapes concrètes, avec celle que tu recommandes. En général :
 
-- **projet simple** : planifier le premier jalon, en appelant le Skill tool avec « plan » sur `docs/cahier-des-charges.md`, puis `implement` ;
-- **gros projet** : écrire la spec du premier jalon, en appelant le Skill tool avec « to-spec » sur `docs/cahier-des-charges.md`. Elle sera découpée en tickets, et chaque ticket se traitera ensuite dans sa propre session avec `/implement <ticket>` ;
+- **projet simple** : planifier le premier jalon, en appelant le Skill tool avec « plan » sur `docs/requirements.md`, puis `implement` ;
+- **gros projet** : écrire la spec du premier jalon, en appelant le Skill tool avec « to-spec » sur `docs/requirements.md`. Elle sera découpée en tickets, et chaque ticket se traitera ensuite dans sa propre session avec `/implement <ticket>` ;
 - **définir l'identité visuelle** avec `/design`, ou **trouver un nom** avec `/naming`, si ce n'est pas encore fait.
 
 N'enchaîne pas sur le développement sans l'accord de l'utilisateur. Une question métier **bloquante** pour un jalon empêche de le planifier : planifie un jalon qui n'en dépend pas, ou attends la réponse.

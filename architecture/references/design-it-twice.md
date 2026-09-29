@@ -2,7 +2,7 @@
 
 Pour comparer plusieurs interfaces possibles d'un module approfondi. D'après « Design It Twice »
 (Ousterhout) : la première idée est rarement la meilleure. Vocabulaire :
-[vocabulaire.md](vocabulaire.md).
+[vocabulary.md](vocabulary.md).
 
 ## 1. Poser le problème
 
@@ -10,7 +10,7 @@ Avant de lancer les sous-agents, écrire pour l'utilisateur :
 
 - les contraintes que toute nouvelle interface doit respecter ;
 - les dépendances sur lesquelles elle s'appuie, et leur catégorie
-  ([approfondir.md](approfondir.md)) ;
+  ([deepening.md](deepening.md)) ;
 - une esquisse de code grossière, pour rendre les contraintes concrètes : pas une proposition.
 
 Le montrer, puis passer tout de suite à l'étape 2 : l'utilisateur lit pendant que les

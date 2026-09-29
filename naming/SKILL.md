@@ -1,6 +1,6 @@
 ---
 name: naming
-description: Trouver un nom de projet (app, SaaS, CLI, site, produit, bibliothèque) et vérifier réellement sa disponibilité (domaines, GitHub, npm, homonymes, pistes de marque), puis consigner le choix dans docs/nommage.md.
+description: Trouver un nom de projet (app, SaaS, CLI, site, produit, bibliothèque) et vérifier réellement sa disponibilité (domaines, GitHub, npm, homonymes, pistes de marque), puis consigner le choix dans docs/naming.md.
 argument-hint: "[projet ou noms envisagés]"
 disable-model-invocation: true
 ---
@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 L'objectif est d'aboutir à **un nom choisi en connaissance de cause** : qui a du sens, se
 prononce bien, se distingue dans son secteur, et dont la disponibilité a été **réellement
-vérifiée**, pas supposée. Le choix est consigné dans `docs/nommage.md`.
+vérifiée**, pas supposée. Le choix est consigné dans `docs/naming.md`.
 
 Le travail de génération et de tri se fait sans bruit : l'utilisateur voit une shortlist, pas 40
 noms bruts.
@@ -26,8 +26,9 @@ disponible fait perdre bien plus de temps qu'il n'en fait gagner.
 
 **Si le projet existe déjà**, en faire le tour avant toute question :
 
-1. Lire `README.md`, `CLAUDE.md`, `ROADMAP.md`, `docs/cahier-des-charges.md`,
-   `docs/design/DESIGN.md` (ou leurs équivalents à la racine dans un projet plus ancien).
+1. Lire `README.md`, `CLAUDE.md`, `ROADMAP.md`, `docs/requirements.md`,
+   `docs/design/DESIGN.md` (ou leurs anciens noms : `docs/cahier-des-charges.md`, un `DESIGN.md`
+   à la racine).
 2. Lire le manifeste (`package.json`, `go.mod`, `pyproject.toml`, `Cargo.toml`,
    `composer.json`…) : nom actuel, description, dépendances révélatrices.
 3. Parcourir l'arborescence (2 niveaux) et les points d'entrée : routes, écrans principaux,
@@ -111,7 +112,7 @@ Compléter par des **recherches web** pour chaque nom de la shortlist :
 - la présence sur l'App Store et Google Play, si c'est une app mobile ;
 - les réseaux sociaux si l'utilisateur en a besoin (par recherche, sans garantie).
 
-Puis appliquer [references/marques.md](references/marques.md) : pour les 3 finalistes, fournir
+Puis appliquer [references/trademarks.md](references/trademarks.md) : pour les 3 finalistes, fournir
 les liens de recherche et les classes de Nice pertinentes. Si la portée est « outil interne »,
 indiquer simplement que la vérification de marque n'est pas prioritaire.
 
@@ -129,7 +130,9 @@ Laisser l'utilisateur choisir, mélanger ou relancer. S'il relance, demander ce 
 
 ## 8. Consigner
 
-Quand un nom est retenu, écrire `docs/nommage.md` (dans le dossier courant s'il n'y a pas de
-projet) en suivant [references/nommage.md](references/nommage.md). Terminer par les actions
+Quand un nom est retenu, écrire `docs/naming.md` (dans le dossier courant s'il n'y a pas de
+projet) en suivant [references/naming-template.md](references/naming-template.md). Un
+`docs/nommage.md` existant est le même fichier sous son ancien nom : le compléter, et proposer de
+le renommer avec `git mv`. Terminer par les actions
 concrètes restantes : réserver le domaine, vérifier la marque, renommer le dépôt et le manifeste.
 Proposer de faire le renommage technique dans le projet, sans le faire d'office.

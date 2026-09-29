@@ -93,10 +93,10 @@ Perdu en chemin ? /next dit quel skill lancer.
 |---|---|
 | `CLAUDE.md`, `ARCHITECTURE.md` | `onboard` |
 | `GLOSSARY.md` | `domain-modeling`, appelé par `interview` |
-| `docs/cahier-des-charges.md` | `brainstorming` |
+| `docs/requirements.md` (le cahier des charges) | `brainstorming` |
 | `docs/poc/` | `poc` |
 | `docs/design/DESIGN.md`, `docs/design/prototype.html` | `design` |
-| `docs/nommage.md` | `naming` |
+| `docs/naming.md` | `naming` |
 | `docs/research/` | `research` |
 | `docs/questionnaires/` | `to-questionnaire` |
 | `docs/adr/` | `adr` |
@@ -158,9 +158,6 @@ Les pistes à venir sont dans [TODO.md](TODO.md).
 ## Crédits
 
 Plusieurs skills adaptent en français le travail de [Matt Pocock](https://github.com/mattpocock/skills)
-(licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
-`domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
-`wtf` (d'après `wait-what`), `next` (d'après `ask-matt`), `review` (d'après `code-review`) et
-`debug` (d'après `diagnosing-bugs`) `retro`, `wizard`, `git-guardrails` et `architecture` (d'après `improve-codebase-architecture` et
-`codebase-design`). L'organisation en skills qui s'appellent entre eux vient
-aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).
+(licence MIT), dont l'organisation en skills qui s'appellent entre eux. Quelques idées viennent
+aussi de [superpowers](https://github.com/obra/superpowers), de Jesse Vincent. La liste des skills
+adaptés et leur source : [CREDITS.md](CREDITS.md).

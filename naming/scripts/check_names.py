@@ -37,10 +37,10 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-USER_AGENT = "nommage-skill/1.0 (verification de disponibilite)"
+USER_AGENT = "naming-skill/1.0 (verification de disponibilite)"
 TIMEOUT = 10
 IANA_BOOTSTRAP = "https://data.iana.org/rdap/dns.json"
-CACHE_FILE = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "nommage" / "rdap-dns.json"
+CACHE_FILE = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "naming" / "rdap-dns.json"
 CACHE_MAX_AGE = 7 * 24 * 3600
 
 LIBRE, PRIS, INCONNU = "libre", "pris", "inconnu"

@@ -56,7 +56,7 @@ seul ce skill l'écrit, en même temps que le statut.
 ```markdown
 # Roadmap
 
-Jalons du [cahier des charges](docs/cahier-des-charges.md). Le détail et le statut de chaque
+Jalons du [cahier des charges](docs/requirements.md). Le détail et le statut de chaque
 ticket sont dans son fichier.
 
 ## M1 : <nom du jalon>

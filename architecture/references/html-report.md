@@ -90,7 +90,7 @@ Une carte plus grande : le nom de la piste, une phrase sur le pourquoi, un lien 
 
 ## Le ton
 
-Court et simple, avec les mots de [vocabulaire.md](vocabulaire.md) : module, interface,
+Court et simple, avec les mots de [vocabulary.md](vocabulary.md) : module, interface,
 implémentation, profondeur, profond, superficiel, jointure, adaptateur, levier, localité. Jamais
 composant, service ou unité pour module ; API ou signature pour interface ; frontière pour
 jointure ; couche ou enveloppe quand on parle d'un module.

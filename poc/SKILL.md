@@ -42,9 +42,9 @@ La question décide de la **forme** du POC, à noter dans le fichier :
   minimal qui tranche l'hypothèse ;
 - **démo de logique** : une règle métier, des états et leurs transitions, une forme de données.
   Un fichier HTML qu'on manipule, même sans coder :
-  [references/demo-logique.md](references/demo-logique.md) ;
+  [references/logic-demo.md](references/logic-demo.md) ;
 - **variantes d'interface** : à quoi un écran d'un projet existant devrait ressembler. Plusieurs
-  variantes sur une même route : [references/variantes-ui.md](references/variantes-ui.md).
+  variantes sur une même route : [references/ui-variants.md](references/ui-variants.md).
 
 Une question factuelle (« cette API existe-t-elle, combien coûte-t-elle ? ») se cherche avec le
 skill `research`, sans la poser à l'utilisateur. Si la recherche suffit à répondre, le POC n'a

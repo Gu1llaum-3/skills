@@ -87,7 +87,7 @@ séries au maximum, sur ces seuls points.
 ## 5. Rédiger
 
 - **`CLAUDE.md` ou `AGENTS.md`** : suivre [references/claude-md.md](references/claude-md.md), et
-  pour l'écriture [references/ecrire-pour-un-agent.md](references/ecrire-pour-un-agent.md).
+  pour l'écriture [references/writing-for-agents.md](references/writing-for-agents.md).
   Modifier celui qui existe ; si aucun n'existe, demander lequel créer. Si les deux existent,
   proposer d'en garder un comme source et de faire importer l'autre (`@AGENTS.md` dans
   `CLAUDE.md`), pour qu'ils ne divergent plus. Ne jamais effacer un passage de l'utilisateur sans

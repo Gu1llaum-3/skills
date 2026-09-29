@@ -16,10 +16,11 @@ Pour un projet qui n'existe pas encore, c'est `/brainstorming` qu'il faut.
 
 ## 1. Lire le projet
 
-- **Documents** : `CLAUDE.md`, `README.md`, `ROADMAP.md`, `docs/cahier-des-charges.md`,
+- **Documents** : `CLAUDE.md`, `README.md`, `ROADMAP.md`, `docs/requirements.md`,
   `docs/design/DESIGN.md`, `GLOSSARY.md` (le glossaire, s'il existe), les specs, plans, POC et
   recherches de `docs/`, et les titres des ADR (`docs/adr/`). Dans les projets plus anciens, ces
-  fichiers peuvent être à la racine.
+  fichiers peuvent être à la racine, et le cahier des charges s'appeler
+  `docs/cahier-des-charges.md`.
 - **Un fichier POC** (`docs/poc/<slug>.md`, cité par `/poc`) : lire d'abord son verdict. Ce qui
   est **décidé** se reprend tel quel (cité dans la synthèse, pour pouvoir le rouvrir), une
   **hypothèse** se rejoue pendant l'entretien, ce qui est **ouvert** fait partie des questions. Le

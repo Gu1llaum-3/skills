@@ -1,4 +1,4 @@
-# Gabarit de docs/nommage.md
+# Gabarit de docs/naming.md
 
 Concis : c'est la trace de la décision, pour s'en souvenir dans six mois et ne pas rouvrir le débat sans raison. 40 à 80 lignes.
 

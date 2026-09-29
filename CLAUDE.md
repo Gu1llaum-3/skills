@@ -15,8 +15,13 @@ lié dans `~/.claude/skills/` par `install.sh`.
 
 ## Conventions
 
-- Écrire ou modifier un skill : suivre `onboard/references/ecrire-pour-un-agent.md` (renvois,
+- Écrire ou modifier un skill : suivre `onboard/references/writing-for-agents.md` (renvois,
   hiérarchie, critères de fin, mots directeurs, élagage).
+- Les noms de fichiers et de dossiers sont en anglais, leur contenu en français : ceux des skills
+  (`references/smells.md`) comme ceux qu'un skill écrit dans un projet (`docs/requirements.md`,
+  `docs/naming.md`). Seuls les noms tirés du sujet (`docs/plans/<slug>.md`, les branches)
+  suivent la langue de la conversation. Un fichier de projet renommé garde une lecture de son
+  ancien nom, avec la proposition d'un `git mv` (comme `CONTEXT.md` pour `GLOSSARY.md`).
 - Un SKILL.md s'adresse à Claude, à l'infinitif ou à l'impératif ; il parle de « l'utilisateur ».
   Son corps reste sous 500 lignes (limite d'Anthropic) ; ce qui ne sert que dans certains cas va
   dans `references/`, pointé depuis le skill. La description, chargée à chaque tour, reste la plus
@@ -44,9 +49,11 @@ lié dans `~/.claude/skills/` par `install.sh`.
 - Une description est limitée à 1024 caractères (`plan` en fait déjà près de 900).
 - Un skill que Claude peut déclencher doit être ajouté à `MINE` dans `evals/run_triggers.py`,
   sinon le banc d'essai le compte comme « autre ».
-- Renommer un skill casse les liens relatifs des autres skills, et ses mentions dans
-  `docs/skills.template.html` : les chercher avec `grep -r "../<ancien-nom>/"` et
-  `grep -n '"<ancien-nom>"' docs/skills.template.html`, puis relancer `./install.sh`.
+- Renommer un skill ou l'un de ses fichiers casse ce qui pointe vers lui : les liens relatifs
+  des autres skills (`../onboard/references/…`) et des références voisines, `CLAUDE.md`,
+  `CREDITS.md`, `README.md` et `docs/skills.template.html`. Les chercher avec
+  `git grep -n "<ancien-nom>" -- ':!docs/plans'` (les plans racontent le passé), puis relancer
+  `./install.sh` pour un skill.
 
 ## Travail
 

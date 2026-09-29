@@ -1,6 +1,6 @@
 # Approfondir un groupe de modules, selon ses dépendances
 
-Suppose le vocabulaire de [vocabulaire.md](vocabulaire.md).
+Suppose le vocabulaire de [vocabulary.md](vocabulary.md).
 
 ## Les catégories de dépendance
 

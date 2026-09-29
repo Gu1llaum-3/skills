@@ -28,10 +28,10 @@ projets** (`~/.claude/settings.json`) ?
 
 ## 2. Copier le script
 
-Copier [scripts/bloquer-git-dangereux.sh](scripts/bloquer-git-dangereux.sh) :
+Copier [scripts/block-dangerous-git.sh](scripts/block-dangerous-git.sh) :
 
-- **ce projet** : `.claude/hooks/bloquer-git-dangereux.sh` ;
-- **tous les projets** : `~/.claude/hooks/bloquer-git-dangereux.sh`.
+- **ce projet** : `.claude/hooks/block-dangerous-git.sh` ;
+- **tous les projets** : `~/.claude/hooks/block-dangerous-git.sh`.
 
 Le rendre exécutable (`chmod +x`). Il a besoin de `jq` : le vérifier (`command -v jq`), et
 sinon proposer de l'installer.
@@ -50,7 +50,7 @@ avec ce qui existe : ne rien écraser d'autre. Lire le fichier avant, montrer le
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/bloquer-git-dangereux.sh"
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-dangerous-git.sh"
           }
         ]
       }
@@ -59,7 +59,7 @@ avec ce qui existe : ne rien écraser d'autre. Lire le fichier avant, montrer le
 }
 ```
 
-Pour tous les projets, la commande devient `~/.claude/hooks/bloquer-git-dangereux.sh`.
+Pour tous les projets, la commande devient `~/.claude/hooks/block-dangerous-git.sh`.
 
 ## 4. Ajuster la liste
 

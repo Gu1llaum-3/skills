@@ -18,7 +18,7 @@ code s'écrit ensuite avec `implement`.
   avec « tickets » pour le lire, commentaires et spec parente compris. Si des bloquants ne sont
   pas terminés, le signaler : le plan peut s'écrire, mais `implement` refusera de démarrer.
   Établir ensuite sa provenance, **cadré** ou **externe**, qui règle la suite de la revue :
-  [references/provenance.md](references/provenance.md).
+  [references/origin.md](references/origin.md).
 - **Spec** ou **cahier des charges** : le lire en entier. Pour un cahier des charges, planifier
   un seul jalon à la fois : celui que l'utilisateur désigne, sinon le premier non réalisé de la
   roadmap (skill `tickets`).

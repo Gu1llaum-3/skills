@@ -52,7 +52,7 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
     commité avec la première tâche ;
   - en plus du plan, des fichiers **nouveaux** écrits par les skills du parcours
     (`docs/research/`, `docs/questionnaires/`, `docs/poc/`, `docs/specs/`, `docs/tickets/`,
-    `docs/design/`, `docs/cahier-des-charges.md`, `ROADMAP.md`) : les nommer, puis les commiter
+    `docs/design/`, `docs/requirements.md`, `ROADMAP.md`) : les nommer, puis les commiter
     avec la première tâche ;
   - toute autre modification : montrer le diff. S'il correspond visiblement à la tâche du point
     de reprise (une exécution interrompue), proposer de repartir de ce travail ou de l'écarter ;
@@ -147,7 +147,7 @@ Quand la dernière vague est verte :
    Passer la ligne de statut à `> Statut : terminé le <JJ/MM/AAAA>` et commiter selon le format
    du dépôt (par défaut `docs: record plan outcome`).
    **Plan d'un jalon ou tiré d'un ticket** (ligne `Origine :`) : suivre
-   [references/fin-selon-origine.md](references/fin-selon-origine.md), pour ce commit et pour le
+   [references/ending-by-origin.md](references/ending-by-origin.md), pour ce commit et pour le
    résumé de fusion (`Closes #…`).
    **Plan d'origine POC** : s'arrêter là, sans résumé de fusion ni suite Git, et proposer
    `/poc docs/poc/<slug>.md` pour écrire le verdict.

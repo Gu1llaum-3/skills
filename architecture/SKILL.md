@@ -12,7 +12,7 @@ refactorisations qui transforment des modules superficiels en modules profonds. 
 plus facile à tester, et plus facile à parcourir pour un agent.
 
 Tout le rapport et l'entretien parlent avec le vocabulaire de
-[references/vocabulaire.md](references/vocabulaire.md) (**module**, **interface**, **profondeur**,
+[references/vocabulary.md](references/vocabulary.md) (**module**, **interface**, **profondeur**,
 **jointure**, **adaptateur**, **levier**, **localité**), exactement, sans glisser vers
 « composant », « service », « API » ou « frontière ». Les notions du domaine prennent les termes
 de `GLOSSARY.md` (ou `CONTEXT.md`, son ancien nom) s'il existe. Les ADR de `docs/adr/` sont des
@@ -55,7 +55,7 @@ signal cherché.
 Écrire un fichier HTML autonome dans le dossier temporaire (`$TMPDIR`, sinon `/tmp`), jamais dans
 le dépôt : `<tmp>/architecture-<date-heure>.html`. L'ouvrir (`open` sur macOS, `xdg-open` sur
 Linux) et donner son chemin. Gabarit, schémas et ton :
-[references/rapport-html.md](references/rapport-html.md).
+[references/html-report.md](references/html-report.md).
 
 Une carte par piste :
 
@@ -65,7 +65,7 @@ Une carte par piste :
 - **Gains**, en termes de localité et de levier, et ce que deviennent les tests ;
 - **Schéma avant / après**, côte à côte ;
 - **Force** : `Solide`, `À creuser` ou `Spéculative` ;
-- la **catégorie de dépendance** (voir [references/approfondir.md](references/approfondir.md)).
+- la **catégorie de dépendance** (voir [references/deepening.md](references/deepening.md)).
 
 Finir par **la piste à attaquer d'abord**, et pourquoi.
 
@@ -91,7 +91,7 @@ En chemin, dès qu'une décision tombe :
   Skill tool avec « adr ». Seulement si la raison servira à la prochaine exploration ; pas pour
   « pas le moment » ni pour l'évident ;
 - **l'envie de comparer plusieurs interfaces** : suivre
-  [references/deux-conceptions.md](references/deux-conceptions.md), des sous-agents en parallèle
+  [references/design-it-twice.md](references/design-it-twice.md), des sous-agents en parallèle
   qui conçoivent chacun une interface radicalement différente.
 
 ## 5. Proposer la suite

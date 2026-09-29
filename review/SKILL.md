@@ -41,7 +41,7 @@ Ce que le dépôt écrit sur la façon de coder : `CLAUDE.md` (et ceux des sous-
 `GLOSSARY.md` (les termes du domaine), les ADR de `docs/adr/`, `docs/design/DESIGN.md` si le diff
 touche l'interface, `docs/conventions.md` (les règles de jugement, écrites pour la relecture) et
 `CONTRIBUTING.md` s'ils existent. S'y ajoute la base d'odeurs de
-[references/odeurs.md](references/odeurs.md), qu'on colle en entier dans le brief du sous-agent :
+[references/smells.md](references/smells.md), qu'on colle en entier dans le brief du sous-agent :
 il n'y a pas accès autrement.
 
 ## 4. Lancer les deux sous-agents, en parallèle

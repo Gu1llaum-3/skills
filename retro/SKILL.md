@@ -29,7 +29,7 @@ Lire ensuite ce que l'environnement offrait : `CLAUDE.md` (et ceux des sous-doss
 `Makefile`…), les hooks de pre-commit, la CI.
 
 Pour juger une ligne de `CLAUDE.md` ou d'un skill, suivre
-[../onboard/references/ecrire-pour-un-agent.md](../onboard/references/ecrire-pour-un-agent.md).
+[../onboard/references/writing-for-agents.md](../onboard/references/writing-for-agents.md).
 
 ## 2. Chercher les pistes
 

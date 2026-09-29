@@ -26,7 +26,7 @@ portent le signal. Si la sortie masquée ne suffit plus à diagnostiquer, le dir
 
 **C'est le cœur du skill** : y mettre l'effort, être inventif, ne pas lâcher. Les façons de
 construire une boucle, les bugs intermittents et les régressions de performance sont dans
-[references/boucles.md](references/boucles.md).
+[references/loops.md](references/loops.md).
 
 La phase est finie quand on peut nommer **une commande** (un test, un script, un curl), **déjà
 lancée**, sortie montrée, qui est :
@@ -73,7 +73,7 @@ Chaque sonde répond à une prédiction de l'étape 3, **une variable à la fois
 avant les logs, et jamais « tout logger puis chercher ». Marquer chaque log de débogage d'un
 préfixe unique, par exemple `[DEBUG-a4f2]` : le nettoyage tiendra en un `grep`. Une régression de
 performance ne se piste pas aux logs : mesure de référence, puis bissection (voir la
-[référence](references/boucles.md), « Instrumenter » et « Régressions de performance »).
+[référence](references/loops.md), « Instrumenter » et « Régressions de performance »).
 
 Quand une hypothèse est confirmée, évaluer la taille du correctif (une tâche au sens de
 [`to-tickets`](../to-tickets/SKILL.md), ou plus), puis s'arrêter :

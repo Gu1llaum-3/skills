@@ -3,7 +3,7 @@
 - [x] **`/next`** (d'abord noté `/guide`), un routeur façon `ask-matt` : lit la conversation, ou
   l'état du projet, et dit quel skill lancer.
 - [x] **Évaluations des déclencheurs** : `python3 evals/run_triggers.py`, à relancer après chaque
-  changement de description (45/46 le 29/09/2026, un passage par phrase).
+  changement de description (46/46 le 29/09/2026, un passage par phrase).
   Deux phrases de `to-spec` sont instables (« garde une trace… », « transforme ce qu'on vient de
   décider… ») : de 0 à 3 réussites sur 6 en trois passages, y compris avec la description de
   `main`. Dans un dossier vide et sans conversation, rien n'a été décidé : Claude explore au lieu

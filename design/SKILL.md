@@ -38,7 +38,8 @@ plugin `impeccable` s'il est installé).
      Si elle échoue, il peut le chercher dans `/plugin`, onglet Discover. Un redémarrage de
      session peut être nécessaire. S'il refuse, continuer sans.
 2. **Contexte existant** : lire s'ils existent `README.md`, `CLAUDE.md`,
-   `docs/cahier-des-charges.md`, `docs/nommage.md`, les assets (logo, captures), la configuration
+   `docs/requirements.md`, `docs/naming.md` (ou leurs anciens noms, `docs/cahier-des-charges.md`
+   et `docs/nommage.md`), les assets (logo, captures), la configuration
    Tailwind ou les CSS existants.
    - Si un `docs/design/DESIGN.md` existe (ou un `DESIGN.md` à la racine dans un projet plus
      ancien) : passer en **mode évolution**. Demander ce qui ne va plus, ne pas repartir de zéro.
