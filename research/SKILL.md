@@ -1,6 +1,6 @@
 ---
 name: research
-description: Faire une recherche fiable sur une question (bibliothèque à choisir, bonne pratique, API, réglementation, concurrents, comment font les autres) à partir de sources primaires, dans un agent en arrière-plan, et consigner les conclusions sourcées dans docs/research/. Utilise ce skill quand l'utilisateur demande de rechercher, comparer, se documenter ou vérifier un point sur le web, et chaque fois qu'un autre skill (brainstorming, feature, design, naming, plan, interview) a besoin d'une recherche.
+description: "Recherche sur sources primaires, dans un agent en arrière-plan, consignée et sourcée dans docs/research/ : bibliothèque à choisir, bonne pratique, API, réglementation, concurrents. Utilise ce skill quand l'utilisateur veut rechercher, comparer ou vérifier un point sur le web (« compare ces deux bibliothèques », « comment font les autres ? »)."
 ---
 
 # Recherche
@@ -8,8 +8,6 @@ description: Faire une recherche fiable sur une question (bibliothèque à chois
 Une recherche vaut ce que valent ses sources. Ce skill délègue la lecture à un **agent en
 arrière-plan**, pour que la conversation continue pendant ce temps, et laisse une note sourcée
 qu'on pourra relire dans six mois.
-
-Réponds dans la langue de l'utilisateur.
 
 ## 1. Formuler la question
 
@@ -72,9 +70,3 @@ Les points qui justifient la conclusion, chacun avec sa source ([1], [2]…).
 Pendant que l'agent travaille, continuer ce qui n'en dépend pas. À son retour, lire le fichier,
 vérifier que les affirmations clés ont bien une source, puis rendre au skill appelant (ou à
 l'utilisateur) **la conclusion en 10 lignes au maximum** et le chemin du fichier.
-
-## Ce que ce skill ne fait jamais
-
-- Présenter comme vérifié ce qui n'a pas de source.
-- Recommander une dépendance sans avoir vérifié sa licence et sa maintenance.
-- Inventer une information pour combler un trou : on écrit qu'on n'a pas trouvé.

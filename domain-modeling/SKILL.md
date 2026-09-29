@@ -1,6 +1,6 @@
 ---
 name: domain-modeling
-description: Construire et tenir à jour le glossaire du domaine d'un projet (CONTEXT.md, ou CONTEXT-MAP.md s'il y a plusieurs domaines) pendant qu'on conçoit — confronter les mots employés au glossaire et au code, préciser les termes flous, trancher un seul mot par concept et l'écrire dès qu'il est tranché. Utilise ce skill quand l'utilisateur discute du vocabulaire du projet (« on dit client ou utilisateur ? », « ajoute ce terme au glossaire »), écrit ou modifie CONTEXT.md, et chaque fois qu'un autre skill (interview, onboard) aborde les notions du domaine.
+description: "Tenir le glossaire du domaine d'un projet (CONTEXT.md, ou CONTEXT-MAP.md pour plusieurs domaines) : un seul mot par concept, confronté au code, écrit dès qu'il est tranché. Utilise ce skill quand l'utilisateur hésite sur le vocabulaire (« on dit client ou utilisateur ? »), veut ajouter ou changer un terme du glossaire, ou quand une discussion de conception porte sur les notions du domaine."
 ---
 
 # Domain modeling : le glossaire du domaine
@@ -11,8 +11,6 @@ mot pour un concept, pas parce qu'on l'a trouvé dans le code. Ce skill est la p
 **active** : contester les mots, inventer des cas limites, écrire au moment où c'est décidé.
 Simplement lire `CONTEXT.md` pour reprendre son vocabulaire n'est pas ce skill : c'est une
 habitude que tout skill peut avoir (voir « Pour les autres skills »).
-
-Réponds dans la langue de l'utilisateur.
 
 ## Où vit le glossaire
 
@@ -36,8 +34,9 @@ Format : [references/context-format.md](references/context-format.md).
 - **Confronter au code** : quand l'utilisateur dit comment une chose marche, vérifier que le
   code est d'accord, et signaler l'écart. « Le code annule des commandes entières, tu viens de
   dire qu'une annulation partielle est possible. Lequel est juste ? »
-- **Écrire tout de suite** : un terme tranché s'écrit dans `CONTEXT.md` au moment où il l'est,
-  sans attendre la fin de la session. Montrer la ligne ajoutée en une phrase.
+- **Écrire tout de suite** : un terme tranché par l'utilisateur s'écrit dans `CONTEXT.md` au
+  moment où il l'est, sans attendre la fin de la session. Montrer la ligne ajoutée en une phrase.
+  Une définition existante qui change se signale, avec l'ancienne et la nouvelle.
 
 `CONTEXT.md` est un glossaire et rien d'autre : ni spec, ni brouillon, ni décisions
 d'implémentation. Une décision difficile à défaire, surprenante sans contexte et issue d'un vrai
@@ -56,10 +55,3 @@ sans appeler ce skill :
 - une notion dont on a besoin et qui manque au glossaire est un signal : soit on invente un mot
   que le projet n'emploie pas (se reprendre), soit il y a un vrai trou (le proposer à
   l'utilisateur, qui peut le trancher avec ce skill).
-
-## Ce que ce skill ne fait jamais
-
-- Écrire un terme que l'utilisateur n'a pas tranché, ou deviner un glossaire depuis le code.
-- Mettre dans `CONTEXT.md` des notions générales de programmation ou des détails
-  d'implémentation.
-- Changer une définition existante sans le dire.

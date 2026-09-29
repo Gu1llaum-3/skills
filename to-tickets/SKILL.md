@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: Découper une spec, un cahier des charges, un plan ou la conversation en tickets par tranches verticales, chacun avec ses critères d'acceptation et les tickets qui le bloquent, puis les publier dans le gestionnaire du projet (fichiers locaux, GitHub, GitLab, Jira ou autre) et les ranger dans un jalon de la roadmap. Ce skill fixe aussi le critère de taille (« tient en une session ») auquel les autres skills se réfèrent. Utilise ce skill dès que l'utilisateur veut découper du travail en tickets, en issues ou en tâches à répartir sur plusieurs sessions (« découpe en tickets », « crée les issues », « fais-en des tickets »), et quand to-spec lui passe une spec à découper.
+description: "Découper une spec, un cahier des charges, un plan ou la conversation en tickets par tranches verticales, chacun avec ses critères et ses bloquants, puis les publier et les ranger dans un jalon de la roadmap ; fixe aussi le critère de taille « tient en une session ». Utilise ce skill quand l'utilisateur veut découper du travail en tickets ou en issues à répartir sur plusieurs sessions (« découpe en tickets », « crée les issues »)."
 ---
 
 # To-tickets : découper en tranches verticales
@@ -8,8 +8,6 @@ description: Découper une spec, un cahier des charges, un plan ou la conversati
 Un bon découpage permet de prendre n'importe quel ticket démarrable, de le finir en une session,
 et de montrer un résultat. C'est ce qui fait avancer un projet sur plusieurs sessions sans
 tout garder en tête.
-
-Réponds dans la langue de l'utilisateur.
 
 ## 1. Rassembler
 
@@ -76,11 +74,8 @@ ticket à la spec s'il y en a une, et au jalon de la roadmap : celui de la spec 
 cahier des charges), sinon celui que l'utilisateur choisit, ou « plus tard ». Sur un gestionnaire distant, l'accord donné à l'étape 3 vaut
 pour ce contenu exact : toute modification ensuite se remontre.
 
+Les tickets existants, spec parente comprise, restent tels quels : les fermer ou les relier se
+propose à part, avec `tickets`.
+
 Terminer par la liste des tickets créés (références et liens), en signalant ceux qui peuvent
 démarrer tout de suite, et la commande pour attaquer le premier : `/implement <référence>`.
-
-## Ce que ce skill ne fait jamais
-
-- Publier un découpage que l'utilisateur n'a pas validé.
-- Fermer, modifier ou supprimer un ticket existant, y compris la spec parente.
-- Découper par couche technique.

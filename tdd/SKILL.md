@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: Écrire du code en TDD (test d'abord, rouge puis vert) avec des tests qui valent la peine d'être gardés — comportement testé par l'interface publique, pas de mocks internes, pas de tests tautologiques, une tranche verticale à la fois. Utilise ce skill dès que l'utilisateur veut développer une fonctionnalité ou corriger un bug dont la cause est connue en commençant par le test, parle de TDD, de « test d'abord », de « red-green », de tests d'intégration, ou demande d'écrire ou d'améliorer des tests ; et chaque fois qu'un autre skill (comme implement) demande d'écrire du code en TDD. Pour un bug qui résiste, c'est debug.
+description: "Écrire du code test d'abord (rouge, puis vert), avec des tests qui valent la peine d'être gardés : comportement testé par l'interface publique, pas de mocks internes, une tranche verticale à la fois. Utilise ce skill quand l'utilisateur veut développer une fonctionnalité ou corriger un bug à la cause connue en commençant par le test (« en TDD », « test d'abord »), ou écrire, réécrire ou améliorer des tests. Pour un bug qui résiste, c'est debug."
 ---
 
 # Test-Driven Development
@@ -85,10 +85,3 @@ preuve que la boucle a vraiment eu lieu.
   verticales** : un test, son code, puis le suivant.
 - **Test adapté au code** : si un test échoue, on corrige le code, pas l'assertion. Changer le test
   n'est légitime que si c'est lui qui exprimait mal le comportement attendu, et on le dit.
-
-## Ce que ce skill ne fait jamais
-
-- Écrire du code de production avant le test qui l'exige.
-- Passer au vert sans avoir vu le rouge, ou annoncer un succès sans avoir lu la sortie du test.
-- Désactiver, ignorer ou affaiblir un test pour le faire passer.
-- Mocker du code qu'on contrôle.

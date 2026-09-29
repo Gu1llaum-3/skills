@@ -12,8 +12,8 @@ des enfants de 6 ans ? ») avant qu'on investisse dans un cadrage complet. Ce qu
 une hypothèse précise, un critère qui dit oui ou non, et un verdict écrit, même négatif. Le
 fichier survit ; le code est jetable par défaut.
 
-Réponds dans la langue de l'utilisateur. Pour cadrer un projet entier, c'est `/brainstorming` ;
-pour une fonctionnalité déjà décidée, `/feature`.
+Pour cadrer un projet entier, c'est `/brainstorming` ; pour une fonctionnalité déjà décidée,
+`/feature`.
 
 ## 1. Reprendre ou démarrer
 
@@ -72,10 +72,3 @@ Selon le verdict, proposer sans le lancer : c'est à l'utilisateur de le faire.
   revient, la réponse est déjà écrite.
 
 Commiter le fichier POC selon le format du dépôt.
-
-## Ce que ce skill ne fait jamais
-
-- Traiter plusieurs questions dans un même POC.
-- Faire passer le code du POC pour une base du vrai projet : ce qu'on en garde se décide dans
-  `/brainstorming` ou `/feature`.
-- Lancer lui-même `/brainstorming` ou `/feature`.

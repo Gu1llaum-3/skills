@@ -16,8 +16,10 @@ lié dans `~/.claude/skills/` par `install.sh`.
   Son corps reste sous 500 lignes (limite d'Anthropic) ; ce qui ne sert que dans certains cas va
   dans `references/`, pointé depuis le skill. La description, chargée à chaque tour, reste la plus
   courte possible.
-- Description : ce que fait le skill, puis « Utilise ce skill quand… » avec des phrases types
-  entre guillemets, et les skills qui l'appellent.
+- Description d'un skill que Claude peut déclencher, entre guillemets doubles : ce que fait le
+  skill, puis « Utilise ce skill quand… » avec une phrase type par cas distinct. Pas de liste des
+  skills qui l'appellent : ils l'appellent par son nom. Celle d'un skill que l'utilisateur lance
+  lui-même n'est lue que par lui : une phrase qui dit ce qu'il fait.
 - Un skill que l'utilisateur lance lui-même porte `disable-model-invocation: true` : Claude ne
   peut pas le lancer, il le propose avec sa commande.
 - Passer d'une étape du parcours à la suivante (cadrage → `plan` → `implement`, ou `to-spec`) se

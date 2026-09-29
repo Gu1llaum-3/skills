@@ -1,6 +1,6 @@
 ---
 name: review
-description: "Relire un diff (une branche, une PR, le travail en cours, ou ce qu'implement vient de livrer) sur deux axes séparés : la spec (ce que le plan, le ticket ou la spec demandaient : manques, dépassements, erreurs) et les conventions du dépôt (CLAUDE.md, CONTEXT.md, ADR, DESIGN.md, odeurs de code). Deux sous-agents au contexte vierge, deux rapports côte à côte. Utilise ce skill quand l'utilisateur veut faire relire son travail (« relis la branche », « fais une review de ce que j'ai fait », « vérifie que ça colle au ticket 42 », « review depuis main »), et quand implement termine un plan. Pas pour chercher des bugs : c'est /code-review."
+description: "Relire un diff (une branche, une PR, le travail en cours) sur deux axes séparés, la spec (plan, ticket : manques, dépassements, erreurs) et les conventions du dépôt, dans deux sous-agents au contexte vierge. Utilise ce skill quand l'utilisateur veut faire relire son travail (« relis la branche », « vérifie que ça colle au ticket 42 », « review depuis main »). Pas pour chercher des bugs : c'est /code-review."
 argument-hint: "[point fixe : branche, commit, main] [spec : plan, ticket, chemin]"
 ---
 

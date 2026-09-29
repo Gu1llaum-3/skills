@@ -11,7 +11,7 @@ L'objectif est d'aider l'utilisateur à transformer une idée, souvent accompagn
 
 Ce skill sert aux **nouveaux projets**. Pour une idée de fonctionnalité dans un projet existant, c'est `/feature` qu'il faut.
 
-Réponds dans la langue de l'utilisateur. Le déroulé comporte six étapes. Adapte-le si l'utilisateur en saute une ou en demande une autre.
+Le déroulé comporte six étapes. Adapte-le si l'utilisateur en saute une ou en demande une autre.
 
 ## 1. S'imprégner : l'existant et le domaine
 

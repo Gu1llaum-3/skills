@@ -209,8 +209,9 @@
  {
   "q": "relis le code de ma PR avant que je merge",
   "ok": [
-   "none",
-   "autre:code-review"
+   "review",
+   "autre:code-review",
+   "none"
   ]
  },
  {

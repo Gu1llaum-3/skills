@@ -12,8 +12,6 @@ par « je te fais un plan ? » au lieu de passer par son parcours. Ce skill lit 
 dit quel skill lancer. Il **propose, il ne lance rien**, et ne fait pas le travail du skill
 recommandé (pas d'entretien, pas de plan).
 
-Réponds dans la langue de l'utilisateur.
-
 ## 1. Lire la situation
 
 **La conversation d'abord**, et l'argument s'il y en a un. Relever :
@@ -110,10 +108,3 @@ Session : <continuer ici | /clear puis la commande>, parce que <raison>.
     validé, un ticket) et que la conversation ne sert plus ;
   - si la conversation est longue et encore utile : **`/compact` avec une consigne**
     (« `/compact` on passe au plan de l'export ») avant la commande.
-
-## Ce que ce skill ne fait jamais
-
-- Lancer le skill recommandé : l'utilisateur tape la commande.
-- Commencer le travail du skill suivant : questions de cadrage, plan, code.
-- Recommander un skill qui n'existe pas, ou citer un fichier qu'il n'a pas lu.
-- Donner plus de trois options : au-delà, l'utilisateur n'est pas plus avancé qu'avant.

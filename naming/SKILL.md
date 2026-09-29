@@ -11,8 +11,8 @@ L'objectif est d'aboutir à **un nom choisi en connaissance de cause** : qui a d
 prononce bien, se distingue dans son secteur, et dont la disponibilité a été **réellement
 vérifiée**, pas supposée. Le choix est consigné dans `docs/nommage.md`.
 
-Réponds dans la langue de l'utilisateur. Le travail de génération et de tri se fait sans bruit :
-l'utilisateur voit une shortlist, pas 40 noms bruts.
+Le travail de génération et de tri se fait sans bruit : l'utilisateur voit une shortlist, pas 40
+noms bruts.
 
 ## La règle d'honnêteté
 
@@ -133,10 +133,3 @@ Quand un nom est retenu, écrire `docs/nommage.md` (dans le dossier courant s'il
 projet) en suivant [references/nommage.md](references/nommage.md). Terminer par les actions
 concrètes restantes : réserver le domaine, vérifier la marque, renommer le dépôt et le manifeste.
 Proposer de faire le renommage technique dans le projet, sans le faire d'office.
-
-## Ce que ce skill ne fait jamais
-
-- Affirmer qu'un nom, un domaine ou un compte est libre sans preuve.
-- Conclure qu'une marque est libre.
-- Inventer une étymologie.
-- Renommer le projet sans accord.

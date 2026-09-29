@@ -1,6 +1,6 @@
 ---
 name: debug
-description: "Diagnostiquer un bug qui résiste — intermittent, régression apparue entre deux versions, cause introuvable au premier regard, lenteur nouvelle — par une boucle qui échoue sur ce bug avant toute hypothèse, puis reproduire, réduire, tester des hypothèses réfutables, faire confirmer la cause, et corriger avec un test de non-régression si le correctif tient en une tâche. Utilise ce skill quand l'utilisateur dit « débogue ça », « je ne comprends pas pourquoi ça plante », « ça marche une fois sur dix », « c'est cassé depuis la dernière version », et quand plan rencontre un bug de cause inconnue. Pas pour une erreur dont la cause se lit dans le message, ni pour un bug à la cause connue : c'est tdd."
+description: "Diagnostiquer un bug qui résiste (intermittent, régression entre deux versions, lenteur nouvelle, cause introuvable au premier regard) : une boucle qui échoue sur ce bug avant toute hypothèse, puis la cause confirmée, et un correctif avec test de non-régression s'il tient en une tâche. Utilise ce skill quand l'utilisateur dit « débogue ça », « je ne comprends pas pourquoi ça plante », « ça marche une fois sur dix » ou « c'est cassé depuis la dernière version ». Pas pour une erreur dont la cause se lit dans le message, ni pour un bug à la cause connue : c'est tdd."
 argument-hint: "[symptôme]"
 ---
 

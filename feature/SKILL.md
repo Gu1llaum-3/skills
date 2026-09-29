@@ -12,14 +12,18 @@ construit, pourquoi, comment on saura que c'est fait, et quand on le fait. On n'
 pendant le cadrage. Ce qui a de la valeur : montrer qu'on a compris comment l'idée s'insère dans
 le projet, questionner le besoin, et laisser une trace qu'une autre session pourra reprendre.
 
-Réponds dans la langue de l'utilisateur. Pour un projet qui n'existe pas encore, c'est
-`/brainstorming` qu'il faut.
+Pour un projet qui n'existe pas encore, c'est `/brainstorming` qu'il faut.
 
 ## 1. Lire le projet
 
 - **Documents** : `CLAUDE.md`, `README.md`, `ROADMAP.md`, `docs/cahier-des-charges.md`,
   `docs/design/DESIGN.md`, `CONTEXT.md` (le glossaire, s'il existe), les specs, plans, POC et
-  recherches de `docs/`, et les titres des ADR (`docs/adr/`). Dans les projets plus anciens, ces fichiers peuvent être à la racine.
+  recherches de `docs/`, et les titres des ADR (`docs/adr/`). Dans les projets plus anciens, ces
+  fichiers peuvent être à la racine.
+- **Un fichier POC** (`docs/poc/<slug>.md`, cité par `/poc`) : lire d'abord son verdict. Ce qui
+  est **décidé** se reprend tel quel (cité dans la synthèse, pour pouvoir le rouvrir), une
+  **hypothèse** se rejoue pendant l'entretien, ce qui est **ouvert** fait partie des questions. Le
+  code du POC est jetable : ce qu'on en garde se décide pendant l'entretien.
 - **Tickets existants** : si le `CLAUDE.md` a une section « Tickets », appeler le Skill tool avec
   « tickets » pour chercher un ticket proche. Sinon, ne rien configurer maintenant.
 - **Code** : la partie que l'idée touche, les modèles de données, les interfaces publiques, les
@@ -82,17 +86,11 @@ selon la taille :
   d'interface qu'on voudra retrouver, passer par `to-spec` d'abord.
 - **Plus tard, ou trop gros pour une session** : appeler le Skill tool avec « to-spec ». Tout
   est dans la conversation ; il en fait un ticket, ou une spec et des tickets, rangés dans la
-  roadmap. Même remise à plus tard, l'idée mérite sa spec maintenant : c'est maintenant que le
-  contexte est frais.
+  roadmap. `feature` laisse la roadmap à `to-spec`, qui l'écrit avec `tickets`. Même remise à
+  plus tard, l'idée mérite sa spec maintenant : c'est maintenant que le contexte est frais.
 - **Abandonner** : résumer en une ligne pourquoi, pour que la raison ne se perde pas.
 
 **S'il reste une question métier bloquante**, ne pas recommander « maintenant » : le plan ne
 pourrait pas être validé. Recommander « plus tard », pour que `to-spec` écrive les questions
 dans la spec ou le ticket, et proposer un questionnaire avec le skill `to-questionnaire`. Une
 question non bloquante n'empêche rien : le plan avance avec son hypothèse.
-
-## Ce que ce skill ne fait jamais
-
-- Écrire du code pendant le cadrage.
-- Publier un ticket ou toucher à la roadmap sans que l'utilisateur ait choisi cette suite.
-- Écrire dans la roadmap lui-même : c'est le rôle de `tickets`, appelé par `to-spec`.

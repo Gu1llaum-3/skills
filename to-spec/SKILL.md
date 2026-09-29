@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: Transformer ce qui a été décidé dans la conversation (souvent après feature) en spec, puis en un ou plusieurs tickets dans le gestionnaire du projet — fichiers locaux, GitHub, GitLab, Jira ou autre — rangés dans un jalon de la roadmap. Pas de nouvel entretien, seulement une synthèse fidèle de ce qui est déjà tranché. Sert aussi à écrire la spec d'un jalon du cahier des charges d'un gros projet. Utilise ce skill dès que l'utilisateur veut « en faire une spec », « en faire un ticket », « mettre ça de côté pour plus tard », « garder une trace de ce qu'on a décidé », « préparer le travail pour une autre session » ou « faire la spec du jalon 1 ».
+description: "Transformer ce qui est déjà décidé dans la conversation, ou un jalon du cahier des charges d'un gros projet, en spec, puis en tickets rangés dans un jalon de la roadmap, sans nouvel entretien. Utilise ce skill quand l'utilisateur veut « en faire une spec » ou un ticket, garder une trace de ce qui est décidé pour plus tard (« mets ça de côté », « garde une trace de ce qu'on a décidé », « prépare le travail pour une autre session »), ou écrire la spec d'un jalon (« fais la spec du jalon 1 »)."
 ---
 
 # To-spec : des décisions à la spec
@@ -9,8 +9,6 @@ La spec existe parce que les conversations se terminent. Tout ce qui a été tra
 la solution, les choix discutés, ce qu'on a refusé) tient dans une conversation qui va
 disparaître ; la spec est ce qui en reste. Elle **enregistre** des décisions, elle n'en prend
 pas : toute affirmation de la spec que l'utilisateur n'a pas faite est un défaut.
-
-Réponds dans la langue de l'utilisateur.
 
 ## 1. Rassembler
 
@@ -61,7 +59,8 @@ recommander avec AskUserQuestion :
 
 Un jalon de gros projet prend presque toujours la deuxième forme : c'est ce qui l'a classé
 « gros ». S'il tient finalement en une session, le dire : il peut se planifier directement avec
-`plan`.
+`plan`, et proposer de corriger le verdict d'envergure du cahier des charges (« simple »), pour
+que la prochaine session ne le rejoue pas.
 
 ## 3. Rédiger
 
@@ -95,11 +94,3 @@ compromis se propose en ADR, via le skill `adr`.
   skill `to-questionnaire`, publiable en commentaire de la spec ou du ticket.
 - Terminer par la référence de ce qui a été créé, et la commande pour s'y mettre :
   `/implement <référence du ticket>`, un ticket par session.
-
-## Ce que ce skill ne fait jamais
-
-- Rouvrir le besoin ou le périmètre : ces décisions se prennent dans `feature` ou
-  `brainstorming`. Seules les questions techniques laissées ouvertes par un cahier des charges se
-  posent ici.
-- Ajouter à la spec une décision que personne n'a prise.
-- Publier sans avoir montré le contenu et obtenu l'accord.

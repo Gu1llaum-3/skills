@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Rédiger le plan d'implémentation (vagues, tâches à cocher, critères d'acceptation, interfaces à tester) d'un ticket — fichier local, issue GitHub ou GitLab, Jira — d'une spec, d'un jalon de cahier des charges, d'un POC ou d'une feature qui vient d'être cadrée. Avant d'écrire, le skill confronte la source au code actuel, fait une recherche quand le code ne suffit pas à savoir comment faire proprement, et challenge le besoin d'un ticket écrit hors de ces skills (produit, client, bug remonté) ; il signale ce qui est faux, manquant ou trop gros. Le plan est ensuite exécuté par implement. Utilise ce skill quand l'utilisateur veut planifier, préparer ou analyser un ticket avant de coder (« prépare le plan du ticket 42 », « planifie PROJ-123 », « analyse ce ticket de la PO », « fais le plan du jalon 1 »), et chaque fois que feature, brainstorming ou implement demandent un plan.
+description: "Rédiger le plan d'implémentation (vagues, tâches à cocher, critères d'acceptation, interfaces à tester) d'un ticket, d'une spec, d'un jalon du cahier des charges, d'un POC ou d'une feature cadrée, après l'avoir confronté au code ; un ticket écrit hors de ces skills est challengé. Utilise ce skill quand l'utilisateur veut planifier, préparer ou analyser un travail avant de coder (« prépare le plan du ticket 42 », « analyse ce ticket de la PO », « fais le plan du jalon 1 »)."
 argument-hint: "[ticket | spec | cahier des charges | POC]"
 ---
 
@@ -9,15 +9,16 @@ argument-hint: "[ticket | spec | cahier des charges | POC]"
 Un ticket ou une spec disent **quoi** construire ; le plan dit **dans quel ordre, en quelles
 tâches, et comment on prouvera chaque critère**, pour qu'`implement` puisse l'exécuter sans la
 conversation sous les yeux. Entre l'écriture du ticket et aujourd'hui, le code a pu changer : ce
-skill vérifie la source avant de s'y fier, et le dit quand elle est fausse.
-
-Réponds dans la langue de l'utilisateur.
+skill vérifie la source avant de s'y fier, et le dit quand elle est fausse. Il écrit le plan ; le
+code s'écrit ensuite avec `implement`.
 
 ## 1. Lire la source
 
 - **Ticket** (`#42`, une URL, `PROJ-123`, un fichier de `docs/tickets/`) : appeler le Skill tool
   avec « tickets » pour le lire, commentaires et spec parente compris. Si des bloquants ne sont
   pas terminés, le signaler : le plan peut s'écrire, mais `implement` refusera de démarrer.
+  Établir ensuite sa provenance, **cadré** ou **externe**, qui règle la suite de la revue :
+  [references/provenance.md](references/provenance.md).
 - **Spec** ou **cahier des charges** : le lire en entier. Pour un cahier des charges, planifier
   un seul jalon à la fois : celui que l'utilisateur désigne, sinon le premier non réalisé de la
   roadmap (skill `tickets`).
@@ -32,22 +33,6 @@ Réponds dans la langue de l'utilisateur.
 Lire aussi `CLAUDE.md`, `CONTEXT.md` s'il existe (le plan nomme les notions avec ses termes),
 les ADR (`docs/adr/`) et `docs/design/DESIGN.md` s'il y a de l'interface (ou `DESIGN.md` à la
 racine dans les projets plus anciens).
-
-### Provenance d'un ticket
-
-Un ticket écrit par `to-spec` ou `to-tickets` a été cadré avec le code sous les yeux ; un ticket
-écrit ailleurs (product owner, client, bug remonté) décrit souvent bien le besoin, mais pas
-comment l'implémenter proprement, et sa solution n'a pas été discutée par des devs. Le skill
-[`tickets`](../tickets/SKILL.md) liste les sections qui signent un ticket de ces skills
-(« Reconnaître un ticket écrit par ces skills ») :
-
-- **toutes présentes** : ticket **cadré**, revue normale ;
-- **aucune** : ticket **externe**, revue poussée (étapes 3, 4 et 6) ;
-- **en partie** : demander en une ligne d'où vient le ticket, plutôt que deviner.
-
-Lire aussi les commentaires et, si le gestionnaire le permet, l'historique : un ticket cadré
-dont le périmètre ou un critère a été changé ensuite par quelqu'un d'autre est traité comme
-externe **pour ce point-là**.
 
 ## 2. Confronter au code et au monde
 
@@ -99,7 +84,8 @@ recherche.
   - **prêt** : on planifie ;
   - **à ajuster** : quelques points à trancher, on les tranche à l'étape 4 ;
   - **trop gros** : il ne tient pas en une session (critère « Taille » de
-    [`to-tickets`](../to-tickets/SKILL.md)) ; proposer de le redécouper avec `to-tickets`. Si la
+    [`to-tickets`](../to-tickets/SKILL.md)) ; proposer de le redécouper avec `to-tickets`, puis
+    de fermer le ticket d'origine avec un lien vers les nouveaux, via le skill `tickets`. Si la
     source est un cahier des charges, proposer `to-spec` d'abord, et corriger le verdict
     d'envergure du cahier des charges (« gros ») pour que la prochaine session ne le rejoue pas ;
   - **à revoir** : le besoin lui-même n'est pas clair. Ticket cadré : proposer de relancer
@@ -150,10 +136,3 @@ questionnaire rempli.
 - Appelé par `implement` : lui rendre la main avec le chemin du plan.
 - Sinon : proposer de lancer l'implémentation, et sur accord appeler le Skill tool avec
   « implement » en lui donnant le chemin du plan.
-
-## Ce que ce skill ne fait jamais
-
-- Écrire un plan sans avoir confronté la source au code (sauf juste après `feature`).
-- Modifier ou commenter un ticket en silence, ou le publier sans accord.
-- Ajouter au plan une tâche que ni la source ni l'utilisateur n'ont demandée.
-- Écrire du code.

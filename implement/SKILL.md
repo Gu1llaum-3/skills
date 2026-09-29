@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Exécute un plan markdown déjà validé, ou un ticket (fichier local, issue GitHub ou GitLab, Jira) dont il tire un plan, vague par vague. Tout le code s'écrit en TDD, chaque tâche fait un commit avec sa case cochée, et le plan est vérifié et mis en pause à la fin de chaque vague ; on reprend exactement là où on s'est arrêté. Utilise ce skill dès que l'utilisateur veut implémenter, exécuter, dérouler ou reprendre un plan (« implémente le plan », « lance la vague 2 », « on attaque le jalon T2 », « continue le plan », « enchaîne les vagues », « implémente le ticket 42 », « on attaque PROJ-123 »), même s'il ne dit pas « /implement ». Ne pas l'utiliser pour écrire, relire ou modifier un plan.
+description: "Exécuter un plan validé, un ticket ou un jalon (fichier local, GitHub, GitLab, Jira), vague par vague, en TDD, une tâche par commit, avec une pause par vague et une relecture à la fin ; reprendre exactement là où on s'est arrêté. Utilise ce skill quand l'utilisateur veut implémenter, lancer ou reprendre un plan (« implémente le plan », « lance la vague 2 », « continue le plan »), un ticket (« implémente le ticket 42 », « on attaque PROJ-123 ») ou un jalon (« on attaque le jalon 2 »). Pas pour écrire, relire ou modifier un plan : c'est plan."
 argument-hint: "[chemin du plan | ticket] [turbo]"
 ---
 
@@ -29,6 +29,9 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
     s'arrêter et les citer ;
   - sinon, appeler le Skill tool avec « plan » en lui donnant le ticket. Il confronte le ticket au
     code, rédige le plan et le fait valider ; on reprend ensuite ici avec ce plan.
+- **Partir d'un jalon** (« on attaque le jalon 2 ») : un plan non terminé de `docs/plans/` qui
+  cite ce jalon dans son `Origine :` est une reprise ; sinon, appeler le Skill tool avec « plan » sur ce jalon
+  du cahier des charges, puis reprendre ici avec son plan.
 - **Validé** : la ligne `> Statut : validé par … le …`, ou un accord explicite dans la
   conversation (écrire alors cette ligne dans le plan). Une question marquée « bloquante » dans
   le plan interdit aussi de démarrer. Sinon, s'arrêter : un plan brouillon ne s'exécute pas,
@@ -141,15 +144,11 @@ Quand la dernière vague est verte :
    - ce qui reste hors plan.
    Passer la ligne de statut à `> Statut : terminé le <JJ/MM/AAAA>` et commiter selon le format
    du dépôt (par défaut `docs: record plan outcome`).
-   **Plan d'un jalon** (`Origine : jalon N`) : dans ce même commit, cocher sa ligne dans la
-   roadmap avec le skill `tickets`. Sur un gestionnaire distant, proposer de marquer le jalon
-   réalisé.
+   **Plan d'un jalon ou tiré d'un ticket** (ligne `Origine :`) : suivre
+   [references/fin-selon-origine.md](references/fin-selon-origine.md), pour ce commit et pour le
+   résumé de fusion (`Closes #…`).
    **Plan d'origine POC** : s'arrêter là, sans résumé de fusion ni suite Git, et proposer
    `/poc docs/poc/<slug>.md` pour écrire le verdict.
-   **Plan tiré d'un ticket** : en local, le terminer avec le skill `tickets` (statut, critères
-   atteints et case de `ROADMAP.md`), dans ce même commit. Sur un gestionnaire distant, ne rien fermer : prévoir
-   `Closes #<numéro>` (ou l'équivalent) dans le résumé de fusion, et proposer un commentaire de
-   bilan sur le ticket.
 3. **Proposer un résumé de fusion**, tiré du plan : trois lignes de résumé, les critères atteints,
    une ligne par décision, le lien vers le plan. Il sert de description de pull request si le dépôt
    en utilise, sinon de récapitulatif avant la fusion.
@@ -175,15 +174,3 @@ Quand la dernière vague est verte :
 - **Un changement destructeur** (suppression de données, migration irréversible, écriture vers un
   service tiers, réécriture de l'historique) : demander une confirmation explicite, même si le
   plan le prévoit.
-
-## Ce que ce skill ne fait jamais
-
-- Exécuter un plan non validé, ou une tâche qui n'y figure pas.
-- Écrire du code avant son test, adapter un test au code pour le faire passer, désactiver ou
-  ignorer un test.
-- Cocher une tâche dont le test ou la vérification n'a pas tourné.
-- Masquer le code de retour d'une vérification, ou annoncer du vert sans l'avoir lu.
-- Commiter sur la branche principale, sauf convention écrite du dépôt qui le demande.
-- Fusionner dans la branche de départ, pousser, ouvrir une pull request, ou commenter ou fermer un
-  ticket distant, sans feu vert explicite.
-- Enchaîner les vagues sans pause quand ce n'est pas demandé.

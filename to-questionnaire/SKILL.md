@@ -1,6 +1,6 @@
 ---
 name: to-questionnaire
-description: Transformer les questions auxquelles l'utilisateur ne peut pas répondre seul (règles métier, juridique, chiffres, priorités produit) en questionnaire à faire remplir par une personne précise — métier, client, product owner, auteur d'un ticket — rangé dans docs/questionnaires/, puis réintégrer ses réponses. Utilise ce skill quand l'utilisateur veut préparer des questions pour quelqu'un d'autre (« fais un questionnaire pour le métier », « prépare les questions pour la PO », « il faut que je demande ça à la compta ») ou revient avec un questionnaire rempli, et chaque fois qu'un autre skill (interview, brainstorming, feature, to-spec, plan) a des questions pour le métier.
+description: "Faire remplir par une personne précise (métier, client, product owner, auteur d'un ticket) les questions que l'utilisateur ne peut pas trancher seul (règles métier, juridique, chiffres, priorités produit), dans docs/questionnaires/, puis réintégrer ses réponses. Utilise ce skill quand l'utilisateur veut préparer des questions pour quelqu'un d'autre (« fais un questionnaire pour le métier », « il faut que je demande ça à la compta ») ou revient avec un questionnaire rempli."
 ---
 
 # To-questionnaire : faire répondre le métier
@@ -13,8 +13,6 @@ exploitables.
 **On questionne l'utilisateur sur l'envoi, pas sur le sujet** : s'il connaissait le sujet, il
 n'aurait pas besoin d'écrire à quelqu'un. Les questions du document visent l'écart entre ce que
 sait le destinataire et ce dont l'utilisateur a besoin.
-
-Réponds dans la langue de l'utilisateur.
 
 ## 1. Rassembler les questions
 
@@ -92,10 +90,3 @@ plan, une question pour le métier s'écrit :
 
 Une question bloquante empêche de valider le plan qui en dépend. Une question non bloquante
 laisse avancer avec son hypothèse.
-
-## Ce que ce skill ne fait jamais
-
-- Poser à l'utilisateur des questions sur le fond.
-- Mélanger plusieurs destinataires dans un même questionnaire.
-- Publier ou envoyer un questionnaire sans accord sur le texte.
-- Transformer une réponse floue en décision.

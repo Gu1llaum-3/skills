@@ -15,8 +15,6 @@ Ce skill ne code pas l'application : il s'arrête au prototype et au `DESIGN.md`
 auditer ou peaufiner une interface déjà codée, d'autres outils conviennent mieux (par exemple le
 plugin `impeccable` s'il est installé).
 
-Réponds dans la langue de l'utilisateur.
-
 ## Principes
 
 - **Du concret plutôt que de l'abstrait** : « quelle ambiance voulez-vous ? » donne des réponses
@@ -126,9 +124,3 @@ Quand l'utilisateur valide le prototype :
    travail d'interface, lire `docs/design/DESIGN.md` et utiliser exclusivement ses tokens. »
 3. Terminer par un récapitulatif en 3 lignes : direction retenue, fichiers produits, prochaine
    étape suggérée.
-
-## Ce que ce skill ne fait jamais
-
-- Coder l'application.
-- Reprendre un logo, un visuel ou un texte d'un concurrent.
-- Écrire un `DESIGN.md` dont les tokens diffèrent du prototype validé.

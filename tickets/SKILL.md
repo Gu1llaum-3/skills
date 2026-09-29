@@ -1,6 +1,6 @@
 ---
 name: tickets
-description: Lire, créer, commenter et relier des tickets, des specs et les jalons de la roadmap dans le gestionnaire du projet — fichiers locaux avec ROADMAP.md, GitHub, GitLab, Jira ou un autre outil décrit par l'utilisateur — et configurer ce gestionnaire (section Tickets du CLAUDE.md). Utilise ce skill dès que l'utilisateur veut créer, lire, lister, commenter ou fermer un ticket ou une issue, voir où en est la roadmap, rattacher un ticket à un jalon, demande où sont ses tickets ou veut changer de gestionnaire ; et chaque fois qu'un autre skill (to-spec, to-tickets, plan, implement) doit publier, lire ou ranger un ticket.
+description: "Lire, créer, commenter, fermer et relier des tickets, des specs et les jalons de la roadmap dans le gestionnaire du projet (fichiers locaux avec ROADMAP.md, GitHub, GitLab, Jira ou autre), et configurer ce gestionnaire (section Tickets du CLAUDE.md). Utilise ce skill quand l'utilisateur veut agir sur un ticket ou une issue, voir où en est la roadmap, rattacher un ticket à un jalon, savoir où vivent ses tickets ou changer de gestionnaire."
 ---
 
 # Tickets
@@ -104,6 +104,10 @@ Règles communes :
   Seule exception : un extrait qui fixe une décision mieux que la prose (schéma, type, machine à
   états).
 - Réutiliser les labels ou types existants ; ne pas en créer sans le dire.
+- **Sur un gestionnaire distant** (GitHub, GitLab, Jira, autre), publier, fermer, commenter ou
+  modifier un ticket seulement après avoir montré le contenu et obtenu un accord explicite : un
+  ticket publié est vu par d'autres, même supprimé ensuite. Réorganiser la roadmap ou changer de
+  gestionnaire se propose de même avant de se faire.
 - **Les jalons viennent du cahier des charges** (section « Découpage en jalons ») : reprendre
   leur nom et leur objectif, sans recopier le reste du document. Un jalon ajouté, renommé ou
   réordonné se propose, il ne se fait pas en silence.
@@ -120,11 +124,3 @@ toujours ces trois sections :
 `plan` s'en sert pour savoir si un ticket a déjà été cadré avec le code sous les yeux ou s'il
 vient d'ailleurs (produit, client, bug remonté). Si un modèle de ticket change, garder cette
 liste à jour.
-
-## Ce que ce skill ne fait jamais
-
-- Publier sur un gestionnaire distant (GitHub, GitLab, Jira, autre) sans avoir montré le contenu
-  et obtenu un accord explicite. Un ticket publié est vu par d'autres, même supprimé ensuite.
-- Fermer, supprimer, commenter ou modifier un ticket distant sans feu vert.
-- Réorganiser la roadmap (jalons, ordre, rattachements) sans accord.
-- Changer de gestionnaire sans demander.

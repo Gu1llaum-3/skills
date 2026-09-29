@@ -13,8 +13,8 @@ deviner en lisant le code** : les commandes, les conventions que rien n'impose, 
 règles de travail. Ce skill crée ces fichiers quand ils manquent, et surtout **met à l'épreuve**
 ceux qui existent : il ne les prend pas pour acquis.
 
-Réponds dans la langue de l'utilisateur. Pour vérifier sans rien réécrire, l'utilisateur relance
-simplement ce skill en le disant (« vérifie seulement ») : on s'arrête alors à l'étape 3.
+Pour vérifier sans rien réécrire, l'utilisateur relance simplement ce skill en le disant (« vérifie
+seulement ») : on s'arrête alors à l'étape 3.
 
 ## 1. Explorer
 
@@ -103,11 +103,3 @@ Montrer chaque fichier, ou le diff d'un fichier existant, avant d'écrire.
 changé, en quelques lignes, et rappeler qu'on peut relancer `/onboard` pour vérifier les fichiers
 quand le projet aura bougé. Si les mêmes commandes demandent souvent une permission, suggérer
 `/fewer-permission-prompts`.
-
-## Ce que ce skill ne fait jamais
-
-- Écrire ou supprimer quoi que ce soit sans avoir montré le contenu et obtenu l'accord.
-- Créer un fichier ou une section « pour l'avoir » : un fichier vide ou générique est un défaut.
-- Créer `CONTEXT.md`.
-- Recopier le README ou le code dans un fichier de contexte.
-- Lancer une commande longue ou à effets de bord pour la vérifier.

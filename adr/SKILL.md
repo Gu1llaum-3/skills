@@ -1,6 +1,6 @@
 ---
 name: adr
-description: Enregistrer une décision d'architecture (ADR) dans docs/adr/, au format court — seulement pour les décisions difficiles à défaire, surprenantes sans contexte et issues d'un vrai compromis — et tenir à jour le statut des ADR remplacés. Utilise ce skill quand l'utilisateur veut noter, documenter ou revenir sur une décision technique (« fais un ADR », « note cette décision », « pourquoi on avait choisi X ? »), et chaque fois qu'un autre skill (interview, plan, implement, to-spec) propose d'en enregistrer une.
+description: "Enregistrer une décision d'architecture dans docs/adr/, au format court, et tenir à jour le statut des ADR remplacés ; seulement pour une décision difficile à défaire, surprenante sans contexte et issue d'un vrai compromis. Utilise ce skill quand l'utilisateur veut noter une décision technique (« fais un ADR », « note cette décision »), revenir sur une décision passée pour la remplacer (« on abandonne Redis ») ou retrouver pourquoi elle a été prise (« pourquoi on avait choisi X ? »)."
 ---
 
 # ADR
@@ -9,8 +9,7 @@ Un ADR (Architecture Decision Record) retient **qu'une décision a été prise, 
 valeur : empêcher qu'on « corrige » dans six mois un choix délibéré, ou qu'on repropose une option
 déjà écartée pour de bonnes raisons. Pas de remplir des sections.
 
-Réponds dans la langue de l'utilisateur ; écris l'ADR dans la langue des ADR existants, sinon dans
-celle du projet.
+Écris l'ADR dans la langue des ADR existants, sinon dans celle du projet.
 
 ## Quand un ADR se justifie
 

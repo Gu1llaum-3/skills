@@ -1,6 +1,6 @@
 ---
 name: interview
-description: Mener un entretien critique pour éclaircir une idée, un besoin ou un plan jusqu'à ce que plus rien d'important ne soit supposé en silence — le besoin est questionné avant la solution, les faits sont cherchés (code, docs, web), seules les décisions sont posées à l'utilisateur, par séries de questions à choix avec une recommandation, et celles qui appartiennent au métier sont repérées et mises de côté pour un questionnaire. Utilise ce skill quand l'utilisateur veut qu'on le challenge, qu'on lui pose des questions sur son idée ou qu'on mette son plan à l'épreuve (« challenge-moi », « pose-moi des questions », « grill me »), et chaque fois qu'un autre skill (brainstorming, feature, design, naming, plan) demande un entretien.
+description: "Entretien critique pour éclaircir une idée, un besoin ou un plan jusqu'à ce que rien d'important ne reste supposé en silence : le besoin avant la solution, les faits cherchés, seules les décisions posées, les questions du métier mises de côté. Utilise ce skill quand l'utilisateur veut être challengé ou questionné sur son idée ou son plan (« challenge-moi », « pose-moi des questions », « grill me »)."
 ---
 
 # Entretien
@@ -9,8 +9,7 @@ L'entretien sert à atteindre une **compréhension partagée** : ce qu'on constr
 pourquoi, et ce qu'on a décidé de ne pas faire. Il est critique par principe : une idée qui
 ressort de l'entretien sans avoir été questionnée n'a pas été cadrée.
 
-Réponds dans la langue de l'utilisateur. Le skill appelant peut fixer un cadre (nombre de séries,
-thèmes à couvrir) : le respecter.
+Le skill appelant peut fixer un cadre (nombre de séries, thèmes à couvrir) : le respecter.
 
 **Le vocabulaire** : si l'entretien porte sur les notions du domaine (ce que sont une commande,
 un avoir, un client, et leurs règles), et pas seulement sur de la technique, appeler le Skill
