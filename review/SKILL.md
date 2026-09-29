@@ -9,7 +9,7 @@ argument-hint: "[point fixe : branche, commit, main] [spec : plan, ticket, chemi
 Un diff peut respecter toutes les conventions et faire autre chose que ce qui était demandé, ou
 faire exactement ce qui était demandé en cassant les conventions. Ce skill relit les deux
 séparément, dans deux sous-agents au contexte vierge, pour qu'un axe ne masque pas l'autre. Il ne
-modifie rien : il rapporte.
+modifie rien : il rapporte, puis propose la suite.
 
 ## 1. Choisir le point fixe
 
@@ -88,6 +88,10 @@ Pour les bugs : `/code-review`.
 
 - Ne pas fusionner ni reclasser les remarques entre les deux axes : c'est ce que la séparation
   empêche.
-- **Appelé par `implement`** : numéroter les remarques `R-1`, `R-2`… à travers les deux axes, et
-  lui rendre la main avec le rapport.
-- **Lancé seul** : s'arrêter au rapport ; l'utilisateur décide de la suite.
+- Numéroter les remarques `R-1`, `R-2`… à travers les deux axes.
+- **Appelé par `implement`** : lui rendre la main avec le rapport.
+- **Lancé seul** : demander quelles remarques l'utilisateur garde (« R-2 et R-5 ») ; les
+  jugements ne sont que des odeurs possibles. Puis proposer la suite, sans la lancer :
+  - quelques corrections locales : les faire ici, avec `tdd` si un comportement change ;
+  - un manque de spec ou un vrai chantier : `/plan` à partir des remarques gardées, en
+    continuant dans cette conversation, qui en est la source.
