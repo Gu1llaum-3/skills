@@ -13,6 +13,7 @@ Mes skills personnels pour Claude Code.
 | `/poc` | Vérifier vite qu'une idée tient debout, sur une seule question |
 | `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
 | `/architecture` | Chercher où approfondir les modules d'un projet existant : rapport HTML, puis entretien sur la piste choisie |
+| `/retro` | Après une session difficile : ce qu'il faudrait changer dans l'environnement (renvois, contrôles, conventions de relecture) |
 | `/next` | Quel skill lancer maintenant : lit la conversation, ou l'état du projet |
 | `/wtf` | Un message n'est pas passé : le faire reformuler, avec le contexte et les mots du projet |
 | `/design` | Définir l'identité visuelle : prototype HTML et `DESIGN.md` |
@@ -61,6 +62,7 @@ bug qui résiste ──► debug ──┬── petit correctif ──► test 
 
 interview, research, adr et to-questionnaire sont appelés en cours de route.
 implement écrit le code avec tdd, puis le fait relire par review avant son bilan.
+Après une session difficile, /retro propose ce qu'il faudrait changer dans l'environnement.
 Perdu en chemin ? /next dit quel skill lancer.
 ```
 
@@ -97,6 +99,7 @@ Perdu en chemin ? /next dit quel skill lancer.
 | `docs/questionnaires/` | `to-questionnaire` |
 | `docs/adr/` | `adr` |
 | `docs/specs/`, `docs/tickets/`, `ROADMAP.md` | `to-spec`, `to-tickets`, via `tickets` (gestionnaire local) |
+| `docs/conventions.md` | `retro`, lu par `review` |
 | `docs/plans/` | `plan`, exécutés par `implement` |
 
 Le gestionnaire de tickets se règle par projet, dans une section « Tickets » du `CLAUDE.md`,
@@ -156,6 +159,6 @@ Plusieurs skills adaptent en français le travail de [Matt Pocock](https://githu
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
 `domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
 `wtf` (d'après `wait-what`), `next` (d'après `ask-matt`), `review` (d'après `code-review`) et
-`debug` (d'après `diagnosing-bugs`) et `architecture` (d'après `improve-codebase-architecture` et
+`debug` (d'après `diagnosing-bugs`) `retro`, et `architecture` (d'après `improve-codebase-architecture` et
 `codebase-design`). L'organisation en skills qui s'appellent entre eux vient
 aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).

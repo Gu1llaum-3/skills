@@ -379,7 +379,7 @@ const DATA = /*DATA*/;
 const COLUMNS = [
   { title: "Toi seul les lances", sub: "cadrer, préparer, s'orienter", groups: [
     ["Cadrer", ["brainstorming", "feature", "poc", "architecture"]],
-    ["Préparer", ["onboard", "design", "naming"]],
+    ["Préparer", ["onboard", "retro", "design", "naming"]],
     ["S'orienter", ["next", "wtf"]],
   ]},
   { title: "Le parcours", sub: "toi ou Claude, de la décision au code relu", groups: [
@@ -400,7 +400,8 @@ const NEXT = {
   "to-spec": ["to-tickets", "implement"],
   "to-tickets": ["implement"],
   plan: ["implement"],
-  implement: ["review"],
+  implement: ["review", "retro"],
+  retro: ["plan"],
   debug: ["plan"],
   review: ["plan"],
   onboard: ["feature"],
@@ -443,6 +444,7 @@ const FLOWS = [
       { l: "Savoir quoi lancer", st: [{ s: "next", p: "Lit la conversation, ou l'état du projet, et donne la commande exacte et la ligne de session." }] },
       { l: "Comprendre le dernier message", st: [{ s: "wtf", p: "Claude reformule, avec le contexte et les mots du projet." }] },
       { l: "Préparer un projet existant", st: [{ s: "onboard", p: "Crée ou met à l'épreuve CLAUDE.md et ARCHITECTURE.md." }] },
+      { l: "Une session qui a peiné", st: [{ s: "retro", p: "Relit la session et propose le renvoi, le contrôle ou la convention de relecture qui éviterait la difficulté." }] },
       { l: "Un code difficile à changer", st: [{ s: "architecture", p: "Cherche où approfondir les modules, là où le code change le plus, dans un rapport HTML, puis mène l'entretien sur la piste choisie." }, { s: "plan", p: "Maintenant si ça tient en une session ; sinon to-spec." }] },
       { l: "Trancher un mot, une décision", st: [{ s: "domain-modeling", p: "Un mot par concept, dans GLOSSARY.md." }, { s: "adr", p: "Une décision difficile à défaire, dans docs/adr/." }] },
       { l: "Demander ou chercher", st: [{ s: "to-questionnaire", p: "Les questions pour le métier, puis leurs réponses réintégrées." }, { s: "research", p: "Une recherche sourcée, en arrière-plan." }] },
@@ -466,6 +468,7 @@ const FILES = [
   { p: "adr/", d: "docs/", w: ["adr"], r: ["interview", "feature", "plan", "implement", "review", "architecture"], role: "Les décisions d'architecture : difficiles à défaire, surprenantes sans contexte, et fruit d'un vrai compromis.", tip: "Un ADR remplacé garde son texte et change de statut." },
   { p: "specs/", d: "docs/", w: ["to-spec"], r: ["to-tickets", "plan", "review"], role: "Les specs en local : problème, solution, décisions, critères, hors périmètre.", tip: "Avec un gestionnaire en ligne, la spec est un ticket parent (une Epic sur Jira), et ses tickets en dépendent." },
   { p: "tickets/", d: "docs/", w: ["to-tickets", "to-spec"], r: ["plan", "implement", "next"], role: "Les tickets en local, par tranches verticales, avec leurs critères, leurs bloquants et leur statut.", tip: "Écrits par tickets, pour le compte de to-spec et to-tickets." },
+  { p: "conventions.md", d: "docs/", w: ["retro"], r: ["review"], role: "Les règles de jugement pour la relecture : ce qu'aucun linter ne vérifie, comme la cohérence entre fichiers.", tip: "Lu par review, pas par implement : les règles mécaniques deviennent des contrôles automatiques." },
   { p: "plans/", d: "docs/", w: ["plan"], r: ["implement", "review", "next"], role: "Les plans d'implémentation : vagues, tâches à cocher, critères, journal et bilan. La ligne « > Statut : » dit où il en est.", tip: "implement coche les cases au fil des commits : une reprise repart de la première case vide." },
 ];
 

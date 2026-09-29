@@ -52,6 +52,8 @@ répondre à « Claude se tromperait-il sans elle ? ». Supprimer les sections s
   place est la roadmap).
 - Les secrets, les URL internes sensibles.
 - Les préférences personnelles : `CLAUDE.local.md`, non versionné.
+- Les règles de jugement qui ne servent qu'à relire (la cohérence entre fichiers) :
+  `docs/conventions.md`, lu par `review`. Une règle mécanique devient un contrôle automatique.
 
 ## Importer ou pointer
 

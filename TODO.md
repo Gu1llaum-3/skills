@@ -43,3 +43,7 @@
   le vocabulaire des modules profonds va dans ses `references/`, sans skill à part.
 - [ ] Essayer `/architecture` sur un projet existant qui a un historique git fourni : les pistes
   viennent-elles des zones qui changent, et le rapport HTML s'ouvre-t-il ?
+- [x] **`/retro`**, d'après `retro` de Matt : les règles de jugement vont dans
+  `docs/conventions.md`, lu par `review`.
+- [ ] Essayer `/retro` à la fin d'une vraie session laborieuse : chaque piste cite-t-elle un
+  moment de la session, sans conseils généraux ?

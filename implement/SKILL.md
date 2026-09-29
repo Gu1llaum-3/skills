@@ -156,7 +156,8 @@ Quand la dernière vague est verte :
    en utilise, sinon de récapitulatif avant la fusion.
 4. **Proposer, sans l'exécuter**, la suite Git habituelle du dépôt (fusion dans la branche de
    départ, en avance rapide si c'est la convention, ou pull request) et le push s'il existe un
-   dépôt distant. Ces étapes attendent un feu vert explicite.
+   dépôt distant. Ces étapes attendent un feu vert explicite. Si la session a été laborieuse
+   (recherches longues, erreurs qu'un outil aurait vues), proposer aussi `/retro`.
 
 ## Quand ça ne va pas
 

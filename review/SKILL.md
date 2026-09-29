@@ -39,7 +39,8 @@ Si rien ne vient, demander. S'il n'y en a pas, l'axe spec est sauté et le rappo
 
 Ce que le dépôt écrit sur la façon de coder : `CLAUDE.md` (et ceux des sous-dossiers touchés),
 `GLOSSARY.md` (les termes du domaine), les ADR de `docs/adr/`, `docs/design/DESIGN.md` si le diff
-touche l'interface, `CONTRIBUTING.md` s'il existe. S'y ajoute la base d'odeurs de
+touche l'interface, `docs/conventions.md` (les règles de jugement, écrites pour la relecture) et
+`CONTRIBUTING.md` s'ils existent. S'y ajoute la base d'odeurs de
 [references/odeurs.md](references/odeurs.md), qu'on colle en entier dans le brief du sous-agent :
 il n'y a pas accès autrement.
 
