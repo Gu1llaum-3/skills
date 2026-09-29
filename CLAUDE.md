@@ -15,6 +15,8 @@ lié dans `~/.claude/skills/` par `install.sh`.
 
 ## Conventions
 
+- Écrire ou modifier un skill : suivre `onboard/references/ecrire-pour-un-agent.md` (renvois,
+  hiérarchie, critères de fin, mots directeurs, élagage).
 - Un SKILL.md s'adresse à Claude, à l'infinitif ou à l'impératif ; il parle de « l'utilisateur ».
   Son corps reste sous 500 lignes (limite d'Anthropic) ; ce qui ne sert que dans certains cas va
   dans `references/`, pointé depuis le skill. La description, chargée à chaque tour, reste la plus

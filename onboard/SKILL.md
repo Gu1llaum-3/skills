@@ -45,7 +45,13 @@ Chaque affirmation des fichiers de contexte est confrontée au dépôt, et class
 - **mal placé** : une règle qui ne vaut que pour un dossier, dans le fichier racine ; un long
   document importé à chaque session (`@fichier`) alors qu'il suffirait de le pointer ; une
   préférence personnelle dans le fichier partagé (sa place est `CLAUDE.local.md`) ;
-- **contradictoire** : deux fichiers qui disent l'inverse, ou un fichier et le code.
+- **contradictoire** : deux fichiers qui disent l'inverse, ou un fichier et le code ;
+- **à changer en contrôle** : une règle mécanique (une API interdite, une forme d'import, un
+  fichier à sa place) qu'un linter, un hook de pre-commit ou la CI peuvent vérifier. Un contrôle
+  échoue ; une phrase de `CLAUDE.md`, non.
+
+Un dépôt **sans garde-fou** (ni hook de pre-commit, ni CI qui lance le lint, les types et les
+tests) est lui-même un constat.
 
 **Les commandes** : vérifier que chacune existe (script, cible, binaire). Proposer ensuite la
 liste des commandes rapides à lancer pour de vrai (lint, un seul fichier de test, vérification
@@ -80,7 +86,8 @@ séries au maximum, sur ces seuls points.
 
 ## 5. Rédiger
 
-- **`CLAUDE.md` ou `AGENTS.md`** : suivre [references/claude-md.md](references/claude-md.md).
+- **`CLAUDE.md` ou `AGENTS.md`** : suivre [references/claude-md.md](references/claude-md.md), et
+  pour l'écriture [references/ecrire-pour-un-agent.md](references/ecrire-pour-un-agent.md).
   Modifier celui qui existe ; si aucun n'existe, demander lequel créer. Si les deux existent,
   proposer d'en garder un comme source et de faire importer l'autre (`@AGENTS.md` dans
   `CLAUDE.md`), pour qu'ils ne divergent plus. Ne jamais effacer un passage de l'utilisateur sans
