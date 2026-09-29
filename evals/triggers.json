@@ -265,5 +265,23 @@
    "none",
    "interview"
   ]
+ },
+ {
+  "q": "il faut que je crée un compte Resend, que je récupère la clé d'API et que je la mette dans le .env et les secrets GitHub, guide-moi",
+  "ok": [
+   "wizard"
+  ]
+ },
+ {
+  "q": "prépare-moi un truc pour configurer Sentry et Stripe pas à pas sur la nouvelle machine, je ne me souviens jamais où sont les clés",
+  "ok": [
+   "wizard"
+  ]
+ },
+ {
+  "q": "ajoute la variable DATABASE_URL=postgres://localhost/app au .env",
+  "ok": [
+   "none"
+  ]
  }
 ]

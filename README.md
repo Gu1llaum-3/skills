@@ -36,6 +36,7 @@ Mes skills personnels pour Claude Code.
 | `to-questionnaire` | Faire remplir par le métier les questions auxquelles tu ne peux pas répondre, puis réintégrer les réponses |
 | `research` | Recherche sur sources primaires, en arrière-plan, notée dans `docs/research/` |
 | `adr` | Enregistrer une décision d'architecture dans `docs/adr/` |
+| `wizard` | Un script qui guide pas à pas dans ce que toi seul peux faire (comptes, secrets, tableaux de bord), et écrit les valeurs dans `.env` et la CI |
 
 ## Enchaînement
 
@@ -60,7 +61,7 @@ bug qui résiste ──► debug ──┬── petit correctif ──► test 
 /architecture ──► rapport HTML ──► une piste choisie ──┬── maintenant ──► plan ──► implement
                                                        └── plus tard ──► to-spec
 
-interview, research, adr et to-questionnaire sont appelés en cours de route.
+interview, research, adr, to-questionnaire et wizard sont appelés en cours de route.
 implement écrit le code avec tdd, puis le fait relire par review avant son bilan.
 Après une session difficile, /retro propose ce qu'il faudrait changer dans l'environnement.
 Perdu en chemin ? /next dit quel skill lancer.
@@ -159,6 +160,6 @@ Plusieurs skills adaptent en français le travail de [Matt Pocock](https://githu
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
 `domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
 `wtf` (d'après `wait-what`), `next` (d'après `ask-matt`), `review` (d'après `code-review`) et
-`debug` (d'après `diagnosing-bugs`) `retro`, et `architecture` (d'après `improve-codebase-architecture` et
+`debug` (d'après `diagnosing-bugs`) `retro`, `wizard`, et `architecture` (d'après `improve-codebase-architecture` et
 `codebase-design`). L'organisation en skills qui s'appellent entre eux vient
 aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).

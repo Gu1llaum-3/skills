@@ -388,7 +388,7 @@ const COLUMNS = [
   ]},
   { title: "En cours de route", sub: "toi ou Claude, souvent appelés par les autres", groups: [
     ["Questionner", ["interview", "domain-modeling", "to-questionnaire"]],
-    ["S'appuyer sur", ["research", "adr", "tickets"]],
+    ["S'appuyer sur", ["research", "adr", "tickets", "wizard"]],
     ["Coder", ["tdd"]],
   ]},
 ];
@@ -447,6 +447,7 @@ const FLOWS = [
       { l: "Une session qui a peiné", st: [{ s: "retro", p: "Relit la session et propose le renvoi, le contrôle ou la convention de relecture qui éviterait la difficulté." }] },
       { l: "Un code difficile à changer", st: [{ s: "architecture", p: "Cherche où approfondir les modules, là où le code change le plus, dans un rapport HTML, puis mène l'entretien sur la piste choisie." }, { s: "plan", p: "Maintenant si ça tient en une session ; sinon to-spec." }] },
       { l: "Trancher un mot, une décision", st: [{ s: "domain-modeling", p: "Un mot par concept, dans GLOSSARY.md." }, { s: "adr", p: "Une décision difficile à défaire, dans docs/adr/." }] },
+      { l: "Faire faire ce que toi seul peux faire", st: [{ s: "wizard", p: "Un script qui ouvre chaque page, dit quoi cliquer, et écrit les valeurs dans .env et les secrets de la CI." }] },
       { l: "Demander ou chercher", st: [{ s: "to-questionnaire", p: "Les questions pour le métier, puis leurs réponses réintégrées." }, { s: "research", p: "Une recherche sourcée, en arrière-plan." }] },
       { l: "Se faire challenger", st: [{ s: "interview", p: "Le besoin avant la solution, jusqu'à ce que rien ne reste supposé." }] },
     ]},

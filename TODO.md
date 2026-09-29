@@ -49,3 +49,4 @@
   moment de la session, sans conseils généraux ?
 - [ ] Essayer `/poc` sur une question de règle métier (démo de logique attendue) et sur un écran
   d'un projet existant (variantes d'interface attendues).
+- [x] **`wizard`**, d'après celui de Matt, avec son `template.sh` traduit.

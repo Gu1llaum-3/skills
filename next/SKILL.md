@@ -68,6 +68,7 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 | Une question que seul le métier, un client ou une PO peut trancher, ou sa réponse revenue | `/to-questionnaire` |
 | Un point à vérifier sur le web, une bibliothèque à choisir | `/research` |
 | Une décision d'architecture à noter | `/adr` |
+| Des étapes que toi seul peux faire : un compte à créer, des secrets à poser, un tableau de bord | `/wizard` |
 | L'identité visuelle, avant de coder l'interface | `/design` |
 | Un nom à trouver | `/naming` |
 | Un projet existant sans `CLAUDE.md`, ou avec un `CLAUDE.md` douteux | `/onboard` |
