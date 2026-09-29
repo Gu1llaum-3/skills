@@ -15,10 +15,9 @@
 - [ ] **Étudier `differential-review` de Trail of Bits**
   ([trailofbits/skills](https://github.com/trailofbits/skills/tree/main/plugins/differential-review/skills/differential-review)) :
   à intégrer quelque part (`review` ?) ou à garder en skill à part.
-- [ ] **Fins de phase de `next`** (point 5 de l'audit) : reprendre de l'arbre d'`ask-matt` ce que
-  la version courte a perdu : écarter « continuer ici » en premier (une conversation gardée vaut
-  mieux qu'un résumé), le sous-agent pour le travail sans surveillance, décider à la fin d'une
-  phase et pas au milieu, garder entretien, spec et tickets dans la même fenêtre.
+- [x] **Fins de phase de `next`** (point 5 de l'audit) : un arbre ordonné (continuer, `/clear`,
+  `/to-spec` pour la passation, sous-agent, `/compact`), pas de décision de session au milieu
+  d'une phase.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt

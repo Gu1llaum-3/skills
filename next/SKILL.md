@@ -95,16 +95,36 @@ Court, dans cet ordre :
 Sinon :
 - `/<autre>` si <ce qui le ferait préférer>.
 
-Session : <continuer ici | /clear puis la commande>, parce que <raison>.
+Session : <un geste de la section 4>, parce que <raison>.
 ```
 
 - **Une ou deux** autres options au plus, chacune avec sa condition. Aucune si la situation est
   sans ambiguïté.
 - **La commande exacte** : avec le chemin, le ticket ou le jalon quand on les connaît.
-- **La ligne de session** :
-  - **continuer ici** quand le skill suivant a besoin de cette discussion comme source
-    (`/feature`, `/plan` ou `/to-spec` juste après un échange) : un résumé perdrait le pourquoi ;
-  - **`/clear` puis la commande** quand le skill suivant part d'un fichier qui se suffit (un plan
-    validé, un ticket) et que la conversation ne sert plus ;
-  - si la conversation est longue et encore utile : **`/compact` avec une consigne**
-    (« `/compact` on passe au plan de l'export ») avant la commande.
+- **La ligne de session** : un seul geste, choisi avec la section 4.
+
+## 4. La ligne de session
+
+**À la fin d'une phase** (un cadrage fini, un plan validé, une vague ou un ticket terminés),
+suivre cet arbre dans l'ordre ; la première réponse « oui » l'emporte :
+
+1. **Continuer ici** : la suite a besoin de cette conversation comme source et elle n'est pas
+   très longue. C'est à examiner en premier : tout autre geste remplace la conversation par un
+   résumé, qui perd le pourquoi. Un cadrage reste ainsi dans la même conversation jusqu'aux
+   tickets, pour que la spec et le découpage partent de la même réflexion ; chaque
+   `/implement <ticket>` repart ensuite d'une session vide (branche 2).
+2. **`/clear` puis la commande** : plus rien de la conversation ne sert, la suite part d'un
+   fichier qui se suffit (un plan validé, un ticket).
+3. **`/to-spec` d'abord** : le travail doit voyager (vers une autre session, un autre dossier,
+   un autre outil, un collègue) alors que ce qui est décidé n'est encore écrit nulle part : il en
+   fait une spec ou un ticket qui se suffit. Si la recommandation est déjà `/to-spec`, la ligne
+   de session dit seulement de continuer ici.
+4. **Un sous-agent** : la suite est une tâche bien bornée qui peut tourner sans l'utilisateur et
+   qu'aucun skill ne prend déjà en charge (`research` et `review` lancent les leurs) ; la session
+   reste intacte.
+5. Sinon, **`/compact` avec une consigne** qui dit ce que la suite doit garder
+   (« `/compact` on passe au plan de l'export »).
+
+**Au milieu d'une phase** (en pleine vague, en plein entretien), la session se décide à la fin
+de la phase : d'ici là, continuer ici, ou confier un morceau bien borné à un sous-agent, pour
+garder le fil.
