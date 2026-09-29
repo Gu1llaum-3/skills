@@ -14,6 +14,7 @@ Mes skills personnels pour Claude Code.
 | `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
 | `/architecture` | Chercher où approfondir les modules d'un projet existant : rapport HTML, puis entretien sur la piste choisie |
 | `/retro` | Après une session difficile : ce qu'il faudrait changer dans l'environnement (renvois, contrôles, conventions de relecture) |
+| `/git-guardrails` | Bloquer les commandes git destructrices de Claude (push, reset --hard, clean…) par un hook |
 | `/next` | Quel skill lancer maintenant : lit la conversation, ou l'état du projet |
 | `/wtf` | Un message n'est pas passé : le faire reformuler, avec le contexte et les mots du projet |
 | `/design` | Définir l'identité visuelle : prototype HTML et `DESIGN.md` |
@@ -160,6 +161,6 @@ Plusieurs skills adaptent en français le travail de [Matt Pocock](https://githu
 (licence MIT) : `tdd`, `interview` (d'après `grilling`), `adr` (d'après le format d'ADR de
 `domain-modeling`), `domain-modeling`, `research`, `to-spec`, `to-tickets`, `to-questionnaire`,
 `wtf` (d'après `wait-what`), `next` (d'après `ask-matt`), `review` (d'après `code-review`) et
-`debug` (d'après `diagnosing-bugs`) `retro`, `wizard`, et `architecture` (d'après `improve-codebase-architecture` et
+`debug` (d'après `diagnosing-bugs`) `retro`, `wizard`, `git-guardrails` et `architecture` (d'après `improve-codebase-architecture` et
 `codebase-design`). L'organisation en skills qui s'appellent entre eux vient
 aussi de son dépôt. Voir [CREDITS.md](CREDITS.md).

@@ -50,3 +50,6 @@
 - [ ] Essayer `/poc` sur une question de règle métier (démo de logique attendue) et sur un écran
   d'un projet existant (variantes d'interface attendues).
 - [x] **`wizard`**, d'après celui de Matt, avec son `template.sh` traduit.
+- [x] **`/git-guardrails`**, d'après `git-guardrails-claude-code` de Matt.
+- [ ] Essayer `/git-guardrails` dans un projet qui a déjà des hooks dans `.claude/settings.json` :
+  la fusion garde-t-elle les hooks existants ?

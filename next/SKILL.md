@@ -72,6 +72,7 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 | L'identité visuelle, avant de coder l'interface | `/design` |
 | Un nom à trouver | `/naming` |
 | Un projet existant sans `CLAUDE.md`, ou avec un `CLAUDE.md` douteux | `/onboard` |
+| Empêcher Claude de pousser ou d'effacer du travail git | `/git-guardrails` |
 | Une session laborieuse : Claude a cherché longtemps, fait une erreur qu'un outil aurait vue | `/retro` |
 | Un code difficile à changer ou à tester, sans bug ni fonctionnalité en vue | `/architecture` |
 | Voir la roadmap, lire ou ranger des tickets | `/tickets` |
