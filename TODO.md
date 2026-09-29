@@ -8,6 +8,17 @@
   décider… ») : de 0 à 3 réussites sur 6 en trois passages, y compris avec la description de
   `main`. Dans un dossier vide et sans conversation, rien n'a été décidé : Claude explore au lieu
   de lancer le skill. Réécrire ces phrases avec un contexte, ou tester dans une conversation.
+- [ ] **Comparer `brainstorming` avec celui de superpowers**
+  ([obra/superpowers](https://github.com/obra/superpowers/tree/main/skills/brainstorming)) : il
+  semble utilisable à tout moment, alors que le mien mène toujours à un cahier des charges. À
+  étudier : sortir le cahier des charges dans un sous-skill appelé à la demande.
+- [ ] **Étudier `differential-review` de Trail of Bits**
+  ([trailofbits/skills](https://github.com/trailofbits/skills/tree/main/plugins/differential-review/skills/differential-review)) :
+  à intégrer quelque part (`review` ?) ou à garder en skill à part.
+- [ ] **Fins de phase de `next`** (point 5 de l'audit) : reprendre de l'arbre d'`ask-matt` ce que
+  la version courte a perdu : écarter « continuer ici » en premier (une conversation gardée vaut
+  mieux qu'un résumé), le sous-agent pour le travail sans surveillance, décider à la fin d'une
+  phase et pas au milieu, garder entretien, spec et tickets dans la même fenêtre.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt
