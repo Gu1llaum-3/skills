@@ -9,6 +9,9 @@ lié dans `~/.claude/skills/` par `install.sh`.
 - Banc d'essai des déclencheurs : `python3 evals/run_triggers.py [passages]`. Il lance un appel à
   `claude -p` par phrase : le proposer après chaque changement de description, le lancer
   seulement après accord.
+- Page des skills : `python3 docs/build_skills_page.py` régénère `docs/skills.html` depuis les
+  `SKILL.md` et le gabarit `docs/skills.template.html` ; tests :
+  `python3 -m unittest docs/test_build_skills_page.py`.
 
 ## Conventions
 
@@ -35,15 +38,20 @@ lié dans `~/.claude/skills/` par `install.sh`.
 - Une description est limitée à 1024 caractères (`plan` en fait déjà près de 900).
 - Un skill que Claude peut déclencher doit être ajouté à `MINE` dans `evals/run_triggers.py`,
   sinon le banc d'essai le compte comme « autre ».
-- Renommer un skill casse les liens relatifs des autres skills : les chercher avec
-  `grep -r "../<ancien-nom>/"`, puis relancer `./install.sh`.
+- Renommer un skill casse les liens relatifs des autres skills, et ses mentions dans
+  `docs/skills.template.html` : les chercher avec `grep -r "../<ancien-nom>/"` et
+  `grep -n '"<ancien-nom>"' docs/skills.template.html`, puis relancer `./install.sh`.
 
 ## Travail
 
 - Ajouter ou modifier un skill, c'est aussi mettre à jour, selon le cas : les tableaux et le
   schéma du `README.md`, `CREDITS.md` (skill adapté de Matt Pocock, ou idées reprises d'ailleurs),
   `evals/triggers.json` (avec des pièges qui ne doivent rien déclencher), `TODO.md`, la carte de
-  `next/SKILL.md`.
+  `next/SKILL.md`, et `docs/skills.template.html` (son groupe sur la carte, ce qu'on enchaîne
+  après lui, les parcours, les fichiers qu'il écrit ou relit, les règles du jeu), puis relancer
+  `python3 docs/build_skills_page.py` : les appels et les descriptions s'y mettent à jour seuls.
+  Tant qu'un skill n'a pas de groupe dans `COLUMNS`, `docs/test_build_skills_page.py` échoue, et
+  la page le range dans « Autres ».
 - Tout changement se vérifie contre les skills rattachés, avant le plan puis avant le commit : ceux
   qui l'appellent, ceux qu'il appelle, et ceux qui renvoient à ses étapes, ses fichiers ou ses
   formats (`grep -rn "<skill>" --include='*.md' .`). Chercher ce qui casse (un numéro d'étape

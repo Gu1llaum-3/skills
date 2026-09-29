@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atlas des skills maison</title>
+<!-- Gabarit de docs/skills.html : modifier ce fichier, puis python3 docs/build_skills_page.py -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --paper: #faf9f5;
+  --surface: #ffffff;
+  --sunk: #f0eee6;
+  --ink: #141413;
+  --ink-2: #3d3d3a;
+  --muted: #6b6a65;
+  --rule: #e8e6dc;
+  --clay: #d97757;
+  --clay-ink: #b0502f;
+  --clay-soft: #f7e4da;
+  --slate: #6a9bcc;
+  --slate-ink: #3b6a99;
+  --slate-soft: #e1ebf5;
+  --edge: #b0aea5;
+  --focus: #c15f3c;
+  --display: "Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Lora", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #262624; --surface: #30302e; --sunk: #1f1e1d; --ink: #faf9f5; --ink-2: #dedcd3;
+    --muted: #a8a69d; --rule: #3e3e3a; --clay: #d97757; --clay-ink: #e8906f; --clay-soft: #4a3026;
+    --slate: #7fa9d4; --slate-ink: #9ec0e4; --slate-soft: #25364a; --edge: #6e6d67; --focus: #e8906f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #262624; --surface: #30302e; --sunk: #1f1e1d; --ink: #faf9f5; --ink-2: #dedcd3;
+  --muted: #a8a69d; --rule: #3e3e3a; --clay: #d97757; --clay-ink: #e8906f; --clay-soft: #4a3026;
+  --slate: #7fa9d4; --slate-ink: #9ec0e4; --slate-soft: #25364a; --edge: #6e6d67; --focus: #e8906f;
+}
+*, *::before, *::after { box-sizing: inherit; }
+[hidden] { display: none !important; }
+html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 72px); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+h1, h2, h3, h4 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+p { margin: 0; }
+a { color: var(--clay-ink); text-underline-offset: 3px; }
+code { font-family: var(--mono); font-size: 0.84em; background: var(--sunk); padding: 0.08em 0.35em; border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.eyebrow { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+
+/* barre du haut */
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+.topbar-inner { max-width: 1240px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 16px; white-space: nowrap; text-decoration: none; color: var(--ink); }
+.spark { width: 20px; height: 20px; flex: none; color: var(--clay); }
+.steps-nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+.steps-nav::-webkit-scrollbar { display: none; }
+.steps-nav a { display: flex; align-items: baseline; gap: 7px; padding: 6px 12px; border-radius: 8px; color: var(--ink-2); text-decoration: none; white-space: nowrap; font-family: var(--display); font-size: 14px; font-weight: 500; }
+.steps-nav a b { font-weight: 700; color: var(--muted); }
+.steps-nav a:hover { background: var(--sunk); color: var(--ink); }
+.steps-nav a[aria-current="true"] { background: var(--clay-soft); color: var(--clay-ink); }
+.steps-nav a[aria-current="true"] b { color: var(--clay-ink); }
+
+/* introduction */
+main { max-width: 1240px; margin: 0 auto; padding: 0 24px 96px; }
+.hero { padding-block: 64px 48px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; align-items: end; }
+.hero h1 { font-size: clamp(40px, 6.4vw, 80px); line-height: 0.98; font-weight: 700; letter-spacing: -0.025em; }
+.hero h1 em { font-style: normal; color: var(--clay); }
+.lead { font-size: 19px; color: var(--ink-2); max-width: 50ch; margin-top: 22px; }
+.lead strong { font-weight: 600; color: var(--ink); }
+.route { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--clay); }
+.route li { border-bottom: 1px solid var(--rule); }
+.route a { display: grid; grid-template-columns: 44px 1fr; gap: 2px 12px; padding: 13px 0; text-decoration: none; color: var(--ink); }
+.route .n { grid-row: span 2; font-family: var(--display); font-size: 30px; line-height: 1; font-weight: 700; color: var(--clay); }
+.route .route-t { font-family: var(--display); font-weight: 600; font-size: 17px; }
+.route .route-d { color: var(--muted); font-size: 15px; }
+.route a:hover .route-t { color: var(--clay-ink); }
+
+/* sections */
+section.step { padding-block: 64px 24px; border-bottom: 1px solid var(--rule); }
+.step-head { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 24px; align-items: start; margin-bottom: 32px; }
+.step-num { font-family: var(--display); font-size: 104px; line-height: 0.8; font-weight: 700; color: var(--clay); }
+.step-head h2 { font-size: clamp(30px, 4vw, 46px); font-weight: 700; letter-spacing: -0.015em; }
+.step-head p { margin-top: 12px; color: var(--ink-2); font-size: 18px; max-width: 66ch; }
+
+/* légende et filtres */
+.tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 15px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 14px; height: 14px; border-radius: 4px; border: 2px solid; flex: none; display: inline-block; }
+.sw.u { border-color: var(--clay); background: var(--clay-soft); }
+.sw.m { border-color: var(--slate); background: var(--slate-soft); }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--display); font-size: 13px; font-weight: 500; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.chip:hover { border-color: var(--edge); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* carte */
+.map-grid { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1100px) { .map-grid { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; } }
+.graph-box { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; overflow-x: auto; padding: 10px; }
+#graph { display: block; width: 100%; min-width: 760px; height: auto; }
+#graph .colt { font-family: var(--display); font-size: 16px; font-weight: 600; fill: var(--ink); }
+#graph .cols { font-family: var(--body); font-size: 12.5px; fill: var(--muted); font-style: italic; }
+#graph .grp { font-family: var(--display); font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; fill: var(--muted); font-weight: 600; }
+#graph .node { cursor: pointer; }
+#graph .node rect { fill: var(--surface); stroke-width: 1.5; transition: opacity 0.15s; }
+#graph .node.u rect { stroke: var(--clay); }
+#graph .node.m rect { stroke: var(--slate); }
+#graph .node text { font-family: var(--mono); font-size: 13px; fill: var(--ink); }
+#graph .node .dot { stroke: none; }
+#graph .node.u .dot { fill: var(--clay); }
+#graph .node.m .dot { fill: var(--slate); }
+#graph .node:hover rect { stroke-width: 2.5; }
+#graph .node:focus { outline: none; }
+#graph .node:focus-visible rect { stroke: var(--focus); stroke-width: 3; }
+#graph .node.sel rect { stroke-width: 3; }
+#graph .node.u.sel rect, #graph .node.u.rel rect { fill: var(--clay-soft); }
+#graph .node.m.sel rect, #graph .node.m.rel rect { fill: var(--slate-soft); }
+#graph .edge { fill: none; stroke: var(--edge); stroke-width: 1.2; opacity: 0.45; transition: opacity 0.15s; }
+#graph .edge.on { opacity: 1; stroke: var(--ink); stroke-width: 2.2; }
+#graph .dim { opacity: 0.2; }
+#graph .arrow { fill: var(--edge); }
+#graph .arrow-on { fill: var(--ink); }
+.graph-note { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 20px; display: grid; gap: 14px; }
+@media (min-width: 1100px) { .panel { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); } }
+.kind { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; justify-self: start; }
+.kind.u { background: var(--clay-soft); color: var(--clay-ink); }
+.kind.m { background: var(--slate-soft); color: var(--slate-ink); }
+.panel h3 { font-family: var(--mono); font-size: 21px; font-weight: 600; word-break: break-word; }
+.panel .desc { font-size: 15.5px; }
+.rel-block { display: grid; gap: 6px; }
+.rel-block .eyebrow { font-size: 11px; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-family: var(--mono); font-size: 13px; border: 1.5px solid; border-radius: 6px; padding: 4px 10px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.pill.u { border-color: var(--clay); }
+.pill.m { border-color: var(--slate); }
+.pill:hover { background: var(--sunk); }
+.none { font-size: 14.5px; color: var(--muted); }
+.cmdline { font-family: var(--mono); font-size: 13.5px; background: var(--sunk); border-radius: 6px; padding: 8px 10px; }
+
+/* parcours */
+.sits { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-bottom: 16px; }
+.sit { font: inherit; text-align: left; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; cursor: pointer; display: grid; gap: 6px; color: var(--ink); }
+.sit:hover { border-color: var(--edge); }
+.sit[aria-selected="true"] { border-color: var(--clay); box-shadow: inset 0 0 0 1px var(--clay); }
+.sit .t { font-family: var(--display); font-weight: 600; font-size: 16px; line-height: 1.3; }
+.sit .entry { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.flow { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 24px clamp(16px, 3vw, 32px); display: grid; gap: 18px; }
+.flow-head { display: grid; gap: 4px; }
+.flow-head h3 { font-size: 22px; font-weight: 600; }
+.flow-head p { color: var(--muted); }
+ol.fsteps { list-style: none; margin: 0; padding: 0; display: grid; }
+ol.fsteps > li { position: relative; padding: 0 0 20px 36px; }
+ol.fsteps > li::before { content: ""; position: absolute; left: 11px; top: 26px; bottom: -2px; border-left: 2px solid var(--rule); }
+ol.fsteps > li:last-child::before { display: none; }
+ol.fsteps > li::after { content: attr(data-n); position: absolute; left: 0; top: 1px; width: 24px; height: 24px; border-radius: 50%; background: var(--clay); color: var(--paper); font-family: var(--display); font-size: 12px; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.fstep { display: grid; gap: 4px; max-width: 74ch; }
+.fstep .pill { justify-self: start; }
+.fstep p { font-size: 15.5px; }
+.fstep.plain p { color: var(--muted); font-style: italic; }
+.branch { border: 1px dashed var(--edge); border-radius: 12px; padding: 14px; display: grid; gap: 12px; }
+.branch .q { font-family: var(--display); font-weight: 600; font-size: 15px; }
+.opts { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.opt { background: var(--sunk); border-radius: 10px; padding: 12px 14px; display: grid; gap: 10px; align-content: start; }
+.opt .lbl { font-family: var(--display); font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--clay-ink); }
+.opt .fstep p { font-size: 14.5px; }
+.down { color: var(--muted); font-size: 13px; line-height: 1; }
+.flow-note { font-size: 15px; background: var(--sunk); border-radius: 10px; padding: 12px 16px; max-width: 80ch; }
+.flow-note b { font-weight: 600; }
+
+/* quel skill ? */
+.sorter-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.sorter-bar p { color: var(--muted); font-size: 15px; }
+.sorter { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); align-items: start; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
+.card > button { display: block; width: 100%; text-align: left; font: inherit; font-size: 15.5px; background: none; border: 0; color: var(--ink); padding: 14px 16px; cursor: pointer; border-radius: 12px; }
+.card > button:hover { background: var(--sunk); }
+.card > button .hint { display: block; font-family: var(--display); font-size: 12px; color: var(--muted); margin-top: 6px; }
+.card .ans { padding: 0 16px 14px; display: grid; gap: 6px; font-size: 14.5px; color: var(--ink-2); }
+.card .ans .cmd { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--clay-ink); }
+.card.m .ans .cmd { color: var(--slate-ink); }
+.card .ans .pill { justify-self: start; }
+
+/* fichiers */
+.explorer { display: grid; grid-template-columns: minmax(250px, 320px) minmax(0, 1fr); gap: 28px; align-items: start; }
+.tree { font-family: var(--mono); font-size: 13.5px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 12px 8px; }
+@media (min-width: 981px) { .tree { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); } }
+.tree ul { list-style: none; margin: 0; padding: 0; }
+.tree .root { padding: 4px 10px 8px; color: var(--muted); }
+.tree .dir { padding: 8px 10px 4px; color: var(--muted); }
+.tree button { display: block; width: 100%; text-align: left; font: inherit; background: none; border: 0; color: var(--ink); cursor: pointer; padding: 5px 10px; border-radius: 6px; }
+.tree button.sub { padding-left: 26px; }
+.tree button:hover { background: var(--sunk); }
+.tree button[aria-current="true"] { background: var(--clay); color: var(--paper); }
+.leaflet { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; }
+.leaflet-head { padding: 22px 26px 18px; border-bottom: 3px solid var(--clay); display: grid; gap: 6px; }
+.leaflet-head h3 { font-family: var(--mono); font-size: 24px; font-weight: 600; word-break: break-word; }
+.leaflet-head p { color: var(--ink-2); }
+.leaflet-body { padding: 6px 26px 22px; }
+.lf { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.lf:last-child { border-bottom: 0; }
+.lf h4 { font-size: 14px; font-weight: 600; color: var(--clay-ink); }
+.lf p { font-size: 15.5px; }
+
+/* règles */
+.rules { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.rule { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.rule h3 { font-size: 17px; font-weight: 600; }
+.rule p { font-size: 15px; color: var(--ink-2); }
+.rule b { color: var(--ink); font-weight: 600; }
+.session { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; counter-reset: s; }
+.session li { counter-increment: s; font-size: 14.5px; color: var(--ink-2); position: relative; padding-left: 22px; }
+.session li::before { content: counter(s); position: absolute; left: 0; font-family: var(--display); font-weight: 700; color: var(--clay); }
+
+footer { max-width: 1240px; margin: 0 auto; padding: 32px 24px 56px; color: var(--muted); font-size: 14.5px; }
+
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 44px; }
+  .explorer { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .topbar-inner { padding: 8px 16px; gap: 10px; }
+  .brand span { display: none; }
+  .steps-nav a { padding: 6px 8px; }
+  .steps-nav a .t { display: none; }
+  main { padding: 0 16px 72px; }
+  .step-head { grid-template-columns: 1fr; gap: 6px; }
+  .step-num { font-size: 64px; }
+  .lf { grid-template-columns: 1fr; gap: 4px; }
+  .leaflet-head, .leaflet-body { padding-inline: 16px; }
+  footer { padding-inline: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sparkSym" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5l1.9 7.2 6.5-3.6-3.6 6.5 7.2 1.9-7.2 1.9 3.6 6.5-6.5-3.6L12 22.5l-1.9-7.2-6.5 3.6 3.6-6.5L0 12.4l7.2-1.9-3.6-6.5 6.5 3.6z"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top"><svg class="spark"><use href="#sparkSym"/></svg><span>Skills maison</span></a>
+    <nav class="steps-nav" id="nav" aria-label="Sections"></nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div>
+      <h1>Des skills qui <em>s'appellent</em> entre eux</h1>
+      <p class="lead" id="lead"></p>
+    </div>
+    <ol class="route" id="route"></ol>
+  </div>
+
+  <section class="step" id="carte" aria-labelledby="h-carte" data-t="La carte" data-d="Qui appelle qui, et ce qu'on enchaîne ensuite">
+    <div class="step-head">
+      <div class="step-num" aria-hidden="true">1</div>
+      <div>
+        <h2 id="h-carte">Qui appelle qui</h2>
+        <p>Un trait veut dire « appelle ce skill avec l'outil Skill », d'après les <code>SKILL.md</code>. Tous se tapent avec <code>/nom</code>. À gauche, ceux que toi seul peux lancer : Claude te donne la commande. Au milieu, les étapes du parcours ; à droite, les skills appelés en cours de route : ceux-là, Claude peut aussi les lancer seul, quand ta demande correspond ou qu'un autre skill les appelle. Clique un skill pour voir ses liens.</p>
+      </div>
+    </div>
+    <div class="tools">
+      <div class="legend" aria-label="Légende">
+        <span><i class="sw u"></i>Toi seul le lances (<code>disable-model-invocation</code>)</span>
+        <span><i class="sw m"></i>Toi ou Claude : tu le tapes, Claude le lance seul, ou un skill l'appelle</span>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrer la carte">
+        <button type="button" class="chip" data-f="all" aria-pressed="true">Tout</button>
+        <button type="button" class="chip" data-f="u" aria-pressed="false">Toi seul</button>
+        <button type="button" class="chip" data-f="m" aria-pressed="false">Toi ou Claude</button>
+      </div>
+    </div>
+    <div class="map-grid">
+      <div>
+        <div class="graph-box">
+          <svg id="graph" role="img" aria-label="Carte des skills et de leurs appels"></svg>
+        </div>
+        <p class="graph-note">Sur téléphone, la carte défile dans son cadre. <code>next</code> et <code>wtf</code> n'ont pas de trait : ils orientent sans appeler de skill.</p>
+      </div>
+      <aside class="panel" id="panel" aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <section class="step" id="parcours" aria-labelledby="h-parcours" data-t="Les parcours" data-d="Ta situation, son point d'entrée et ses embranchements">
+    <div class="step-head">
+      <div class="step-num" aria-hidden="true">2</div>
+      <div>
+        <h2 id="h-parcours">Quelle est ta situation ?</h2>
+        <p>Chaque situation a son point d'entrée. Les skills du parcours s'enchaînent avec ton accord à chaque étape ; ceux appelés en route (<code>interview</code>, <code>research</code>, <code>tdd</code>, <code>review</code>…) ne demandent rien. Clique un skill pour le retrouver sur la carte.</p>
+      </div>
+    </div>
+    <div class="sits" role="tablist" aria-label="Situations" id="sits"></div>
+    <div class="flow" role="tabpanel" id="flow" aria-live="polite"></div>
+  </section>
+
+  <section class="step" id="quel-skill" aria-labelledby="h-quel" data-t="Quel skill ?" data-d="Des situations à retourner, tirées de la carte de /next">
+    <div class="step-head">
+      <div class="step-num" aria-hidden="true">3</div>
+      <div>
+        <h2 id="h-quel">Quel skill ? Testez-vous</h2>
+        <p>Cinq situations tirées de la carte de <code>/next</code>, telles qu'il les lit. Réfléchis, puis retourne la carte. Et si tu as un doute en vrai, <code>/next</code> lit la conversation ou l'état du projet et te donne la commande.</p>
+      </div>
+    </div>
+    <div class="sorter-bar">
+      <p id="sorter-count"></p>
+      <div class="filters">
+        <button type="button" class="chip" id="flip-all" aria-pressed="false">Tout retourner</button>
+        <button type="button" class="chip" id="deal">5 autres situations</button>
+      </div>
+    </div>
+    <div class="sorter" id="sorter"></div>
+  </section>
+
+  <section class="step" id="fichiers" aria-labelledby="h-fichiers" data-t="Les fichiers" data-d="Ce que les skills écrivent dans un projet, et qui le relit">
+    <div class="step-head">
+      <div class="step-num" aria-hidden="true">4</div>
+      <div>
+        <h2 id="h-fichiers">Ce qui reste dans le projet</h2>
+        <p>Les skills laissent une trace écrite, pour qu'une autre session reprenne sans la conversation. Clique un fichier : sa notice dit à quoi il sert, qui l'écrit et qui le relit.</p>
+      </div>
+    </div>
+    <div class="explorer">
+      <nav class="tree" id="tree" aria-label="Arborescence d'un projet"></nav>
+      <article class="leaflet" id="leaflet" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section class="step" id="regles" aria-labelledby="h-regles" data-t="Les règles du jeu" data-d="Comment l'ensemble tient debout">
+    <div class="step-head">
+      <div class="step-num" aria-hidden="true">5</div>
+      <div>
+        <h2 id="h-regles">Comment l'ensemble tient debout</h2>
+      </div>
+    </div>
+    <div class="rules">
+      <div class="rule"><h3>Deux familles</h3><p>Tous les skills se tapent avec <code>/nom</code>. Ceux en <code>disable-model-invocation: true</code> ne se lancent que par <b>toi</b> : Claude te donne la commande. Les autres, <b>Claude peut aussi les lancer</b> quand ta demande correspond à leur description, ou parce qu'un autre skill les appelle.</p></div>
+      <div class="rule"><h3>Ton accord entre deux étapes</h3><p>Passer du cadrage au plan, puis du plan à <code>implement</code>, ou vers <code>to-spec</code>, se fait <b>après ton accord explicite</b>. Les skills appelés en route (<code>tdd</code>, <code>interview</code>, <code>research</code>, <code>review</code>, <code>tickets</code>…) n'en demandent pas.</p></div>
+      <div class="rule"><h3>Simple ou gros</h3><p>Le critère est celui de <code>to-tickets</code> : <b>ça tient en une session ?</b> Oui : <code>plan</code> puis <code>implement</code>. Non : <code>to-spec</code>, <code>to-tickets</code>, puis un <code>/implement &lt;ticket&gt;</code> par session. Pour un nouveau projet, le verdict est écrit dans le cahier des charges.</p></div>
+      <div class="rule"><h3>Les questions du métier</h3><p><code>interview</code> repère ce qui n'est pas à toi de trancher (règles métier, juridique, chiffres, priorités produit). Ces questions vont dans les « Questions ouvertes » du document, puis dans un questionnaire par destinataire. <b>Une question bloquante empêche de valider le plan</b> qui en dépend.</p></div>
+      <div class="rule"><h3>Implement, vague par vague</h3><p>Un plan validé s'exécute en TDD, <b>une tâche par commit</b>, avec une pause d'essai à chaque fin de vague. À la fin, <code>review</code> relit le diff contre le plan et contre les conventions du dépôt, dans deux sous-agents au contexte vierge.</p></div>
+      <div class="rule"><h3>La ligne de session</h3><p>À la fin d'une phase, le premier « oui » l'emporte :</p>
+        <ol class="session">
+          <li>continuer ici, si la suite a besoin de la conversation ;</li>
+          <li><code>/clear</code> puis la commande, si un fichier se suffit ;</li>
+          <li><code>/to-spec</code>, si le travail doit voyager ;</li>
+          <li>un sous-agent, pour une tâche bornée ;</li>
+          <li>sinon <code>/compact</code>, avec une consigne.</li>
+        </ol>
+      </div>
+      <div class="rule"><h3>La roadmap et les tickets</h3><p><code>tickets</code> tient la roadmap : <code>ROADMAP.md</code> en local, milestones sur GitHub et GitLab, versions sur Jira. Le gestionnaire se règle <b>une fois par projet</b>, dans une section « Tickets » du <code>CLAUDE.md</code>, proposée la première fois.</p></div>
+      <div class="rule"><h3>Un appel par son nom</h3><p>Un skill en appelle un autre avec « appeler le Skill tool avec « nom » » : ce sont ces phrases qui tracent la carte. Il pointe ses fichiers par un lien relatif (<code>../tickets/SKILL.md</code>).</p></div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer"></footer>
+
+<script>
+const DATA = {"skills": {"adr": {"desc": "Enregistrer une décision d'architecture dans docs/adr/, au format court, et tenir à jour le statut des ADR remplacés ; seulement pour une décision difficile à défaire, surprenante sans contexte et issue d'un vrai compromis. Utilise ce skill quand l'utilisateur veut noter une décision technique (« fais un ADR », « note cette décision »), revenir sur une décision passée pour la remplacer (« on abandonne Redis ») ou retrouver pourquoi elle a été prise (« pourquoi on avait choisi X ? »).", "user": false, "calls": []}, "brainstorming": {"desc": "Cadrer un nouveau projet (app, jeu, outil, site, produit) avant d'écrire du code, jusqu'à un cahier des charges validé dans docs/, ou une synthèse à planifier directement pour un petit outil.", "user": true, "calls": ["research", "plan", "interview", "to-questionnaire", "tickets", "to-spec"]}, "debug": {"desc": "Diagnostiquer un bug qui résiste (intermittent, régression entre deux versions, lenteur nouvelle, cause introuvable au premier regard) : une boucle qui échoue sur ce bug avant toute hypothèse, puis la cause confirmée, et un correctif avec test de non-régression s'il tient en une tâche. Utilise ce skill quand l'utilisateur dit « débogue ça », « je ne comprends pas pourquoi ça plante », « ça marche une fois sur dix » ou « c'est cassé depuis la dernière version ». Pas pour une erreur dont la cause se lit dans le message, ni pour un bug à la cause connue : c'est tdd.", "user": false, "calls": ["plan"]}, "design": {"desc": "Définir l'identité visuelle d'un projet avant de coder son interface — recherche du secteur, directions contrastées, prototype HTML, puis docs/design/DESIGN.md avec les tokens.", "user": true, "calls": ["interview", "research"]}, "domain-modeling": {"desc": "Tenir le glossaire du domaine d'un projet (CONTEXT.md, ou CONTEXT-MAP.md pour plusieurs domaines) : un seul mot par concept, confronté au code, écrit dès qu'il est tranché. Utilise ce skill quand l'utilisateur hésite sur le vocabulaire (« on dit client ou utilisateur ? »), veut ajouter ou changer un terme du glossaire, ou quand une discussion de conception porte sur les notions du domaine.", "user": false, "calls": []}, "feature": {"desc": "Cadrer une idée de fonctionnalité dans un projet existant, puis la planifier tout de suite, ou en faire une spec et des tickets rangés dans la roadmap pour plus tard.", "user": true, "calls": ["tickets", "research", "interview", "plan", "to-spec"]}, "implement": {"desc": "Exécuter un plan validé, un ticket ou un jalon (fichier local, GitHub, GitLab, Jira), vague par vague, en TDD, une tâche par commit, avec une pause par vague et une relecture à la fin ; reprendre exactement là où on s'est arrêté. Utilise ce skill quand l'utilisateur veut implémenter, lancer ou reprendre un plan (« implémente le plan », « lance la vague 2 », « continue le plan »), un ticket (« implémente le ticket 42 », « on attaque PROJ-123 ») ou un jalon (« on attaque le jalon 2 »). Pas pour écrire, relire ou modifier un plan : c'est plan.", "user": false, "calls": ["tickets", "plan", "tdd", "review", "adr"]}, "interview": {"desc": "Entretien critique pour éclaircir une idée, un besoin ou un plan jusqu'à ce que rien d'important ne reste supposé en silence : le besoin avant la solution, les faits cherchés, seules les décisions posées, les questions du métier mises de côté. Utilise ce skill quand l'utilisateur veut être challengé ou questionné sur son idée ou son plan (« challenge-moi », « pose-moi des questions », « grill me »).", "user": false, "calls": ["domain-modeling", "research", "adr"]}, "naming": {"desc": "Trouver un nom de projet (app, SaaS, CLI, site, produit, bibliothèque) et vérifier réellement sa disponibilité — domaines, GitHub, npm, homonymes, pistes de marque — puis consigner le choix dans docs/nommage.md.", "user": true, "calls": ["interview", "research"]}, "next": {"desc": "Quel skill lancer maintenant ? Lit la conversation, ou l'état du projet si elle est vide, et recommande le skill suivant avec la commande exacte, une ou deux autres options, et s'il faut continuer ici ou repartir d'une session vide.", "user": true, "calls": []}, "onboard": {"desc": "Préparer un projet existant pour Claude — créer, ou mettre à l'épreuve s'ils existent, les fichiers lus au démarrage d'une session (CLAUDE.md ou AGENTS.md, ARCHITECTURE.md si le dépôt le justifie, et la vérification de CONTEXT.md), pour qu'ils ne contiennent que ce qui est vrai, utile et impossible à deviner en lisant le code.", "user": true, "calls": ["interview", "tickets"]}, "plan": {"desc": "Rédiger le plan d'implémentation (vagues, tâches à cocher, critères d'acceptation, interfaces à tester) d'un ticket, d'une spec, d'un jalon du cahier des charges, d'un POC ou d'une feature cadrée, après l'avoir confronté au code ; un ticket écrit hors de ces skills est challengé. Utilise ce skill quand l'utilisateur veut planifier, préparer ou analyser un travail avant de coder (« prépare le plan du ticket 42 », « analyse ce ticket de la PO », « fais le plan du jalon 1 »).", "user": false, "calls": ["tickets", "research", "debug", "interview", "to-questionnaire", "implement"]}, "poc": {"desc": "Vérifier vite qu'une idée tient debout, avec un POC ciblé sur une seule question, sans cadrer tout le projet ; le résultat est écrit dans docs/poc/ et peut servir d'entrée à brainstorming ou feature.", "user": true, "calls": ["interview", "plan"]}, "research": {"desc": "Recherche sur sources primaires, dans un agent en arrière-plan, consignée et sourcée dans docs/research/ : bibliothèque à choisir, bonne pratique, API, réglementation, concurrents. Utilise ce skill quand l'utilisateur veut rechercher, comparer ou vérifier un point sur le web (« compare ces deux bibliothèques », « comment font les autres ? »).", "user": false, "calls": []}, "review": {"desc": "Relire un diff (une branche, une PR, le travail en cours) sur deux axes séparés, la spec (plan, ticket : manques, dépassements, erreurs) et les conventions du dépôt, dans deux sous-agents au contexte vierge. Utilise ce skill quand l'utilisateur veut faire relire son travail (« relis la branche », « vérifie que ça colle au ticket 42 », « review depuis main »). Pas pour chercher des bugs : c'est /code-review.", "user": false, "calls": ["tickets"]}, "tdd": {"desc": "Écrire du code test d'abord (rouge, puis vert), avec des tests qui valent la peine d'être gardés : comportement testé par l'interface publique, pas de mocks internes, une tranche verticale à la fois. Utilise ce skill quand l'utilisateur veut développer une fonctionnalité ou corriger un bug à la cause connue en commençant par le test (« en TDD », « test d'abord »), ou écrire, réécrire ou améliorer des tests. Pour un bug qui résiste, c'est debug.", "user": false, "calls": []}, "tickets": {"desc": "Lire, créer, commenter, fermer et relier des tickets, des specs et les jalons de la roadmap dans le gestionnaire du projet (fichiers locaux avec ROADMAP.md, GitHub, GitLab, Jira ou autre), et configurer ce gestionnaire (section Tickets du CLAUDE.md). Utilise ce skill quand l'utilisateur veut agir sur un ticket ou une issue, voir où en est la roadmap, rattacher un ticket à un jalon, savoir où vivent ses tickets ou changer de gestionnaire.", "user": false, "calls": []}, "to-questionnaire": {"desc": "Faire remplir par une personne précise (métier, client, product owner, auteur d'un ticket) les questions que l'utilisateur ne peut pas trancher seul (règles métier, juridique, chiffres, priorités produit), dans docs/questionnaires/, puis réintégrer ses réponses. Utilise ce skill quand l'utilisateur veut préparer des questions pour quelqu'un d'autre (« fais un questionnaire pour le métier », « il faut que je demande ça à la compta ») ou revient avec un questionnaire rempli.", "user": false, "calls": []}, "to-spec": {"desc": "Transformer ce qui est déjà décidé dans la conversation, ou un jalon du cahier des charges d'un gros projet, en spec, puis en tickets rangés dans un jalon de la roadmap, sans nouvel entretien. Utilise ce skill quand l'utilisateur veut « en faire une spec » ou un ticket, garder une trace de ce qui est décidé pour plus tard (« mets ça de côté », « garde une trace de ce qu'on a décidé », « prépare le travail pour une autre session »), ou écrire la spec d'un jalon (« fais la spec du jalon 1 »).", "user": false, "calls": ["tickets", "research", "interview", "to-tickets"]}, "to-tickets": {"desc": "Découper une spec, un cahier des charges, un plan ou la conversation en tickets par tranches verticales, chacun avec ses critères et ses bloquants, puis les publier et les ranger dans un jalon de la roadmap ; fixe aussi le critère de taille « tient en une session ». Utilise ce skill quand l'utilisateur veut découper du travail en tickets ou en issues à répartir sur plusieurs sessions (« découpe en tickets », « crée les issues »).", "user": false, "calls": ["tickets"]}, "wtf": {"desc": "Stop : je n'ai pas compris ton dernier message, reformule-le.", "user": true, "calls": []}}, "situations": [{"q": "Pas encore de projet, une idée de produit", "s": "brainstorming", "cmd": "/brainstorming"}, {"q": "Une idée dont on ne sait pas si elle tient, sur une seule question", "s": "poc", "cmd": "/poc"}, {"q": "Une idée de fonctionnalité, ou des problèmes discutés sans rien trancher", "s": "feature", "cmd": "/feature"}, {"q": "Tout est décidé dans la conversation, ça tient en une session", "s": "plan", "cmd": "/plan"}, {"q": "Tout est décidé, mais pour plus tard ou trop gros pour une session", "s": "to-spec", "cmd": "/to-spec"}, {"q": "Une spec ou un cahier des charges à découper en tickets", "s": "to-tickets", "cmd": "/to-tickets"}, {"q": "Un ticket (des skills, d'une PO, d'un client) à analyser avant de coder", "s": "plan", "cmd": "/plan <ticket>"}, {"q": "Un plan validé, ou un ticket à attaquer directement", "s": "implement", "cmd": "/implement <plan ou ticket>"}, {"q": "Une branche ou un travail à relire contre sa spec et les conventions", "s": "review", "cmd": "/review"}, {"q": "Un bug dont la cause est connue", "s": "tdd", "cmd": "/tdd"}, {"q": "Un bug qui résiste : intermittent, régression, cause introuvable", "s": "debug", "cmd": "/debug"}, {"q": "Des tests à écrire ou à réécrire", "s": "tdd", "cmd": "/tdd"}, {"q": "Se faire challenger sur une idée ou un plan", "s": "interview", "cmd": "/interview"}, {"q": "Un mot flou, deux mots pour la même chose", "s": "domain-modeling", "cmd": "/domain-modeling"}, {"q": "Une question que seul le métier, un client ou une PO peut trancher, ou sa réponse revenue", "s": "to-questionnaire", "cmd": "/to-questionnaire"}, {"q": "Un point à vérifier sur le web, une bibliothèque à choisir", "s": "research", "cmd": "/research"}, {"q": "Une décision d'architecture à noter", "s": "adr", "cmd": "/adr"}, {"q": "L'identité visuelle, avant de coder l'interface", "s": "design", "cmd": "/design"}, {"q": "Un nom à trouver", "s": "naming", "cmd": "/naming"}, {"q": "Un projet existant sans `CLAUDE.md`, ou avec un `CLAUDE.md` douteux", "s": "onboard", "cmd": "/onboard"}, {"q": "Voir la roadmap, lire ou ranger des tickets", "s": "tickets", "cmd": "/tickets"}, {"q": "Le dernier message n'est pas compris", "s": "wtf", "cmd": "/wtf"}], "others": {"u": [], "m": []}, "commit": "c6315c6", "date": "29/09/2026"};
+
+/* Écrit à la main : colonne et groupe de chaque skill, et ce qu'on enchaîne après lui. */
+const COLUMNS = [
+  { title: "Toi seul les lances", sub: "cadrer, préparer, s'orienter", groups: [
+    ["Cadrer", ["brainstorming", "feature", "poc"]],
+    ["Préparer", ["onboard", "design", "naming"]],
+    ["S'orienter", ["next", "wtf"]],
+  ]},
+  { title: "Le parcours", sub: "toi ou Claude, de la décision au code relu", groups: [
+    ["Écrire la suite", ["to-spec", "to-tickets", "plan"]],
+    ["Construire", ["implement", "debug", "review"]],
+  ]},
+  { title: "En cours de route", sub: "toi ou Claude, souvent appelés par les autres", groups: [
+    ["Questionner", ["interview", "domain-modeling", "to-questionnaire"]],
+    ["S'appuyer sur", ["research", "adr", "tickets"]],
+    ["Coder", ["tdd"]],
+  ]},
+];
+const NEXT = {
+  brainstorming: ["plan", "to-spec", "poc"],
+  feature: ["plan", "to-spec", "poc"],
+  poc: ["brainstorming", "feature"],
+  "to-spec": ["to-tickets", "implement"],
+  "to-tickets": ["implement"],
+  plan: ["implement"],
+  implement: ["review"],
+  debug: ["plan"],
+  review: ["plan"],
+  onboard: ["feature"],
+  design: ["feature", "plan"],
+  "to-questionnaire": ["plan", "to-spec"],
+};
+
+/* Écrit à la main : les parcours, d'après l'« Enchaînement » du README et les étapes des skills. */
+const FLOWS = [
+  { id: "projet", t: "Un nouveau projet", e: "/brainstorming", sub: "Pas encore de code : une app, un jeu, un outil, un site.", steps: [
+    { s: "brainstorming", p: "S'imprègne de l'existant et du domaine, restitue, puis mène l'entretien (interview, research en arrière-plan). Annonce le chemin avant d'écrire quoi que ce soit." },
+    { b: "Quel chemin ?", o: [
+      { l: "Une question de faisabilité", st: [{ s: "poc", p: "Un POC sur une seule question, écrit dans docs/poc/, avant de cadrer le reste." }] },
+      { l: "Un petit outil", st: [{ p: "Une synthèse dans la conversation, sans cahier des charges." }, { s: "plan", p: "Le plan part de la synthèse." }, { s: "implement", p: "Vague par vague, en TDD." }] },
+      { l: "Un vrai projet", st: [{ p: "Le cahier des charges dans docs/cahier-des-charges.md, relu par un sous-agent neuf, avec son verdict d'envergure." }, { s: "tickets", p: "Les jalons du cahier des charges deviennent la roadmap." }] },
+    ]},
+    { b: "Le projet est-il simple ou gros ?", o: [
+      { l: "Simple : chaque jalon tient en une session", st: [{ s: "plan", p: "Le plan du premier jalon." }, { s: "implement", p: "Puis le jalon suivant, avec un nouveau plan." }] },
+      { l: "Gros : un jalon dépasse une session", st: [{ s: "to-spec", p: "La spec du jalon." }, { s: "to-tickets", p: "Découpée en tranches verticales, rangées dans le jalon." }, { s: "implement", p: "Un /implement <ticket> par session, après /clear." }] },
+    ]},
+  ], notes: ["<b>Avant de coder l'interface :</b> /design pour l'identité visuelle, /naming pour le nom.", "<b>Une question que seul le métier peut trancher :</b> to-questionnaire la prépare ; bloquante, elle retient le jalon qui en dépend."] },
+  { id: "feature", t: "Une idée de fonctionnalité", e: "/feature · /poc", sub: "Dans un projet qui existe déjà.", steps: [
+    { s: "feature", p: "Lit le projet (et le verdict d'un POC, s'il y en a un), restitue ce qui rend l'idée simple ou ce qui frotte, puis mène l'entretien et écrit la synthèse : décisions, critères AC-n, hors périmètre, taille." },
+    { b: "Maintenant ou plus tard ?", o: [
+      { l: "Maintenant, ça tient en une session", st: [{ s: "plan", p: "L'exploration est faite : il passe à la rédaction." }, { s: "implement", p: "Sur le plan validé." }] },
+      { l: "Plus tard, ou trop gros", st: [{ s: "to-spec", p: "Un ticket, ou une spec et ses tickets, rangés dans la roadmap." }, { s: "to-tickets", p: "Quand la spec dépasse une session." }] },
+      { l: "Une question de faisabilité", st: [{ s: "poc", p: "Un POC ciblé, puis un verdict : approfondir avec /feature ou /brainstorming, ou abandonner." }] },
+    ]},
+  ], notes: ["<b>Une question métier bloquante</b> fait recommander « plus tard » : la spec garde la question, et to-questionnaire la pose.", "<b>Plusieurs modules et des décisions d'interface à retrouver :</b> to-spec d'abord, même pour maintenant."] },
+  { id: "ticket", t: "Un ticket ou un bug", e: "/implement <ticket> · /debug", sub: "Un ticket de la roadmap, d'une PO ou d'un client ; un bug qui résiste.", steps: [
+    { b: "Qu'est-ce que tu as devant toi ?", o: [
+      { l: "Un ticket", st: [{ s: "implement", p: "Cherche un plan qui cite déjà le ticket ; sinon lit le ticket avec tickets et refuse s'il a des bloquants." }, { s: "plan", p: "Confronte le ticket au code. Écrit hors de ces skills, il est challengé, et les questions vont à son auteur." }, { s: "implement", p: "Exécute le plan, puis le fait relire par review." }] },
+      { l: "Un bug qui résiste", st: [{ s: "debug", p: "Une boucle qui échoue sur ce bug avant toute hypothèse, puis la cause confirmée." }, { p: "Petit correctif : test de non-régression et commit. Plus gros : plan, puis implement." }] },
+      { l: "Un bug à la cause connue", st: [{ s: "tdd", p: "Le test qui reproduit le bug d'abord, puis le correctif." }] },
+    ]},
+    { s: "review", p: "Relit le diff sur deux axes, la spec et les conventions. On peut aussi la lancer seule : « relis la branche »." },
+  ], notes: ["<b>Dans implement :</b> tdd pour chaque tâche, une tâche par commit, une pause par vague, puis review et le bilan dans le plan.", "<b>Entre deux tickets :</b> /clear, puis /implement <ticket> : le ticket se suffit."] },
+  { id: "toujours", t: "À tout moment", e: "/next · /wtf", sub: "Perdu, pas compris, ou un besoin ponctuel en chemin.", steps: [
+    { b: "De quoi as-tu besoin ?", o: [
+      { l: "Savoir quoi lancer", st: [{ s: "next", p: "Lit la conversation, ou l'état du projet, et donne la commande exacte et la ligne de session." }] },
+      { l: "Comprendre le dernier message", st: [{ s: "wtf", p: "Claude reformule, avec le contexte et les mots du projet." }] },
+      { l: "Préparer un projet existant", st: [{ s: "onboard", p: "Crée ou met à l'épreuve CLAUDE.md et ARCHITECTURE.md." }] },
+      { l: "Trancher un mot, une décision", st: [{ s: "domain-modeling", p: "Un mot par concept, dans CONTEXT.md." }, { s: "adr", p: "Une décision difficile à défaire, dans docs/adr/." }] },
+      { l: "Demander ou chercher", st: [{ s: "to-questionnaire", p: "Les questions pour le métier, puis leurs réponses réintégrées." }, { s: "research", p: "Une recherche sourcée, en arrière-plan." }] },
+      { l: "Se faire challenger", st: [{ s: "interview", p: "Le besoin avant la solution, jusqu'à ce que rien ne reste supposé." }] },
+    ]},
+  ], notes: ["<b>La ligne de session</b> de /next : continuer ici, /clear, /to-spec, un sous-agent, ou /compact avec une consigne, dans cet ordre."] },
+];
+
+/* Écrit à la main : les fichiers d'un projet, qui les écrit et qui les relit. */
+const FILES = [
+  { p: "CLAUDE.md", d: "", w: ["onboard"], r: ["feature", "plan", "implement", "review", "tickets", "tdd"], role: "Les conventions du projet, lues au démarrage de chaque session : commandes, pièges, façon de travailler, et la section « Tickets » qui dit où vivent les tickets.", tip: "implement et review en tirent les conventions à respecter ; tickets y lit son gestionnaire." },
+  { p: "ARCHITECTURE.md", d: "", w: ["onboard"], r: [], role: "La carte du code, quand le dépôt le justifie : modules, flux, points d'entrée.", tip: "Écrit seulement si le dépôt est assez grand pour qu'un nouveau venu s'y perde." },
+  { p: "CONTEXT.md", d: "", w: ["domain-modeling"], r: ["interview", "feature", "plan", "implement", "review", "debug", "wtf"], role: "Le glossaire du domaine : un seul mot par concept, confronté au code. CONTEXT-MAP.md quand il y a plusieurs domaines.", tip: "Écrit dès qu'un terme est tranché, souvent pendant un entretien : interview appelle domain-modeling." },
+  { p: "ROADMAP.md", d: "", w: ["tickets"], r: ["brainstorming", "feature", "implement", "next"], role: "Les jalons et leurs tickets, en local. Sur GitHub ou GitLab, ce sont les milestones ; sur Jira, les versions.", tip: "to-spec, to-tickets et brainstorming y rangent le travail en passant par tickets." },
+  { p: "cahier-des-charges.md", d: "docs/", w: ["brainstorming"], r: ["plan", "to-spec", "feature", "design", "next"], role: "Le cahier des charges d'un nouveau projet, avec ses jalons et son verdict d'envergure : simple ou gros.", tip: "Un jalon se planifie avec plan (simple) ou passe par to-spec (gros)." },
+  { p: "poc/<slug>.md", d: "docs/", w: ["poc"], r: ["feature", "brainstorming", "plan", "next"], role: "Une question, l'essai qui la tranche, et un verdict : ce qui est décidé, ce qui reste une hypothèse, ce qui est ouvert.", tip: "Le code du POC est jetable ; le fichier, lui, reste pour la prochaine fois." },
+  { p: "design/DESIGN.md", d: "docs/", w: ["design"], r: ["feature", "plan", "implement", "review"], role: "L'identité visuelle et ses tokens, avec un prototype HTML (docs/design/prototype.html).", tip: "À lire avant tout travail d'interface." },
+  { p: "nommage.md", d: "docs/", w: ["naming"], r: [], role: "Les noms envisagés, leur disponibilité vérifiée (domaines, GitHub, npm, homonymes) et le choix retenu.", tip: "" },
+  { p: "research/", d: "docs/", w: ["research"], r: ["brainstorming", "feature", "plan"], role: "Des recherches sur sources primaires, sourcées : bibliothèque à choisir, bonne pratique, API, réglementation.", tip: "Elles tournent en arrière-plan ; l'entretien continue sans les attendre." },
+  { p: "questionnaires/", d: "docs/", w: ["to-questionnaire"], r: ["next", "implement"], role: "Un questionnaire par destinataire (métier, client, PO), avec son statut : envoyé, puis rempli et réintégré.", tip: "/next vérifie si une réponse est revenue." },
+  { p: "adr/", d: "docs/", w: ["adr"], r: ["interview", "feature", "plan", "implement", "review"], role: "Les décisions d'architecture : difficiles à défaire, surprenantes sans contexte, et fruit d'un vrai compromis.", tip: "Un ADR remplacé garde son texte et change de statut." },
+  { p: "specs/", d: "docs/", w: ["to-spec"], r: ["to-tickets", "plan", "review"], role: "Les specs en local : problème, solution, décisions, critères, hors périmètre.", tip: "Avec un gestionnaire en ligne, la spec est un ticket parent (une Epic sur Jira), et ses tickets en dépendent." },
+  { p: "tickets/", d: "docs/", w: ["to-tickets", "to-spec"], r: ["plan", "implement", "next"], role: "Les tickets en local, par tranches verticales, avec leurs critères, leurs bloquants et leur statut.", tip: "Écrits par tickets, pour le compte de to-spec et to-tickets." },
+  { p: "plans/", d: "docs/", w: ["plan"], r: ["implement", "review", "next"], role: "Les plans d'implémentation : vagues, tâches à cocher, critères, journal et bilan. La ligne « > Statut : » dit où il en est.", tip: "implement coche les cases au fil des commits : une reprise repart de la première case vide." },
+];
+
+(function () {
+  const S = DATA.skills;
+  const names = Object.keys(S);
+  const kind = n => (S[n].user ? "u" : "m");
+
+  /* un skill sans groupe dans le gabarit va dans « Autres », du côté de sa famille (DATA.others) */
+  const cols = COLUMNS.map(c => ({ ...c, groups: c.groups.map(([g, ns]) => [g, ns.filter(n => S[n])]).filter(g => g[1].length) }));
+  if (DATA.others.u.length) cols[0].groups.push(["Autres", DATA.others.u]);
+  if (DATA.others.m.length) cols[2].groups.push(["Autres", DATA.others.m]);
+
+  const splitDesc = d => {
+    const i = d.indexOf("Utilise ce skill quand");
+    return i < 0 ? [d, ""] : [d.slice(0, i).trim(), d.slice(i + "Utilise ce skill ".length).trim()];
+  };
+  const calledBy = n => names.filter(a => S[a].calls.includes(n));
+  const userCount = names.filter(n => S[n].user).length;
+
+  /* introduction, barre du haut et itinéraire, d'après les sections présentes */
+  document.getElementById("lead").innerHTML =
+    `${names.length} skills en français, écrits comme des briques qui s'appellent. Tu peux tous les taper. <strong>${userCount} ne se lancent que par toi</strong>, pour cadrer, préparer ou t'orienter ; <strong>les ${names.length - userCount} autres, Claude peut aussi les lancer</strong>, quand ta demande correspond ou qu'un autre skill les appelle. Passer d'une étape à la suivante se fait toujours avec ton accord.`;
+  const sections = [...document.querySelectorAll("section.step")];
+  document.getElementById("nav").innerHTML = sections.map((s, i) =>
+    `<a href="#${s.id}"><b>${i + 1}</b><span class="t">${s.dataset.t}</span></a>`).join("");
+  document.getElementById("route").innerHTML = sections.map((s, i) =>
+    `<li><a href="#${s.id}"><span class="n">${i + 1}</span><span class="route-t">${s.dataset.t}</span><span class="route-d">${s.dataset.d}</span></a></li>`).join("");
+  document.getElementById("footer").innerHTML =
+    `Généré par <code>python3 docs/build_skills_page.py</code> le ${DATA.date}${DATA.commit ? `, après le commit <code>${DATA.commit}</code>` : ""}. Les traits viennent des « appeler le Skill tool avec… » de chaque <code>SKILL.md</code> ; les groupes, les enchaînements et les parcours sont écrits dans <code>docs/skills.template.html</code>.`;
+
+  if ("IntersectionObserver" in window) {
+    const links = [...document.querySelectorAll("#nav a")];
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) links.forEach(a => a.setAttribute("aria-current", String(a.hash === "#" + e.target.id)));
+    }), { rootMargin: "-40% 0px -55% 0px" });
+    sections.forEach(s => io.observe(s));
+  }
+
+  /* carte */
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("graph");
+  const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+  const NW = 200, NH = 30, ROW = 38, GH = 26, GG = 14, TOP = 66, XS = [20, 400, 780], W = XS[2] + NW + 60;
+  const heights = cols.map(c => c.groups.reduce((h, g) => h + GH + g[1].length * ROW + GG, 0));
+  const H = Math.max(...heights) + TOP + 10;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const defs = el("defs", {}, svg);
+  [["arr", "arrow"], ["arr-on", "arrow-on"]].forEach(([id, c]) => {
+    const m = el("marker", { id, viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse" }, defs);
+    el("path", { d: "M0,0 L10,5 L0,10 z", class: c }, m);
+  });
+  const edgesG = el("g", {}, svg), nodesG = el("g", {}, svg);
+  const pos = {};
+  cols.forEach((c, ci) => {
+    const x = XS[ci];
+    el("text", { x, y: 24, class: "colt" }, nodesG).textContent = c.title;
+    el("text", { x, y: 44, class: "cols" }, nodesG).textContent = c.sub;
+    let y = TOP + (Math.max(...heights) - heights[ci]) / 2;
+    c.groups.forEach(([g, ns]) => {
+      el("text", { x, y: y + 15, class: "grp" }, nodesG).textContent = g;
+      y += GH;
+      ns.forEach(n => { pos[n] = { x, y, cy: y + NH / 2, col: ci }; y += ROW; });
+      y += GG;
+    });
+  });
+  const nodeEls = {};
+  names.forEach(n => {
+    const p = pos[n];
+    const g = el("g", { class: "node " + kind(n), tabindex: "0", role: "button", "aria-label": n, "data-n": n, transform: `translate(${p.x},${p.y})` }, nodesG);
+    el("rect", { width: NW, height: NH, rx: "6" }, g);
+    el("circle", { cx: "13", cy: NH / 2, r: "4", class: "dot" }, g);
+    el("text", { x: "25", y: NH / 2 + 4.5 }, g).textContent = n;
+    nodeEls[n] = g;
+  });
+  const edges = [];
+  names.forEach(a => S[a].calls.forEach(b => {
+    const pa = pos[a], pb = pos[b];
+    let d;
+    if (pa.col === pb.col) {
+      const x = pa.x + NW, bend = 26 + Math.abs(pa.cy - pb.cy) * 0.12;
+      d = `M${x},${pa.cy} C${x + bend},${pa.cy} ${x + bend},${pb.cy} ${x + 2},${pb.cy}`;
+    } else if (pa.col < pb.col) {
+      const x1 = pa.x + NW, x2 = pb.x - 2, mx = (x1 + x2) / 2;
+      d = `M${x1},${pa.cy} C${mx},${pa.cy} ${mx},${pb.cy} ${x2},${pb.cy}`;
+    } else {
+      const x1 = pa.x, x2 = pb.x + NW + 2, mx = (x1 + x2) / 2;
+      d = `M${x1},${pa.cy} C${mx},${pa.cy} ${mx},${pb.cy} ${x2},${pb.cy}`;
+    }
+    edges.push({ a, b, e: el("path", { d, class: "edge", "marker-end": "url(#arr)" }, edgesG) });
+  }));
+
+  const produces = n => FILES.filter(f => f.w.includes(n));
+  const flowSkills = f => f.steps.flatMap(st => st.b ? st.o.flatMap(o => o.st.map(x => x.s)) : [st.s]);
+  const inFlows = n => FLOWS.filter(f => flowSkills(f).includes(n));
+  const fileChip = f => `<button type="button" class="chip" data-file="${f.d + f.p}">${f.d + f.p}</button>`;
+  const pill = n => S[n] ? `<button type="button" class="pill ${kind(n)}" data-go="${n}">${n}</button>` : "";
+  const block = (label, list, empty) => `<div class="rel-block"><span class="eyebrow">${label}</span>${list.length ? `<div class="pills">${list.map(pill).join("")}</div>` : `<p class="none">${empty}</p>`}</div>`;
+  const panel = document.getElementById("panel");
+  let filter = "all";
+
+  function applyFilter() {
+    names.forEach(n => nodeEls[n].classList.toggle("dim", filter !== "all" && kind(n) !== filter));
+    edges.forEach(x => x.e.classList.toggle("dim", filter !== "all" && kind(x.a) !== filter && kind(x.b) !== filter));
+  }
+  function select(n) {
+    const rel = new Set([...S[n].calls, ...calledBy(n)]);
+    names.forEach(k => { nodeEls[k].classList.toggle("sel", k === n); nodeEls[k].classList.toggle("rel", rel.has(k)); });
+    edges.forEach(x => { const on = x.a === n || x.b === n; x.e.classList.toggle("on", on); x.e.setAttribute("marker-end", on ? "url(#arr-on)" : "url(#arr)"); });
+    applyFilter();
+    const [role, when] = splitDesc(S[n].desc);
+    const user = S[n].user;
+    panel.innerHTML = `<span class="kind ${kind(n)}">${user ? "Toi seul le lances" : "Toi ou Claude"}</span>
+      <h3>/${n}</h3>
+      <p class="desc">${role}</p>
+      ${when ? `<div class="rel-block"><span class="eyebrow">Se déclenche</span><p class="desc">${when}</p></div>` : ""}
+      ${block("Appelle", S[n].calls, "Aucun autre skill.")}
+      ${block("Appelé par", calledBy(n), user ? "Personne : c'est toi qui le lances, Claude te donne la commande." : "Aucun skill : Claude le prend quand ta demande correspond, ou tu le tapes.")}
+      ${NEXT[n] ? block("Ensuite, on enchaîne avec", NEXT[n].filter(k => S[k]), "") : ""}
+      ${produces(n).length ? `<div class="rel-block"><span class="eyebrow">Écrit</span><div class="pills">${produces(n).map(fileChip).join("")}</div></div>` : ""}
+      ${inFlows(n).length ? `<div class="rel-block"><span class="eyebrow">Dans les parcours</span><div class="pills">${inFlows(n).map(f => `<button type="button" class="chip" data-flow="${f.id}">${f.t}</button>`).join("")}</div></div>` : ""}
+      <p class="cmdline">/${n}</p>`;
+  }
+
+  nodesG.addEventListener("click", e => { const g = e.target.closest(".node"); if (g) select(g.dataset.n); });
+  nodesG.addEventListener("keydown", e => { const g = e.target.closest(".node"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); select(g.dataset.n); } });
+  document.querySelectorAll(".filters .chip").forEach(b => b.addEventListener("click", () => {
+    filter = b.dataset.f;
+    document.querySelectorAll(".filters .chip").forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+    applyFilter();
+  }));
+  const smooth = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+  document.addEventListener("click", e => {
+    const go = e.target.closest("[data-go]");
+    if (go) {
+      select(go.dataset.go);
+      if (!panel.contains(go)) document.getElementById("carte").scrollIntoView({ behavior: smooth(), block: "start" });
+    }
+    const fl = e.target.closest("[data-flow]");
+    if (fl) { showFlow(fl.dataset.flow); document.getElementById("parcours").scrollIntoView({ behavior: smooth(), block: "start" }); }
+    const fi = e.target.closest("[data-file]");
+    if (fi) { showFile(fi.dataset.file); if (!document.getElementById("tree").contains(fi)) document.getElementById("fichiers").scrollIntoView({ behavior: smooth(), block: "start" }); }
+  });
+
+  /* parcours */
+  const sits = document.getElementById("sits"), flowEl = document.getElementById("flow");
+  FLOWS.forEach(f => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "sit"; b.setAttribute("role", "tab"); b.id = "tab-" + f.id; b.dataset.id = f.id;
+    b.innerHTML = `<span class="t">${f.t}</span><span class="entry">entrée : ${f.e.replace(/</g, "&lt;")}</span>`;
+    b.addEventListener("click", () => showFlow(f.id));
+    sits.appendChild(b);
+  });
+  const esc = t => t.replace(/<(?!\/?b>)/g, "&lt;");
+  const stepHTML = st => st.s ? `<div class="fstep">${pill(st.s)}<p>${esc(st.p)}</p></div>` : `<div class="fstep plain"><p>${esc(st.p)}</p></div>`;
+  function showFlow(id) {
+    const f = FLOWS.find(x => x.id === id);
+    sits.querySelectorAll(".sit").forEach(b => { const on = b.dataset.id === id; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; });
+    flowEl.setAttribute("aria-labelledby", "tab-" + id);
+    const items = f.steps.map((st, i) => st.b
+      ? `<li data-n="${i + 1}"><div class="branch"><p class="q">${st.b}</p><div class="opts">${st.o.map(o => `<div class="opt"><span class="lbl">${o.l}</span>${o.st.map((x, j) => (j ? '<span class="down" aria-hidden="true">↓</span>' : "") + stepHTML(x)).join("")}</div>`).join("")}</div></div></li>`
+      : `<li data-n="${i + 1}">${stepHTML(st)}</li>`).join("");
+    flowEl.innerHTML = `<div class="flow-head"><h3>${f.t}</h3><p>${f.sub}</p></div><ol class="fsteps">${items}</ol>${f.notes.map(x => `<p class="flow-note">${esc(x)}</p>`).join("")}`;
+  }
+  sits.addEventListener("keydown", e => {
+    const tabs = [...sits.querySelectorAll(".sit")], i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    let j = null;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % tabs.length;
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + tabs.length) % tabs.length;
+    if (j !== null) { e.preventDefault(); tabs[j].focus(); showFlow(tabs[j].dataset.id); }
+  });
+  showFlow("feature");
+
+  /* quel skill ? */
+  const sorter = document.getElementById("sorter"), flipAll = document.getElementById("flip-all");
+  const firstSentence = d => { const r = splitDesc(d)[0]; const m = r.match(/^.+?[.;:](\s|$)/); return (m ? m[0] : r).trim().replace(/\s*[;:]$/, "."); };
+  const HAND = 5;
+  let deck = [];
+  function deal() {
+    if (deck.length < HAND) {
+      deck = DATA.situations.map((x, i) => i);
+      for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+    }
+    const hand = deck.splice(0, HAND);
+    sorter.innerHTML = hand.map(i => { const x = DATA.situations[i]; return `<div class="card ${kind(x.s)}">
+      <button type="button" aria-expanded="false" aria-controls="ans-${i}" id="q-${i}">${x.q}<span class="hint">Retourner</span></button>
+      <div class="ans" id="ans-${i}" hidden><span class="cmd">${x.cmd.replace(/</g, "&lt;")}</span><span>${firstSentence(S[x.s].desc)}</span>${pill(x.s)}</div>
+    </div>`; }).join("");
+    flipAll.setAttribute("aria-pressed", "false"); flipAll.textContent = "Tout retourner";
+  }
+  document.getElementById("sorter-count").textContent = `${HAND} situations parmi les ${DATA.situations.length} de /next ; le bouton en tire d'autres, sans répétition jusqu'à la fin du paquet.`;
+  document.getElementById("deal").addEventListener("click", deal);
+  const flip = (btn, open) => { btn.setAttribute("aria-expanded", String(open)); btn.nextElementSibling.hidden = !open; btn.querySelector(".hint").textContent = open ? "Cacher" : "Retourner"; };
+  sorter.addEventListener("click", e => { const b = e.target.closest(".card > button"); if (b) flip(b, b.getAttribute("aria-expanded") !== "true"); });
+  flipAll.addEventListener("click", () => {
+    const open = flipAll.getAttribute("aria-pressed") !== "true";
+    flipAll.setAttribute("aria-pressed", String(open)); flipAll.textContent = open ? "Tout cacher" : "Tout retourner";
+    sorter.querySelectorAll(".card > button").forEach(b => flip(b, open));
+  });
+  deal();
+
+  /* fichiers */
+  const tree = document.getElementById("tree"), leaflet = document.getElementById("leaflet");
+  const fbtn = f => `<li><button type="button" class="${f.d ? "sub" : ""}" data-file="${f.d + f.p}">${f.p.replace(/</g, "&lt;")}</button></li>`;
+  tree.innerHTML = `<div class="root">mon-projet/</div><ul>${FILES.filter(f => !f.d).map(fbtn).join("")}</ul><div class="dir">docs/</div><ul>${FILES.filter(f => f.d).map(fbtn).join("")}</ul>`;
+  function showFile(path) {
+    const f = FILES.find(x => x.d + x.p === path);
+    if (!f) return;
+    tree.querySelectorAll("button").forEach(b => b.setAttribute("aria-current", String(b.dataset.file === path)));
+    leaflet.innerHTML = `<div class="leaflet-head"><span class="eyebrow">${f.d || "à la racine"}</span><h3>${path.replace(/</g, "&lt;")}</h3><p>${f.role}</p></div>
+      <div class="leaflet-body">
+        <div class="lf"><h4>Écrit par</h4><div class="pills">${f.w.map(pill).join("")}</div></div>
+        <div class="lf"><h4>Relu par</h4>${f.r.length ? `<div class="pills">${f.r.map(pill).join("")}</div>` : `<p class="none">Toi, surtout : aucun autre skill ne le relit.</p>`}</div>
+        ${f.tip ? `<div class="lf"><h4>Bon à savoir</h4><p>${f.tip}</p></div>` : ""}
+      </div>`;
+  }
+  showFile("docs/plans/");
+
+  let start = "feature";
+  try { const h = location.hash.slice(1); if (S[h]) start = h; } catch (e) {}
+  select(start);
+})();
+</script>
+</body>
+</html>

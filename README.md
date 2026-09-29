@@ -132,6 +132,18 @@ et vérifie quel skill part en premier, y compris sur des pièges qui ne doivent
 À relancer après chaque changement de description. Pour une mesure plus fiable, passer le
 nombre de passages par phrase en argument (`python3 evals/run_triggers.py 3`).
 
+## La page des skills
+
+```bash
+python3 docs/build_skills_page.py && open docs/skills.html
+```
+
+[`docs/skills.html`](docs/skills.html) montre qui appelle qui, les parcours par situation, un jeu
+« quel skill ? » tiré de la carte de `/next`, et les fichiers que les skills laissent dans un
+projet. Les appels et les descriptions viennent des `SKILL.md` ; les groupes, les parcours et
+les fichiers sont écrits dans `docs/skills.template.html`. À relancer après chaque changement de
+skill.
+
 Les pistes à venir sont dans [TODO.md](TODO.md).
 
 ## Crédits

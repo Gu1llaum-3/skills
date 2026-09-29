@@ -2,3 +2,4 @@
 *.bak.*
 evals/results.json
 __pycache__/
+.impeccable/
