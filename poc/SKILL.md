@@ -36,6 +36,16 @@ Appeler le Skill tool avec « interview », avec pour cadre **une ou deux série
   comptes, gestion d'erreurs…) ;
 - **les choix techniques** nécessaires, et ceux qu'on laisse ouverts.
 
+La question décide de la **forme** du POC, à noter dans le fichier :
+
+- **essai technique** : une API, une performance, une bibliothèque, une intégration. Du code
+  minimal qui tranche l'hypothèse ;
+- **démo de logique** : une règle métier, des états et leurs transitions, une forme de données.
+  Un fichier HTML qu'on manipule, même sans coder :
+  [references/demo-logique.md](references/demo-logique.md) ;
+- **variantes d'interface** : à quoi un écran d'un projet existant devrait ressembler. Plusieurs
+  variantes sur une même route : [references/variantes-ui.md](references/variantes-ui.md).
+
 Une question factuelle (« cette API existe-t-elle, combien coûte-t-elle ? ») se cherche avec le
 skill `research`, sans la poser à l'utilisateur. Si la recherche suffit à répondre, le POC n'a
 plus besoin de code : passer directement au verdict.
@@ -49,10 +59,16 @@ statut à `> Statut : en cours`.
 
 ## 4. Construire
 
-Proposer de construire, et sur accord appeler le Skill tool avec « plan » en lui donnant le
-fichier POC. Il fait un plan court, sur une branche `poc/<slug>` (le code n'a pas vocation à être
-fusionné), puis propose lui-même `implement` ; à la fin, `implement` renvoie ici pour le
-verdict.
+Toujours sur une branche `poc/<slug>` : le code n'a pas vocation à être fusionné. Il reste
+jetable (pas de tests, rien de persistant sauf si c'est la question), et montre l'état après
+chaque action pour qu'on voie ce qui change.
+
+- **Démo de logique** ou **variantes d'interface** : proposer de construire, et sur accord suivre
+  leur référence, sans plan : c'est un seul geste. Puis donner le fichier ou l'URL, et attendre
+  que l'utilisateur (ou la personne à qui il le montre) ait essayé.
+- **Essai technique** : proposer de construire, et sur accord appeler le Skill tool avec « plan »
+  en lui donnant le fichier POC. Il fait un plan court sur cette branche, puis propose lui-même
+  `implement` ; à la fin, `implement` renvoie ici pour le verdict.
 
 ## 5. Écrire le verdict
 

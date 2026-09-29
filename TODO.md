@@ -47,3 +47,5 @@
   `docs/conventions.md`, lu par `review`.
 - [ ] Essayer `/retro` à la fin d'une vraie session laborieuse : chaque piste cite-t-elle un
   moment de la session, sans conseils généraux ?
+- [ ] Essayer `/poc` sur une question de règle métier (démo de logique attendue) et sur un écran
+  d'un projet existant (variantes d'interface attendues).

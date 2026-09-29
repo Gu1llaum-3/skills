@@ -18,6 +18,7 @@ Les skills suivants sont des adaptations en français de skills de Matt Pocock
 | `review` | `skills/engineering/code-review` |
 | `debug` | `skills/engineering/diagnosing-bugs` |
 | `onboard/references/ecrire-pour-un-agent.md` | `skills/productivity/writing-for-agents` |
+| `poc/references/demo-logique.md`, `variantes-ui.md` | `skills/engineering/prototype` |
 | `retro` | `skills/engineering/retro` |
 | `architecture` | `skills/engineering/improve-codebase-architecture` et `skills/engineering/codebase-design` |
 

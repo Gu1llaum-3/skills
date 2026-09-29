@@ -8,6 +8,7 @@ code fini. Supprimer les sections vides.
 
 > Statut : à valider | en cours | terminé
 > Date : JJ/MM/AAAA
+> Forme : essai technique | démo de logique | variantes d'interface
 
 ## Question
 
