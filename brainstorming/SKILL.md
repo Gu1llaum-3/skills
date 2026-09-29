@@ -34,7 +34,7 @@ Présente en un message court et structuré :
 4. **Le découpage**, si l'idée réunit plusieurs sous-systèmes indépendants (« un chat, des paiements et des statistiques ») : signale-le maintenant, avant les questions de détail, et propose un ordre. L'entretien cadre le premier en profondeur ; les autres deviennent des jalons.
 5. **Le chemin**, annoncé pour que l'utilisateur puisse le corriger :
    - **une question de faisabilité** (« est-ce que c'est possible ? ») : c'est `/poc`. Donne la commande et arrête-toi là ;
-   - **un petit outil** qui tient en une session (critère « Taille » de [`to-tickets`](../to-tickets/SKILL.md)) : l'entretien en 1 ou 2 séries, puis, au lieu des étapes 4 à 6, une synthèse dans la conversation (problème et solution, décisions, critères d'acceptation `AC-n`, interfaces à tester, hors périmètre, questions pour le métier), relue d'abord comme le cahier des charges à l'étape 4 (trous, contradictions, phrases à double lecture). Sur accord, appelle le Skill tool avec « plan » sur cette synthèse. Ni cahier des charges ni roadmap ;
+   - **un petit outil** qui tient en une session (critère « Taille » de [`to-tickets`](../to-tickets/SKILL.md)) : l'entretien en 1 ou 2 séries, puis, au lieu des étapes 4 à 6, une synthèse dans la conversation (problème et solution, décisions, critères d'acceptation `AC-n`, interfaces à tester, hors périmètre, questions pour le métier), que tu relis d'abord toi-même (trous, contradictions, phrases à double lecture, renvois internes, et si elle tient toujours en une session). Sur accord, appelle le Skill tool avec « plan » sur cette synthèse. Ni cahier des charges ni roadmap ;
    - **sinon, le cahier des charges** (étapes 3 à 6).
 
    Dans le doute, prends le chemin le plus lourd. En cours de route, on peut monter (le petit outil s'avère plus gros : dis-le, et passe au cahier des charges), jamais redescendre.
@@ -65,12 +65,11 @@ Saute les thèmes que l'existant a déjà tranchés. Les choix structurants et d
   - **gros** : au moins un jalon dépasse une session. Chaque jalon passe par une spec (`to-spec`), puis des tickets rangés dans ce jalon de la roadmap.
 - Si la mémoire persistante est disponible, enregistre les décisions clés du projet (un fichier par fait).
 
-Avant de montrer le document, relis-le d'un œil neuf et corrige sans le signaler :
+Avant de montrer le document, fais-le relire par un sous-agent d'exploration au contexte vierge : qui vient d'écrire un long document n'y voit plus ses incohérences, un lecteur neuf les trouve. Donne-lui le chemin du fichier et ce brief, rien d'autre :
 
-- **les trous** : « à définir », TODO, section vide, exigence vague (« rapide », « simple ») ;
-- **les contradictions** entre sections, par exemple une plateforme exclue qui revient dans un jalon ;
-- **les phrases qu'on peut lire de deux façons** : choisis la lecture la plus plausible et écris-la, ou marque-la **[À valider]** ;
-- **la taille** : un jalon qui dépasse visiblement une session doit être compté dans le verdict d'envergure.
+> Lis en entier <chemin>. Rapporte, avec les numéros de ligne des passages en cause : (1) les trous : « à définir », TODO, section vide, exigence vague (« rapide », « simple ») ; (2) les contradictions entre sections : un chiffre, un délai, un rôle ou un périmètre qui diffère, un élément exclu qui revient dans un jalon ; (3) les phrases qu'on peut lire de deux façons ; (4) les renvois internes faux : un numéro de question ou de section, un nombre annoncé (« trois cas ») qui ne correspond pas ; (5) un jalon qui dépasse visiblement une session. Un point marqué [À valider] ou [Métier : …] n'est pas un trou, mais une contradiction qui le touche se rapporte. N'invente rien : une catégorie sans problème se dit vide. Moins de 400 mots.
+
+Corrige ce qui est fondé, sans le détailler à l'utilisateur. Ce qui demande sa décision devient **[À valider]** dans les questions ouvertes ; un jalon trop gros compte dans le verdict d'envergure.
 
 Termine le message par : un résumé en quelques puces, la liste des questions ouvertes, et **une proposition de prochaine étape**. S'il y a des questions pour le métier, propose d'en faire un questionnaire par destinataire en appelant le Skill tool avec « to-questionnaire ».
 

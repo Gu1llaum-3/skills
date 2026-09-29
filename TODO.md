@@ -13,8 +13,13 @@
   de sous-skill pour le cahier des charges (ses trois chemins existent déjà : `/poc`, `/feature`,
   `/brainstorming`), mais un chemin annoncé avec un chemin court pour un petit outil, le
   découpage d'emblée, le dit et le supposé, les approches et la relecture du document.
-- [ ] Essayer `/brainstorming` sur un petit script (chemin du petit outil attendu), puis sur une
-  plateforme à plusieurs sous-systèmes (découpage signalé à l'étape 2).
+- [x] Essayer `/brainstorming` sur un petit script (chemin du petit outil attendu), puis sur une
+  plateforme à plusieurs sous-systèmes (découpage signalé à l'étape 2). Le 29/09/2026 : les deux
+  chemins marchent, mais le cahier des charges de la plateforme avait des contradictions : sa
+  relecture passe par un sous-agent (`docs/plans/relecture-sous-agent.md`).
+- [ ] Rejouer la plateforme avec la relecture par sous-agent, en autorisant la lecture de
+  `~/.claude/skills/` (en `-p`, le modèle de cahier des charges était refusé) ; attendu : 0
+  contradiction et 0 renvoi faux pour un sous-agent neuf.
 - [ ] **Étudier `differential-review` de Trail of Bits**
   ([trailofbits/skills](https://github.com/trailofbits/skills/tree/main/plugins/differential-review/skills/differential-review)) :
   à intégrer quelque part (`review` ?) ou à garder en skill à part.

@@ -64,14 +64,31 @@ que la prochaine session ne le rejoue pas.
 
 ## 3. Rédiger
 
-Suivre [references/spec.md](references/spec.md). Avant de montrer le brouillon, le relire d'un
-œil neuf et corriger sans le signaler :
+Suivre [references/spec.md](references/spec.md). Avant de montrer le brouillon, le faire
+relire :
+
+- **une spec et plusieurs tickets** : par un sous-agent d'exploration au contexte vierge, avec
+  le brouillon collé dans son brief, rien d'autre. Qui vient d'écrire un long document n'y voit
+  plus ses incohérences. Brief :
+
+  > Lis le brouillon de spec ci-dessous. Rapporte, en citant les passages en cause, chaque
+  > problème parmi ces vérifications : <les cinq ci-dessous, recopiées>. Un point marqué
+  > [À valider] ou [Métier : …] n'est pas un trou, mais une contradiction qui le touche se
+  > rapporte. N'invente rien : une catégorie sans problème se dit vide. Moins de 400 mots.
+
+- **un seul ticket** : le relire soi-même.
+
+Les vérifications :
 
 - **les trous** : « à définir », TODO, section vide, critère invérifiable ;
 - **les contradictions** entre sections, par exemple une décision que le hors périmètre exclut ;
-- **les phrases qu'on peut lire de deux façons** : écrire la lecture que la conversation a
-  tranchée, sinon la marquer **[À valider]** ;
-- **la taille** : si elle ne correspond plus à la forme choisie à l'étape 2, le dire.
+- **les phrases qu'on peut lire de deux façons** ;
+- **les renvois internes** : un numéro de critère ou de section, un nombre annoncé (« trois
+  cas ») qui ne correspond pas ;
+- **la taille** : si elle ne correspond plus à la forme choisie à l'étape 2.
+
+Corriger ce qui est fondé ; une ambiguïté prend la lecture que la conversation a tranchée, sinon
+elle devient **[À valider]**. Une taille qui a changé se dit à l'utilisateur.
 
 Montrer ensuite le brouillon et laisser l'utilisateur le corriger avant toute publication.
 
