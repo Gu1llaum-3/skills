@@ -17,7 +17,7 @@ Pour un projet qui n'existe pas encore, c'est `/brainstorming` qu'il faut.
 ## 1. Lire le projet
 
 - **Documents** : `CLAUDE.md`, `README.md`, `ROADMAP.md`, `docs/cahier-des-charges.md`,
-  `docs/design/DESIGN.md`, `CONTEXT.md` (le glossaire, s'il existe), les specs, plans, POC et
+  `docs/design/DESIGN.md`, `GLOSSARY.md` (le glossaire, s'il existe), les specs, plans, POC et
   recherches de `docs/`, et les titres des ADR (`docs/adr/`). Dans les projets plus anciens, ces
   fichiers peuvent être à la racine.
 - **Un fichier POC** (`docs/poc/<slug>.md`, cité par `/poc`) : lire d'abord son verdict. Ce qui

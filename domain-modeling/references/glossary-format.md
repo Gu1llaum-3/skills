@@ -1,4 +1,4 @@
-# Format de CONTEXT.md
+# Format de GLOSSARY.md
 
 ```markdown
 # <Nom du domaine>
@@ -41,15 +41,15 @@ _À éviter_ : remboursement (un remboursement rend l'argent sur la carte)
 
 ## Plusieurs domaines
 
-`CONTEXT-MAP.md` à la racine :
+`GLOSSARY-MAP.md` à la racine :
 
 ```markdown
 # Carte des domaines
 
 ## Domaines
 
-- [Commandes](./src/commandes/CONTEXT.md) : reçoit et suit les commandes des clients
-- [Facturation](./src/facturation/CONTEXT.md) : émet les factures et les avoirs
+- [Commandes](./src/commandes/GLOSSARY.md) : reçoit et suit les commandes des clients
+- [Facturation](./src/facturation/GLOSSARY.md) : émet les factures et les avoirs
 
 ## Relations
 

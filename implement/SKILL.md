@@ -38,7 +38,7 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   parce qu'on coderait des décisions que personne n'a prises.
 - **Conventions du dépôt** : lire `CLAUDE.md`, `README.md` et les documents qu'ils désignent comme
   obligatoires pour le type de tâche (par exemple `docs/design/DESIGN.md` avant un travail d'interface), et les titres des ADR
-  (`docs/adr/`) pour ne pas contredire une décision passée sans le savoir. `CONTEXT.md`, s'il
+  (`docs/adr/`) pour ne pas contredire une décision passée sans le savoir. `GLOSSARY.md`, s'il
   existe : les noms du code et des tests reprennent ses termes.
   Relever ce qu'ils disent des branches, des commits, des tests, des essais manuels et de la
   vérification.

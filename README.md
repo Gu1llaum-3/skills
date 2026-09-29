@@ -30,7 +30,7 @@ Mes skills personnels pour Claude Code.
 | `to-tickets` | Découper en tickets par tranches verticales, avec leurs dépendances |
 | `tickets` | Lire, publier et ranger les tickets et les jalons de la roadmap (local, GitHub, GitLab, Jira) |
 | `interview` | Entretien critique : le besoin d'abord, les faits cherchés, les décisions posées, les questions métier repérées |
-| `domain-modeling` | Tenir le glossaire du domaine (`CONTEXT.md`) : un mot tranché par concept |
+| `domain-modeling` | Tenir le glossaire du domaine (`GLOSSARY.md`) : un mot tranché par concept |
 | `to-questionnaire` | Faire remplir par le métier les questions auxquelles tu ne peux pas répondre, puis réintégrer les réponses |
 | `research` | Recherche sur sources primaires, en arrière-plan, notée dans `docs/research/` |
 | `adr` | Enregistrer une décision d'architecture dans `docs/adr/` |
@@ -84,7 +84,7 @@ Perdu en chemin ? /next dit quel skill lancer.
 | Fichier | Produit par |
 |---|---|
 | `CLAUDE.md`, `ARCHITECTURE.md` | `onboard` |
-| `CONTEXT.md` | `domain-modeling`, appelé par `interview` |
+| `GLOSSARY.md` | `domain-modeling`, appelé par `interview` |
 | `docs/cahier-des-charges.md` | `brainstorming` |
 | `docs/poc/` | `poc` |
 | `docs/design/DESIGN.md`, `docs/design/prototype.html` | `design` |

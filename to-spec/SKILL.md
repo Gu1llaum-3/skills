@@ -19,7 +19,7 @@ pas : toute affirmation de la spec que l'utilisateur n'a pas faite est un défau
   pour tout le projet (architecture, modèle de données) se proposent en ADR, pour que les specs
   des jalons suivants les reprennent au lieu de les redécider.
 - Si l'utilisateur donne une référence (un ticket, un fichier), la lire en entier.
-- Le code, si ce n'est pas déjà fait : ce qui existe, le vocabulaire du projet (`CONTEXT.md`
+- Le code, si ce n'est pas déjà fait : ce qui existe, le vocabulaire du projet (`GLOSSARY.md`
   s'il existe : la spec emploie ses termes), les conventions.
 - Les titres des ADR (`docs/adr/`) : la spec ne contredit pas une décision passée sans le dire.
 - Le gestionnaire de tickets : appeler le Skill tool avec « tickets ». Il lit la section

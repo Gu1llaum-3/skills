@@ -14,7 +14,7 @@ Le skill appelant peut fixer un cadre (nombre de séries, thèmes à couvrir) : 
 **Le vocabulaire** : si l'entretien porte sur les notions du domaine (ce que sont une commande,
 un avoir, un client, et leurs règles), et pas seulement sur de la technique, appeler le Skill
 tool avec « domain-modeling » dès le début. Il fait confronter les mots au glossaire et au code
-au fil des séries, et écrit dans `CONTEXT.md` chaque terme tranché.
+au fil des séries, et écrit dans `GLOSSARY.md` chaque terme tranché.
 
 ## 1. Questionner le besoin avant la solution
 

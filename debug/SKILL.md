@@ -13,7 +13,7 @@ mécanique.
 **Si une réponse directe suffit** (la cause se lit dans le message d'erreur, ou c'est une
 question), la donner, sans dérouler les phases.
 
-Lire `CONTEXT.md` s'il existe, et les ADR de la zone touchée.
+Lire `GLOSSARY.md` s'il existe, et les ADR de la zone touchée.
 
 ## Masquer les secrets
 

@@ -34,7 +34,7 @@ répondre à « Claude se tromperait-il sans elle ? ». Supprimer les sections s
 
 - Avant de toucher à <zone> : lire `ARCHITECTURE.md`.
 - Avant un travail d'interface : lire `docs/design/DESIGN.md`.
-- Glossaire du domaine : `CONTEXT.md`. Décisions : `docs/adr/`.
+- Glossaire du domaine : `GLOSSARY.md`. Décisions : `docs/adr/`.
 
 ## Tickets
 

@@ -1,6 +1,6 @@
 ---
 name: onboard
-description: Préparer un projet existant pour Claude — créer, ou mettre à l'épreuve s'ils existent, les fichiers lus au démarrage d'une session (CLAUDE.md ou AGENTS.md, ARCHITECTURE.md si le dépôt le justifie, et la vérification de CONTEXT.md), pour qu'ils ne contiennent que ce qui est vrai, utile et impossible à deviner en lisant le code.
+description: Préparer un projet existant pour Claude — créer, ou mettre à l'épreuve s'ils existent, les fichiers lus au démarrage d'une session (CLAUDE.md ou AGENTS.md, ARCHITECTURE.md si le dépôt le justifie, et la vérification de GLOSSARY.md), pour qu'ils ne contiennent que ce qui est vrai, utile et impossible à deviner en lisant le code.
 argument-hint: "[vérifier seulement]"
 disable-model-invocation: true
 ---
@@ -21,7 +21,7 @@ seulement ») : on s'arrête alors à l'étape 3.
 Lire, sans rien supposer :
 
 - **Les fichiers de contexte** : `CLAUDE.md`, `AGENTS.md`, `CLAUDE.local.md`, les `CLAUDE.md` des
-  sous-dossiers, `.claude/` (règles, commandes), `CONTEXT.md` et `CONTEXT-MAP.md`,
+  sous-dossiers, `.claude/` (règles, commandes), `GLOSSARY.md` et `GLOSSARY-MAP.md`,
   `ARCHITECTURE.md`, `README.md`, et ce que `docs/` contient (`adr/`, `design/`, `specs/`…).
 - **Les commandes** : `package.json`, `Makefile`, `justfile`, `mise.toml`, `pyproject.toml`,
   `Cargo.toml`, les scripts de `bin/` ou `scripts/`, la CI (`.github/workflows/`,
@@ -53,8 +53,9 @@ de types), les lancer après accord, et noter le résultat. Les commandes longue
 bord (build complet, déploiement, migration, envoi de données) se vérifient sur le papier
 seulement.
 
-**`CONTEXT.md`**, s'il existe : le vérifier avec le format du skill
-[`domain-modeling`](../domain-modeling/references/context-format.md) (un terme par concept,
+**`GLOSSARY.md`**, s'il existe (un `CONTEXT.md` seul est son ancien nom : proposer le
+`git mv`) : le vérifier avec le format du skill
+[`domain-modeling`](../domain-modeling/references/glossary-format.md) (un terme par concept,
 définitions courtes, pas de notion générale de programmation, pas d'implémentation) et contre le
 code (un terme défini que le code nomme autrement). **Ne jamais le créer** : il naît au premier
 terme tranché, pendant un entretien, avec `domain-modeling`.

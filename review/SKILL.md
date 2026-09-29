@@ -38,7 +38,7 @@ Si rien ne vient, demander. S'il n'y en a pas, l'axe spec est sauté et le rappo
 ## 3. Trouver les conventions
 
 Ce que le dépôt écrit sur la façon de coder : `CLAUDE.md` (et ceux des sous-dossiers touchés),
-`CONTEXT.md` (les termes du domaine), les ADR de `docs/adr/`, `docs/design/DESIGN.md` si le diff
+`GLOSSARY.md` (les termes du domaine), les ADR de `docs/adr/`, `docs/design/DESIGN.md` si le diff
 touche l'interface, `CONTRIBUTING.md` s'il existe. S'y ajoute la base d'odeurs de
 [references/odeurs.md](references/odeurs.md), qu'on colle en entier dans le brief du sous-agent :
 il n'y a pas accès autrement.
