@@ -39,7 +39,7 @@ Un logiciel se vérifie presque toujours en 9 + 42, plus la classe du métier se
 ## Format de restitution pour chaque finaliste
 
 ```
-**<Nom>** — à vérifier en classes 9, 42 (+ <classe métier>)
+**<Nom>** : à vérifier en classes 9, 42 (+ <classe métier>)
 - Recherche web : <ce qui a été trouvé, ou « aucun homonyme repéré dans le secteur »>
 - INPI : https://data.inpi.fr/  → rechercher « <nom> »
 - TMview : https://www.tmdn.org/tmview/  → rechercher « <nom> » + variantes « <v1> », « <v2> »

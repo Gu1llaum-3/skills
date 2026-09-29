@@ -1,6 +1,6 @@
 ---
 name: onboard
-description: Préparer un projet existant pour Claude — créer, ou mettre à l'épreuve s'ils existent, les fichiers lus au démarrage d'une session (CLAUDE.md ou AGENTS.md, ARCHITECTURE.md si le dépôt le justifie, et la vérification de GLOSSARY.md), pour qu'ils ne contiennent que ce qui est vrai, utile et impossible à deviner en lisant le code.
+description: Préparer un projet existant pour Claude : créer, ou mettre à l'épreuve s'ils existent, les fichiers lus au démarrage d'une session (CLAUDE.md ou AGENTS.md, ARCHITECTURE.md si le dépôt le justifie, et la vérification de GLOSSARY.md), pour qu'ils ne contiennent que ce qui est vrai, utile et impossible à deviner en lisant le code.
 argument-hint: "[vérifier seulement]"
 disable-model-invocation: true
 ---

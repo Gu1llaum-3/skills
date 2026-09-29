@@ -9,7 +9,7 @@ Concis : c'est la trace de la décision, pour s'en souvenir dans six mois et ne 
 
 ## Le nom
 
-- **Nom** : <Nom> — prononciation : <FR> / <EN>
+- **Nom** : <Nom> (prononciation : <FR> / <EN>)
 - **Origine et sens** : <langue, graphie d'origine, sens exact, pourquoi il colle au projet>
 - **Déclinaisons** : domaine <…>, dépôt <…>, paquet / commande <…>, handle <…>
 
@@ -28,7 +28,7 @@ Concis : c'est la trace de la décision, pour s'en souvenir dans six mois et ne 
 | <nom>.com | … | |
 | github.com/<nom> | … | |
 | Homonymes dans le secteur | aucun / <liste> | |
-| Marque | **à vérifier** — classes <…> | liens INPI / TMview |
+| Marque | **à vérifier** en classes <…> | liens INPI / TMview |
 
 ## Alternatives écartées
 

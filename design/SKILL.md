@@ -1,6 +1,6 @@
 ---
 name: design
-description: Définir l'identité visuelle d'un projet avant de coder son interface — recherche du secteur, directions contrastées, prototype HTML, puis docs/design/DESIGN.md avec les tokens.
+description: Définir l'identité visuelle d'un projet avant de coder son interface : recherche du secteur, directions contrastées, prototype HTML, puis docs/design/DESIGN.md avec les tokens.
 argument-hint: "[type de projet ou contexte]"
 disable-model-invocation: true
 ---

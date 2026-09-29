@@ -3,7 +3,7 @@
 Suis cette structure. Reste concis : c'est une référence que Claude relira à chaque session d'UI, pas une plaquette. Viser 80 à 150 lignes.
 
 ````markdown
-# DESIGN.md — [Nom du projet]
+# DESIGN.md : [Nom du projet]
 
 > Référence visuelle du projet. Toute interface doit utiliser ces tokens et respecter ces principes.
 > Prototype de référence : `docs/design/prototype.html`

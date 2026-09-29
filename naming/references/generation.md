@@ -22,7 +22,7 @@ Pour un projet français, pense aussi aux mots français courts qui passent bien
 - Pars du **vocabulaire métier** relevé au cadrage et des **métaphores** du produit (ce qu'il fait ressemble à quoi dans le monde physique ?).
 - Vise les **espaces libres** de la cartographie, pas les motifs saturés.
 - Privilégie **2 à 3 syllabes**, 4 à 9 lettres.
-- Pour un mot étranger : note la langue, la graphie originale, le sens exact. Si tu n'es pas certain du sens, vérifie par une recherche plutôt que de deviner — une étymologie inventée est pire qu'aucune.
+- Pour un mot étranger : note la langue, la graphie originale, le sens exact. Si tu n'es pas certain du sens, vérifie par une recherche plutôt que de deviner : une étymologie inventée est pire qu'aucune.
 - Pense aux **déclinaisons** : le nom doit supporter un handle, un sous-domaine, un nom de paquet ou de commande CLI (court, sans accent, sans espace).
 
 ## Grille de notation

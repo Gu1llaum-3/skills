@@ -23,6 +23,8 @@ lié dans `~/.claude/skills/` par `install.sh`.
   skill, puis « Utilise ce skill quand… » avec une phrase type par cas distinct. Pas de liste des
   skills qui l'appellent : ils l'appellent par son nom. Celle d'un skill que l'utilisateur lance
   lui-même n'est lue que par lui : une phrase qui dit ce qu'il fait.
+- Pas de tiret long (—) dans la prose des skills et de la doc : réécrire la phrase avec une
+  virgule, un deux-points, des parenthèses ou un point, pas un remplacement aveugle du caractère.
 - Un skill que l'utilisateur lance lui-même porte `disable-model-invocation: true` : Claude ne
   peut pas le lancer, il le propose avec sa commande.
 - Passer d'une étape du parcours à la suivante (cadrage → `plan` → `implement`, ou `to-spec`) se

@@ -7,7 +7,7 @@ reçoit, pour quand, et pouvoir répondre sans rien demander de plus.
 # <Titre : le sujet, du point de vue du destinataire>
 
 > Statut : envoyé le JJ/MM/AAAA | répondu le JJ/MM/AAAA
-> De : <l'utilisateur> — Pour : <le destinataire, son rôle>
+> De : <l'utilisateur>. Pour : <le destinataire, son rôle>
 > Réponse souhaitée : avant le JJ/MM/AAAA
 
 **Pourquoi ce questionnaire :** la décision qui en dépend, en une ou deux phrases.

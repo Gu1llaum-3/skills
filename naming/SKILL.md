@@ -1,6 +1,6 @@
 ---
 name: naming
-description: Trouver un nom de projet (app, SaaS, CLI, site, produit, bibliothèque) et vérifier réellement sa disponibilité — domaines, GitHub, npm, homonymes, pistes de marque — puis consigner le choix dans docs/nommage.md.
+description: Trouver un nom de projet (app, SaaS, CLI, site, produit, bibliothèque) et vérifier réellement sa disponibilité (domaines, GitHub, npm, homonymes, pistes de marque), puis consigner le choix dans docs/nommage.md.
 argument-hint: "[projet ou noms envisagés]"
 disable-model-invocation: true
 ---

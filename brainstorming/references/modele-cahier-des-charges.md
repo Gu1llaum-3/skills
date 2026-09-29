@@ -3,9 +3,9 @@
 Utilise cette structure comme point de départ. Supprime les sections qui ne s'appliquent pas, et renomme-les selon le domaine (par exemple « Progression pédagogique » pour une app éducative, « Parcours utilisateur » pour un SaaS).
 
 ```markdown
-# <Nom de travail du projet> — Cahier des charges
+# Cahier des charges : <nom de travail du projet>
 
-> Version 0.1 — brouillon à valider. Les points marqués **[À valider]** attendent ta décision.
+> Version 0.1 : brouillon à valider. Les points marqués **[À valider]** attendent ta décision.
 
 ## 1. Vision
 Une ou deux phrases : pour qui, pour quoi faire, avec quel fil conducteur.
@@ -45,9 +45,9 @@ Personnages, textes, ton. Les noms encore inconnus sont centralisés dans la con
 ## 11. Découpage en jalons
 Un tableau : M1 (socle utilisable), M2, M3… jusqu'à la publication. Pour chaque jalon : son objectif en une phrase, et ce qu'on pourra montrer à la fin.
 
-**Envergure : simple | gros** — la raison en une phrase (par exemple « chaque jalon tient en une session » ou « M2 demande plusieurs sessions : synchronisation et mode hors ligne »).
+**Envergure : simple | gros**, avec la raison en une phrase (par exemple « chaque jalon tient en une session » ou « M2 demande plusieurs sessions : synchronisation et mode hors ligne »).
 
-## 12. Licences (règle permanente) — seulement si le projet sera publié
+## 12. Licences (règle permanente, seulement si le projet sera publié)
 
 ## 13. Questions ouvertes
 1. Un point [À valider] par ligne, formulé comme une question avec une proposition par défaut.

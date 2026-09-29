@@ -86,7 +86,7 @@ L'utilisateur répond en général en liste numérotée. Pour chaque point :
 - **Point pour le métier** (« je ne sais pas, faut voir avec le client ») : marque-le **[Métier : <destinataire>]** au lieu de le supposer, et propose un questionnaire avec le skill `to-questionnaire`. Quand le questionnaire revient rempli, ce skill reporte les réponses dans le cahier des charges.
 - **Nom ou valeur encore inconnu** : prévois qu'il soit centralisé et modifiable (configuration), et propose quelques exemples.
 
-Passe ensuite le document à la version suivante (« v0.2 — décisions du JJ/MM/AAAA intégrées »), après la même relecture qu'à l'étape 4. Retire les marqueurs **[À valider]** résolus, et ne garde dans les questions ouvertes que ce qui l'est vraiment.
+Passe ensuite le document à la version suivante (« v0.2, décisions du JJ/MM/AAAA intégrées »), après la même relecture qu'à l'étape 4. Retire les marqueurs **[À valider]** résolus, et ne garde dans les questions ouvertes que ce qui l'est vraiment.
 
 ### Licences, si le projet sera publié
 
