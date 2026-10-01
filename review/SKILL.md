@@ -76,7 +76,8 @@ fichiers de l'étape 3 et la base d'odeurs. Brief :
 ```markdown
 ## Spec
 
-<le rapport du sous-agent, à peine nettoyé ; ou « pas de spec : axe sauté »>
+<le rapport du sous-agent, à peine nettoyé, avec la marque de vérification de chaque
+remarque ; ou « pas de spec : axe sauté »>
 
 ## Conventions
 
@@ -87,12 +88,17 @@ fichiers de l'étape 3 et la base d'odeurs. Brief :
 <les odeurs possibles>
 
 **En bref** :
-- Spec : <n> remarques, la plus grave : ….
-- Conventions : <n> violations et <n> jugements, le plus grave : ….
+- Spec : <n> remarques (<n> confirmées), la plus grave : ….
+- Conventions : <n> violations et <n> jugements (<n> confirmés), le plus grave : ….
 
 Pour les bugs : `/code-review`.
 ```
 
+- **Vérifier chaque remarque** avant de la rapporter : un retour de sous-agent est une
+  hypothèse. Relire le passage cité du diff et de la spec, puis marquer la remarque
+  **confirmée**, **douteuse** (ce qui manque pour trancher) ou **fausse** (pourquoi, en une
+  ligne). Une remarque fausse reste au rapport, barrée, pour que l'utilisateur puisse la
+  contester. Ne rien corriger à cette étape.
 - Ne pas fusionner ni reclasser les remarques entre les deux axes : c'est ce que la séparation
   empêche.
 - Numéroter les remarques `R-1`, `R-2`… à travers les deux axes.

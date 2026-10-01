@@ -134,7 +134,8 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
 Quand la dernière vague est verte :
 
 1. **Faire relire** (sauf plan d'origine POC) : appeler le Skill tool avec « review », avec le
-   plan pour spec. Écrire ses remarques `R-n` dans le journal et demander lesquelles corriger.
+   plan pour spec. Écrire ses remarques `R-n` dans le journal, avec leur marque de vérification
+   (confirmée, douteuse, fausse), et demander lesquelles corriger, en recommandant les confirmées.
    Les retenues deviennent les tâches d'une vague « Retours de revue », exécutée en TDD comme
    les autres ; les écartées sont notées avec leur raison. Puis passer au bilan, sans nouvelle
    revue.
