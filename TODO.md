@@ -37,6 +37,10 @@
 - [ ] **Fixtures plus dures pour `run_subagents.py`** : un cahier des charges de 500 lignes ou
   plus, des défauts plus discrets, des leurres qui tentent vraiment, et un cas `/plan` complet
   (avec l'exploration de l'étape 2) pour savoir ce que la relecture du plan ajoute.
+  Ce test tranchera aussi `Explore` contre `general-purpose` : en attendant, `review`, `plan`,
+  `brainstorming` et `to-spec` gardent `general-purpose` et la phrase « pas `Explore`, qui lit par
+  extraits », que le premier lancement n'a pas confirmée. Si l'écart reste nul, revenir à
+  `Explore` hors de `review`, qui garde `general-purpose` parce qu'il charge `CLAUDE.md`.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt
