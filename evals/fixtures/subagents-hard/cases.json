@@ -1,0 +1,67 @@
+{
+  "paths": {
+    "ticket": "docs/tickets/modify/01-modify-booking.md",
+    "plan": "docs/plans/modify-booking.md"
+  },
+  "plan": {
+    "expected": {
+      "H1": "Le plan part de bookings.update_booking(), qui n'existe pas dans bookings.py (seulement create_booking et cancel_booking).",
+      "H2": "Le plan affirme que la colonne updated_at existe déjà : elle n'existe pas dans le schéma (migrations 001 et 002).",
+      "H3": "Le plan ajoute des colonnes dans migrations/001_init.sql, alors que CLAUDE.md interdit de modifier une migration publiée : il faut un nouveau fichier 003.",
+      "H4": "Réutiliser check_window impose 48 heures avant le début, ce qui contredit AC-1 (déplacement possible jusqu'à 24 heures avant) : entre 24 et 48 heures, aucun déplacement ne passe.",
+      "H5": "Réutiliser check_quota avec count_upcoming tel quel compte la réservation déplacée elle-même : une association à 6 réservations ne peut plus en déplacer aucune.",
+      "H6": "AC-3 demande un courriel avec l'ancien et le nouveau créneau, mais aucune tâche ne l'envoie et aucune interface à tester ne le vérifie (la tâche AC-3 ne fait que repasser en attente).",
+      "H7": "La tâche room_id (déplacer dans une autre salle) est hors périmètre : le ticket exclut le changement de salle."
+    },
+    "decoys": {
+      "L1": "notifications.booking_recipients() existe et donne bien l'auteur et les responsables : la réutiliser est correct.",
+      "L2": "bookings.can_act_on() existe et couvre l'auteur et les responsables : la réutiliser est correct.",
+      "L3": "L'heure courante via dates.now_utc() : conforme à CLAUDE.md."
+    },
+    "verdict": "À AMENDER"
+  },
+  "plan-full": {
+    "judge_note": "Le « rapport » est ici le plan final écrit par l'agent à partir du ticket. Un piège est trouvé si le plan l'évite ou le corrige (il ne reprend pas l'erreur du ticket, ou il la signale et la tranche ou en fait une question). Il n'est pas trouvé si le plan reprend l'erreur telle quelle.",
+    "expected": {
+      "T1": "Le ticket dit que bookings.update_booking() existe : elle n'existe pas. Le plan doit prévoir de l'écrire, pas de la réutiliser.",
+      "T2": "Le ticket dit que updated_at est déjà stocké : c'est faux. Le plan doit prévoir une nouvelle migration (003), sans modifier 001.",
+      "T3": "Réutiliser check_window tel quel impose 48 heures et rend AC-1 (24 heures) impossible entre 24 et 48 heures : le plan doit relever ce conflit et le trancher ou en faire une question.",
+      "T4": "Réutiliser check_quota tel quel compte la réservation déplacée : le plan doit l'exclure du compte.",
+      "T5": "Le plan n'ajoute pas le changement de salle, hors périmètre."
+    },
+    "decoys": {}
+  },
+  "doc": {
+    "expected": {
+      "C1": "Contradiction : au plus 6 réservations à venir par association (section 3.1) contre 8 dans le récapitulatif des limites (section 19).",
+      "C2": "Contradiction : un agent ne crée jamais de réservation (section 2.2, et la matrice des droits en 16) contre l'agent qui saisit la réservation par téléphone (section 10.2).",
+      "C3": "Contradiction : le prêt de matériel est hors périmètre (section 20) contre le vidéoprojecteur portable qu'on réserve pour l'emporter (section 6.3).",
+      "C4": "Contradiction : créneaux entre 8 h et 23 h et 8 heures au plus (section 3.1) contre la soirée annuelle de 19 h à 1 h (section 11).",
+      "F1": "Renvoi faux : « voir 7.3 » (section 10.4) alors que la section 7 n'a que 7.1 et 7.2.",
+      "F2": "Nombre faux : « les quatre salles » (section 1.1) alors que le tableau des salles (6.1) en liste cinq.",
+      "F3": "Renvoi faux : la suspension renvoie à « la question ouverte 3 » (section 3.3), qui porte sur l'export iCal.",
+      "A1": "Ambiguïté : « les associations voisines » (section 4.3) n'est défini nulle part."
+    },
+    "decoys": {
+      "D1": "La validation automatique en 5 jours marquée [À valider] : ce n'est pas un trou.",
+      "D2": "Journaux conservés 1 an et réservations 2 ans : deux données différentes, pas une contradiction.",
+      "D3": "48 heures pour réserver au plus tard et 24 heures pour annuler ou déplacer : deux règles différentes, cohérentes avec 3.4."
+    }
+  },
+  "review": {
+    "expected": {
+      "S1": "AC-1 partiel : seul l'auteur peut déplacer (member.id != slot.member_id), un responsable de l'association ne le peut pas ; can_act_on() n'est pas utilisée.",
+      "S2": "AC-3 partiel : le courriel part seulement au membre qui agit ([member.email]), pas à l'auteur et aux responsables (booking_recipients() n'est pas utilisée) ; le test AC-3 ne vérifie que l'objet.",
+      "S3": "Hors périmètre : update_reservation et Store.move_booking acceptent un room_id, donc un changement de salle.",
+      "S4": "Convention : migrations/001_init.sql est modifiée au lieu d'ajouter une migration 003.",
+      "S5": "Convention : Store.move_booking construit la requête SQL en f-string au lieu de paramètres.",
+      "S6": "Convention : datetime.now(timezone.utc) dans bookings.py au lieu de dates.now_utc().",
+      "S7": "Vocabulaire : update_reservation et slot, alors que GLOSSARY.md interdit « reservation » et « slot » et que le plan prévoit move_booking."
+    },
+    "decoys": {
+      "L1": "Le except Exception de cli.py : autorisé par CLAUDE.md, cli.py est le seul module qui l'attrape.",
+      "L2": "Store.move_booking écrit dans Store.transaction() (BEGIN IMMEDIATE) : demandé par CLAUDE.md.",
+      "L3": "Le nouveau paramètre exclude_id de count_upcoming : demandé par le plan, ce n'est pas du hors périmètre."
+    }
+  }
+}

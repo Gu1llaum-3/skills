@@ -1,4 +1,8 @@
 {
+  "paths": {
+    "ticket": "docs/tickets/export/01-export-csv.md",
+    "plan": "docs/plans/export-csv.md"
+  },
   "plan": {
     "expected": {
       "P1": "Le plan cite src/tasks/repository.py et TaskRepository.all(), qui n'existent pas : les tâches se lisent avec Store.load() de src/tasks/store.py.",

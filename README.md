@@ -168,7 +168,10 @@ Rejoue les relectures (celle du plan, celle du cahier des charges dans `Explore`
 `general-purpose`, et `review` avant et après un changement) sur un mini-projet aux défauts
 plantés (`evals/fixtures/subagents/`). Un correcteur compte, pour chaque cas, les défauts
 trouvés, les leurres écartés, les remarques hors liste (à relire : justes ou fausses), les remarques sourcées et le coût.
-`--dry-run` prépare les projets de test sans appeler Claude.
+`--dry-run` prépare les projets de test sans appeler Claude. `--set hard` prend un jeu plus dur
+(`evals/fixtures/subagents-hard/`) : défauts discrets, leurres qui ont l'air de vraies erreurs,
+cahier des charges de près de 400 lignes, et `/plan` complet sur un ticket piégé
+(`plan-full-old` contre `plan-full-new`).
 
 ## La page des skills
 

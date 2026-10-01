@@ -1,32 +1,51 @@
 """Mesure les relectures par sous-agent sur des défauts plantés, avant et après un changement.
 
 Usage (depuis la racine du dépôt) :
-  python3 evals/run_subagents.py [--runs N] [--dry-run] [--before REF] [cas ...]
-Cas : plan, doc-explore, doc-general, review-old, review-new (tous par défaut).
+  python3 evals/run_subagents.py [--set easy|hard] [--runs N] [--dry-run] [--before REF] [cas ...]
+Cas : plan, doc-explore, doc-general, review-old, review-new, et plan-full-old, plan-full-new
+pour le jeu hard (tous par défaut).
+
+Jeux : easy (evals/fixtures/subagents/, défauts visibles) et hard
+(evals/fixtures/subagents-hard/, défauts discrets, leurres tentants, cahier des charges long).
 
 - plan : la relecture du plan (plan/SKILL.md, étape 5) sur un brouillon à 5 défauts. Avant ce
   changement, il n'y avait pas de relecture : 0 trouvé par construction.
 - doc-explore / doc-general : le brief de relecture de brainstorming, lancé dans Explore ou dans
   general-purpose, sur un cahier des charges à 3 contradictions et 2 renvois faux.
 - review-old / review-new : le skill review au commit --before (défaut a1f460b) et dans l'arbre
-  de travail, sur une branche à 5 défauts et 2 leurres. Copiés dans le projet de test sous
+  de travail, sur une branche aux défauts et leurres plantés. Copiés dans le projet de test sous
   d'autres noms, car un skill personnel l'emporte sur un skill de projet du même nom.
+- plan-full-old / plan-full-new (hard) : le skill plan en entier, aux deux mêmes versions, sur
+  un ticket piégé ; on note le plan écrit. Mesure ce que la relecture du plan ajoute à
+  l'exploration de l'étape 2.
 
 Chaque rapport est noté par un correcteur (claude -p séparé) contre evals/fixtures/subagents/
-cases.json. --dry-run prépare les projets de test et affiche les prompts sans appeler Claude.
+cases.json du jeu. --dry-run prépare les projets de test et affiche les prompts sans appeler Claude.
 """
 import argparse, json, os, re, shutil, subprocess, tempfile, time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-FIX = ROOT / "evals" / "fixtures" / "subagents"
+SETS = {"easy": "subagents", "hard": "subagents-hard"}
+FIX = ROOT / "evals" / "fixtures" / "subagents"  # fixé par --set
 OUT = ROOT / "evals" / "subagents-results.json"
 MODEL = "claude-opus-5-5"
 JUDGE_MODEL = "claude-sonnet-5-5"
 ALLOWED = "Read,Grep,Glob,Bash(git:*),Agent,Task,Skill"
 DENIED = "Edit,Write,NotebookEdit"
-CASES = ["plan", "doc-explore", "doc-general", "review-old", "review-new"]
+CASES = ["plan", "doc-explore", "doc-general", "review-old", "review-new", "plan-full-old",
+         "plan-full-new"]
+
+
+def cases_spec():
+    return json.loads((FIX / "cases.json").read_text(encoding="utf-8"))
+
+
+def case_key(case):
+    if case.startswith("plan-full"):
+        return "plan-full"
+    return "plan" if case == "plan" else "doc" if case.startswith("doc") else "review"
 
 
 def git(cwd, *args):
@@ -76,8 +95,11 @@ def skill_files_at(ref, skill):
 def build_project(case, before):
     work = Path(tempfile.mkdtemp(prefix=f"subagents-{case}-"))
     shutil.copytree(FIX / "base", work, dirs_exist_ok=True)
+    paths = cases_spec()["paths"]
+    if case.startswith("plan"):  # le plan juste donnerait la réponse
+        (work / paths["plan"]).unlink()
     if case == "plan":
-        shutil.copy(FIX / "plan-draft.md", work / "docs" / "plans" / "export-csv.md")
+        shutil.copy(FIX / "plan-draft.md", work / paths["plan"])
     if case.startswith("doc"):
         shutil.copy(FIX / "requirements.md", work / "docs" / "requirements.md")
     git(work, "init", "-q", "-b", "main")
@@ -90,6 +112,9 @@ def build_project(case, before):
         git(work, "commit", "-q", "-m", "feat: export CSV")
         ref = before if case == "review-old" else None
         install_skill(skill_files_at(ref, "review"), work, case)
+    if case.startswith("plan-full"):
+        ref = before if case == "plan-full-old" else None
+        install_skill(skill_files_at(ref, "plan"), work, case)
     return work
 
 
@@ -100,23 +125,31 @@ def subagent_prompt(agent_type, brief):
 
 
 def prompt_for(case):
+    paths = cases_spec()["paths"]
     if case == "plan":
         brief = brief_after(ROOT / "plan" / "SKILL.md", "**Faire relire le plan**")
-        brief = brief.replace("<plan>", "docs/plans/export-csv.md").replace(
-            "<source>", "docs/tickets/export/01-export-csv.md")
+        brief = brief.replace("<plan>", paths["plan"]).replace("<source>", paths["ticket"])
         return subagent_prompt("general-purpose", brief)
+    if case.startswith("plan-full"):
+        return (f"Appelle le Skill tool avec « {case} » sur le ticket {paths['ticket']}. Cette "
+                "session n'est pas interactive : personne ne répondra. Ne pose aucune question : "
+                "à chaque point à trancher, applique l'hypothèse la plus plausible et note-la "
+                "dans le plan. Pas de recherche sur le web. Écris le plan dans docs/plans/, puis "
+                "arrête-toi avant la validation, sans rien commiter.")
     if case.startswith("doc"):
         brief = brief_after(ROOT / "brainstorming" / "SKILL.md", "fais-le relire par un sous-agent")
         brief = brief.replace("<chemin>", "docs/requirements.md")
         return subagent_prompt("Explore" if case == "doc-explore" else "general-purpose", brief)
     return (f"Appelle le Skill tool avec « {case} », avec pour point fixe main et pour spec "
-            "docs/plans/export-csv.md. Ne corrige rien : donne le rapport, puis arrête-toi.")
+            f"{paths['plan']}. Ne corrige rien : donne le rapport, puis arrête-toi.")
 
 
-def run_claude(prompt, cwd, model, timeout=900):
+def run_claude(prompt, cwd, model, timeout=900, write=False):
     env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
     cmd = ["claude", "-p", prompt, "--output-format", "stream-json", "--verbose", "--model", model,
-           "--allowedTools", ALLOWED, "--disallowedTools", DENIED]
+           "--allowedTools", ALLOWED + (",Write,Edit" if write else "")]
+    if not write:
+        cmd += ["--disallowedTools", DENIED]
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, cwd=cwd, env=env,
                          text=True)
     t0, agents, agent_results, result = time.time(), [], {}, {}
@@ -155,8 +188,9 @@ def run_claude(prompt, cwd, model, timeout=900):
 
 
 def judge(case_key, report):
-    spec = json.loads((FIX / "cases.json").read_text(encoding="utf-8"))[case_key]
+    spec = cases_spec()[case_key]
     prompt = (
+        spec.get("judge_note", "") + " "
         "Tu notes le rapport d'un relecteur contre une liste de défauts connus. Ne lis aucun "
         "fichier. Un défaut est trouvé si le rapport le signale comme problème, même avec "
         "d'autres mots. Pour chaque leurre (un point correct qui a l'air suspect) : « absent » si "
@@ -212,11 +246,15 @@ def one(job, before):
 def run_one(job, before):
     case, run = job
     work = build_project(case, before)
-    out = run_claude(prompt_for(case), work, MODEL)
+    key = case_key(case)
+    full = key == "plan-full"
+    out = run_claude(prompt_for(case), work, MODEL, timeout=1800 if full else 900, write=full)
     report = out.get("text", "")
-    if case != "review-old" and case != "review-new" and out["agents"]:
+    if key in ("plan", "doc") and out["agents"]:
         report = out["agents"][0]["report"] or report
-    key = "plan" if case == "plan" else "doc" if case.startswith("doc") else "review"
+    if full:
+        plans = sorted((work / "docs" / "plans").glob("*.md"))
+        report = "\n\n".join(f.read_text(encoding="utf-8") for f in plans) or report
     row = {"case": case, "run": run, "cost": out.get("cost"), "ms": out.get("ms"),
            "error": out.get("error"), "agent_types": [a["type"] for a in out["agents"]],
            "agent_prompts": [a["prompt"] for a in out["agents"]], "report": report,
@@ -255,7 +293,8 @@ def summary(rows):
                                                             (r["score"] for r in rs) if "error" in s]
         if errors:
             print(f"{'':12} erreurs : {errors}")
-    print("\nplan avant le changement : pas de relecture, 0 trouvé par construction.")
+    print("\nplan avant le changement : pas de relecture, 0 trouvé par construction. "
+          "plan-full : pièges évités dans le plan écrit.")
     print(f"Détail (rapports, prompts des sous-agents) : {OUT.relative_to(ROOT)}")
 
 
@@ -265,10 +304,16 @@ def main():
     ap.add_argument("--runs", type=int, default=3)
     ap.add_argument("--before", default="a1f460b")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--set", choices=sorted(SETS), default="easy")
     args = ap.parse_args()
-    unknown = set(args.cases) - set(CASES)
+    global FIX, OUT
+    FIX = ROOT / "evals" / "fixtures" / SETS[args.set]
+    OUT = ROOT / "evals" / f"subagents-results{'' if args.set == 'easy' else '-' + args.set}.json"
+    if args.cases == CASES:
+        args.cases = [c for c in CASES if case_key(c) in cases_spec()]
+    unknown = {c for c in args.cases if c not in CASES or case_key(c) not in cases_spec()}
     if unknown:
-        raise SystemExit(f"cas inconnus : {', '.join(sorted(unknown))}")
+        raise SystemExit(f"cas inconnus pour le jeu {args.set} : {', '.join(sorted(unknown))}")
     if args.dry_run:
         for case in args.cases:
             work = build_project(case, args.before)
