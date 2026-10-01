@@ -47,7 +47,7 @@ il n'y a pas accès autrement.
 ## 4. Lancer les deux sous-agents, en parallèle
 
 Dans un seul message, deux sous-agents `general-purpose` au contexte vierge : pas `Explore`, qui
-lit par extraits et sert à situer du code, pas à le juger ; jamais un fork, qui hérite de la
+ne charge pas `CLAUDE.md`, la première source des conventions ; jamais un fork, qui hérite de la
 conversation et donc des raisons de l'auteur. Le brief ne contient que ce qui suit : ni
 justification des choix, ni résumé du travail.
 

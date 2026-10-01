@@ -34,15 +34,18 @@
   `general-purpose`, pour le même coût, et ses remarques hors liste sont justes : le passage à
   `general-purpose` n'est pas prouvé. La relecture du plan trouve 5 sur 5 avec le bon verdict
   (0,27 $, 50 s), mais rien ne dit encore si l'exploration de l'étape 2 les aurait déjà vus.
-- [ ] **Lancer `run_subagents.py --set hard --runs 3`** (jeu écrit le 01/10/2026 : 7 défauts et
-  3 leurres dans le brouillon de plan, 8 erreurs et 3 leurres dans un cahier des charges de 387
-  lignes, 7 défauts et 3 leurres dans la branche, 5 pièges dans le ticket pour `/plan` complet).
-  Il tranchera `Explore` contre `general-purpose` : en attendant, `review`, `plan`,
-  `brainstorming` et `to-spec` gardent `general-purpose` et la phrase « pas `Explore`, qui lit par
-  extraits », que le premier lancement n'a pas confirmée. Si l'écart reste nul, revenir à
-  `Explore` hors de `review`, qui garde `general-purpose` parce qu'il charge `CLAUDE.md`.
-  `plan-full-new` contre `plan-full-old` dira si la relecture du plan ajoute quelque chose à
-  l'exploration de l'étape 2 ; si non, la retirer.
+- [x] **`run_subagents.py --set hard --runs 3`** le 01/10/2026 : `Explore` et `general-purpose`
+  trouvent les 8 erreurs sur 8 du cahier des charges de 387 lignes, pour le même coût : retour à
+  `Explore` dans `brainstorming` et `to-spec`. `review` garde `general-purpose`, qui charge
+  `CLAUDE.md`, et cite un `fichier:ligne` pour 19 remarques sur 19 (0 sur 40 avant).
+  `/plan` complet évite les 5 pièges du ticket avec ou sans relecture du plan, qui coûte 58 % de
+  plus : relecture retirée. Aucune version de `review` ne prend un leurre pour une erreur : la
+  vérification des remarques reste sans preuve.
+- [ ] **`run_subagents.py`** : 3 rapports de `review` sur 6 sont vides (sous-agents lancés en
+  arrière-plan, session `-p` fermée avant leur retour) ; demander d'attendre leur retour, et
+  compter un rapport sans remarque comme incomplet. Le correcteur de `plan-full` a pris pour
+  manqué un hors périmètre bien noté : lui préciser qu'un piège rangé dans « Hors périmètre »
+  est évité.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt
