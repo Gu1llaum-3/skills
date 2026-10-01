@@ -25,7 +25,7 @@ Mes skills personnels pour Claude Code.
 
 | Skill | Rôle |
 |---|---|
-| `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code (et challengé, s'il vient d'ailleurs) |
+| `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code (et challengé, s'il vient d'ailleurs), puis le faire relire |
 | `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD, puis le faire relire |
 | `review` | Relire un diff sur deux axes séparés : la spec (plan, ticket) et les conventions du dépôt |
 | `tdd` | La boucle rouge-vert et ce qui fait un bon test |

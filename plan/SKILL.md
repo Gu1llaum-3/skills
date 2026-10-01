@@ -120,12 +120,38 @@ décisions de l'étape 4 demandent : un ajout se propose, il ne s'y glisse pas.
 **Bug** : la première tâche est un test qui reproduit le bug et échoue, à partir du cas réduit
 par `debug` s'il est passé par là. Le test reste ensuite comme test de non-régression.
 
+**Faire relire le plan** (sauf plan d'origine POC), avant de le montrer : `implement` le suivra à
+la lettre, et une erreur coûte moins cher ici que dans le code. L'exploration de l'étape 2
+renseignait la rédaction ; cette relecture vérifie ce que le plan affirme une fois écrit. Un
+sous-agent `general-purpose` au contexte vierge (pas `Explore`, qui lit par extraits ; jamais un
+fork, qui hérite de la conversation). Lui donner le chemin du plan et de quoi lire la source
+lui-même (son chemin, la commande qui affiche le ticket, ou son texte collé tel quel ; rien si
+c'est la conversation), avec ce brief et rien d'autre :
+
+> Lis en entier <plan>, puis <source>, puis le code que le plan touche. Rapporte, chaque point
+> avec sa preuve (ligne du plan, ligne de la source, `fichier:ligne` du code) : (1) un critère de
+> la source absent des critères du plan, un `AC-n` qu'aucune tâche ne cite, ou un `AC-n`
+> qu'aucune interface à tester ne vérifie ; (2) une affirmation sur le code qui est fausse : un fichier, une
+> fonction, un modèle à reprendre qui n'existe pas ou ne fait pas ce que le plan dit ; (3) un
+> oubli évident parmi ce que les tâches touchent (migration, types, routes, configuration,
+> tests, documentation) ; (4) une tâche que la source ne demande pas, ou que son hors périmètre
+> exclut ; (5) un risque non traité (données existantes, compatibilité, sécurité) ; (6) un plan
+> qui ne tient visiblement pas en une session. Ne réécris pas le plan. Commence par une ligne
+> `VERDICT : PRÊT | À AMENDER | À REDÉCOUPER`. Une catégorie sans problème se dit vide. Moins
+> de 400 mots.
+
+Vérifier chaque point dans le code ou la source avant de s'en servir : un retour est une
+hypothèse. Corriger le plan pour ce qui est fondé ; ce qui demande une décision de l'utilisateur
+se pose à l'étape 6. **À REDÉCOUPER**, s'il est confirmé, mène au verdict « trop gros » de
+l'étape 3.
+
 ## 6. Valider et passer la main
 
-Montrer le plan et demander le feu vert. Une fois l'accord obtenu, passer la ligne de statut à
-`> Statut : validé par <nom> le <JJ/MM/AAAA>`. Le plan d'un jalon sans tickets se rattache
-ensuite à ce jalon avec le skill `tickets`. Le plan n'est pas commité ici : `implement`
-le commite avec la première tâche, sur sa branche.
+Montrer le plan et demander le feu vert, avec en quelques lignes le verdict de la relecture, ce
+qu'elle a fait corriger et les points écartés avec leur raison. Une fois l'accord obtenu, passer
+la ligne de statut à `> Statut : validé par <nom> le <JJ/MM/AAAA>`. Le plan d'un jalon sans
+tickets se rattache ensuite à ce jalon avec le skill `tickets`. Le plan n'est pas commité ici :
+`implement` le commite avec la première tâche, sur sa branche.
 
 **Questions pour le métier ou pour l'auteur du ticket** : appeler le Skill tool avec
 « to-questionnaire ». Pour un ticket externe, le questionnaire porte aussi les réserves sur la
