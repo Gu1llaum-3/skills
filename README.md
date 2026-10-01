@@ -167,7 +167,7 @@ python3 evals/run_subagents.py --runs 3
 Rejoue les relectures (celle du plan, celle du cahier des charges dans `Explore` ou dans
 `general-purpose`, et `review` avant et après un changement) sur un mini-projet aux défauts
 plantés (`evals/fixtures/subagents/`). Un correcteur compte, pour chaque cas, les défauts
-trouvés, les leurres écartés, les fausses alertes, les remarques sourcées et le coût.
+trouvés, les leurres écartés, les remarques hors liste (à relire : justes ou fausses), les remarques sourcées et le coût.
 `--dry-run` prépare les projets de test sans appeler Claude.
 
 ## La page des skills

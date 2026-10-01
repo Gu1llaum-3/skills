@@ -129,8 +129,9 @@ def run_claude(prompt, cwd, model, timeout=900):
                 ev = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            msg = ev.get("message") or {}
-            for c in msg.get("content") or []:
+            msg = ev.get("message")
+            content = msg.get("content") if isinstance(msg, dict) else None
+            for c in content if isinstance(content, list) else []:
                 if not isinstance(c, dict):
                     continue
                 if c.get("type") == "tool_use" and c.get("name") in ("Agent", "Task"):
@@ -160,14 +161,14 @@ def judge(case_key, report):
         "fichier. Un défaut est trouvé si le rapport le signale comme problème, même avec "
         "d'autres mots. Pour chaque leurre (un point correct qui a l'air suspect) : « absent » si "
         "le rapport n'en parle pas, « écarté » s'il en parle en le jugeant correct, douteux ou "
-        "faux, « signalé » s'il le présente comme un problème confirmé. Compte comme fausse "
-        "alerte toute remarque présentée comme un problème qui ne correspond à aucun défaut "
-        "ni leurre et qui est fausse au vu de la liste.\n\n"
+        "faux, « signalé » s'il le présente comme un problème confirmé. Compte à part les "
+        "remarques qui ne correspondent à aucun défaut ni leurre : elles peuvent être justes "
+        "(un défaut non planté) ou fausses, tu ne les juges pas.\n\n"
         f"Défauts : {json.dumps(spec['expected'], ensure_ascii=False)}\n"
         f"Leurres : {json.dumps(spec['decoys'], ensure_ascii=False)}\n\n"
         f"<rapport>\n{report}\n</rapport>\n\n"
         'Réponds uniquement en JSON : {"found": {"<id>": true|false}, "decoys": {"<id>": '
-        '"absent"|"écarté"|"signalé"}, "false_alarms": <entier>, "verdict": "<la ligne VERDICT '
+        '"absent"|"écarté"|"signalé"}, "extras": <entier>, "verdict": "<la ligne VERDICT '
         'du rapport, ou null>"}')
     out = run_claude(prompt, tempfile.mkdtemp(prefix="judge-"), JUDGE_MODEL, timeout=300)
     text = out.get("text", "")
@@ -178,20 +179,37 @@ def judge(case_key, report):
 
 
 def refs_check(report, work):
-    """Part des remarques R-n qui citent un fichier:ligne existant du projet de test."""
-    items = re.split(r"(?=\bR-\d+\b)", report)
-    items = [i for i in items if re.match(r"R-\d+", i)]
+    """Remarques R-n distinctes, et combien citent un fichier:ligne qui existe dans le projet.
+
+    Seule la première apparition d'un R-n compte (« En bref » les recite). Un chemin court
+    (`export.py:18`) vaut s'il désigne un seul fichier du projet.
+    """
+    files = [p for p in work.rglob("*") if p.is_file() and ".git" not in p.parts]
+    blocks, seen = {}, []
+    for chunk in re.split(r"(?=\bR-\d+\b)", report):
+        m = re.match(r"R-(\d+)", chunk)
+        if m and m.group(1) not in blocks:
+            blocks[m.group(1)] = chunk
     good = 0
-    for item in items:
-        for path, line in re.findall(r"([\w./-]+\.\w+):(\d+)", item):
-            f = work / path
-            if f.is_file() and 0 < int(line) <= len(f.read_text(encoding="utf-8").splitlines()):
+    for chunk in blocks.values():
+        for path, line in re.findall(r"([\w./-]+\.\w+):(\d+)", chunk):
+            hits = [f for f in files if str(f.relative_to(work)) == path
+                    or str(f.relative_to(work)).endswith("/" + path)]
+            if len(hits) == 1 and 0 < int(line) <= len(hits[0].read_text(encoding="utf-8").splitlines()):
                 good += 1
                 break
-    return {"remarks": len(items), "with_valid_ref": good}
+    return {"remarks": len(blocks), "with_valid_ref": good}
 
 
 def one(job, before):
+    try:
+        return run_one(job, before)
+    except Exception as exc:  # un cas qui casse ne doit pas perdre les autres
+        return {"case": job[0], "run": job[1], "cost": None, "ms": None, "error": repr(exc),
+                "agent_types": [], "agent_prompts": [], "report": "", "score": {}}
+
+
+def run_one(job, before):
     case, run = job
     work = build_project(case, before)
     out = run_claude(prompt_for(case), work, MODEL)
@@ -210,7 +228,7 @@ def one(job, before):
 
 
 def summary(rows):
-    print(f"\n{'cas':12} {'trouvés':>9} {'leurres écartés':>16} {'fausses al.':>11} "
+    print(f"\n{'cas':12} {'trouvés':>9} {'leurres écartés':>16} {'hors liste':>10} "
           f"{'R-n sourcés':>12} {'coût $':>7} {'durée':>6}  sous-agents")
     for case in CASES:
         rs = [r for r in rows if r["case"] == case]
@@ -222,7 +240,7 @@ def summary(rows):
         total = len(sc[0]["found"]) if sc else 0
         decoys = [v for s in sc for v in s.get("decoys", {}).values()]
         ok_decoys = f"{sum(v != 'signalé' for v in decoys)}/{len(decoys)}" if decoys else "-"
-        fa = sum(s.get("false_alarms", 0) for s in sc) / n
+        fa = sum(s.get("extras", 0) for s in sc) / n
         refs = [r["refs"] for r in rs if "refs" in r]
         refs_s = (f"{sum(x['with_valid_ref'] for x in refs)}/{sum(x['remarks'] for x in refs)}"
                   if refs else "-")
@@ -230,7 +248,7 @@ def summary(rows):
         dur = sum(r["ms"] or 0 for r in rs) / len(rs) / 1000
         types = sorted({t for r in rs for t in r["agent_types"] if t})
         verdicts = {s.get("verdict") for s in sc if s.get("verdict")}
-        print(f"{case:12} {found:5.1f}/{total:<3} {ok_decoys:>16} {fa:11.1f} {refs_s:>12} "
+        print(f"{case:12} {found:5.1f}/{total:<3} {ok_decoys:>16} {fa:10.1f} {refs_s:>12} "
               f"{cost:7.2f} {dur:5.0f}s  {', '.join(types) or '-'}"
               + (f"  verdict : {' | '.join(verdicts)}" if verdicts else ""))
         errors = [r["error"] for r in rs if r["error"]] + [s["error"] for s in
@@ -259,9 +277,12 @@ def main():
             print(f"=== {case} : {work}\n{prompt_for(case)}\n--- fichiers : {', '.join(files)}\n")
         return
     jobs = [(c, r) for c in args.cases for r in range(args.runs)]
+    rows = []
     with ThreadPoolExecutor(4) as ex:
-        rows = list(ex.map(lambda j: one(j, args.before), jobs))
-    OUT.write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+        for row in ex.map(lambda j: one(j, args.before), jobs):
+            rows.append(row)
+            OUT.write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+            print(f"{row['case']} #{row['run']} : {row['error'] or 'fini'}", flush=True)
     summary(rows)
 
 

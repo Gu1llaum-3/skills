@@ -26,11 +26,17 @@
 - [x] **Fins de phase de `next`** (point 5 de l'audit) : un arbre ordonné (continuer, `/clear`,
   `/to-spec` pour la passation, sous-agent, `/compact`), pas de décision de session au milieu
   d'une phase.
-- [ ] **Lancer `evals/run_subagents.py --runs 3`** après les changements des relectures du
-  01/10/2026 (`general-purpose`, relecture du plan, remarques vérifiées) : attendu, `plan` 4/5 au
-  moins sans fausse alerte ; `doc-general` au-dessus de `doc-explore` ; `review-new` avec les
-  deux leurres écartés et toutes ses remarques sourcées. Si la relecture du plan ne trouve rien
-  de plus que l'exploration, ou coûte trop pour ce qu'elle trouve, la retirer.
+- [x] **`evals/run_subagents.py --runs 3`** le 01/10/2026, après les changements des relectures :
+  tous les cas trouvent 5 défauts sur 5, et aucun leurre n'est signalé, même avant : les fixtures
+  sont trop faciles pour départager. `review-new` cite un `fichier:ligne` valide pour 41
+  remarques sur 45 (contre 3 sur 49 avant), pour 17 % de coût en plus (0,56 $ contre 0,48 $).
+  `Explore` relit le cahier des charges de 142 lignes en entier, aussi bien que
+  `general-purpose`, pour le même coût, et ses remarques hors liste sont justes : le passage à
+  `general-purpose` n'est pas prouvé. La relecture du plan trouve 5 sur 5 avec le bon verdict
+  (0,27 $, 50 s), mais rien ne dit encore si l'exploration de l'étape 2 les aurait déjà vus.
+- [ ] **Fixtures plus dures pour `run_subagents.py`** : un cahier des charges de 500 lignes ou
+  plus, des défauts plus discrets, des leurres qui tentent vraiment, et un cas `/plan` complet
+  (avec l'exploration de l'étape 2) pour savoir ce que la relecture du plan ajoute.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt
