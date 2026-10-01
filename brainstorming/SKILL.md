@@ -67,7 +67,7 @@ proposer de le renommer avec `git mv`. Adapte les sections au projet : un site w
   - **gros** : au moins un jalon dépasse une session. Chaque jalon passe par une spec (`to-spec`), puis des tickets rangés dans ce jalon de la roadmap.
 - Si la mémoire persistante est disponible, enregistre les décisions clés du projet (un fichier par fait).
 
-Avant de montrer le document, fais-le relire par un sous-agent d'exploration au contexte vierge : qui vient d'écrire un long document n'y voit plus ses incohérences, un lecteur neuf les trouve. Donne-lui le chemin du fichier et ce brief, rien d'autre :
+Avant de montrer le document, fais-le relire par un sous-agent `general-purpose` au contexte vierge (pas `Explore`, qui lit par extraits ; jamais un fork, qui hérite de la conversation) : qui vient d'écrire un long document n'y voit plus ses incohérences, un lecteur neuf les trouve. Donne-lui le chemin du fichier et ce brief, rien d'autre :
 
 > Lis en entier <chemin>. Rapporte, avec les numéros de ligne des passages en cause : (1) les trous : « à définir », TODO, section vide, exigence vague (« rapide », « simple ») ; (2) les contradictions entre sections : un chiffre, un délai, un rôle ou un périmètre qui diffère, un élément exclu qui revient dans un jalon ; (3) les phrases qu'on peut lire de deux façons ; (4) les renvois internes faux : un numéro de question ou de section, un nombre annoncé (« trois cas ») qui ne correspond pas ; (5) un jalon qui dépasse visiblement une session. Un point marqué [À valider] ou [Métier : …] n'est pas un trou, mais une contradiction qui le touche se rapporte. N'invente rien : une catégorie sans problème se dit vide. Moins de 400 mots.
 

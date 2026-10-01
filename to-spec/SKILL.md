@@ -67,8 +67,9 @@ que la prochaine session ne le rejoue pas.
 Suivre [references/spec.md](references/spec.md). Avant de montrer le brouillon, le faire
 relire :
 
-- **une spec et plusieurs tickets** : par un sous-agent d'exploration au contexte vierge, avec
-  le brouillon collé dans son brief, rien d'autre. Qui vient d'écrire un long document n'y voit
+- **une spec et plusieurs tickets** : par un sous-agent `general-purpose` au contexte vierge
+  (pas `Explore`, qui lit par extraits ; jamais un fork, qui hérite de la conversation), avec le
+  brouillon collé dans son brief, rien d'autre. Qui vient d'écrire un long document n'y voit
   plus ses incohérences. Brief :
 
   > Lis le brouillon de spec ci-dessous. Rapporte, en citant les passages en cause, chaque

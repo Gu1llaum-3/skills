@@ -46,7 +46,10 @@ il n'y a pas accès autrement.
 
 ## 4. Lancer les deux sous-agents, en parallèle
 
-Dans un seul message, deux sous-agents d'exploration.
+Dans un seul message, deux sous-agents `general-purpose` au contexte vierge : pas `Explore`, qui
+lit par extraits et sert à situer du code, pas à le juger ; jamais un fork, qui hérite de la
+conversation et donc des raisons de l'auteur. Le brief ne contient que ce qui suit : ni
+justification des choix, ni résumé du travail.
 
 **Spec** : la commande du diff, les fichiers non suivis, la liste des commits, la source de la
 spec (chemin ou contenu).
@@ -55,14 +58,16 @@ Brief :
 > Rapporte : (a) ce que la spec demande et qui manque ou n'est fait qu'en partie ; (b) ce que le
 > diff fait sans que ce soit demandé, y compris ce que la spec met hors périmètre ; (c) ce qui
 > paraît fait mais de travers. Cite pour chaque remarque la ligne de la spec (le critère `AC-n`
-> s'il y en a). Moins de 400 mots.
+> s'il y en a) et le `fichier:ligne` du diff en cause. Une remarque sans ces deux preuves ne se
+> rapporte pas. Moins de 400 mots.
 
 **Conventions** : la commande du diff, les fichiers non suivis, la liste des commits, les
 fichiers de l'étape 3 et la base d'odeurs. Brief :
 
 > Rapporte, par fichier ou par morceau du diff : (a) les **violations** : chaque écart à une
-> règle écrite du dépôt, en citant le fichier et la règle ; (b) les **jugements** : chaque odeur
-> de la base repérée, sous la forme « possible <odeur> », avec l'extrait. Une règle du dépôt
+> règle écrite du dépôt, en citant le `fichier:ligne` du diff et la règle ; (b) les
+> **jugements** : chaque odeur de la base repérée, sous la forme « possible <odeur> », avec le
+> `fichier:ligne` et l'extrait. Une remarque sans preuve ne se rapporte pas. Une règle du dépôt
 > l'emporte sur une odeur. Ce que l'outillage impose déjà (linter, formateur, typage) ne se
 > signale pas. Moins de 400 mots.
 
