@@ -25,7 +25,7 @@ Mes skills personnels pour Claude Code.
 
 | Skill | Rôle |
 |---|---|
-| `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code (et challengé, s'il vient d'ailleurs), puis le faire relire |
+| `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code (et challengé, s'il vient d'ailleurs) |
 | `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD, puis le faire relire |
 | `review` | Relire un diff sur deux axes séparés : la spec (plan, ticket) et les conventions du dépôt |
 | `tdd` | La boucle rouge-vert et ce qui fait un bon test |
@@ -164,10 +164,11 @@ python3 evals/run_subagents.py --dry-run
 python3 evals/run_subagents.py --runs 3
 ```
 
-Rejoue les relectures (celle du plan, celle du cahier des charges dans `Explore` ou dans
-`general-purpose`, et `review` avant et après un changement) sur un mini-projet aux défauts
-plantés (`evals/fixtures/subagents/`). Un correcteur compte, pour chaque cas, les défauts
-trouvés, les leurres écartés, les remarques hors liste (à relire : justes ou fausses), les remarques sourcées et le coût.
+Rejoue les relectures (celle du cahier des charges dans `Explore` ou dans `general-purpose`, et
+`review` avant et après un changement) sur un mini-projet aux défauts plantés
+(`evals/fixtures/subagents/`). Un correcteur compte, pour chaque cas, les défauts trouvés, les
+leurres écartés, les remarques hors liste (à relire : justes ou fausses), les remarques sourcées
+et le coût.
 `--dry-run` prépare les projets de test sans appeler Claude. `--set hard` prend un jeu plus dur
 (`evals/fixtures/subagents-hard/`) : défauts discrets, leurres qui ont l'air de vraies erreurs,
 cahier des charges de près de 400 lignes, et `/plan` complet sur un ticket piégé

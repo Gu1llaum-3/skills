@@ -2,22 +2,19 @@
 
 Usage (depuis la racine du dépôt) :
   python3 evals/run_subagents.py [--set easy|hard] [--runs N] [--dry-run] [--before REF] [cas ...]
-Cas : plan, doc-explore, doc-general, review-old, review-new, et plan-full-old, plan-full-new
-pour le jeu hard (tous par défaut).
+Cas : doc-explore, doc-general, review-old, review-new, et plan-full-old, plan-full-new pour le
+jeu hard (tous par défaut).
 
 Jeux : easy (evals/fixtures/subagents/, défauts visibles) et hard
 (evals/fixtures/subagents-hard/, défauts discrets, leurres tentants, cahier des charges long).
 
-- plan : la relecture du plan (plan/SKILL.md, étape 5) sur un brouillon à 5 défauts. Avant ce
-  changement, il n'y avait pas de relecture : 0 trouvé par construction.
 - doc-explore / doc-general : le brief de relecture de brainstorming, lancé dans Explore ou dans
   general-purpose, sur un cahier des charges à 3 contradictions et 2 renvois faux.
 - review-old / review-new : le skill review au commit --before (défaut a1f460b) et dans l'arbre
   de travail, sur une branche aux défauts et leurres plantés. Copiés dans le projet de test sous
   d'autres noms, car un skill personnel l'emporte sur un skill de projet du même nom.
 - plan-full-old / plan-full-new (hard) : le skill plan en entier, aux deux mêmes versions, sur
-  un ticket piégé ; on note le plan écrit. Mesure ce que la relecture du plan ajoute à
-  l'exploration de l'étape 2.
+  un ticket piégé ; on note les pièges que le plan écrit évite.
 
 Chaque rapport est noté par un correcteur (claude -p séparé) contre evals/fixtures/subagents/
 cases.json du jeu. --dry-run prépare les projets de test et affiche les prompts sans appeler Claude.
@@ -34,7 +31,7 @@ MODEL = "claude-opus-5-5"
 JUDGE_MODEL = "claude-sonnet-5-5"
 ALLOWED = "Read,Grep,Glob,Bash(git:*),Agent,Task,Skill"
 DENIED = "Edit,Write,NotebookEdit"
-CASES = ["plan", "doc-explore", "doc-general", "review-old", "review-new", "plan-full-old",
+CASES = ["doc-explore", "doc-general", "review-old", "review-new", "plan-full-old",
          "plan-full-new"]
 
 
@@ -45,7 +42,7 @@ def cases_spec():
 def case_key(case):
     if case.startswith("plan-full"):
         return "plan-full"
-    return "plan" if case == "plan" else "doc" if case.startswith("doc") else "review"
+    return "doc" if case.startswith("doc") else "review"
 
 
 def git(cwd, *args):
@@ -98,8 +95,6 @@ def build_project(case, before):
     paths = cases_spec()["paths"]
     if case.startswith("plan"):  # le plan juste donnerait la réponse
         (work / paths["plan"]).unlink()
-    if case == "plan":
-        shutil.copy(FIX / "plan-draft.md", work / paths["plan"])
     if case.startswith("doc"):
         shutil.copy(FIX / "requirements.md", work / "docs" / "requirements.md")
     git(work, "init", "-q", "-b", "main")
@@ -126,10 +121,6 @@ def subagent_prompt(agent_type, brief):
 
 def prompt_for(case):
     paths = cases_spec()["paths"]
-    if case == "plan":
-        brief = brief_after(ROOT / "plan" / "SKILL.md", "**Faire relire le plan**")
-        brief = brief.replace("<plan>", paths["plan"]).replace("<source>", paths["ticket"])
-        return subagent_prompt("general-purpose", brief)
     if case.startswith("plan-full"):
         return (f"Appelle le Skill tool avec « {case} » sur le ticket {paths['ticket']}. Cette "
                 "session n'est pas interactive : personne ne répondra. Ne pose aucune question : "
@@ -250,7 +241,7 @@ def run_one(job, before):
     full = key == "plan-full"
     out = run_claude(prompt_for(case), work, MODEL, timeout=1800 if full else 900, write=full)
     report = out.get("text", "")
-    if key in ("plan", "doc") and out["agents"]:
+    if key == "doc" and out["agents"]:
         report = out["agents"][0]["report"] or report
     if full:
         plans = sorted((work / "docs" / "plans").glob("*.md"))
@@ -293,8 +284,7 @@ def summary(rows):
                                                             (r["score"] for r in rs) if "error" in s]
         if errors:
             print(f"{'':12} erreurs : {errors}")
-    print("\nplan avant le changement : pas de relecture, 0 trouvé par construction. "
-          "plan-full : pièges évités dans le plan écrit.")
+    print("\nplan-full : pièges évités dans le plan écrit.")
     print(f"Détail (rapports, prompts des sous-agents) : {OUT.relative_to(ROOT)}")
 
 

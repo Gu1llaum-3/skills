@@ -12,8 +12,8 @@ lié dans `~/.claude/skills/` par `install.sh`.
 - Banc d'essai des relectures par sous-agent :
   `python3 evals/run_subagents.py [--set easy|hard] [--runs N] [cas…]` (`--dry-run` sans appel).
   Environ 2 appels à `claude -p` par cas et par passage, longs : le proposer après un changement
-  de relecture (`review`, `plan` étape 5, briefs de `brainstorming` et `to-spec`), le lancer
-  seulement après accord.
+  de relecture (`review`, briefs de `brainstorming` et `to-spec`, exploration de `plan`), le
+  lancer seulement après accord.
 - Page des skills : `python3 docs/build_skills_page.py` régénère `docs/skills.html` depuis les
   `SKILL.md` et le gabarit `docs/skills.template.html` ; tests :
   `python3 -m unittest docs/test_build_skills_page.py`.

@@ -3,23 +3,6 @@
     "ticket": "docs/tickets/modify/01-modify-booking.md",
     "plan": "docs/plans/modify-booking.md"
   },
-  "plan": {
-    "expected": {
-      "H1": "Le plan part de bookings.update_booking(), qui n'existe pas dans bookings.py (seulement create_booking et cancel_booking).",
-      "H2": "Le plan affirme que la colonne updated_at existe déjà : elle n'existe pas dans le schéma (migrations 001 et 002).",
-      "H3": "Le plan ajoute des colonnes dans migrations/001_init.sql, alors que CLAUDE.md interdit de modifier une migration publiée : il faut un nouveau fichier 003.",
-      "H4": "Réutiliser check_window impose 48 heures avant le début, ce qui contredit AC-1 (déplacement possible jusqu'à 24 heures avant) : entre 24 et 48 heures, aucun déplacement ne passe.",
-      "H5": "Réutiliser check_quota avec count_upcoming tel quel compte la réservation déplacée elle-même : une association à 6 réservations ne peut plus en déplacer aucune.",
-      "H6": "AC-3 demande un courriel avec l'ancien et le nouveau créneau, mais aucune tâche ne l'envoie et aucune interface à tester ne le vérifie (la tâche AC-3 ne fait que repasser en attente).",
-      "H7": "La tâche room_id (déplacer dans une autre salle) est hors périmètre : le ticket exclut le changement de salle."
-    },
-    "decoys": {
-      "L1": "notifications.booking_recipients() existe et donne bien l'auteur et les responsables : la réutiliser est correct.",
-      "L2": "bookings.can_act_on() existe et couvre l'auteur et les responsables : la réutiliser est correct.",
-      "L3": "L'heure courante via dates.now_utc() : conforme à CLAUDE.md."
-    },
-    "verdict": "À AMENDER"
-  },
   "plan-full": {
     "judge_note": "Le « rapport » est ici le plan final écrit par l'agent à partir du ticket. Un piège est trouvé si le plan l'évite ou le corrige (il ne reprend pas l'erreur du ticket, ou il la signale et la tranche ou en fait une question). Il n'est pas trouvé si le plan reprend l'erreur telle quelle.",
     "expected": {
