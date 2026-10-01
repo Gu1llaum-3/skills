@@ -380,6 +380,7 @@ const COLUMNS = [
   { title: "Toi seul les lances", sub: "cadrer, préparer, s'orienter", groups: [
     ["Cadrer", ["brainstorming", "feature", "poc", "architecture"]],
     ["Préparer", ["onboard", "retro", "git-guardrails", "design", "naming"]],
+    ["Entretenir", ["upgrade"]],
     ["S'orienter", ["next", "wtf"]],
   ]},
   { title: "Le parcours", sub: "toi ou Claude, de la décision au code relu", groups: [
@@ -405,6 +406,7 @@ const NEXT = {
   debug: ["plan"],
   review: ["plan"],
   onboard: ["feature"],
+  upgrade: ["implement", "research"],
   design: ["feature", "plan"],
   "to-questionnaire": ["plan", "to-spec"],
 };
@@ -446,6 +448,7 @@ const FLOWS = [
       { l: "Préparer un projet existant", st: [{ s: "onboard", p: "Crée ou met à l'épreuve CLAUDE.md et ARCHITECTURE.md." }] },
       { l: "Une session qui a peiné", st: [{ s: "retro", p: "Relit la session et propose le renvoi, le contrôle ou la convention de relecture qui éviterait la difficulté." }] },
       { l: "Un code difficile à changer", st: [{ s: "architecture", p: "Cherche où approfondir les modules, là où le code change le plus, dans un rapport HTML, puis mène l'entretien sur la piste choisie." }, { s: "plan", p: "Maintenant si ça tient en une session ; sinon to-spec." }] },
+      { l: "Tenir les versions à jour", st: [{ s: "upgrade", p: "Inventaire de tout ce qui porte une version, puis failles, fins de vie et paquets abandonnés, avec leurs sources, dans docs/audits/. Les montées sans risque se font tout de suite, un commit par groupe ; les chantiers deviennent des tickets." }, { s: "implement", p: "Un /implement <ticket> par chantier : une majeure, un runtime, un remplacement." }] },
       { l: "Trancher un mot, une décision", st: [{ s: "domain-modeling", p: "Un mot par concept, dans GLOSSARY.md." }, { s: "adr", p: "Une décision difficile à défaire, dans docs/adr/." }] },
       { l: "Faire faire ce que toi seul peux faire", st: [{ s: "wizard", p: "Un script qui ouvre chaque page, dit quoi cliquer, et écrit les valeurs dans .env et les secrets de la CI." }] },
       { l: "Demander ou chercher", st: [{ s: "to-questionnaire", p: "Les questions pour le métier, puis leurs réponses réintégrées." }, { s: "research", p: "Une recherche sourcée, en arrière-plan." }] },
@@ -470,6 +473,7 @@ const FILES = [
   { p: "specs/", d: "docs/", w: ["to-spec"], r: ["to-tickets", "plan", "review"], role: "Les specs en local : problème, solution, décisions, critères, hors périmètre.", tip: "Avec un gestionnaire en ligne, la spec est un ticket parent (une Epic sur Jira), et ses tickets en dépendent." },
   { p: "tickets/", d: "docs/", w: ["to-tickets", "to-spec"], r: ["plan", "implement", "next"], role: "Les tickets en local, par tranches verticales, avec leurs critères, leurs bloquants et leur statut.", tip: "Écrits par tickets, pour le compte de to-spec et to-tickets." },
   { p: "conventions.md", d: "docs/", w: ["retro"], r: ["review"], role: "Les règles de jugement pour la relecture : ce qu'aucun linter ne vérifie, comme la cohérence entre fichiers.", tip: "Lu par review, pas par implement : les règles mécaniques deviennent des contrôles automatiques." },
+  { p: "audits/<date>-upgrade.md", d: "docs/", w: ["upgrade"], r: ["upgrade"], role: "Un audit des versions : ce qui est à traiter, par priorité, ce qui n'a pas pu être vérifié, et les montées écartées.", tip: "Le suivant dit ce qui est nouveau, réglé ou traîne depuis le dernier, et ne repropose pas ce qui a été écarté." },
   { p: "plans/", d: "docs/", w: ["plan"], r: ["implement", "review", "next"], role: "Les plans d'implémentation : vagues, tâches à cocher, critères, journal et bilan. La ligne « > Statut : » dit où il en est.", tip: "implement coche les cases au fil des commits : une reprise repart de la première case vide." },
 ];
 

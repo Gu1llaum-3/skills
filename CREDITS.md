@@ -52,6 +52,14 @@ SOFTWARE.
 
 ## Idées reprises
 
+Pour `upgrade`, sans reprise de texte : de `supply-chain-risk-auditor` de Trail of Bits
+(https://github.com/trailofbits/skills), les faits tirés d'un script plutôt que du modèle, le
+« non évaluable » qui n'est jamais un feu vert, le seuil de 730 jours sans version et le
+remplaçant vérifié dans le registre ; de `audit-outdated` de kubetail
+(https://github.com/kubetail-org/kstack), les tags flottants à part et la date de chaque source ;
+de `update-deps` de Mozilla (https://github.com/mozilla/bedrock), la cohérence des versions entre
+fichiers et les montées écartées qu'on ne repropose pas.
+
 Sans traduction, quelques idées du skill `brainstorming` de superpowers, de Jesse Vincent
 (https://github.com/obra/superpowers, licence MIT) : le chemin annoncé au départ, qu'on ne fait
 que monter, le découpage d'emblée en sous-systèmes, la reformulation qui sépare le dit du

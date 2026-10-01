@@ -53,3 +53,13 @@
 - [x] **`/git-guardrails`**, d'après `git-guardrails-claude-code` de Matt.
 - [ ] Essayer `/git-guardrails` dans un projet qui a déjà des hooks dans `.claude/settings.json` :
   la fusion garde-t-elle les hooks existants ?
+- [x] **`/upgrade`** : audit des versions (runtime, pnpm, paquets, images, services) avec
+  `scripts/collect.py` (endoflife.date, deps.dev, OSV). Essayé sur carto le 30/09/2026, avec et
+  sans skill, en quatre séries : 26/26 critères contre 17/26, un rapport d'un écran (41 lignes),
+  pour deux fois plus de temps (8 minutes sur un audit complet).
+- [ ] Essayer `/upgrade` sur un projet npm sans lockfile, sur un monorepo à plusieurs
+  workspaces, et jusqu'à l'étape 5 (montées sans risque commitées, tickets ouverts).
+- [ ] `/upgrade`, suite de l'évaluation du 01/10/2026 : ne plus détailler dans le SKILL.md les
+  champs que le script documente déjà ; partir des PR ouvertes de Renovate ou Dependabot quand
+  le projet en a ; proposer `docker scout` ou trivy dans un conteneur épinglé pour les failles
+  des images ; étendre le script à PyPI, Go et Composer (OSV et deps.dev les couvrent).

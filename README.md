@@ -14,6 +14,7 @@ Mes skills personnels pour Claude Code.
 | `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
 | `/architecture` | Chercher où approfondir les modules d'un projet existant : rapport HTML, puis entretien sur la piste choisie |
 | `/retro` | Après une session difficile : ce qu'il faudrait changer dans l'environnement (renvois, contrôles, conventions de relecture) |
+| `/upgrade` | Auditer les versions (Node, pnpm, paquets, images Docker, Postgres) : failles, fins de vie, paquets abandonnés, mises à jour compatibles, dans `docs/audits/` |
 | `/git-guardrails` | Bloquer les commandes git destructrices de Claude (push, reset --hard, clean…) par un hook |
 | `/next` | Quel skill lancer maintenant : lit la conversation, ou l'état du projet |
 | `/wtf` | Un message n'est pas passé : le faire reformuler, avec le contexte et les mots du projet |
@@ -58,6 +59,9 @@ ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──►
 
 bug qui résiste ──► debug ──┬── petit correctif ──► test de non-régression, commit
                             └── plus gros ──► plan ──► implement
+
+/upgrade ──► docs/audits/<date>-upgrade.md ──┬── sans risque ──► un commit par groupe
+                                             └── chantier ──► tickets ──► /implement <ticket>
 
 /architecture ──► rapport HTML ──► une piste choisie ──┬── maintenant ──► plan ──► implement
                                                        └── plus tard ──► to-spec
