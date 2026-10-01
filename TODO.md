@@ -26,6 +26,11 @@
 - [x] **Fins de phase de `next`** (point 5 de l'audit) : un arbre ordonné (continuer, `/clear`,
   `/to-spec` pour la passation, sous-agent, `/compact`), pas de décision de session au milieu
   d'une phase.
+- [ ] **Lancer `evals/run_subagents.py --runs 3`** après les changements des relectures du
+  01/10/2026 (`general-purpose`, relecture du plan, remarques vérifiées) : attendu, `plan` 4/5 au
+  moins sans fausse alerte ; `doc-general` au-dessus de `doc-explore` ; `review-new` avec les
+  deux leurres écartés et toutes ses remarques sourcées. Si la relecture du plan ne trouve rien
+  de plus que l'exploration, ou coûte trop pour ce qu'elle trouve, la retirer.
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt

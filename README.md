@@ -157,6 +157,19 @@ et vérifie quel skill part en premier, y compris sur des pièges qui ne doivent
 À relancer après chaque changement de description. Pour une mesure plus fiable, passer le
 nombre de passages par phrase en argument (`python3 evals/run_triggers.py 3`).
 
+## Mesurer les relectures par sous-agent
+
+```bash
+python3 evals/run_subagents.py --dry-run
+python3 evals/run_subagents.py --runs 3
+```
+
+Rejoue les relectures (celle du plan, celle du cahier des charges dans `Explore` ou dans
+`general-purpose`, et `review` avant et après un changement) sur un mini-projet aux défauts
+plantés (`evals/fixtures/subagents/`). Un correcteur compte, pour chaque cas, les défauts
+trouvés, les leurres écartés, les fausses alertes, les remarques sourcées et le coût.
+`--dry-run` prépare les projets de test sans appeler Claude.
+
 ## La page des skills
 
 ```bash

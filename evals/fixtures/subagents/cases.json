@@ -1,0 +1,36 @@
+{
+  "plan": {
+    "expected": {
+      "P1": "Le plan cite src/tasks/repository.py et TaskRepository.all(), qui n'existent pas : les tâches se lisent avec Store.load() de src/tasks/store.py.",
+      "P2": "Le plan affirme que dates.iso() renvoie une chaîne vide pour None : c'est faux, iso() lève TypeError.",
+      "P3": "Le critère AC-2 du ticket (filtre --done) manque dans le plan.",
+      "P4": "AC-4 (refus d'écraser, --force) n'a aucune tâche ni interface à tester.",
+      "P5": "La tâche export.to_json est hors périmètre : le ticket exclut l'export JSON."
+    },
+    "decoys": {},
+    "verdict": "À AMENDER"
+  },
+  "doc": {
+    "expected": {
+      "C1": "Contradiction : chaque sauvegarde est conservée 30 jours (section 7) contre 90 jours (section 10).",
+      "C2": "Contradiction : pas d'application mobile native (section 9) contre une application mobile au jalon 3 (section 11).",
+      "C3": "Contradiction : le planning ne montre jamais le nom de la personne (section 4) contre le nom et le téléphone du membre affichés le jour même (section 5).",
+      "F1": "Renvoi faux : « voir la question ouverte 7 » alors qu'il n'y a que 5 questions.",
+      "F2": "Nombre faux : « les trois profils suivants » alors que quatre sont listés."
+    },
+    "decoys": {}
+  },
+  "review": {
+    "expected": {
+      "S1": "AC-4 non fait : to_csv écrase le fichier existant, le paramètre force est ignoré, pas d'erreur.",
+      "S2": "export.to_json est ajouté alors que l'export JSON est hors périmètre.",
+      "S3": "La colonne due est au format JJ/MM/AAAA (strftime) au lieu d'ISO via dates.iso() (AC-3 et convention).",
+      "S4": "print dans src/tasks/export.py, alors que seul cli.py peut écrire : il faut logging.",
+      "S5": "ExportError est définie dans export.py et n'hérite pas de TasksError (errors.py), donc cli.py ne l'attrape pas."
+    },
+    "decoys": {
+      "L1": "Les print de cli.py : autorisés par CLAUDE.md, car cli.py écrit la sortie des commandes.",
+      "L2": "done écrit « oui »/« non » au lieu d'un booléen : c'est ce que demande AC-1."
+    }
+  }
+}

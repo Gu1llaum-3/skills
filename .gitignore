@@ -1,5 +1,6 @@
 .DS_Store
 *.bak.*
 evals/results.json
+evals/subagents-results.json
 __pycache__/
 .impeccable/
