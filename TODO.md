@@ -34,8 +34,8 @@
   `onboard`.
 - [ ] Essayer `/onboard` sur un projet existant qui a déjà un `CLAUDE.md`, pour voir si la mise à
   l'épreuve trouve de vrais problèmes sans noyer sous les remarques.
-- [ ] Tester `tickets` en vrai sur GitHub (sous-issues, « bloqué par », milestones), GitLab et
-  Jira (versions : le connecteur sait-il les créer ?).
+- [ ] Tester `tickets` en vrai sur GitHub (sous-issues, « bloqué par », milestones), GitLab,
+  Forgejo (`tea api`, dépendances natives) et Jira (versions : le connecteur sait-il les créer ?).
 - [x] **`debug`**, d'après `diagnosing-bugs` de Matt : une boucle qui échoue avant toute
   hypothèse, pour les bugs dont la cause résiste ; `plan` l'appelle pour un bug de cause inconnue.
 - [ ] Essayer la revue d'un ticket externe de `plan` sur un vrai ticket Jira écrit par la PO.

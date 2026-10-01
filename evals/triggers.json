@@ -91,6 +91,12 @@
   ]
  },
  {
+  "q": "on quitte GitHub pour notre Forgejo auto-hébergé, il faut que les tickets et les milestones de ce projet aillent là-bas",
+  "ok": [
+   "tickets"
+  ]
+ },
+ {
   "q": "ferme l'issue 12, c'est réglé depuis le dernier déploiement",
   "ok": [
    "tickets"

@@ -32,7 +32,7 @@ Mes skills personnels pour Claude Code.
 | `debug` | Diagnostiquer un bug qui résiste : une boucle qui échoue d'abord, puis hypothèses, cause confirmée, correctif |
 | `to-spec` | Transformer les décisions (ou un jalon du cahier des charges) en spec, puis en tickets |
 | `to-tickets` | Découper en tickets par tranches verticales, avec leurs dépendances |
-| `tickets` | Lire, publier et ranger les tickets et les jalons de la roadmap (local, GitHub, GitLab, Jira) |
+| `tickets` | Lire, publier et ranger les tickets et les jalons de la roadmap (local, GitHub, GitLab, Forgejo / Gitea, Jira) |
 | `interview` | Entretien critique : le besoin d'abord, les faits cherchés, les décisions posées, les questions métier repérées |
 | `domain-modeling` | Tenir le glossaire du domaine (`GLOSSARY.md`) : un mot tranché par concept |
 | `to-questionnaire` | Faire remplir par le métier les questions auxquelles tu ne peux pas répondre, puis réintégrer les réponses |
@@ -75,8 +75,8 @@ Perdu en chemin ? /next dit quel skill lancer.
 - **Simple ou gros** : le verdict est écrit dans le cahier des charges. Simple, chaque jalon
   tient en une session et se planifie directement ; gros, chaque jalon passe par une spec puis
   des tickets. Le critère de taille est celui de `to-tickets`.
-- **La roadmap** est tenue par `tickets` : `ROADMAP.md` en local, milestones sur GitHub et
-  GitLab, versions sur Jira. Ses jalons sont ceux du cahier des charges.
+- **La roadmap** est tenue par `tickets` : `ROADMAP.md` en local, milestones sur GitHub,
+  GitLab, Forgejo et Gitea, versions sur Jira. Ses jalons sont ceux du cahier des charges.
 - **Jalon, spec, tickets** : un jalon est une étape de livraison, vide au départ. Dans un gros
   projet, l'epic, c'est la spec du jalon (un ticket parent, une Epic sur Jira), et ses tickets
   en sont les enfants, rangés dans le jalon. Un projet simple n'a pas d'epic : le plan du jalon
@@ -87,6 +87,7 @@ Perdu en chemin ? /next dit quel skill lancer.
   | Local | section de `ROADMAP.md` | `docs/specs/<feature>.md` | `docs/tickets/<feature>/NN-<slug>.md` |
   | GitHub | milestone | issue parente, label `spec` | sous-issue de la spec |
   | GitLab | milestone | issue, label `spec` | issue qui cite la spec |
+  | Forgejo, Gitea | milestone | issue, label `spec` | issue qui cite la spec, bloquants en dépendances natives |
   | Jira | version (Fix Version) | Epic | Story rattachée à l'Epic |
 - **Un ticket écrit hors de ces skills** (par une PO, un client) se reconnaît à son format :
   `plan` questionne alors le besoin, pousse l'entretien et propose un commentaire pour son

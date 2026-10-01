@@ -1,6 +1,6 @@
 ---
 name: tickets
-description: "Lire, créer, commenter, fermer et relier des tickets, des specs et les jalons de la roadmap dans le gestionnaire du projet (fichiers locaux avec ROADMAP.md, GitHub, GitLab, Jira ou autre), et configurer ce gestionnaire (section Tickets du CLAUDE.md). Utilise ce skill quand l'utilisateur veut agir sur un ticket ou une issue, voir où en est la roadmap, rattacher un ticket à un jalon, savoir où vivent ses tickets ou changer de gestionnaire."
+description: "Lire, créer, commenter, fermer et relier des tickets, des specs et les jalons de la roadmap dans le gestionnaire du projet (fichiers locaux avec ROADMAP.md, GitHub, GitLab, Forgejo ou Gitea, Jira ou autre), et configurer ce gestionnaire (section Tickets du CLAUDE.md). Utilise ce skill quand l'utilisateur veut agir sur un ticket ou une issue, voir où en est la roadmap, rattacher un ticket à un jalon, savoir où vivent ses tickets ou changer de gestionnaire."
 ---
 
 # Tickets
@@ -18,16 +18,19 @@ existe, l'appliquer telle quelle et passer à l'étape 3.
 
 Si la section n'existe pas, **explorer avant de demander** :
 
-- `git remote -v` : GitHub, GitLab (gitlab.com ou instance auto-hébergée) ou aucun remote ;
+- `git remote -v` : GitHub, GitLab (gitlab.com ou instance auto-hébergée), Forgejo ou Gitea
+  (codeberg.org, ou une instance dont `https://<hôte>/api/v1/version` répond) ou aucun remote ;
 - des traces d'usage : `docs/tickets/`, `docs/specs/`, des références `PROJ-123` dans `git log`
-  (signe de Jira), des issues existantes (`gh issue list --limit 5`, `glab issue list`).
+  (signe de Jira), des issues existantes (`gh issue list --limit 5`, `glab issue list`,
+  `tea issues list`).
 
 Proposer ensuite **une** valeur par défaut, avec l'outil AskUserQuestion :
 
-- remote GitHub → **GitHub Issues** ; remote GitLab → **GitLab Issues** ; sinon → **fichiers
-  locaux** ;
-- toujours offrir les autres : fichiers locaux, GitHub, GitLab, Jira. L'utilisateur peut aussi
-  décrire un autre outil (option « Autre » de l'outil) : noter sa description telle quelle.
+- remote GitHub → **GitHub Issues** ; remote GitLab → **GitLab Issues** ; remote Forgejo ou
+  Gitea → **Forgejo / Gitea Issues** ; sinon → **fichiers locaux** ;
+- toujours offrir les autres : fichiers locaux, GitHub, GitLab, Forgejo / Gitea, Jira.
+  L'utilisateur peut aussi décrire un autre outil (option « Autre » de l'outil) : noter sa
+  description telle quelle.
 
 Pour Jira, demander aussi le site et la clé du projet. Pour « Autre », demander comment on crée,
 lit et relie un ticket.
@@ -63,8 +66,11 @@ l'écrire. Formats :
 - Jalons : versions (Fix Version)
 ```
 
-Pour GitLab, le bloc est celui de GitHub avec `GitLab Issues` et des milestones. Sur Jira, les
-jalons sont des versions et pas des Epics : les Epics portent déjà les specs.
+Pour GitLab, le bloc est celui de GitHub avec `GitLab Issues` et des milestones. Pour Forgejo et
+Gitea, `Forgejo Issues` ou `Gitea Issues` (`https://<instance>`, `owner/repo`), et
+`Tickets : issues qui citent la spec, dépendances natives pour les bloquants` : ni l'un ni
+l'autre n'a de sous-issues. Sur Jira, les jalons sont des versions et pas des Epics : les Epics
+portent déjà les specs.
 
 Pour « Autre », écrire la description de l'utilisateur sous `- Gestionnaire :`, puis les règles
 de création, de lecture, de lien et de jalons qu'il a données.
@@ -76,8 +82,8 @@ est nécessaire, proposer la valeur par défaut du gestionnaire et l'ajouter apr
 
 Le détail de chaque gestionnaire est dans `references/` : [local.md](references/local.md),
 [github.md](references/github.md), [gitlab.md](references/gitlab.md),
-[jira.md](references/jira.md). Lire uniquement celui du projet. Pour un gestionnaire « Autre »,
-suivre la section du `CLAUDE.md`.
+[gitea.md](references/gitea.md) (Forgejo et Gitea), [jira.md](references/jira.md). Lire
+uniquement celui du projet. Pour un gestionnaire « Autre », suivre la section du `CLAUDE.md`.
 
 Les opérations dont les autres skills ont besoin :
 
@@ -104,10 +110,10 @@ Règles communes :
   Seule exception : un extrait qui fixe une décision mieux que la prose (schéma, type, machine à
   états).
 - Réutiliser les labels ou types existants ; ne pas en créer sans le dire.
-- **Sur un gestionnaire distant** (GitHub, GitLab, Jira, autre), publier, fermer, commenter ou
-  modifier un ticket seulement après avoir montré le contenu et obtenu un accord explicite : un
-  ticket publié est vu par d'autres, même supprimé ensuite. Réorganiser la roadmap ou changer de
-  gestionnaire se propose de même avant de se faire.
+- **Sur un gestionnaire distant** (GitHub, GitLab, Forgejo, Gitea, Jira, autre), publier, fermer,
+  commenter ou modifier un ticket seulement après avoir montré le contenu et obtenu un accord
+  explicite : un ticket publié est vu par d'autres, même supprimé ensuite. Réorganiser la
+  roadmap ou changer de gestionnaire se propose de même avant de se faire.
 - **Les jalons viennent du cahier des charges** (section « Découpage en jalons ») : reprendre
   leur nom et leur objectif, sans recopier le reste du document. Un jalon ajouté, renommé ou
   réordonné se propose, il ne se fait pas en silence.
