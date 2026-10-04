@@ -30,6 +30,9 @@ code s'écrit ensuite avec `implement`.
   un petit outil) : la synthèse qui vient d'être validée.
 - **Reprise** : si un plan de `docs/plans/` cite déjà cette source et a des cases non cochées, ne
   pas en écrire un autre : le dire et proposer de reprendre avec `implement`.
+- **Plan déjà terminé** (`> Statut : terminé`) qui cite cette source : le dire, avec son bilan,
+  et demander ce qui reste à faire. Un reste qui mérite un plan devient un nouveau ticket (skill
+  `tickets`), qui aura le sien.
 
 Lire aussi `CLAUDE.md`, `GLOSSARY.md` s'il existe (le plan nomme les notions avec ses termes),
 les ADR (`docs/adr/`) et `docs/design/DESIGN.md` s'il y a de l'interface (ou `DESIGN.md` à la
