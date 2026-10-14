@@ -31,6 +31,8 @@ MODEL = "claude-opus-5-5"
 JUDGE_MODEL = "claude-sonnet-5-5"
 ALLOWED = "Read,Grep,Glob,Bash(git:*),Agent,Task,Skill"
 DENIED = "Edit,Write,NotebookEdit"
+NON_INTERACTIVE = ("Cette session n'est pas interactive : personne ne répondra. Ne pose aucune "
+                   "question")
 CASES = ["doc-explore", "doc-general", "review-old", "review-new", "plan-full-old",
          "plan-full-new"]
 
@@ -122,17 +124,17 @@ def subagent_prompt(agent_type, brief):
 def prompt_for(case):
     paths = cases_spec()["paths"]
     if case.startswith("plan-full"):
-        return (f"Appelle le Skill tool avec « {case} » sur le ticket {paths['ticket']}. Cette "
-                "session n'est pas interactive : personne ne répondra. Ne pose aucune question : "
-                "à chaque point à trancher, applique l'hypothèse la plus plausible et note-la "
-                "dans le plan. Pas de recherche sur le web. Écris le plan dans docs/plans/, puis "
+        return (f"Appelle le Skill tool avec « {case} » sur le ticket {paths['ticket']}. "
+                f"{NON_INTERACTIVE} : à chaque point à trancher, applique l'hypothèse la plus "
+                "plausible et note-la dans le plan. Pas de recherche sur le web. Écris le plan dans docs/plans/, puis "
                 "arrête-toi avant la validation, sans rien commiter.")
     if case.startswith("doc"):
         brief = brief_after(ROOT / "brainstorming" / "SKILL.md", "fais-le relire par un sous-agent")
         brief = brief.replace("<chemin>", "docs/requirements.md")
         return subagent_prompt("Explore" if case == "doc-explore" else "general-purpose", brief)
     return (f"Appelle le Skill tool avec « {case} », avec pour point fixe main et pour spec "
-            f"{paths['plan']}. Ne corrige rien : donne le rapport, puis arrête-toi.")
+            f"{paths['plan']}. {NON_INTERACTIVE}. Ne "
+            "corrige rien : donne la vue groupée et le rapport complet, puis arrête-toi.")
 
 
 def run_claude(prompt, cwd, model, timeout=900, write=False):
@@ -206,8 +208,8 @@ def judge(case_key, report):
 def refs_check(report, work):
     """Remarques R-n distinctes, et combien citent un fichier:ligne qui existe dans le projet.
 
-    Seule la première apparition d'un R-n compte (« En bref » les recite). Un chemin court
-    (`export.py:18`) vaut s'il désigne un seul fichier du projet.
+    Seule la première apparition d'un R-n compte (le rapport complet recite la vue groupée). Un
+    chemin court (`export.py:18`) vaut s'il désigne un seul fichier du projet.
     """
     files = [p for p in work.rglob("*") if p.is_file() and ".git" not in p.parts]
     blocks, seen = {}, []

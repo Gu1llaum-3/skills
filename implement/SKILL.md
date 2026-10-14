@@ -134,11 +134,14 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
 Quand la dernière vague est verte :
 
 1. **Faire relire** (sauf plan d'origine POC) : appeler le Skill tool avec « review », avec le
-   plan pour spec. Écrire ses remarques `R-n` dans le journal, avec leur marque de vérification
-   (confirmée, douteuse, fausse), et demander lesquelles corriger, en recommandant les confirmées.
-   Les retenues deviennent les tâches d'une vague « Retours de revue », exécutée en TDD comme
-   les autres ; les écartées sont notées avec leur raison. Puis passer au bilan, sans nouvelle
-   revue.
+   plan pour spec. Écrire son rapport complet dans le journal. L'utilisateur a pu laisser tourner
+   plusieurs vagues sans les suivre : le message commence par un **bloc d'état** de 3 ou 4 lignes
+   (plan et branche ; vagues faites et commits ; critères atteints n/m ; vérification complète
+   verte ou rouge, et pourquoi), suivi de la vue groupée de `review`, d'un renvoi vers le
+   journal pour le rapport complet, et de sa question (section « Demander quoi corriger »). Les
+   remarques retenues deviennent les tâches d'une vague « Retours de revue », exécutée en TDD
+   comme les autres ; les écartées sont notées avec leur raison. Puis passer au bilan, sans
+   nouvelle revue.
 2. **Écrire le bilan dans le plan**, pour le relecteur : dans la section « Réalisé » si le plan en
    a une, sinon dans une section ajoutée en fin de fichier. Y mettre :
    - chaque critère, atteint (avec le test qui le prouve) ou non, et pourquoi ;

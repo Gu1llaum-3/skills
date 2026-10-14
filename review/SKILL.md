@@ -71,13 +71,37 @@ fichiers de l'étape 3 et la base d'odeurs. Brief :
 > l'emporte sur une odeur. Ce que l'outillage impose déjà (linter, formateur, typage) ne se
 > signale pas. Moins de 400 mots.
 
-## 5. Rapporter
+## 5. Vérifier et classer
+
+Un retour de sous-agent est une hypothèse. Pour chaque remarque :
+
+1. **Vérifier** : relire le passage cité du diff et de la spec, puis marquer la remarque
+   **confirmée**, **douteuse** (ce qui manque pour trancher) ou **fausse** (pourquoi, en une
+   ligne). Ne rien corriger à cette étape.
+2. **Proposer une action**, distincte de la marque (une remarque confirmée n'est pas forcément à
+   corriger) :
+   - **À corriger** : confirmée, et la correction est locale et sans débat ;
+   - **À trancher** : un vrai compromis, que l'utilisateur seul peut arbitrer, ou une remarque
+     douteuse ; **en cas de doute entre corriger et laisser, c'est ici** ;
+   - **Rien à faire** : confirmée, mais sans effet ; avec une raison vérifiable (un fait du code,
+     du dépôt ou de la spec), jamais une préférence. L'agent qui classe est souvent l'auteur du
+     diff : sans raison vérifiable, la remarque va dans « À trancher » ;
+   - **Déjà connu** : répète un écart déjà noté (journal du plan, bilan de vague) ;
+   - **Fausse**.
+
+Numéroter les remarques `R-1`, `R-2`… à travers les deux axes. Le classement par action ne
+fusionne pas deux remarques, ne réécrit pas leur texte et ne change pas leur axe : c'est ce que la
+séparation des sous-agents protège.
+
+## 6. Rapporter
+
+Le **rapport complet**, par axe, garde les extraits qui permettent de contester une remarque :
 
 ```markdown
 ## Spec
 
-<le rapport du sous-agent, à peine nettoyé, avec la marque de vérification de chaque
-remarque ; ou « pas de spec : axe sauté »>
+<le rapport du sous-agent, à peine nettoyé, avec R-n et la marque de chaque remarque ;
+ou « pas de spec : axe sauté »>
 
 ## Conventions
 
@@ -86,25 +110,51 @@ remarque ; ou « pas de spec : axe sauté »>
 
 ### Jugements
 <les odeurs possibles>
+```
 
-**En bref** :
-- Spec : <n> remarques (<n> confirmées), la plus grave : ….
-- Conventions : <n> violations et <n> jugements (<n> confirmés), le plus grave : ….
+La **vue groupée** est ce que l'utilisateur lit d'abord : une ligne par remarque,
+`R-n · spec|conv · fichier:ligne · constat`, suivie de sa raison dans « Rien à faire », « Déjà
+connu » et « Fausses ». Une remarque fausse reste visible, barrée, pour que l'utilisateur puisse
+la contester. Les groupes vides sont omis ; l'ordre est celui-ci :
+
+```markdown
+**Relecture : <n> à corriger, <n> à trancher**, sur <n> remarques (spec <n>, conventions <n>).
+
+À corriger
+- R-3 · spec · docs/plans/x.md:42 · le plan écrit --migrate, les fichiers compose écrivent migrate
+À trancher
+- R-6 · conv · mise.toml:12 · calcul de version écrit deux fois ; le mettre en commun lance git à chaque appel
+Rien à faire
+- R-4 · spec · mise.toml:20 · build affiche le chemin du binaire : sortie seule, sans effet
+Déjà connu
+- R-1 · spec · mise.toml:41 · verify rouge (govulncheck) : déjà dans le journal
+Fausses
+- ~~R-7 · conv · README.md:30 · justification répétée~~ : le dépôt le fait partout
 
 Pour les bugs : `/code-review`.
 ```
 
-- **Vérifier chaque remarque** avant de la rapporter : un retour de sous-agent est une
-  hypothèse. Relire le passage cité du diff et de la spec, puis marquer la remarque
-  **confirmée**, **douteuse** (ce qui manque pour trancher) ou **fausse** (pourquoi, en une
-  ligne). Une remarque fausse reste au rapport, barrée, pour que l'utilisateur puisse la
-  contester. Ne rien corriger à cette étape.
-- Ne pas fusionner ni reclasser les remarques entre les deux axes : c'est ce que la séparation
-  empêche.
-- Numéroter les remarques `R-1`, `R-2`… à travers les deux axes.
-- **Appelé par `implement`** : lui rendre la main avec le rapport.
-- **Lancé seul** : demander quelles remarques l'utilisateur garde (« R-2 et R-5 ») ; les
-  jugements ne sont que des odeurs possibles. Puis proposer la suite, sans la lancer :
+- **Appelé par `implement`** : lui rendre la main avec les deux ; il dit où les mettre.
+- **Lancé seul** : afficher la vue groupée, puis le rapport complet en dessous, et poser la
+  question.
+
+## 7. Demander quoi corriger
+
+Toujours avec AskUserQuestion, sauf s'il n'y a aucune remarque (le dire, puis continuer) :
+
+- **« Que corriger ? »** : en premier le lot « À corriger », suivi de « (Recommandé) » ; puis un
+  lot plus large qui reprend aussi les « Rien à faire » ; puis « Rien, passer au bilan » (appelé
+  par `implement`) ou « Rien, s'arrêter là » (lancé seul). Chaque option nomme ses `R-n`. S'il n'y a rien à corriger, « Rien » vient en
+  premier, recommandé.
+- **Une question par remarque « À trancher »**, de 2 à 4 options qui portent le compromis, la
+  recommandée en premier. Au-delà de 4 questions par appel, les suivantes vont dans un second
+  appel.
+- Les options listées seulement : l'outil ajoute de lui-même la réponse libre.
+
+Ensuite :
+
+- **Appelé par `implement`** : lui rendre la main avec les remarques retenues.
+- **Lancé seul** : proposer la suite, sans la lancer :
   - quelques corrections locales : les faire ici, avec `tdd` si un comportement change ;
   - un manque de spec ou un vrai chantier : `/plan` à partir des remarques gardées, en
     continuant dans cette conversation, qui en est la source.
