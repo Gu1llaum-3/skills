@@ -67,7 +67,7 @@ bug qui résiste ──► debug ──┬── petit correctif ──► test 
                                                        └── plus tard ──► to-spec
 
 interview, research, adr, to-questionnaire et wizard sont appelés en cours de route.
-implement écrit le code avec tdd, puis le fait relire par review avant son bilan.
+implement écrit le code avec tdd, puis le fait relire par review et /code-review avant son bilan.
 Après une session difficile, /retro propose ce qu'il faudrait changer dans l'environnement.
 Perdu en chemin ? /next dit quel skill lancer.
 ```

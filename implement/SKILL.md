@@ -134,14 +134,18 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
 Quand la dernière vague est verte :
 
 1. **Faire relire** (sauf plan d'origine POC) : appeler le Skill tool avec « review », avec le
-   plan pour spec. Écrire son rapport complet dans le journal. L'utilisateur a pu laisser tourner
+   plan pour spec, puis avec « code-review » au niveau `medium`, sur le diff depuis la branche
+   de départ, pour les bugs que `review` ne cherche pas. Ses constats rejoignent la vue groupée
+   de `review` à la suite de ses remarques (`R-n · bug · fichier:ligne · constat`), rangés par
+   action selon les mêmes règles ; la ligne « Pour les bugs : `/code-review` » disparaît.
+   Écrire les deux rapports complets dans le journal. L'utilisateur a pu laisser tourner
    plusieurs vagues sans les suivre : le message commence par un **bloc d'état** de 3 ou 4 lignes
    (plan et branche ; vagues faites et commits ; critères atteints n/m ; vérification complète
-   verte ou rouge, et pourquoi), suivi de la vue groupée de `review`, d'un renvoi vers le
-   journal pour le rapport complet, et de sa question (section « Demander quoi corriger »). Les
+   verte ou rouge, et pourquoi), suivi de la vue groupée, d'un renvoi vers le journal pour les
+   rapports complets, et de la question de `review` (section « Demander quoi corriger »). Les
    remarques retenues deviennent les tâches d'une vague « Retours de revue », exécutée en TDD
-   comme les autres ; les écartées sont notées avec leur raison. Puis passer au bilan, sans
-   nouvelle revue.
+   comme les autres (un bug commence par le test qui le montre) ; les écartées sont notées avec
+   leur raison. Puis passer au bilan, sans nouvelle revue.
 2. **Écrire le bilan dans le plan**, pour le relecteur : dans la section « Réalisé » si le plan en
    a une, sinon dans une section ajoutée en fin de fichier. Y mettre :
    - chaque critère, atteint (avec le test qui le prouve) ou non, et pourquoi ;
