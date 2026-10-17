@@ -17,7 +17,7 @@ Le problème et la solution, en deux ou trois phrases, du point de vue de l'util
 
 ## Décisions
 
-- <une décision par ligne, avec sa raison si elle n'est pas évidente>
+- <une décision par ligne, avec sa raison si elle n'est pas évidente> (AC-n si elle fixe un comportement)
 
 ## Critères d'acceptation
 
@@ -55,6 +55,10 @@ Règles :
   partagé) ne passe pas au vert par tranche. Le découper en *expand–contract*, comme dans
   [`to-tickets`](../../to-tickets/SKILL.md) : une tâche ajoute la nouvelle forme à côté de
   l'ancienne, une tâche par lot migre les appels, une dernière supprime l'ancienne forme.
+- **Décisions** : celle qui fixe un comportement (un ordre, une validation, un refus) devient
+  aussi un critère, que la ligne de décision cite : `implement` ne teste que les critères et
+  manquerait sans bruit une décision restée seule. Une décision de forme (un nom, un
+  emplacement, une dépendance) n'en a pas besoin.
 - **Interfaces à tester** : celles qui existent déjà d'abord, les plus hautes possibles, le moins
   possible. Celles d'une spec ou d'un ticket se reprennent telles quelles.
 - Chaque tâche cite le ou les critères qu'elle prouve.
