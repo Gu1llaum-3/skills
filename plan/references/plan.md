@@ -64,7 +64,8 @@ Règles :
 - Chaque tâche cite le ou les critères qu'elle prouve.
 - Une tâche = un commit : si une tâche paraît demander plusieurs commits, la découper.
 - Les refactorisations préalables repérées dans le code viennent en premières tâches.
-- Plusieurs vagues seulement quand une pause d'essai par l'utilisateur a du sens entre elles.
+- Plusieurs vagues seulement quand un point de vérification complète a du sens entre elles :
+  `implement` les enchaîne, sauf en mode `pas-à-pas`, où l'utilisateur essaie entre deux vagues.
 - « Questions ouvertes » : une question **non bloquante** porte l'hypothèse que le plan applique ;
   une question **bloquante** pointe vers son questionnaire et empêche la validation. Section
   absente s'il n'y en a pas.

@@ -1,6 +1,6 @@
 ---
 name: review
-description: "Relire un diff (une branche, une PR, le travail en cours) sur deux axes séparés, la spec (plan, ticket : manques, dépassements, erreurs) et les conventions du dépôt, dans deux sous-agents au contexte vierge. Utilise ce skill quand l'utilisateur veut faire relire son travail (« relis la branche », « vérifie que ça colle au ticket 42 », « review depuis main »). Pas pour chercher des bugs : c'est /code-review."
+description: "Relire un diff (une branche, une PR, le travail en cours) sur deux axes séparés, la spec (plan, ticket : manques, dépassements, erreurs) et les conventions du dépôt, dans deux sous-agents au contexte vierge, puis un juge qui classe chaque remarque avec une preuve. Utilise ce skill quand l'utilisateur veut faire relire son travail (« relis la branche », « vérifie que ça colle au ticket 42 », « review depuis main »). Pas pour chercher des bugs : c'est /code-review."
 argument-hint: "[point fixe : branche, commit, main] [spec : plan, ticket, chemin]"
 ---
 
@@ -8,8 +8,9 @@ argument-hint: "[point fixe : branche, commit, main] [spec : plan, ticket, chemi
 
 Un diff peut respecter toutes les conventions et faire autre chose que ce qui était demandé, ou
 faire exactement ce qui était demandé en cassant les conventions. Ce skill relit les deux
-séparément, dans deux sous-agents au contexte vierge, pour qu'un axe ne masque pas l'autre. Il ne
-modifie rien : il rapporte, puis propose la suite.
+séparément, dans deux sous-agents au contexte vierge, pour qu'un axe ne masque pas l'autre, puis
+fait classer leurs remarques par un juge qui n'a pas écrit le code. Il ne modifie rien : il
+rapporte, puis propose la suite.
 
 ## 1. Choisir le point fixe
 
@@ -71,27 +72,35 @@ fichiers de l'étape 3 et la base d'odeurs. Brief :
 > l'emporte sur une odeur. Ce que l'outillage impose déjà (linter, formateur, typage) ne se
 > signale pas. Moins de 400 mots.
 
-## 5. Vérifier et classer
+## 5. Faire classer par le juge
 
-Un retour de sous-agent est une hypothèse. Pour chaque remarque :
+Un retour de sous-agent est une hypothèse, et l'agent qui lance `review` est souvent l'auteur du
+diff : il ne classe pas lui-même. Le juge, l'agent `review-judge`
+([../agents/review-judge.md](../agents/review-judge.md)), vérifie chaque remarque dans le code et
+la classe, avec une preuve. Ses outils, fixés dans son fichier, ne lui permettent pas de
+modifier le dépôt.
 
-1. **Vérifier** : relire le passage cité du diff et de la spec, puis marquer la remarque
-   **confirmée**, **douteuse** (ce qui manque pour trancher) ou **fausse** (pourquoi, en une
-   ligne). Ne rien corriger à cette étape.
-2. **Proposer une action**, distincte de la marque (une remarque confirmée n'est pas forcément à
-   corriger) :
-   - **À corriger** : confirmée, et la correction est locale et sans débat ;
-   - **À trancher** : un vrai compromis, que l'utilisateur seul peut arbitrer, ou une remarque
-     douteuse ; **en cas de doute entre corriger et laisser, c'est ici** ;
-   - **Rien à faire** : confirmée, mais sans effet ; avec une raison vérifiable (un fait du code,
-     du dépôt ou de la spec), jamais une préférence. L'agent qui classe est souvent l'auteur du
-     diff : sans raison vérifiable, la remarque va dans « À trancher » ;
-   - **Déjà connu** : répète un écart déjà noté (journal du plan, bilan de vague) ;
-   - **Fausse**.
+1. Numéroter les remarques `R-1`, `R-2`… à travers les axes, dans l'ordre spec, conventions,
+   puis les constats de bugs que l'appelant a passés (axe `bug`, ceux de `/code-review` quand
+   `implement` appelle).
+2. Écrire le diff dans un fichier, par redirection, sans le faire passer par la conversation :
+   `mkdir -p "$(git rev-parse --git-dir)/review"`, puis
+   `git diff <merge-base> > "$(git rev-parse --git-dir)/review/diff.patch"`. Les fichiers non
+   suivis sont lus par le juge à leur chemin.
+3. Lancer l'outil Agent avec `subagent_type` `review-judge`, **au premier plan** (attendre son
+   retour), avec seulement : les remarques telles que les sous-agents les ont écrites, le chemin
+   du diff, les fichiers non suivis, le chemin de la spec, et les écarts déjà notés (journal du
+   plan, bilans de vague). Ni justification des choix, ni résumé du travail. Garder son
+   identifiant : la relecture des corrections le reprend (§8).
+4. Reprendre son classement tel quel, en quatre groupes : « À corriger », « À décider »,
+   « Écartée », « Déjà connu ». Ce qui va dans chacun est défini dans le fichier du juge, et
+   nulle part ailleurs.
 
-Numéroter les remarques `R-1`, `R-2`… à travers les deux axes. Le classement par action ne
-fusionne pas deux remarques, ne réécrit pas leur texte et ne change pas leur axe : c'est ce que la
-séparation des sous-agents protège.
+**Seul le juge écarte.** Désaccord avec un verdict : l'écrire à côté de la remarque, qui passe
+dans « À décider » ; ne jamais la reclasser soi-même. Le classement ne fusionne pas deux
+remarques, ne réécrit pas leur texte et ne change pas leur axe. Ce que le juge a « vu en
+vérifiant » (`V-n`, déjà classé par lui) s'ajoute à la suite, renuméroté en `R-n` suivants,
+partout : vue groupée, rapport complet et relecture des corrections.
 
 ## 6. Rapporter
 
@@ -100,7 +109,7 @@ Le **rapport complet**, par axe, garde les extraits qui permettent de contester 
 ```markdown
 ## Spec
 
-<le rapport du sous-agent, à peine nettoyé, avec R-n et la marque de chaque remarque ;
+<le rapport du sous-agent, à peine nettoyé, avec R-n ;
 ou « pas de spec : axe sauté »>
 
 ## Conventions
@@ -110,51 +119,74 @@ ou « pas de spec : axe sauté »>
 
 ### Jugements
 <les odeurs possibles>
+
+## Classement du juge
+
+<son rendu, tel quel, ses V-n remplacés par leur R-n>
 ```
 
 La **vue groupée** est ce que l'utilisateur lit d'abord : une ligne par remarque,
-`R-n · spec|conv · fichier:ligne · constat`, suivie de sa raison dans « Rien à faire », « Déjà
-connu » et « Fausses ». Une remarque fausse reste visible, barrée, pour que l'utilisateur puisse
-la contester. Les groupes vides sont omis ; l'ordre est celui-ci :
+`R-n · spec|conv|bug · fichier:ligne · constat`, suivie de la preuve du juge dans « Écartée » et
+« Déjà connu », et des options dans « À décider ». Une remarque écartée reste visible, barrée,
+pour que l'utilisateur puisse la contester. Les groupes vides sont omis ; l'ordre est celui-ci :
 
 ```markdown
-**Relecture : <n> à corriger, <n> à trancher**, sur <n> remarques (spec <n>, conventions <n>).
+**Relecture : <n> à corriger, <n> à décider**, sur <n> remarques (spec <n>, conventions <n>, bugs <n>, vues par le juge <n>).
 
 À corriger
 - R-3 · spec · docs/plans/x.md:42 · le plan écrit --migrate, les fichiers compose écrivent migrate
-À trancher
-- R-6 · conv · mise.toml:12 · calcul de version écrit deux fois ; le mettre en commun lance git à chaque appel
-Rien à faire
-- R-4 · spec · mise.toml:20 · build affiche le chemin du binaire : sortie seule, sans effet
+À décider
+- R-6 · conv · mise.toml:12 · calcul de version écrit deux fois · options : le mettre en commun (lance git à chaque appel) / laisser
+Écartée
+- ~~R-4 · spec · mise.toml:20 · build affiche le chemin du binaire~~ : sortie seule, aucun appelant ne la lit (mise.toml:20)
 Déjà connu
 - R-1 · spec · mise.toml:41 · verify rouge (govulncheck) : déjà dans le journal
-Fausses
-- ~~R-7 · conv · README.md:30 · justification répétée~~ : le dépôt le fait partout
 
 Pour les bugs : `/code-review`.
 ```
 
-- **Appelé par `implement`** : lui rendre la main avec les deux ; il dit où les mettre.
+Dans l'en-tête, une part à zéro est omise. La dernière ligne n'apparaît que si aucun constat de
+bug n'a été passé.
+- **Appelé par `implement`** : lui rendre la main avec les deux, sans question ; il dit où les
+  mettre et corrige.
 - **Lancé seul** : afficher la vue groupée, puis le rapport complet en dessous, et poser la
   question.
 
-## 7. Demander quoi corriger
+## 7. Demander quoi corriger (lancé seul)
 
-Toujours avec AskUserQuestion, sauf s'il n'y a aucune remarque (le dire, puis continuer) :
+Toujours avec AskUserQuestion, sauf s'il n'y a aucune remarque (le dire, puis s'arrêter) :
 
-- **« Que corriger ? »** : en premier le lot « À corriger », suivi de « (Recommandé) » ; puis un
-  lot plus large qui reprend aussi les « Rien à faire » ; puis « Rien, passer au bilan » (appelé
-  par `implement`) ou « Rien, s'arrêter là » (lancé seul). Chaque option nomme ses `R-n`. S'il n'y a rien à corriger, « Rien » vient en
-  premier, recommandé.
-- **Une question par remarque « À trancher »**, de 2 à 4 options qui portent le compromis, la
-  recommandée en premier. Au-delà de 4 questions par appel, les suivantes vont dans un second
-  appel.
-- Les options listées seulement : l'outil ajoute de lui-même la réponse libre.
+- **« Que corriger ? »** : en premier le lot « À corriger », suivi de « (Recommandé) » ; puis
+  « Rien, s'arrêter là ». Chaque option nomme ses `R-n`. S'il n'y a rien à corriger, « Rien »
+  vient en premier, recommandé.
+- **Une question par remarque « À décider »**, avec les options du juge, la plus prudente en
+  premier. Au-delà de 4 questions par appel, les suivantes vont dans un second appel.
+- Les options listées seulement : l'outil ajoute de lui-même la réponse libre, qui permet aussi
+  de reprendre une remarque écartée.
 
-Ensuite :
+Puis proposer la suite, sans la lancer :
 
-- **Appelé par `implement`** : lui rendre la main avec les remarques retenues.
-- **Lancé seul** : proposer la suite, sans la lancer :
-  - quelques corrections locales : les faire ici, avec `tdd` si un comportement change ;
-  - un manque de spec ou un vrai chantier : `/plan` à partir des remarques gardées, en
-    continuant dans cette conversation, qui en est la source.
+- quelques corrections locales : les faire ici, avec `tdd` si un comportement change, puis la
+  relecture des corrections (§8) ;
+- un manque de spec ou un vrai chantier : `/plan` à partir des remarques gardées, en continuant
+  dans cette conversation, qui en est la source.
+
+## 8. Relire les corrections
+
+Après les corrections (par `implement`, ou ici sur demande) :
+
+1. Écrire le diff des corrections seules, par redirection, dans
+   `$(git rev-parse --git-dir)/review/fixes-<tour>.patch`, depuis le commit d'avant la première
+   correction. **Sans commit** : noter avant la première correction un instantané du travail,
+   `git stash create` (il ne touche à rien ; vide s'il n'y a rien à garder : prendre `HEAD`), et
+   prendre le diff depuis lui. Les fichiers non suivis n'y sont pas : les copier dans
+   `$(git rev-parse --git-dir)/review/before/` au même moment, puis ajouter au diff des
+   corrections leur `diff -u` contre ces copies.
+2. Reprendre le juge avec `SendMessage` et son identifiant, en lui donnant ce chemin, la
+   correspondance de ses `V-n` renumérotés (`V-1 = R-27`) et, pour
+   chaque remarque « À corriger », le commit qui la corrige (sans commit : les fichiers touchés)
+   ou la contestation de l'auteur (par exemple un test qui ne peut pas échouer). Si la reprise échoue, lancer un nouveau
+   `review-judge` avec son premier classement en plus.
+3. Ce qu'il marque **non réglé**, et ce qu'une correction introduit et qu'il classe « À
+   corriger », se corrige à nouveau, puis un second tour. **Deux tours au maximum** : ce qui reste
+   ouvert passe dans « À décider », avec la raison.

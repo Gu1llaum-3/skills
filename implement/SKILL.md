@@ -1,16 +1,20 @@
 ---
 name: implement
-description: "Exécuter un plan validé, un ticket ou un jalon (fichier local, GitHub, GitLab, Jira), vague par vague, en TDD, une tâche par commit, avec une pause par vague et une relecture à la fin ; reprendre exactement là où on s'est arrêté. Utilise ce skill quand l'utilisateur veut implémenter, lancer ou reprendre un plan (« implémente le plan », « lance la vague 2 », « continue le plan »), un ticket (« implémente le ticket 42 », « on attaque PROJ-123 ») ou un jalon (« on attaque le jalon 2 »). Pas pour écrire, relire ou modifier un plan : c'est plan."
-argument-hint: "[chemin du plan | ticket] [turbo]"
+description: "Exécuter un plan validé, un ticket ou un jalon (fichier local, GitHub, GitLab, Jira), vague par vague, en TDD, une tâche par commit, sans pause, puis une relecture jugée et une PR en brouillon ; reprendre exactement là où on s'est arrêté. Utilise ce skill quand l'utilisateur veut implémenter, lancer ou reprendre un plan (« implémente le plan », « lance la vague 2 », « continue le plan »), un ticket (« implémente le ticket 42 », « on attaque PROJ-123 ») ou un jalon (« on attaque le jalon 2 »). Pas pour écrire, relire ou modifier un plan : c'est plan."
+argument-hint: "[chemin du plan | ticket] [pas-à-pas]"
 ---
 
 # Implémenter un plan
 
 Ce skill sert **uniquement à exécuter**. On ne redessine pas le plan, on ne l'audite pas et on ne le
-réécrit pas : on l'exécute en TDD, on coche au fil de l'eau et on s'arrête dès que quelque chose ne
-va pas. Le plan a été discuté et validé ; le rôle de ce skill est de le réaliser fidèlement et de
-laisser une trace qu'une reprise ou un relecteur pourra suivre sans avoir la conversation sous les
-yeux.
+réécrit pas : on l'exécute en TDD et on coche au fil de l'eau. Le plan a été discuté et validé ;
+le rôle de ce skill est de le réaliser fidèlement et de laisser une trace qu'une reprise ou un
+relecteur pourra suivre sans avoir la conversation sous les yeux.
+
+**Autonome par défaut** : la validation du plan est le point de contrôle de l'utilisateur. Une
+fois les préalables réunis, le skill va jusqu'à la PR en brouillon sans le déranger, sauf pour
+les arrêts de « Quand ça ne va pas ». Tout ce qu'il tranche seul s'écrit dans le journal du plan
+et remonte dans la PR, où l'utilisateur le relit.
 
 **Les conventions du dépôt priment toujours** sur ce qui suit (langue, noms de branches, format des
 commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
@@ -44,7 +48,8 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   vérification.
 - **Commandes** : trouver la commande de vérification complète, celle qui lance un seul fichier
   de test, et celle du typage s'il y en a un (`CLAUDE.md`, `package.json`, `mise.toml`,
-  `Makefile`, `justfile`…). Si elles sont introuvables, les demander avant la première tâche. Le skill `tdd` en a besoin aussi : les
+  `Makefile`, `justfile`…). Si elles sont introuvables, s'arrêter avant la première tâche et les demander : sans elles,
+  rien ne prouve qu'une vague est verte, et l'exécution autonome n'a pas encore commencé. Le skill `tdd` en a besoin aussi : les
   avoir trouvées ici évite de les chercher deux fois.
 - **Arbre de travail** (`git status`) :
   - propre : on continue ;
@@ -61,9 +66,14 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
 - **Plan hors du dépôt** (convention qui interdit ces fichiers) : ne jamais le commiter, mais y
   cocher les cases et y écrire le bilan quand même.
 
-**Autorisation de commit** : lancer ce skill sur un plan validé autorise les commits d'une tâche à
-la fois qu'il prévoit, même si le dépôt demande par ailleurs de « ne commiter que sur demande ».
-Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull request.
+**Autorisation** : lancer ce skill sur un plan validé autorise les commits d'une tâche à la fois
+qu'il prévoit, même si le dépôt demande par ailleurs de « ne commiter que sur demande », et, en fin
+de plan, le push de la branche du plan et une pull request **en brouillon**
+([references/pull-request.md](references/pull-request.md)). Elle ne va pas plus loin : pas de
+merge, pas de push de la branche principale. Une consigne qui interdit les commits (dans la
+conversation ou `CLAUDE.md`) l'emporte : tout le parcours se fait sans commit, et
+les corrections restent dans le travail non commité. Ce qui empêche la PR est listé dans
+[references/pull-request.md](references/pull-request.md).
 
 ## Lecture et reprise
 
@@ -81,8 +91,9 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
    **Jamais sur la branche principale** (`main`, `master`, ou celle que le dépôt désigne comme
    telle), sauf si la convention écrite du dépôt (`CLAUDE.md`) dit d'y commiter : la fusion y a
    lieu sur feu vert, pas au fil des tâches.
-5. **Mode turbo** : si l'utilisateur demande d'enchaîner (argument `turbo`, « enchaîne les vagues
-   2 et 3 »), noter quelles vagues sont concernées. Hors de ces vagues, la pause reste de règle.
+5. **Mode pas à pas** : l'argument `pas-à-pas`, ou une demande de pause entre les vagues, rétablit
+   la pause de fin de vague. Une demande qui vise une vague précise (« lance la vague 2 »)
+   s'arrête après elle. Sinon, les vagues s'enchaînent.
 
 ## Une vague
 
@@ -91,7 +102,8 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
    - **Code : TDD, toujours.** Appeler le Skill tool avec « tdd » (une fois par exécution suffit)
      et suivre sa boucle pour chaque tâche de code : test rouge vu échouer pour la bonne raison,
      code minimal, vert, refactorisation. Les interfaces à tester se déduisent de la tâche et de
-     ses critères : le plan étant validé, on ne les redemande pas, sauf réelle ambiguïté. En
+     ses critères : le plan étant validé, on ne les redemande pas ; une réelle ambiguïté se tranche
+     comme en « Quand ça ne va pas », sans question. En
      cours de tâche, lancer souvent le typage (s'il existe) et le fichier de test concerné ; la
      suite complète attend la fin de vague.
      **Plan d'origine POC** : pas de TDD complet ; chaque tâche se vérifie par l'essai ou le test
@@ -123,65 +135,77 @@ Cette autorisation ne va pas plus loin : pas de merge, pas de push, pas de pull 
    - ce qui a été vérifié et comment, et ce qui ne l'a pas été ;
    - les bugs trouvés en route ;
    - **quoi essayer** : la commande pour lancer l'application et deux ou trois choses concrètes à
-     regarder, pour que la pause de test soit utile.
+     regarder, reprises dans la PR pour l'essai de l'utilisateur.
    « Fait » n'est pas un bilan.
-5. **Pause** : `Vague terminée. Passer à la vague suivante « <titre> » ?`. Les retours d'essai du
-   propriétaire sont consignés dans le plan avant de reprendre. Seule exception à la pause : le
-   mode turbo sur les vagues nommées.
+5. **Enchaîner** : annoncer en une ligne la vague suivante et la commencer. En mode pas à pas,
+   faire une pause à la place : `Vague terminée. Passer à la vague suivante « <titre> » ?`, et
+   consigner dans le plan les retours d'essai de l'utilisateur avant de reprendre.
 
 ## Fin du plan
 
 Quand la dernière vague est verte :
 
-1. **Faire relire** (sauf plan d'origine POC) : appeler le Skill tool avec « review », avec le
-   plan pour spec, puis avec « code-review » au niveau `medium`, sur le diff depuis la branche
-   de départ, pour les bugs que `review` ne cherche pas. Ses constats rejoignent la vue groupée
-   de `review` à la suite de ses remarques (`R-n · bug · fichier:ligne · constat`), rangés par
-   action selon les mêmes règles ; la ligne « Pour les bugs : `/code-review` » disparaît.
-   Écrire les deux rapports complets dans le journal. L'utilisateur a pu laisser tourner
-   plusieurs vagues sans les suivre : le message commence par un **bloc d'état** de 3 ou 4 lignes
-   (plan et branche ; vagues faites et commits ; critères atteints n/m ; vérification complète
-   verte ou rouge, et pourquoi), suivi de la vue groupée, d'un renvoi vers le journal pour les
-   rapports complets, et de la question de `review` (section « Demander quoi corriger »). Les
-   remarques retenues deviennent les tâches d'une vague « Retours de revue », exécutée en TDD
-   comme les autres (un bug commence par le test qui le montre) ; les écartées sont notées avec
-   leur raison. Puis passer au bilan, sans nouvelle revue.
-2. **Écrire le bilan dans le plan**, pour le relecteur : dans la section « Réalisé » si le plan en
+1. **Faire relire** (sauf plan d'origine POC) :
+   - appeler le Skill tool avec « code-review » au niveau `medium`, sur le diff depuis la branche
+     de départ, pour les bugs que `review` ne cherche pas ;
+   - puis appeler le Skill tool avec « review », avec le plan pour spec et les constats de
+     `/code-review` (axe `bug`) : son juge classe les remarques des trois sources. `review` rend
+     la vue groupée et le rapport complet, sans question.
+   Écrire le rapport complet dans le journal.
+2. **Corriger les « À corriger »** dans une vague « Retours de revue », en TDD comme les autres
+   (un bug commence par le test qui le montre), une remarque par tâche et par commit. Ne jamais
+   reclasser un verdict du juge : une remarque qu'on ne peut pas corriger (le test du bug ne peut
+   pas échouer, la correction sort du périmètre) se conteste par écrit et passe dans « À
+   décider ». Puis la relecture des corrections de `review` (section « Relire les corrections »),
+   deux tours au maximum.
+3. **Vérification complète**, comme en fin de vague. Rouge après un effort raisonnable : le dire
+   en tête du bilan et du message final.
+4. **Écrire le bilan dans le plan**, pour le relecteur : dans la section « Réalisé » si le plan en
    a une, sinon dans une section ajoutée en fin de fichier. Y mettre :
    - chaque critère, atteint (avec le test qui le prouve) ou non, et pourquoi ;
    - les écarts au plan et leur raison ;
    - les tâches ajoutées ou retirées ;
+   - les remarques de relecture : corrigées (avec leur commit), écartées (avec la preuve du
+     juge), à décider ;
+   - les décisions autonomes ;
    - ce qui reste hors plan.
    Passer la ligne de statut à `> Statut : terminé le <JJ/MM/AAAA>` et commiter selon le format
    du dépôt (par défaut `docs: record plan outcome`).
    **Plan d'un jalon ou tiré d'un ticket** (ligne `Origine :`) : suivre
    [references/ending-by-origin.md](references/ending-by-origin.md), pour ce commit et pour le
-   résumé de fusion (`Closes #…`).
-   **Plan d'origine POC** : s'arrêter là, sans résumé de fusion ni suite Git, et proposer
-   `/poc docs/poc/<slug>.md` pour écrire le verdict.
-3. **Proposer un résumé de fusion**, tiré du plan : trois lignes de résumé, les critères atteints,
-   une ligne par décision, le lien vers le plan. Il sert de description de pull request si le dépôt
-   en utilise, sinon de récapitulatif avant la fusion.
-4. **Proposer, sans l'exécuter**, la suite Git habituelle du dépôt (fusion dans la branche de
-   départ, en avance rapide si c'est la convention, ou pull request) et le push s'il existe un
-   dépôt distant. Ces étapes attendent un feu vert explicite. Si la session a été laborieuse
-   (recherches longues, erreurs qu'un outil aurait vues), proposer aussi `/retro`.
+   corps de la PR (`Closes #…`).
+   **Plan d'origine POC** : s'arrêter là et proposer `/poc docs/poc/<slug>.md` pour écrire le
+   verdict.
+5. **Ouvrir la PR en brouillon**, ou afficher son texte quand elle ne peut pas s'ouvrir :
+   [references/pull-request.md](references/pull-request.md).
+6. **Message final** : un **bloc d'état** de 3 ou 4 lignes (plan et branche ; vagues faites et
+   commits ; critères atteints n/m ; vérification complète verte ou rouge, et pourquoi), le lien
+   de la PR ou la raison de son absence, la vue groupée, puis les lignes **« À faire par toi »** :
+   les « À décider », ce que prévoit `ending-by-origin.md` sur un gestionnaire distant, un ADR
+   proposé, et `/retro` si la session a été laborieuse (recherches longues, erreurs qu'un outil
+   aurait vues). La fusion attend l'utilisateur.
 
 ## Quand ça ne va pas
 
+Seuls trois cas arrêtent l'exécution : un échec dont la suite dépend, un plan faux, un changement
+destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans la PR.
+
 - **Échec d'une tâche** (un test qui ne passe pas après un effort raisonnable, une commande qui
-  échoue, une contradiction avec le code) : arrêter, écrire sous la tâche
-  `> Échec (AAAA-MM-JJ) : …`, rapporter et attendre.
-- **Ambiguïté** : si le plan ne dit pas quoi faire, poser une question courte, puis consigner la
-  réponse dans le plan avant de continuer, pour qu'elle survive à la conversation.
+  échoue, une contradiction avec le code) : écrire sous la tâche `> Échec (AAAA-MM-JJ) : …`. Si
+  des tâches suivantes en dépendent, arrêter, rapporter et attendre. Sinon, continuer : la tâche
+  part dans « À décider » de la PR.
+- **Ambiguïté** : si le plan ne dit pas quoi faire, choisir l'option la plus prudente (la plus
+  petite, la plus réversible, la plus proche de l'existant), l'écrire dans le journal sous
+  `> Décision autonome (AAAA-MM-JJ) : <choix> ; <alternative écartée> ; <raison>`, et continuer.
 - **Le plan a tort** (état de départ faux, dépendance manquante, tâche impossible telle
   qu'écrite) : s'arrêter, dire ce qui est faux et proposer l'amendement. Ne pas contourner en
   silence : un écart non dit rend le plan faux pour tous ceux qui le reliront.
 - **Une idée en route** : l'écrire en une ligne dans une section « Hors plan » du plan, puis
   continuer. Elle ne se code pas.
 - **Une décision d'architecture prise en route** (difficile à défaire, surprenante sans contexte,
-  issue d'un vrai compromis) : la noter dans le journal du plan et proposer de l'enregistrer en
-  appelant le Skill tool avec « adr ».
+  issue d'un vrai compromis) : la noter dans le journal du plan ; le message final propose de
+  l'enregistrer, et sur accord, appeler le Skill tool avec « adr ».
 - **Un changement destructeur** (suppression de données, migration irréversible, écriture vers un
   service tiers, réécriture de l'historique) : demander une confirmation explicite, même si le
-  plan le prévoit.
+  plan le prévoit. Le push de la branche du plan et la PR en brouillon n'en sont pas : ils sont
+  autorisés (« Autorisation »).

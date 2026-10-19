@@ -54,11 +54,15 @@ lié dans `~/.claude/skills/` par `install.sh`.
 - Une description est limitée à 1024 caractères (`plan` en fait déjà près de 900).
 - Un skill que Claude peut déclencher doit être ajouté à `MINE` dans `evals/run_triggers.py`,
   sinon le banc d'essai le compte comme « autre ».
+- Un agent (`agents/<nom>.md`, nom en anglais) est une définition de sous-agent Claude Code,
+  reliée par `install.sh` dans `~/.claude/agents/`. Un skill le lance avec « lancer l'outil Agent
+  avec `subagent_type` `<nom>` » et pointe son fichier par `../agents/<nom>.md`. Le banc
+  `run_subagents.py` copie `agents/` dans le projet de test.
 - Renommer un skill ou l'un de ses fichiers casse ce qui pointe vers lui : les liens relatifs
   des autres skills (`../onboard/references/…`) et des références voisines, `CLAUDE.md`,
   `CREDITS.md`, `README.md` et `docs/skills.template.html`. Les chercher avec
   `git grep -n "<ancien-nom>" -- ':!docs/plans'` (les plans racontent le passé), puis relancer
-  `./install.sh` pour un skill.
+  `./install.sh` pour un skill ou un agent.
 
 ## Travail
 

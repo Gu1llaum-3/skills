@@ -41,8 +41,9 @@ On ne peut pas tout tester : fixer ces interfaces à l'avance, c'est ce qui fait
 les chemins critiques et la logique complexe plutôt que sur chaque cas limite.
 
 - **Avec un plan ou une spécification validés** (appel depuis `implement`, par exemple) : les
-  interfaces se déduisent de la tâche et de ses critères. On ne redemande rien, sauf si la tâche
-  laisse réellement le choix ; on pose alors une question courte.
+  interfaces se déduisent de la tâche et de ses critères. On ne redemande rien. Si la tâche
+  laisse réellement le choix, l'appelant dit comment trancher (pour `implement`, sa règle
+  « Ambiguïté ») ; si l'appelant ne dit rien, ou sans appelant, poser une question courte.
 - **Sans plan** : avant le premier test, proposer en quelques lignes les interfaces à tester et les
   comportements qu'on y vérifiera, et attendre l'accord. Aucun test sur une interface non validée.
 

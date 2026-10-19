@@ -26,8 +26,8 @@ Mes skills personnels pour Claude Code.
 | Skill | Rôle |
 |---|---|
 | `plan` | Écrire le plan d'un ticket, d'une spec ou d'un jalon, après l'avoir confronté au code (et challengé, s'il vient d'ailleurs) |
-| `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD, puis le faire relire |
-| `review` | Relire un diff sur deux axes séparés : la spec (plan, ticket) et les conventions du dépôt |
+| `implement` | Exécuter un plan (ou un ticket) vague par vague, en TDD, sans pause, puis le faire relire, corriger et ouvrir une PR en brouillon |
+| `review` | Relire un diff sur deux axes séparés, la spec (plan, ticket) et les conventions du dépôt, puis faire classer les remarques par un juge |
 | `tdd` | La boucle rouge-vert et ce qui fait un bon test |
 | `debug` | Diagnostiquer un bug qui résiste : une boucle qui échoue d'abord, puis hypothèses, cause confirmée, correctif |
 | `to-spec` | Transformer les décisions (ou un jalon du cahier des charges) en spec, puis en tickets |
@@ -67,7 +67,8 @@ bug qui résiste ──► debug ──┬── petit correctif ──► test 
                                                        └── plus tard ──► to-spec
 
 interview, research, adr, to-questionnaire et wizard sont appelés en cours de route.
-implement écrit le code avec tdd, puis le fait relire par review et /code-review avant son bilan.
+implement écrit le code avec tdd, le fait relire par /code-review et review, dont le juge classe
+les remarques, corrige, puis ouvre une PR en brouillon : la validation du plan est ton seul arrêt.
 Après une session difficile, /retro propose ce qu'il faudrait changer dans l'environnement.
 Perdu en chemin ? /next dit quel skill lancer.
 ```
@@ -127,12 +128,13 @@ proposée automatiquement la première fois.
 
 ```bash
 git clone git@github.com:Gu1llaum-3/skills.git ~/git/skills
-~/git/skills/install.sh            # tous les skills
+~/git/skills/install.sh            # tous les skills et les agents
 ~/git/skills/install.sh naming     # ou seulement certains
 ```
 
-Chaque skill est lié par symlink dans `~/.claude/skills/` : une modification
-dans le dépôt est immédiatement prise en compte par Claude Code.
+Chaque skill est lié par symlink dans `~/.claude/skills/`, et chaque agent de `agents/` (le juge
+de `review`) dans `~/.claude/agents/` : une modification dans le dépôt est immédiatement prise en
+compte par Claude Code.
 
 ## Mise à jour
 

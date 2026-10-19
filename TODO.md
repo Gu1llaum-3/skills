@@ -46,6 +46,10 @@
   compter un rapport sans remarque comme incomplet. Le correcteur de `plan-full` a pris pour
   manqué un hors périmètre bien noté : lui préciser qu'un piège rangé dans « Hors périmètre »
   est évité.
+- [ ] **Juge de `review`** : lancer `run_subagents.py review-new` avec le juge, puis faire
+  vérifier par le correcteur le groupe de chaque remarque (une violation d'`AC-n` doit finir dans
+  « À corriger »), pas seulement trouvé ou écarté. Observer en session réelle si le juge renvoie
+  trop de remarques dans « À décider » faute de `Bash` (alors lui rendre `Bash` en lecture).
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques
   cas réels (qualité d'un plan, d'une spec, d'un découpage en tickets).
 - [x] **Relecture de code** en fin d'`implement` : `review`, d'après le `code-review` de Matt

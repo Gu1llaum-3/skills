@@ -60,6 +60,13 @@ remplaçant vérifié dans le registre ; de `audit-outdated` de kubetail
 de `update-deps` de Mozilla (https://github.com/mozilla/bedrock), la cohérence des versions entre
 fichiers et les montées écartées qu'on ne repropose pas.
 
+Pour le juge de `review` (`agents/review-judge.md`) et la fin autonome d'`implement`, sans
+reprise de texte : l'évaluateur séparé de l'auteur, plus facile à rendre sceptique, de
+« Harness design for long-running application development » d'Anthropic
+(https://www.anthropic.com/engineering/harness-design-long-running-apps) ; la boucle bornée de la
+critique d'OpenHands ; la PR en brouillon de GitHub Copilot coding agent. Sources dans
+`docs/research/2026-10-19-auteur-juge-revue-autonome.md`.
+
 Sans traduction, quelques idées du skill `brainstorming` de superpowers, de Jesse Vincent
 (https://github.com/obra/superpowers, licence MIT) : le chemin annoncé au départ, qu'on ne fait
 que monter, le découpage d'emblée en sous-systèmes, la reformulation qui sépare le dit du

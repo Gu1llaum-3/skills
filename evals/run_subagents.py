@@ -29,7 +29,7 @@ FIX = ROOT / "evals" / "fixtures" / "subagents"  # fixé par --set
 OUT = ROOT / "evals" / "subagents-results.json"
 MODEL = "claude-opus-5-5"
 JUDGE_MODEL = "claude-sonnet-5-5"
-ALLOWED = "Read,Grep,Glob,Bash(git:*),Agent,Task,Skill"
+ALLOWED = "Read,Grep,Glob,Bash(git:*),Bash(mkdir:*),Agent,Task,Skill"
 DENIED = "Edit,Write,NotebookEdit"
 NON_INTERACTIVE = ("Cette session n'est pas interactive : personne ne répondra. Ne pose aucune "
                    "question")
@@ -109,6 +109,8 @@ def build_project(case, before):
         git(work, "commit", "-q", "-m", "feat: export CSV")
         ref = before if case == "review-old" else None
         install_skill(skill_files_at(ref, "review"), work, case)
+        if case == "review-new":  # le juge de l'arbre de travail, pas celui de ~/.claude/agents
+            shutil.copytree(ROOT / "agents", work / ".claude" / "agents", dirs_exist_ok=True)
     if case.startswith("plan-full"):
         ref = before if case == "plan-full-old" else None
         install_skill(skill_files_at(ref, "plan"), work, case)
@@ -133,8 +135,9 @@ def prompt_for(case):
         brief = brief.replace("<chemin>", "docs/requirements.md")
         return subagent_prompt("Explore" if case == "doc-explore" else "general-purpose", brief)
     return (f"Appelle le Skill tool avec « {case} », avec pour point fixe main et pour spec "
-            f"{paths['plan']}. {NON_INTERACTIVE}. Ne "
-            "corrige rien : donne la vue groupée et le rapport complet, puis arrête-toi.")
+            f"{paths['plan']}. {NON_INTERACTIVE}. Lance chaque sous-agent au premier plan et "
+            "attends son retour avant de répondre. Ne corrige rien : donne la vue groupée et le "
+            "rapport complet, puis arrête-toi.")
 
 
 def run_claude(prompt, cwd, model, timeout=900, write=False):
