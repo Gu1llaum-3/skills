@@ -37,7 +37,8 @@ Un seul groupe par remarque :
 - **À corriger** : le constat est exact, la correction reste dans le périmètre de la spec, et
   elle ne change ni schéma, ni contrat, ni configuration (sinon « À décider »).
   **Toujours ici**, quoi qu'en dise le relecteur, une remarque qui montre la violation d'un
-  critère `AC-n` de la spec ou d'une règle écrite du dépôt. Une faille de sécurité dont la
+  critère `AC-n` de la spec ou d'une règle écrite du dépôt, sauf si sa correction change le
+  schéma, un contrat ou la configuration : alors « À décider », l'utilisateur tranche d'abord. Une faille de sécurité dont la
   correction est locale aussi, marquée `sécurité`.
 - **Option prudente** : la remarque demande un choix, et une option domine les autres sur tous
   ces points :

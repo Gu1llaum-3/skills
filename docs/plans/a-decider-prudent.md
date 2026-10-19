@@ -165,3 +165,9 @@ corrections ; sans commit en cours de route : instantané `git stash create`.
   la correction change le schéma, un contrat ou la configuration » à la phrase « Toujours ici »
   du juge).
 - Hors plan : rien de nouveau.
+
+### Décision de l'utilisateur (19/10/2026)
+
+- R-24 : une violation d'AC qui ne se corrige qu'en changeant le schéma, un contrat ou la
+  configuration va dans « À décider » : l'utilisateur tranche d'abord. Écrit dans la règle
+  « Toujours ici » du juge. R-19 : rien à faire (renommage déjà appliqué par R-10).
