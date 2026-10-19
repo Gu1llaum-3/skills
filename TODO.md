@@ -46,8 +46,9 @@
   compter un rapport sans remarque comme incomplet. Le correcteur de `plan-full` a pris pour
   manqué un hors périmètre bien noté : lui préciser qu'un piège rangé dans « Hors périmètre »
   est évité.
-- [ ] **Juge de `review`** : lancer `run_subagents.py review-new` avec le juge, puis faire
-  vérifier par le correcteur le groupe de chaque remarque (une violation d'`AC-n` doit finir dans
+- [ ] **Juge de `review`** : premier banc le 19/10/2026 (`review-new`, 3 passages : 5 sur 5,
+  aucun leurre pris, 0,98 $) ; reste à faire vérifier par le correcteur le groupe de chaque
+  remarque (une violation d'`AC-n` doit finir dans
   « À corriger »), pas seulement trouvé ou écarté. Observer en session réelle si le juge renvoie
   trop de remarques dans « À décider » faute de `Bash` (alors lui rendre `Bash` en lecture).
 - [ ] **Évaluations des sorties** avec `skill-creator` : comparer avec et sans skill sur quelques

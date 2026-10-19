@@ -129,7 +129,7 @@ proposée automatiquement la première fois.
 ```bash
 git clone git@github.com:Gu1llaum-3/skills.git ~/git/skills
 ~/git/skills/install.sh            # tous les skills et les agents
-~/git/skills/install.sh naming     # ou seulement certains
+~/git/skills/install.sh naming     # ou seulement certains skills (et tous les agents)
 ```
 
 Chaque skill est lié par symlink dans `~/.claude/skills/`, et chaque agent de `agents/` (le juge

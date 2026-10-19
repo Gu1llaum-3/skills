@@ -291,5 +291,19 @@ route (convention du dépôt) : instantané `git stash create` avant la premièr
 - Constaté pendant l'essai : l'outil Agent lance les sous-agents en arrière-plan, « au premier
   plan » revient à attendre leur retour ; la numérotation des `V-n` donnée au juge au tour 2
   était décalée (corrigée dans ce bilan).
-- Reste à décider : R-17 et R-27, R-18, R-20 et R-30 (message final).
+- Reste à décider : R-17 et R-27, R-18, R-20 et R-30 (message final), tranchés le jour même (ci-dessous).
 - Hors plan : rien de nouveau.
+
+### Décisions de l'utilisateur sur « À décider » (19/10/2026)
+
+- R-17 et R-27 : une tâche en échec dont rien ne dépend est retirée (travail non commité),
+  sa case reste vide, la vérification reste verte et la tâche part dans « À décider » de la PR.
+- R-18 : `install.sh` relie toujours tous les agents, même quand on nomme des skills.
+- R-20 et R-30 : banc lancé d'abord. `run_subagents.py review-new --runs 3` : 5 défauts sur 5,
+  6 leurres sur 6 écartés, 45 `R-n` sourcés sur 46, 0,98 $, 148 s ; mais l'écriture de
+  `diff.patch` est refusée dans les 3 passages (les agents décrivent le diff au juge à la place).
+  Corrigé : `git diff <base> --output=<dossier git>/review-diff.patch`, chemin écrit en entier,
+  sans `$(…)`, `>` ni `mkdir` ; les fichiers non suivis sont lus à leur chemin (plus de `cp` ni
+  de `diff -u`) ; `Bash(mkdir:*)` retiré du banc. Relancé (`--runs 1`) : le juge reçoit
+  `.git/review-diff.patch`, 5 sur 5, 2 leurres sur 2 écartés, 17 `R-n` sourcés sur 18, 0,88 $,
+  134 s.

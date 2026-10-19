@@ -2,7 +2,8 @@
 # Installe les skills de ce dépôt dans ~/.claude/skills, et ses agents (agents/*.md) dans
 # ~/.claude/agents, via des liens symboliques.
 # Usage : ./install.sh                  -> tous les skills et tous les agents
-#         ./install.sh naming           -> seulement ceux cités (skills ou agents)
+#         ./install.sh naming           -> seulement les skills cités, et tous les agents
+#                                          (des skills comme review en ont besoin)
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")" && pwd)"
@@ -18,20 +19,19 @@ for link in "$DEST"/* "$AGENTS_DEST"/*; do
   fi
 done
 
+agents=()
+for f in "$REPO"/agents/*.md; do
+  [ -f "$f" ] && agents+=("$(basename "$f" .md)")
+done
+
+skills=()
 if [ $# -gt 0 ]; then
-  skills=()
-  agents=()
   for a in "$@"; do
-    if [ -f "$REPO/agents/$a.md" ]; then agents+=("$a"); else skills+=("$a"); fi
+    [ -f "$REPO/agents/$a.md" ] || skills+=("$a")
   done
 else
-  skills=()
   for d in "$REPO"/*/; do
     [ -f "$d/SKILL.md" ] && skills+=("$(basename "$d")")
-  done
-  agents=()
-  for f in "$REPO"/agents/*.md; do
-    [ -f "$f" ] && agents+=("$(basename "$f" .md)")
   done
 fi
 

@@ -29,7 +29,7 @@ FIX = ROOT / "evals" / "fixtures" / "subagents"  # fixé par --set
 OUT = ROOT / "evals" / "subagents-results.json"
 MODEL = "claude-opus-5-5"
 JUDGE_MODEL = "claude-sonnet-5-5"
-ALLOWED = "Read,Grep,Glob,Bash(git:*),Bash(mkdir:*),Agent,Task,Skill"
+ALLOWED = "Read,Grep,Glob,Bash(git:*),Agent,Task,Skill"
 DENIED = "Edit,Write,NotebookEdit"
 NON_INTERACTIVE = ("Cette session n'est pas interactive : personne ne répondra. Ne pose aucune "
                    "question")

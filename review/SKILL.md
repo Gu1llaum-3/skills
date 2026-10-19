@@ -83,10 +83,11 @@ modifier le dépôt.
 1. Numéroter les remarques `R-1`, `R-2`… à travers les axes, dans l'ordre spec, conventions,
    puis les constats de bugs que l'appelant a passés (axe `bug`, ceux de `/code-review` quand
    `implement` appelle).
-2. Écrire le diff dans un fichier, par redirection, sans le faire passer par la conversation :
-   `mkdir -p "$(git rev-parse --git-dir)/review"`, puis
-   `git diff <merge-base> > "$(git rev-parse --git-dir)/review/diff.patch"`. Les fichiers non
-   suivis sont lus par le juge à leur chemin.
+2. Écrire le diff dans un fichier, sans le faire passer par la conversation, avec des commandes
+   `git` seules (une session autonome ou le banc d'essai n'autorisent souvent que `git`, et
+   refusent `$(…)`, `>` ou `mkdir`) : lire le dossier git (`git rev-parse --git-dir`), puis
+   `git diff <merge-base> --output=<dossier git>/review-diff.patch`, chemin écrit en entier. Les
+   fichiers non suivis sont lus par le juge à leur chemin.
 3. Lancer l'outil Agent avec `subagent_type` `review-judge`, **au premier plan** (attendre son
    retour), avec seulement : les remarques telles que les sous-agents les ont écrites, le chemin
    du diff, les fichiers non suivis, le chemin de la spec, et les écarts déjà notés (journal du
@@ -175,13 +176,12 @@ Puis proposer la suite, sans la lancer :
 
 Après les corrections (par `implement`, ou ici sur demande) :
 
-1. Écrire le diff des corrections seules, par redirection, dans
-   `$(git rev-parse --git-dir)/review/fixes-<tour>.patch`, depuis le commit d'avant la première
-   correction. **Sans commit** : noter avant la première correction un instantané du travail,
-   `git stash create` (il ne touche à rien ; vide s'il n'y a rien à garder : prendre `HEAD`), et
-   prendre le diff depuis lui. Les fichiers non suivis n'y sont pas : les copier dans
-   `$(git rev-parse --git-dir)/review/before/` au même moment, puis ajouter au diff des
-   corrections leur `diff -u` contre ces copies.
+1. Écrire le diff des corrections seules de la même façon,
+   `git diff <base> --output=<dossier git>/review-fixes-<tour>.patch`, où `<base>` est le commit
+   d'avant la première correction. **Sans commit** : `<base>` est un instantané du travail noté
+   avant la première correction, `git stash create` (il ne touche à rien ; vide s'il n'y a rien à
+   garder : prendre `HEAD`). Les fichiers non suivis que les corrections touchent se donnent par
+   leur chemin, et le juge les relit.
 2. Reprendre le juge avec `SendMessage` et son identifiant, en lui donnant ce chemin, la
    correspondance de ses `V-n` renumérotés (`V-1 = R-27`) et, pour
    chaque remarque « À corriger », le commit qui la corrige (sans commit : les fichiers touchés)

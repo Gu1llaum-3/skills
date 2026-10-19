@@ -192,8 +192,10 @@ destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans la PR
 
 - **Échec d'une tâche** (un test qui ne passe pas après un effort raisonnable, une commande qui
   échoue, une contradiction avec le code) : écrire sous la tâche `> Échec (AAAA-MM-JJ) : …`. Si
-  des tâches suivantes en dépendent, arrêter, rapporter et attendre. Sinon, continuer : la tâche
-  part dans « À décider » de la PR.
+  des tâches suivantes en dépendent, arrêter, rapporter et attendre. Sinon, retirer le travail de
+  cette tâche seulement (code et test non commités, fichiers qu'elle a créés), pour que la
+  vérification reste verte, laisser sa case vide, et continuer : la tâche part dans « À
+  décider » de la PR.
 - **Ambiguïté** : si le plan ne dit pas quoi faire, choisir l'option la plus prudente (la plus
   petite, la plus réversible, la plus proche de l'existant), l'écrire dans le journal sous
   `> Décision autonome (AAAA-MM-JJ) : <choix> ; <alternative écartée> ; <raison>`, et continuer.
