@@ -13,8 +13,8 @@ relecteur pourra suivre sans avoir la conversation sous les yeux.
 
 **Autonome par défaut** : la validation du plan est le point de contrôle de l'utilisateur. Une
 fois les préalables réunis, le skill va jusqu'à la PR en brouillon sans le déranger, sauf pour
-les arrêts de « Quand ça ne va pas ». Tout ce qu'il tranche seul s'écrit dans le journal du plan
-et remonte dans la PR, où l'utilisateur le relit.
+les arrêts de « Quand ça ne va pas ». Tout ce qu'il tranche seul s'écrit dans le journal du plan,
+et le message final dit ce que l'utilisateur doit trancher ou relire en priorité.
 
 **Les conventions du dépôt priment toujours** sur ce qui suit (langue, noms de branches, format des
 commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
@@ -183,7 +183,9 @@ Quand la dernière vague est verte :
 6. **Message final** : un **bloc d'état** de 3 ou 4 lignes (plan et branche ; vagues faites et
    commits ; critères atteints n/m ; vérification complète verte ou rouge, et pourquoi), le lien
    de la PR ou son lien de création et la raison, la vue groupée, puis les lignes **« À faire
-   par toi »** : les « À décider », chacun avec sa recommandation et son choix par défaut ; ce
+   par toi »** : les « À décider », chacun avec sa recommandation et son choix par défaut, en
+   rappelant que la PR reste en brouillon tant qu'ils sont ouverts ; les « Option prudente »
+   appliquées, une ligne chacune, à relire en priorité ; ce
    que prévoit `ending-by-origin.md` ; un ADR proposé ; `/retro` si la session a été laborieuse
    (recherches longues, erreurs qu'un outil aurait vues). S'il reste des « À décider », proposer
    d'appliquer leurs choix par défaut dans une nouvelle vague du même plan : « sans avis de ta
@@ -192,14 +194,14 @@ Quand la dernière vague est verte :
 ## Quand ça ne va pas
 
 Seuls trois cas arrêtent l'exécution : un échec dont la suite dépend, un plan faux, un changement
-destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans la PR.
+destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans le message final.
 
 - **Échec d'une tâche** (un test qui ne passe pas après un effort raisonnable, une commande qui
   échoue, une contradiction avec le code) : écrire sous la tâche `> Échec (AAAA-MM-JJ) : …`. Si
   des tâches suivantes en dépendent, arrêter, rapporter et attendre. Sinon, retirer le travail de
   cette tâche seulement (code et test non commités, fichiers qu'elle a créés), pour que la
   vérification reste verte, laisser sa case vide, et continuer : la tâche part dans « À
-  décider » de la PR, avec une recommandation et un choix par défaut.
+  décider », avec une recommandation et un choix par défaut.
 - **Ambiguïté** : si le plan ne dit pas quoi faire, choisir l'option la plus petite, la plus
   réversible et la plus proche de l'existant, l'écrire dans le journal sous
   `> Décision autonome (AAAA-MM-JJ) : <choix> ; <alternative écartée> ; <raison>`, et continuer.

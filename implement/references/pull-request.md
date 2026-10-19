@@ -1,7 +1,10 @@
 # La pull request de fin de plan
 
-La PR est ce que l'utilisateur relit : elle dit d'abord ce qu'il doit trancher, puis ce qui a été
-décidé sans lui, avec de quoi le contester. Le plan reste la trace complète.
+La PR décrit le changement, pour celui qui la fusionne et pour l'historique du dépôt : ce qui
+change et pourquoi, pas comment le travail s'est fait. La relecture (remarques, verdicts du juge,
+décisions autonomes) reste dans le journal du plan ; ce que l'utilisateur doit trancher ou relire
+en priorité va dans le message final. Tant qu'un point « À décider » reste ouvert, la PR reste en
+brouillon.
 
 ## Quand pousser la branche
 
@@ -47,33 +50,30 @@ dit aussi : les changements sont dans le travail non commité.
 
 ## Le corps
 
-Dans cet ordre, les sections vides omises :
+Le modèle de PR du dépôt s'il en a un (`.github/pull_request_template.md`, ou l'équivalent de sa
+forge), sinon celui-ci, sections vides omises, sans numéro `R-n` ni vocabulaire de relecture :
 
 ```markdown
-## À décider
+<2 ou 3 phrases : le problème, ce qui change, pour qui>
 
-- R-n · <constat> · options : <a> / <b> · recommandée : <a> · sans avis de ta part : <a>
-- <tâche en échec dont rien ne dépendait, avec la raison> · recommandée : <…> · sans avis de ta part : <…>
+## Changements
 
-## Décidé sans toi, à relire en priorité
+- <un comportement par ligne, du point de vue de l'utilisateur ou de l'appelant ; y compris ce
+  qu'une correction de relecture a changé>
 
-- Option prudente : R-n · <constat> · <option appliquée> · <pourquoi elle domine> · <commit court>
-- Sécurité : R-n · <correction locale faite> · <commit court>
+## Points d'attention
 
-## Décidé sans toi
-
-- Corrigé : R-n · <constat> · <commit court>
-- Écarté : ~~R-n · <constat>~~ · <preuve du juge>
-- Décision autonome : <choix> ; <alternative écartée> ; <raison>
+- <ce que le relecteur doit regarder : un risque, une limite connue, un comportement qui peut
+  surprendre (par exemple une option prudente appliquée), un changement cassant>
 
 ## Critères
 
-- AC-n : atteint, <test qui le prouve> | non atteint, <pourquoi>
+- AC-n : <ce que ça garantit>, <test qui le prouve>
 
 ## Essayer
 
 <la commande, et deux ou trois choses à regarder, tirées des « quoi essayer » des bilans>
 
-Plan et journal complets : <chemin du plan>
+Plan, décisions et relecture : <chemin du plan>
 <Closes #n, selon ending-by-origin.md>
 ```
