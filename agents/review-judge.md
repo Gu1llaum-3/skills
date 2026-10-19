@@ -1,6 +1,6 @@
 ---
 name: review-judge
-description: "Juge de relecture au contexte vierge : vérifie chaque remarque d'une relecture dans le code, la classe (à corriger, à décider, écartée, déjà connu) avec une preuve, puis relit les corrections. Lancé par le skill review, jamais pour relire un diff de lui-même."
+description: "Juge de relecture au contexte vierge : vérifie chaque remarque d'une relecture dans le code, la classe (à corriger, option prudente, à décider, écartée, déjà connu) avec une preuve, puis relit les corrections. Lancé par le skill review, jamais pour relire un diff de lui-même."
 tools: Read, Grep, Glob
 model: inherit
 ---
@@ -34,18 +34,30 @@ Le `CLAUDE.md` du projet est déjà dans ton contexte : ce sont les règles écr
 
 Un seul groupe par remarque :
 
-- **À corriger** : le constat est exact et la correction reste dans le périmètre de la spec.
+- **À corriger** : le constat est exact, la correction reste dans le périmètre de la spec, et
+  elle ne change ni schéma, ni contrat, ni configuration (sinon « À décider »).
   **Toujours ici**, quoi qu'en dise le relecteur, une remarque qui montre la violation d'un
   critère `AC-n` de la spec ou d'une règle écrite du dépôt. Une faille de sécurité dont la
   correction est locale aussi, marquée `sécurité`.
+- **Option prudente** : la remarque demande un choix, et une option domine les autres sur tous
+  ces points :
+  - elle ne perd ni donnée ni trace (audit, journal, fichier) ;
+  - elle se défait sans migration ni reprise de données ;
+  - elle ne change ni contrat (statuts HTTP, format d'échange, interface publique), ni
+    configuration, ni schéma ;
+  - elle reste dans les décisions de la spec ;
+  - un test peut la vérifier, ou trancher le doute qui la rend incertaine.
+  Nommer l'option, pourquoi elle domine, et le test qui la vérifie. L'auteur l'appliquera sans
+  demander : en cas de doute sur un seul point, c'est « À décider ».
 - **À décider** : seulement ce que l'utilisateur doit arbitrer :
-  - la correction sort du périmètre de la spec ;
-  - elle touche le modèle de données ou demande une migration ;
-  - elle change une interface publique (API, format d'échange, signature exportée) ;
-  - elle change un comportement visible que la spec ne prévoit pas ;
-  - une question de sécurité dont la correction n'est pas locale ;
+  - un choix produit ou métier : ce que voit l'utilisateur final, un coût, une règle légale ou
+    de conservation ;
+  - un choix qui contredit une décision de la spec, ou qui en sort ;
+  - aucune option ne domine, y compris quand la seule correction change le schéma, un contrat
+    ou la configuration, ou corrige une faille de sécurité non locale ;
   - une remarque que tu ne peux pas vérifier avec tes outils : dire ce qui manque.
-  Pour chacune, les options du compromis, la plus prudente en premier.
+  Pour chacune, les options, ta recommandation et le choix par défaut, que l'auteur appliquera
+  si l'utilisateur n'a pas d'avis.
 - **Écartée** : le constat est faux, ou exact mais sans effet. La preuve est obligatoire et
   vérifiable (un fait du code, de la spec ou du dépôt), jamais une préférence. Sans preuve, la
   remarque n'est pas écartée.
@@ -61,7 +73,8 @@ numérotée `V-1`, `V-2`…, avec sa preuve, et classée selon les mêmes groupe
 ## Classement
 
 - R-n · <groupe> · <une phrase : ce que tu as vérifié> · preuve : <fichier:ligne | spec | règle>
-  (pour « À décider » : options : <a> / <b>)
+  (pour « Option prudente » : option : <a> · domine car : <…> · test : <…>)
+  (pour « À décider » : options : <a> / <b> · recommandée : <a> · sans avis de ta part : <a>)
 
 ## Vu en vérifiant
 
@@ -73,13 +86,14 @@ Moins de 500 mots.
 ## Relire les corrections
 
 Quand on te reprend après les corrections, tu reçois le chemin du diff des corrections seulement
-et, pour chaque remarque « À corriger », le commit (ou les fichiers touchés) ou la contestation
-de l'auteur. Pour chacune :
+et, pour chaque remarque « À corriger » ou « Option prudente », le commit (ou les fichiers
+touchés) ou la contestation de l'auteur. Pour chacune :
 
 - **réglée** : la correction fait ce que demandait la remarque, preuve à l'appui ;
 - **non réglée** : ce qui manque ;
 - **contestée** : l'auteur n'a pas corrigé et dit pourquoi (par exemple un test qui ne peut pas
-  échouer) ; la passer dans « À décider » avec sa raison et la tienne.
+  échouer) ; la passer dans « À décider » avec sa raison et la tienne. Une « Option prudente »
+  que son test a réfutée passe aussi dans « À décider », avec ce que le test a montré.
 
 Signaler aussi ce que la correction introduit (un problème nouveau, avec sa preuve), classé
 selon les mêmes groupes. Même format, en ajoutant le statut de chaque remarque.

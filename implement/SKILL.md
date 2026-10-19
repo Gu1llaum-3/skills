@@ -152,11 +152,13 @@ Quand la dernière vague est verte :
      `/code-review` (axe `bug`) : son juge classe les remarques des trois sources. `review` rend
      la vue groupée et le rapport complet, sans question.
    Écrire le rapport complet dans le journal.
-2. **Corriger les « À corriger »** dans une vague « Retours de revue », en TDD comme les autres
-   (un bug commence par le test qui le montre), une remarque par tâche et par commit. Ne jamais
+2. **Corriger les « À corriger » et appliquer les « Option prudente »** dans une vague « Retours
+   de revue », en TDD comme les autres (un bug commence par le test qui le montre ; une option
+   prudente, par le test que le juge a nommé), une remarque par tâche et par commit. Ne jamais
    reclasser un verdict du juge : une remarque qu'on ne peut pas corriger (le test du bug ne peut
    pas échouer, la correction sort du périmètre) se conteste par écrit et passe dans « À
-   décider ». Puis la relecture des corrections de `review` (section « Relire les corrections »),
+   décider » ; une option prudente que son test réfute y passe aussi, avec ce que le test a
+   montré, sans autre option essayée à la place. Puis la relecture des corrections de `review` (section « Relire les corrections »),
    deux tours au maximum.
 3. **Vérification complète**, comme en fin de vague. Rouge après un effort raisonnable : le dire
    en tête du bilan et du message final.
@@ -165,8 +167,8 @@ Quand la dernière vague est verte :
    - chaque critère, atteint (avec le test qui le prouve) ou non, et pourquoi ;
    - les écarts au plan et leur raison ;
    - les tâches ajoutées ou retirées ;
-   - les remarques de relecture : corrigées (avec leur commit), écartées (avec la preuve du
-     juge), à décider ;
+   - les remarques de relecture : corrigées et options prudentes appliquées (avec leur commit),
+     écartées (avec la preuve du juge), à décider ;
    - les décisions autonomes ;
    - ce qui reste hors plan.
    Passer la ligne de statut à `> Statut : terminé le <JJ/MM/AAAA>` et commiter selon le format
@@ -180,10 +182,12 @@ Quand la dernière vague est verte :
    [references/pull-request.md](references/pull-request.md).
 6. **Message final** : un **bloc d'état** de 3 ou 4 lignes (plan et branche ; vagues faites et
    commits ; critères atteints n/m ; vérification complète verte ou rouge, et pourquoi), le lien
-   de la PR ou la raison de son absence, la vue groupée, puis les lignes **« À faire par toi »** :
-   les « À décider », ce que prévoit `ending-by-origin.md` sur un gestionnaire distant, un ADR
-   proposé, et `/retro` si la session a été laborieuse (recherches longues, erreurs qu'un outil
-   aurait vues). La fusion attend l'utilisateur.
+   de la PR ou son lien de création et la raison, la vue groupée, puis les lignes **« À faire
+   par toi »** : les « À décider », chacun avec sa recommandation et son choix par défaut ; ce
+   que prévoit `ending-by-origin.md` ; un ADR proposé ; `/retro` si la session a été laborieuse
+   (recherches longues, erreurs qu'un outil aurait vues). S'il reste des « À décider », proposer
+   d'appliquer leurs choix par défaut dans une nouvelle vague du même plan : « sans avis de ta
+   part, c'est ce que je ferais ». La fusion attend l'utilisateur.
 
 ## Quand ça ne va pas
 
@@ -195,9 +199,9 @@ destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans la PR
   des tâches suivantes en dépendent, arrêter, rapporter et attendre. Sinon, retirer le travail de
   cette tâche seulement (code et test non commités, fichiers qu'elle a créés), pour que la
   vérification reste verte, laisser sa case vide, et continuer : la tâche part dans « À
-  décider » de la PR.
-- **Ambiguïté** : si le plan ne dit pas quoi faire, choisir l'option la plus prudente (la plus
-  petite, la plus réversible, la plus proche de l'existant), l'écrire dans le journal sous
+  décider » de la PR, avec une recommandation et un choix par défaut.
+- **Ambiguïté** : si le plan ne dit pas quoi faire, choisir l'option la plus petite, la plus
+  réversible et la plus proche de l'existant, l'écrire dans le journal sous
   `> Décision autonome (AAAA-MM-JJ) : <choix> ; <alternative écartée> ; <raison>`, et continuer.
 - **Le plan a tort** (état de départ faux, dépendance manquante, tâche impossible telle
   qu'écrite) : s'arrêter, dire ce qui est faux et proposer l'amendement. Ne pas contourner en
