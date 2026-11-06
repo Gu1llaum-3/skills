@@ -41,7 +41,9 @@ lié dans `~/.claude/skills/` par `install.sh`.
   peut pas le lancer, il le propose avec sa commande.
 - Passer d'une étape du parcours à la suivante (cadrage → `plan` → `implement`, ou `to-spec`) se
   fait après accord explicite de l'utilisateur. Les skills appelés en cours de route (`tdd`,
-  `interview`, `research`, `review`, `tickets`…) n'en demandent pas.
+  `interview`, `research`, `review`, `tickets`…) n'en demandent pas. Seule exception : la
+  section `## Autonomie` d'un projet (`implement/references/autonomy.md`) vaut accord permanent
+  entre `plan` et `implement`, pour les tickets qu'elle couvre.
 - Un skill en appelle un autre avec « appeler le Skill tool avec « nom » », et pointe ses fichiers
   par un lien relatif (`../tickets/SKILL.md`). Un appel par skill : deux skills, c'est « appeler
   deux fois le Skill tool ». Un skill que l'utilisateur lance lui-même ne s'appelle jamais ainsi :

@@ -101,7 +101,9 @@ Perdu en chemin ? /next dit quel skill lancer.
   dépend.
 - Passer d'une étape à la suivante (du cadrage au plan, du plan à `implement`) se fait après ton
   accord ; les skills appelés en cours de route (`tdd`, `interview`, `research`, `review`…) n'en
-  demandent pas. Ceux que tu lances toi-même (`/brainstorming`, `/feature`, `/poc`…) ne peuvent
+  demandent pas. Exception : un projet dont le `CLAUDE.md` a une section `## Autonomie`
+  (`implement/references/autonomy.md`) laisse `plan` valider seul le plan d'un ticket cadré.
+  Ceux que tu lances toi-même (`/brainstorming`, `/feature`, `/poc`…) ne peuvent
   pas être lancés par Claude : il te donne la commande à taper.
 
 ## Où vont les fichiers d'un projet

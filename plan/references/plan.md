@@ -70,4 +70,5 @@ Règles :
   une question **bloquante** pointe vers son questionnaire et empêche la validation. Section
   absente s'il n'y en a pas.
 - La ligne `> Statut :` reste toujours en tête : `à valider`, puis `validé par <nom> le
-  <JJ/MM/AAAA>` après l'accord, puis `terminé le <JJ/MM/AAAA>` quand `implement` a fini.
+  <JJ/MM/AAAA>` après l'accord (ou `validé par autonomie (CLAUDE.md, section Autonomie) le …`,
+  SKILL.md étape 6), puis `terminé le <JJ/MM/AAAA>` quand `implement` a fini.

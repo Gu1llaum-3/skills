@@ -97,7 +97,9 @@ recherche.
 
 ## 4. Trancher
 
-Pour les points ouverts, appeler le Skill tool avec « interview » :
+Plan qui se valide par la section « Autonomie » (étape 6) : pas d'entretien, les points se
+tranchent comme il y est dit. Sinon, pour les points ouverts, appeler le Skill tool avec
+« interview » :
 
 - **source cadrée** (ticket de ces skills, spec, juste après `feature`) : une ou deux séries au
   maximum. Le travail a déjà été discuté, on ne rouvre que ce qui l'exige ;
@@ -126,7 +128,17 @@ par `debug` s'il est passé par là. Le test reste ensuite comme test de non-ré
 ## 6. Valider et passer la main
 
 Montrer le plan et demander le feu vert. Une fois l'accord obtenu, passer la ligne de statut à
-`> Statut : validé par <nom> le <JJ/MM/AAAA>`. Le plan d'un jalon sans tickets se rattache
+`> Statut : validé par <nom> le <JJ/MM/AAAA>`.
+
+**Validation par la section « Autonomie »** : si le `CLAUDE.md` du projet a une section
+`## Autonomie` dont l'entrée « Plan sans validation » couvre les tickets cadrés
+([../implement/references/autonomy.md](../implement/references/autonomy.md)), que la source est
+un ticket **cadré** avec ses critères et que le plan n'a pas de question bloquante, le plan se
+valide seul : `> Statut : validé par autonomie (CLAUDE.md, section Autonomie) le <JJ/MM/AAAA>`.
+Les points de l'étape 4 se tranchent alors sans entretien, comme une décision autonome
+d'`implement`, dans le journal du projet ; ce que la section met dans « À demander » arrête le
+plan. Un ticket externe, une autre source ou une question bloquante gardent la validation de
+l'utilisateur. Le plan d'un jalon sans tickets se rattache
 ensuite à ce jalon avec le skill `tickets`. Le plan n'est pas commité ici : `implement`
 le commite avec la première tâche, sur sa branche.
 
