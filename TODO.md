@@ -98,3 +98,7 @@
 - [ ] `/onboard` propose la section `## Autonomie` (et `## Audit du code`) quand le projet a
   des tickets cadrés.
 - [ ] Le dépôt en plugin : espace de noms, workflows livrés par le plugin.
+- [x] **`/code-audit`** : les bugs du code par domaine, sur un commit figé, avec des
+  réfutateurs, d'après le workflow d'un projet privé ; domaines dans `## Audit du code`.
+- [ ] Essayer `/code-audit` sur un dépôt jetable sans section (domaines proposés, écrits après
+  accord), puis avec `since` : seuls les domaines touchés sont audités.

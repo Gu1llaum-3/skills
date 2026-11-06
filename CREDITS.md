@@ -67,9 +67,11 @@ reprise de texte : l'évaluateur séparé de l'auteur, plus facile à rendre sce
 critique d'OpenHands ; la PR en brouillon de GitHub Copilot coding agent. Sources dans
 `docs/research/2026-10-19-auteur-juge-revue-autonome.md`.
 
-Pour le chasseur de bugs (`agents/bug-hunter.md`) et `/ticket-chain`, sans source extérieure :
+Pour le chasseur de bugs (`agents/bug-hunter.md`), `/ticket-chain` et `/code-audit`, sans
+source extérieure :
 la méthode vient d'un projet privé de l'auteur, rendue générique (les invariants sont ceux du
-`CLAUDE.md` du projet, les valeurs propres au projet viennent de sa section `## Autonomie`).
+`CLAUDE.md` du projet, les valeurs propres au projet viennent de ses sections `## Autonomie` et
+`## Audit du code`).
 
 Sans traduction, quelques idées du skill `brainstorming` de superpowers, de Jesse Vincent
 (https://github.com/obra/superpowers, licence MIT) : le chemin annoncé au départ, qu'on ne fait

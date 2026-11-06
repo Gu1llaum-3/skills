@@ -15,6 +15,7 @@ Mes skills personnels pour Claude Code.
 | `/architecture` | Chercher où approfondir les modules d'un projet existant : rapport HTML, puis entretien sur la piste choisie |
 | `/retro` | Après une session difficile : ce qu'il faudrait changer dans l'environnement (renvois, contrôles, conventions de relecture) |
 | `/ticket-chain` | Enchaîner les tickets d'une spec sans toi : un agent neuf par ticket, quatre relecteurs et un juge, une vérification, une fusion locale par squash (projet avec une section `## Autonomie`) |
+| `/code-audit` | Chercher les bugs du code par domaine, sur un commit figé : un chasseur par domaine, chaque remarque soumise à des réfutateurs, rapport dans `docs/audits/` |
 | `/upgrade` | Auditer les versions (Node, pnpm, paquets, images Docker, Postgres) : failles, fins de vie, paquets abandonnés, mises à jour compatibles, dans `docs/audits/` |
 | `/git-guardrails` | Bloquer les commandes git destructrices de Claude (push, reset --hard, clean…) par un hook |
 | `/next` | Quel skill lancer maintenant : lit la conversation, ou l'état du projet |
@@ -66,6 +67,8 @@ bug qui résiste ──► debug ──┬── petit correctif ──► test 
 
 /upgrade ──► docs/audits/<date>-upgrade.md ──┬── sans risque ──► un commit par groupe
                                              └── chantier ──► tickets ──► /implement <ticket>
+
+/code-audit ──► docs/audits/<date>-<sha>.md ──► défauts confirmés ──► to-spec ──► tickets
 
 /architecture ──► rapport HTML ──► une piste choisie ──┬── maintenant ──► plan ──► implement
                                                        └── plus tard ──► to-spec
@@ -127,6 +130,7 @@ Perdu en chemin ? /next dit quel skill lancer.
 | `docs/specs/`, `docs/tickets/`, `ROADMAP.md` | `to-spec`, `to-tickets`, via `tickets` (gestionnaire local) |
 | `docs/conventions.md` | `retro`, lu par `review` |
 | `docs/plans/` | `plan`, exécutés par `implement` |
+| `docs/audits/` | `upgrade` (`<date>-upgrade.md`) et `code-audit` (`<date>-<sha>.md`) |
 | `docs/journal.md` (ou celui que nomme la section `## Autonomie`) | `plan` et `implement`, pour les décisions prises seuls |
 
 Le gestionnaire de tickets se règle par projet, dans une section « Tickets » du `CLAUDE.md`,

@@ -260,7 +260,7 @@ part dans ce dépôt.
 
 ## Vague 3 : /code-audit
 
-- [ ] `code-audit/SKILL.md` et `code-audit/workflow.js` (format de la section `## Audit du code`
+- [x] `code-audit/SKILL.md` et `code-audit/workflow.js` (format de la section `## Audit du code`
   dans `code-audit/references/`), `README.md`, `CREDITS.md`, `TODO.md`, carte de `next`, gabarit
   et page (AC-9, AC-10, AC-11) : vérification prévue : `node --check`, relecture contre AC-9,
   tests de la page, `git grep` des termes du brief
@@ -309,3 +309,53 @@ part dans ce dépôt.
 - > Décision autonome (2026-11-06) : `/ticket-chain` est rangé sur la carte dans la colonne
   > « Toi seul les lances », groupe « Enchaîner » ; le groupe « Construire » est écarté, sa colonne
   > est celle des skills que Claude peut aussi lancer.
+
+### Vague 2 (06/11/2026)
+
+- **Livré** : `agents/bug-hunter.md` générique (invariants du `CLAUDE.md`, journal du projet,
+  agent du projet prioritaire) ; `ticket-chain/SKILL.md` (préalables, arguments tirés de la
+  section, appel explicite de l'outil Workflow avec le script en entier, travail à côté, pause,
+  reprise, rapport) ; `ticket-chain/workflow.js` (inventaire par `tickets`, rattrapage, mode
+  `enchaîné`, quatre axes avec repli de `bug-hunter` et du juge sur leur fichier, juge aux classes
+  de `review-judge`, une vérification avec empreinte, squash, contrôle, une réparation) ;
+  `README.md`, `CREDITS.md`, `TODO.md`, carte de `next`, gabarit et page.
+- **Écarts** : aucun sur le contenu ; voir les décisions autonomes ci-dessus.
+- **Vérifié** : `./install.sh` relie `bug-hunter.md` dans `~/.claude/agents/` et
+  `ticket-chain` dans `~/.claude/skills/` ; syntaxe de `workflow.js` : `node --check` sur une
+  copie `.mjs` où le corps est enveloppé dans une fonction `async` (le `return` de premier niveau,
+  admis par l'outil Workflow, est refusé par `node` tel quel) ; déroulé à blanc avec des agents
+  factices : inventaire (ticket terminé sauté), rattrapage, repli de `bug-hunter` quand le type
+  d'agent est inconnu, juge, fusion et contrôle, prompts relus ; pas de `Date.now()` ; tests de
+  la page verts ; termes du brief absents. Non vérifié : un vrai lancement par l'outil Workflow.
+- **Bugs** : aucun.
+- **Quoi essayer** : dépôt jetable avec une spec et deux tickets cadrés, section
+  `## Autonomie` (`Fin : fusion locale`), puis `/ticket-chain <feature>` : deux commits de squash
+  sur `main` avec `Ticket: <ref>`, le contrôle qui dit ne pas relancer la vérification.
+- > Décision autonome (2026-11-06) : `upgrade` lit désormais le dernier rapport `*-upgrade.md`
+  > de `docs/audits/`, et non le dernier rapport du dossier ; laisser `upgrade` tel quel est
+  > écarté ; il aurait pris un rapport de `/code-audit` pour le sien.
+
+### Vague 3 (06/11/2026)
+
+- **Livré** : `code-audit/SKILL.md` (domaines de `## Audit du code`, proposés puis écrits après
+  accord s'ils manquent ; arguments `only`, `since`, `ref` ; appel explicite de l'outil Workflow
+  avec le script en entier ; rapport et suite vers `to-spec`) ; `code-audit/workflow.js` (commit
+  figé, lecture seule, un `bug-hunter` par domaine avec repli sur son fichier, trois réfutateurs
+  pour une remarque critique ou majeure, un pour une mineure, rapport daté commité sur la branche
+  principale ou dans un worktree) ; `code-audit/references/audit-section.md` (format et exemple
+  inventé) ; `upgrade` aligné ; `README.md`, `CREDITS.md`, `TODO.md`, carte de `next`, gabarit
+  et page ; `/ticket-chain` propose `/code-audit` après une spec terminée.
+- **Écarts** : l'argument de filtre des domaines s'appelle `only` dans le script (le plan dit
+  `domains`) : `domains` porte la liste des domaines tirée de la section, puisque le script n'en
+  contient plus aucun ; le skill accepte toujours des clés de domaines en argument.
+- **Vérifié** : syntaxe (`node --check` sur une copie enveloppée) ; déroulé à blanc : domaine
+  inconnu signalé, `since` qui ne garde que le domaine touché, repli de `bug-hunter`, trois
+  réfutateurs pour une majeure et un pour une mineure, majorité, prompt du rapport (worktree
+  `../demo-audit-<sha>`) ; frontmatter YAML lu sans erreur (description entre guillemets, à
+  cause du « : ») ; `./install.sh` relie `code-audit` ; tests de la page verts ; termes du brief
+  absents. Non vérifié : un vrai lancement.
+- **Bugs** : la description de `code-audit` sans guillemets était du YAML invalide (« : » dans
+  une valeur nue) ; corrigée avant le commit.
+- **Quoi essayer** : dépôt jetable sans section `## Audit du code`, `/code-audit` : domaines
+  proposés, section écrite après accord, puis un rapport `docs/audits/<date>-<sha>.md` commité ;
+  relancer avec `since <sha>` après un commit qui ne touche qu'un domaine.

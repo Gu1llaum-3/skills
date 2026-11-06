@@ -381,7 +381,7 @@ const COLUMNS = [
     ["Cadrer", ["brainstorming", "feature", "poc", "architecture"]],
     ["Préparer", ["onboard", "retro", "git-guardrails", "design", "naming"]],
     ["Enchaîner", ["ticket-chain"]],
-    ["Entretenir", ["upgrade"]],
+    ["Entretenir", ["upgrade", "code-audit"]],
     ["S'orienter", ["next", "wtf"]],
   ]},
   { title: "Le parcours", sub: "toi ou Claude, de la décision au code relu", groups: [
@@ -402,13 +402,14 @@ const NEXT = {
   "to-spec": ["to-tickets", "implement"],
   "to-tickets": ["implement"],
   plan: ["implement"],
-  "ticket-chain": ["implement", "review"],
+  "ticket-chain": ["code-audit"],
   implement: ["review", "retro"],
   retro: ["plan"],
   debug: ["plan"],
   review: ["plan"],
   onboard: ["feature"],
   upgrade: ["implement", "research"],
+  "code-audit": ["to-spec"],
   design: ["feature", "plan"],
   "to-questionnaire": ["plan", "to-spec"],
 };
@@ -452,6 +453,7 @@ const FLOWS = [
       { l: "Une session qui a peiné", st: [{ s: "retro", p: "Relit la session et propose le renvoi, le contrôle ou la convention de relecture qui éviterait la difficulté." }] },
       { l: "Un code difficile à changer", st: [{ s: "architecture", p: "Cherche où approfondir les modules, là où le code change le plus, dans un rapport HTML, puis mène l'entretien sur la piste choisie." }, { s: "plan", p: "Maintenant si ça tient en une session ; sinon to-spec." }] },
       { l: "Tenir les versions à jour", st: [{ s: "upgrade", p: "Inventaire de tout ce qui porte une version, puis failles, fins de vie et paquets abandonnés, avec leurs sources, dans docs/audits/. Les montées sans risque se font tout de suite, un commit par groupe ; les chantiers deviennent des tickets." }, { s: "implement", p: "Un /implement <ticket> par chantier : une majeure, un runtime, un remplacement." }] },
+      { l: "Chercher les bugs du code", st: [{ s: "code-audit", p: "Les domaines viennent de la section Audit du code du CLAUDE.md. Un chasseur de bugs par domaine, sur un commit figé ; chaque remarque passe devant des réfutateurs, puis un rapport daté dans docs/audits/. Rien n'est corrigé." }, { s: "to-spec", p: "Les défauts confirmés deviennent une spec, puis des tickets." }] },
       { l: "Trancher un mot, une décision", st: [{ s: "domain-modeling", p: "Un mot par concept, dans GLOSSARY.md." }, { s: "adr", p: "Une décision difficile à défaire, dans docs/adr/." }] },
       { l: "Faire faire ce que toi seul peux faire", st: [{ s: "wizard", p: "Un script qui ouvre chaque page, dit quoi cliquer, et écrit les valeurs dans .env et les secrets de la CI." }] },
       { l: "Demander ou chercher", st: [{ s: "to-questionnaire", p: "Les questions pour le métier, puis leurs réponses réintégrées." }, { s: "research", p: "Une recherche sourcée, en arrière-plan." }] },
@@ -478,6 +480,7 @@ const FILES = [
   { p: "conventions.md", d: "docs/", w: ["retro"], r: ["review"], role: "Les règles de jugement pour la relecture : ce qu'aucun linter ne vérifie, comme la cohérence entre fichiers.", tip: "Lu par review, pas par implement : les règles mécaniques deviennent des contrôles automatiques." },
   { p: "audits/<date>-upgrade.md", d: "docs/", w: ["upgrade"], r: ["upgrade"], role: "Un audit des versions : ce qui est à traiter, par priorité, ce qui n'a pas pu être vérifié, et les montées écartées.", tip: "Le suivant dit ce qui est nouveau, réglé ou traîne depuis le dernier, et ne repropose pas ce qui a été écarté." },
   { p: "journal.md", d: "docs/", w: ["plan", "implement", "ticket-chain"], r: ["ticket-chain"], role: "Le journal des décisions prises sans toi, quand le CLAUDE.md a une section Autonomie : contexte, décision, alternatives, sources, à revoir si.", tip: "Le journal du plan garde une ligne courte qui y renvoie." },
+  { p: "audits/<date>-<sha>.md", d: "docs/", w: ["code-audit"], r: ["code-audit", "to-spec"], role: "Un audit des bugs du code au commit figé : défauts confirmés par gravité et domaine, avec scénario et preuve, et remarques écartées.", tip: "Son en-tête donne la commande de l'audit suivant, limité à ce qui a changé depuis." },
   { p: "plans/", d: "docs/", w: ["plan"], r: ["implement", "review", "next"], role: "Les plans d'implémentation : vagues, tâches à cocher, critères, journal et bilan. La ligne « > Statut : » dit où il en est.", tip: "implement coche les cases au fil des commits : une reprise repart de la première case vide." },
 ];
 

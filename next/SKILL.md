@@ -74,6 +74,7 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 | Un nom à trouver | `/naming` |
 | Un projet existant sans `CLAUDE.md`, ou avec un `CLAUDE.md` douteux | `/onboard` |
 | Des versions à vérifier : failles, fins de vie, paquets en retard ou abandonnés | `/upgrade` |
+| Chercher les bugs de tout le code, ou de ce qui a changé depuis le dernier audit | `/code-audit` |
 | Empêcher Claude de pousser ou d'effacer du travail git | `/git-guardrails` |
 | Une session laborieuse : Claude a cherché longtemps, fait une erreur qu'un outil aurait vue | `/retro` |
 | Un code difficile à changer ou à tester, sans bug ni fonctionnalité en vue | `/architecture` |
