@@ -250,7 +250,7 @@ part dans ce dépôt.
 
 ## Vague 2 : /ticket-chain
 
-- [ ] `agents/bug-hunter.md` générique, `install.sh` vérifié, `CREDITS.md` (AC-6, AC-11) :
+- [x] `agents/bug-hunter.md` générique, `install.sh` vérifié, `CREDITS.md` (AC-6, AC-11) :
   vérification prévue : relecture contre AC-6, `./install.sh` puis `ls -l ~/.claude/agents`,
   `git grep` des termes du brief
 - [ ] `ticket-chain/SKILL.md` et `ticket-chain/workflow.js`, `README.md`, `CREDITS.md`,
@@ -266,3 +266,36 @@ part dans ce dépôt.
   tests de la page, `git grep` des termes du brief
 
 ## Journal
+
+### Vague 1 (06/11/2026)
+
+- **Livré** : `implement/references/autonomy.md` (entrées, valeurs par défaut, journal, exemple
+  inventé d'un outil de réservation) ; `plan` étapes 4 et 6 (validation par la section, points
+  tranchés sans entretien) et `plan/references/plan.md` ; règle « Passer d'une étape… » du
+  `CLAUDE.md` ; `implement` : section lue dans les préalables, autorisation de la fusion locale,
+  mode `enchaîné`, relecture de sécurité à l'étape 1, règle de déblocage, journal du projet ;
+  `implement/references/local-merge.md` (relecture de sécurité et ordre de la fusion) ;
+  `ending-by-origin.md` et `pull-request.md` alignés ; `README.md`, gabarit et page.
+- **Écarts** : la fin locale et la relecture de sécurité vont dans une référence à part
+  (`local-merge.md`) pour garder `implement/SKILL.md` lisible (253 lignes).
+- **Vérifié** : `python3 docs/build_skills_page.py` puis tests de la page (8 tests, code 0) ;
+  `git grep "validé par"` : `implement` (`validé par … le …`) et `next` (`validé par …`)
+  reconnaissent `validé par autonomie (…) le …` sans changement, `next` n'est donc pas modifié ;
+  termes du brief : aucun dans les ajouts, les fichiers non suivis ni les commits. Pas de tiret
+  long. Non vérifié : le comportement réel (aucun test automatique), voir le scénario de fin.
+- **Bugs** : aucun.
+- **Quoi essayer** : dans un dépôt jetable avec une section `## Autonomie`
+  (`Fin : fusion locale`), `/implement <ticket cadré>` : le plan doit se valider seul, puis
+  finir par un commit de squash sur `main` avec `Ticket: <ref>`, sans PR.
+- > Décision autonome (2026-11-06) : la relecture de sécurité d'`implement` se fait dès que la
+  > section nomme un fichier de chemins sensibles touché par le diff, que la fin soit une PR ou
+  > une fusion locale ; la limiter à la fusion locale est écarté ; une PR non relue en sécurité
+  > serait fusionnée à la main sans ce regard.
+- > Décision autonome (2026-11-06) : les constats de sécurité passent au juge comme axe `bug`,
+  > préfixés « sécurité : » ; un axe `sec` dans `review` et `review-judge` est écarté ; il
+  > changerait deux fichiers hors du plan pour une simple étiquette.
+- > Décision autonome (2026-11-06) : AC-11 se vérifie sur ce que la branche ajoute (lignes
+  > ajoutées, fichiers non suivis, messages de commit) ; sur tout le dépôt, l'un des termes
+  > trouve deux mots déjà sur `main`, sans lien avec le projet d'origine (le nom d'un assistant
+  > de GitHub dans `CREDITS.md` et la recherche du 19/10, un verbe de `wizard/template.sh`) ;
+  > les réécrire est écarté, hors périmètre.

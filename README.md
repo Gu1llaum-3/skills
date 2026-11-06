@@ -137,7 +137,7 @@ git clone git@github.com:Gu1llaum-3/skills.git ~/git/skills
 ```
 
 Chaque skill est lié par symlink dans `~/.claude/skills/`, et chaque agent de `agents/` (le juge
-de `review`) dans `~/.claude/agents/` : une modification dans le dépôt est immédiatement prise en
+de `review`, le chasseur de bugs) dans `~/.claude/agents/` : une modification dans le dépôt est immédiatement prise en
 compte par Claude Code.
 
 ## Mise à jour
