@@ -1,6 +1,6 @@
 # Enchaînement autonome : la section Autonomie, /ticket-chain et /code-audit
 
-> Statut : validé par Guillaume le 06/11/2026
+> Statut : terminé le 06/11/2026
 > Origine : cadrage du 06/11/2026, à partir d'un projet privé (le « projet d'origine ») : inventaire
 > de ce qui y surcharge les skills, puis essais de lancement d'un workflow depuis un skill. Les
 > chemins de ses fichiers sont donnés au lancement d'`implement`, jamais écrits dans ce dépôt
@@ -265,6 +265,27 @@ part dans ce dépôt.
   et page (AC-9, AC-10, AC-11) : vérification prévue : `node --check`, relecture contre AC-9,
   tests de la page, `git grep` des termes du brief
 
+## Vague 4 : Retours de revue
+
+- [x] R-6 et R-18 (option prudente) : une fusion `failed` arrête l'enchaînement
+- [x] R-16 (option prudente) : sans verdict du juge, ou un id sans verdict, le ticket est bloqué sans fusion ; un axe vide se signale
+- [x] R-20 : rattrapage, pied ancré et tous les commits qui le portent
+- [x] R-9 : consigne de sécurité lue dans `local-merge.md`, une seule source
+- [x] R-10 : règles de déblocage lues dans `implement/SKILL.md`, seul le point propre au workflow reste
+- [x] R-11 : « À demander » sans valeur recopiée dans le script
+- [x] R-13 : lancement d'un workflow et chemins des agents dans une référence commune
+- [x] R-21 (option prudente) : majorité sur les votes prévus, remarques aux votes incomplets « non vérifiées »
+- [x] R-23 : `inDomain` avec une frontière de dossier
+- [x] R-24 : appel de `tickets` à la forme du dépôt (`ticket-chain/SKILL.md:40`)
+- [x] R-26 : même défaut à `ticket-chain/SKILL.md:61`
+- [x] R-25 : NEXT de `ticket-chain` vers `code-audit`
+- [x] N-1 (introduit par R-21) : une remarque réfutée à la majorité malgré un vote absent est écartée
+
+## Vague 5 : décisions de l'utilisateur (R-17, R-22)
+
+- [x] R-17 : un ticket distant se ferme après le squash et le contrôle, jamais avant ; l'inventaire saute (et ferme) un ticket dont le pied est déjà sur la branche principale ; même fin pour `implement` en fin locale
+- [x] R-22 : le rapport de `/code-audit` s'écrit toujours dans un worktree
+
 ## Journal
 
 ### Vague 1 (06/11/2026)
@@ -359,3 +380,110 @@ part dans ce dépôt.
 - **Quoi essayer** : dépôt jetable sans section `## Audit du code`, `/code-audit` : domaines
   proposés, section écrite après accord, puis un rapport `docs/audits/<date>-<sha>.md` commité ;
   relancer avec `since <sha>` après un commit qui ne touche qu'un domaine.
+
+### Relecture de fin de plan (06/11/2026)
+
+`/code-review` (medium) sur `main...ticket-chain`, puis `review` (axes spec et conventions,
+juge `review-judge`). 25 remarques (spec 7, conventions 8, bugs 10) et une vue par le juge.
+
+**Relecture : 9 à corriger, 3 options prudentes, 2 à décider**, sur 26 remarques (spec 7,
+conventions 8, bugs 10, vues par le juge 1).
+
+À corriger
+- R-9 · conv · implement/references/local-merge.md et ticket-chain/workflow.js · consigne de sécurité écrite deux fois, déjà divergente (phrase des invariants absente du script)
+- R-10 · conv · ticket-chain/workflow.js (UNBLOCK) · recopie la règle de déblocage d'implement
+- R-11 · conv · ticket-chain/workflow.js:23 · valeur par défaut d'« À demander » recopiée, déjà divergente d'autonomy.md
+- R-13 · conv · ticket-chain/SKILL.md et code-audit/SKILL.md · « Lancer » et la ligne `bugHunterPath` en double
+- R-20 · bug · ticket-chain/workflow.js:233 · `--grep` sans ancrage (`x/1` trouve `x/10`), et le correctif porte le même pied
+- R-23 · bug · code-audit/workflow.js:97 · `startsWith` sans frontière : `src/auth` prend `src/authors`
+- R-24 · bug · ticket-chain/SKILL.md:40 · « (skill `tickets`) » au lieu de la forme d'appel du dépôt
+- R-25 · bug · docs/skills.template.html:405 · NEXT de ticket-chain ne mène pas à code-audit, que le skill propose
+- R-26 · conv · ticket-chain/SKILL.md:61 · même défaut que R-24 (vu par le juge)
+Option prudente
+- R-6 · spec · ticket-chain/workflow.js:301 · un `failed` à la fusion part en contrôle et réparation · option : `merge.status !== 'done'` arrête · test : déroulé à blanc, fusion `failed`, ni contrôle ni réparation
+- R-18 · bug · ticket-chain/workflow.js:301 · même constat · option et test de R-6
+- R-16 · bug · ticket-chain/workflow.js:193 · juge nul ou ids omis : remarques perdues, fusion · option : statut bloqué sans fusion, et log de chaque axe nul · test : déroulé à blanc, juge nul, pas d'agent de fusion
+- R-21 · bug · code-audit/workflow.js:142 · votes manquants comptés comme réfutation, 1/1 vaut majorité · option : majorité sur les votes prévus, votes incomplets dans « non vérifiées » · test : déroulé à blanc, vérificateurs nuls
+À décider
+- R-17 · bug · ticket-chain/workflow.js:292 · le ticket est terminé avant la vérification ; sur un gestionnaire distant, fermé même sans fusion, puis sauté par l'inventaire · options : (a) ne rien fermer à distance (`humanActions`) et l'inventaire saute les tickets dont le pied est déjà sur la branche principale / (b) refuser les gestionnaires distants en v1 (un refus de plus à AC-7) · recommandée : (a) · sans avis de ta part : (a)
+- R-22 · bug · code-audit/workflow.js:174 · « sur main et propre » puis commit : course avec /ticket-chain · options : (a) toujours un worktree / (b) `git commit -- <rapport>` après un second contrôle / (c) interdire l'audit pendant /ticket-chain · recommandée : (a) · sans avis de ta part : (a)
+Écartée
+- ~~R-7 · spec · ticket-chain/workflow.js:26 · `catchUp` au lieu de `rattrapage`~~ : identifiants en anglais (plan, décision du script), l'argument du skill reste `rattrapage` (ticket-chain/SKILL.md:4, :59)
+- ~~R-8 · conv · commits sur `ticket-chain`, pas `main`~~ : décision de la spec, à la demande de l'utilisateur (Décisions, « Dépôt »)
+- ~~R-12 · conv · repli `bug-hunter` dupliqué dans les deux scripts~~ : chaque script est passé en entier, sans module partagé possible ; deux lignes
+- ~~R-14 · conv · chirurgie au fusil sur l'exception Autonomie~~ : la spec demande ces fichiers, et chaque mention renvoie à autonomy.md ou local-merge.md
+- ~~R-15 · conv · trois jetons dans `branchFor`~~ : documentés (ticket-chain/SKILL.md:50)
+- ~~R-19 · bug · `blockedBy` inutilisé~~ : l'effet est l'arrêt prévu, avec sa raison (implement refuse et cite les bloquants ; AC-8)
+Déjà connu
+- R-1 · spec · code-audit/workflow.js:20 · `only` au lieu de `domains` : Journal, vague 3
+- R-2 · spec · implement/SKILL.md · relecture de sécurité aussi avant une PR : décision autonome
+- R-3 · spec · ticket-chain/SKILL.md:32 · quatrième refus : décision autonome
+- R-4 · spec · upgrade/SKILL.md · changé hors plan : décision autonome
+- R-5 · spec · ticket-chain/workflow.js · « À décider » tranchés par le choix par défaut : décision autonome (AC-4 vise `implement`)
+
+### Relecture des corrections
+
+- Tour 1 : les 13 remarques traitées sont réglées (R-6, R-9, R-10, R-11, R-13, R-16, R-18, R-20,
+  R-21, R-23, R-24, R-25, R-26) ; une remarque introduite, N-1 (À corriger, par R-21 : une
+  remarque réfutée à la majorité malgré un vote absent passait en « non vérifiées »).
+- Tour 2 : N-1 réglée (808287b), rien d'introduit.
+
+## Réalisé
+
+- **Vérification complète** (06/11/2026), verte : `python3 docs/build_skills_page.py` et les
+  8 tests de la page ; `node --check` des deux `workflow.js` (copie enveloppée) ; 30 contrôles de
+  déroulé à blanc (21 pour `ticket-chain`, 9 pour `code-audit`, vague 5 comprise) ; termes du brief absents des
+  ajouts, des fichiers et des messages de commit ; aucun tiret long ajouté ; le plus long
+  `SKILL.md` touché fait 254 lignes.
+- **Critères** :
+  - AC-1 atteint : `implement/references/autonomy.md` ; sans la section, `plan`, `implement` et
+    `next` gardent leur texte d'avant (relecture ; `next` inchangé, il lit déjà `validé par …`).
+  - AC-2 atteint : `plan` étapes 4 et 6 (relecture).
+  - AC-3 atteint : `implement`, « Déblocage » et journal du projet (relecture).
+  - AC-4 atteint : `implement/references/local-merge.md` (relecture).
+  - AC-5 atteint : mode `enchaîné` d'`implement` (relecture).
+  - AC-6 atteint : `agents/bug-hunter.md`, relié par `./install.sh` (vérifié dans
+    `~/.claude/agents`).
+  - AC-7 atteint, avec un quatrième refus (décision autonome) : `ticket-chain/SKILL.md`.
+  - AC-8 atteint : `ticket-chain/workflow.js`, déroulés à blanc (arrêt sur fusion en échec, sur
+    juge nul ou verdict manquant, rattrapage ancré, contrôle sans relance sur arbre identique).
+  - AC-9 atteint : `code-audit`, déroulés à blanc (votes, `since`, frontière des préfixes).
+  - AC-10 atteint : README, CREDITS, TODO, carte de `next`, gabarit et page, tests verts ;
+    `evals/triggers.json` inchangé (descriptions d'`implement` et de `plan` inchangées, les
+    deux nouveaux skills sont lancés par l'utilisateur).
+  - AC-11 atteint sur ce que la branche ajoute (décision autonome sur deux mots déjà sur `main`).
+  - AC-12 atteint : `implement`, étape 1 de « Fin du plan », et `local-merge.md`.
+  - Le comportement réel n'a pas de test automatique : un lancement réel reste à faire (scénario
+    du message final, et deux lignes de `TODO.md`).
+- **Écarts au plan** : fin locale et relecture de sécurité dans `local-merge.md` ; filtre de
+  domaines nommé `only` ; références communes `ticket-chain/references/launching-a-workflow.md`
+  (R-13) ; `upgrade` ne lit plus que ses rapports `*-upgrade.md`.
+- **Tâches ajoutées** : la vague 4 « Retours de revue » (12 remarques et N-1), la vague 5
+  (décisions de l'utilisateur sur R-17 et R-22).
+- **Relecture** : corrigées R-9 (1589c93), R-10 (7ad1644), R-11 (7d124ec), R-13 (83d6572), R-20
+  (a9954b4), R-23 (59fbf3d), R-24 (6e21ee9), R-25 (5dd71c0), R-26 (1357a59), N-1 (808287b) ;
+  options prudentes appliquées R-6 et R-18 (bdc9822), R-16 (2f53627), R-21 (4b23725) ; écartées
+  R-7, R-8, R-12, R-14, R-15, R-19 (preuves du juge ci-dessus) ; déjà connues R-1 à R-5.
+  **À décider**, tranchés par l'utilisateur et appliqués en vague 5 : R-17, sa variante (un
+  ticket distant se ferme après le squash et le contrôle, l'inventaire saute et ferme un ticket
+  déjà fusionné ; aussi en fin locale d'`implement`) (821ef64) ; R-22, toujours un worktree
+  (6e94bcb). Ces deux changements n'ont pas eu de relecture par le juge (les deux tours
+  prévus étaient faits) : ils sont couverts par les déroulés à blanc.
+- **Décisions autonomes** : voir le Journal (six entrées).
+- **Après le regroupement** (06/11/2026, défaut signalé par l'utilisateur) : un relecteur qui ne
+  rend rien (bugs, conventions, spec, ou sécurité quand un fichier de chemins sensibles est
+  configuré) arrête le ticket comme un juge muet, sans fusion ; avant, l'axe manquant était
+  seulement signalé. Rangé dans le commit `/ticket-chain` ; prouvé par des déroulés à blanc
+  (axe sécurité vide, axe bugs vide après repli, sécurité non configurée qui fusionne).
+- **Historique** : le 06/11/2026, à la demande de l'utilisateur, les commits de correction cités
+  plus haut ont été regroupés dans le commit de leur changement : `implement` (841512a),
+  `/ticket-chain` (37ae8e1), `/code-audit` (68024dc). Les hashes d'origine restent dans la
+  branche locale `ticket-chain-avant-regroupement`, à supprimer une fois la fusion faite.
+- **Hors plan** : rien de nouveau ; les suites restent dans « Hors périmètre » et `TODO.md`.
+
+### Décisions de l'utilisateur (06/11/2026)
+
+- R-17 : variante de l'utilisateur, plutôt que (a) ou (b) : fermer le ticket distant **après**
+  la fusion, pour être sûr qu'il ne se ferme que sur un code fusionné ; avec le garde-fou de (a)
+  (l'inventaire saute un ticket dont le pied est déjà sur la branche principale).
+- R-22 : choix par défaut (a), le rapport toujours dans un worktree.
