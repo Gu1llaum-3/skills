@@ -13,3 +13,9 @@ les fermer avec le skill `tickets`.
   atteints et case de `ROADMAP.md`). Sur un gestionnaire distant, ne rien fermer : prévoir
   `Closes #<numéro>` (ou l'équivalent) dans le corps de la PR, et proposer un commentaire de
   bilan sur le ticket dans les lignes « À faire par toi » du message final.
+- **Fin locale** (section `## Autonomie`, `Fin : fusion locale`) : le ticket local terminé et la
+  case de la roadmap cochée vont dans le commit du bilan, sur la branche, et arrivent dans la
+  branche principale par le commit de squash ([local-merge.md](local-merge.md)). Ni PR ni
+  `Closes #…`. Un ticket distant se ferme **après** le commit de squash, jamais avant, avec le
+  skill `tickets` et un commentaire de bilan (le commit, fusion locale non poussée) ; une
+  fermeture qui échoue devient une ligne « À faire par toi ».

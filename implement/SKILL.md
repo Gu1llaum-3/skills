@@ -1,7 +1,7 @@
 ---
 name: implement
 description: "Exécuter un plan validé, un ticket ou un jalon (fichier local, GitHub, GitLab, Jira), vague par vague, en TDD, une tâche par commit, sans pause, puis une relecture jugée et une PR en brouillon ; reprendre exactement là où on s'est arrêté. Utilise ce skill quand l'utilisateur veut implémenter, lancer ou reprendre un plan (« implémente le plan », « lance la vague 2 », « continue le plan »), un ticket (« implémente le ticket 42 », « on attaque PROJ-123 ») ou un jalon (« on attaque le jalon 2 »). Pas pour écrire, relire ou modifier un plan : c'est plan."
-argument-hint: "[chemin du plan | ticket] [pas-à-pas]"
+argument-hint: "[chemin du plan | ticket] [pas-à-pas | enchaîné]"
 ---
 
 # Implémenter un plan
@@ -46,6 +46,9 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
   existe : les noms du code et des tests reprennent ses termes.
   Relever ce qu'ils disent des branches, des commits, des tests, des essais manuels et de la
   vérification.
+- **Section `## Autonomie`** du `CLAUDE.md`, si elle existe : la lire avec
+  [references/autonomy.md](references/autonomy.md). Elle donne le journal du projet, la fin
+  (PR en brouillon ou fusion locale), les commandes et les chemins sensibles.
 - **Commandes** : trouver la commande de vérification complète, celle qui lance un seul fichier
   de test, et celle du typage s'il y en a un (`CLAUDE.md`, `package.json`, `mise.toml`,
   `Makefile`, `justfile`…). Si elles sont introuvables, s'arrêter avant la première tâche et les demander : sans elles,
@@ -70,7 +73,10 @@ commits, commandes, essais). Ce skill ne donne que les réglages par défaut.
 qu'il prévoit, même si le dépôt demande par ailleurs de « ne commiter que sur demande », et, en fin
 de plan, le push de la branche du plan et une pull request **en brouillon**
 ([references/pull-request.md](references/pull-request.md)). Elle ne va pas plus loin : pas de
-merge, pas de push de la branche principale. Une consigne qui interdit les commits (dans la
+merge, pas de push de la branche principale. Seule exception : avec `Fin : fusion locale` dans la
+section `## Autonomie`, le squash merge dans la branche principale, la suppression de la
+branche du plan et, après le squash, la fermeture du ticket distant
+([references/local-merge.md](references/local-merge.md)), jamais de push. Une consigne qui interdit les commits (dans la
 conversation ou `CLAUDE.md`) l'emporte : tout le parcours se fait sans commit, et
 les corrections restent dans le travail non commité. Ce qui empêche la PR est listé dans
 [references/pull-request.md](references/pull-request.md).
@@ -90,10 +96,19 @@ les corrections restent dans le travail non commité. Ce qui empêche la PR est 
    (`feat/<slug>`, `fix/<slug>`, `chore/<slug>`). En reprise, retourner sur cette branche.
    **Jamais sur la branche principale** (`main`, `master`, ou celle que le dépôt désigne comme
    telle), sauf si la convention écrite du dépôt (`CLAUDE.md`) dit d'y commiter : la fusion y a
-   lieu sur feu vert, pas au fil des tâches.
+   lieu sur feu vert ou en fin locale, pas au fil des tâches.
 5. **Mode pas à pas** : l'argument `pas-à-pas`, ou une demande de pause entre les vagues, rétablit
    la pause de fin de vague. Une demande qui vise une vague précise (« lance la vague 2 »)
    s'arrête après elle. Sinon, les vagues s'enchaînent.
+6. **Mode enchaîné** : l'argument `enchaîné`, donné par `/ticket-chain`, qui relit, vérifie et
+   fusionne lui-même. Les vagues s'enchaînent avec des **tests ciblés** à la place de la
+   vérification complète (ceux de la section `## Autonomie`, sinon le fichier de test, le typage
+   et le lint de ce qui a été touché). En fin de plan, seulement l'étape 4 (le bilan, sans
+   relecture), commité sur la branche ; la ligne de statut et le ticket restent tels quels,
+   l'appelant les ferme à la fusion. Ni relecture, ni PR, ni fusion. Le message final commence par le statut **prêt**
+   (tout est commité sur la branche, tests ciblés verts) ou **bloqué** (un arrêt de « Quand ça ne
+   va pas », avec sa raison), puis les entrées ajoutées au journal du projet et les actions
+   manuelles.
 
 ## Une vague
 
@@ -127,7 +142,8 @@ les corrections restent dans le travail non commité. Ce qui empêche la PR est 
 3. **Fin de vague** : lancer la vérification complète et **lire son code de retour**. Ne jamais
    faire passer la sortie par un pipe (`| tail`, `| grep`) dans la commande qui sert de
    vérification, car le pipe remplace le code de retour et masque l'échec. Rediriger vers un
-   fichier, lire le code, puis lire le fichier. Si c'est rouge, la vague n'est pas finie.
+   fichier, lire le code, puis lire le fichier. Si c'est rouge, la vague n'est pas finie. En mode
+   enchaîné, les tests ciblés de la vague remplacent la vérification complète.
 4. **Micro-bilan**, écrit aussi dans le plan (sous la vague ou dans une section « Journal » /
    « Retours d'essai » si le plan en a une) :
    - ce qui a été livré : fichiers, tests, comportements ;
@@ -151,6 +167,10 @@ Quand la dernière vague est verte :
    - puis appeler le Skill tool avec « review », avec le plan pour spec et les constats de
      `/code-review` (axe `bug`) : son juge classe les remarques des trois sources. `review` rend
      la vue groupée et le rapport complet, sans question.
+   - si la section `## Autonomie` nomme un fichier de chemins sensibles et que le diff en touche
+     un, la relecture de sécurité de
+     [references/local-merge.md](references/local-merge.md), avant `review`, dont le juge classe
+     aussi ses constats.
    Écrire le rapport complet dans le journal.
 2. **Corriger les « À corriger » et appliquer les « Option prudente »** dans une vague « Retours
    de revue », en TDD comme les autres (un bug commence par le test qui le montre ; une option
@@ -161,7 +181,8 @@ Quand la dernière vague est verte :
    montré, sans autre option essayée à la place. Puis la relecture des corrections de `review` (section « Relire les corrections »),
    deux tours au maximum.
 3. **Vérification complète**, comme en fin de vague. Rouge après un effort raisonnable : le dire
-   en tête du bilan et du message final.
+   en tête du bilan et du message final. En fin locale, elle se fait après le bilan, dans l'ordre
+   de [references/local-merge.md](references/local-merge.md).
 4. **Écrire le bilan dans le plan**, pour le relecteur : dans la section « Réalisé » si le plan en
    a une, sinon dans une section ajoutée en fin de fichier. Y mettre :
    - chaque critère, atteint (avec le test qui le prouve) ou non, et pourquoi ;
@@ -179,24 +200,36 @@ Quand la dernière vague est verte :
    **Plan d'origine POC** : s'arrêter là et proposer `/poc docs/poc/<slug>.md` pour écrire le
    verdict.
 5. **Ouvrir la PR en brouillon**, ou afficher son texte quand elle ne peut pas s'ouvrir :
-   [references/pull-request.md](references/pull-request.md).
+   [references/pull-request.md](references/pull-request.md). Avec `Fin : fusion locale` : la
+   fusion par squash de [references/local-merge.md](references/local-merge.md), sans PR.
 6. **Message final** : un **bloc d'état** de 3 ou 4 lignes (plan et branche ; vagues faites et
    commits ; critères atteints n/m ; vérification complète verte ou rouge, et pourquoi), le lien
-   de la PR ou son lien de création et la raison, la vue groupée, puis les lignes **« À faire
+   de la PR ou son lien de création et la raison (en fin locale, le commit de squash, ou pourquoi
+   la branche n'est pas fusionnée), la vue groupée, puis les lignes **« À faire
    par toi »** : les « À décider », chacun avec sa recommandation et son choix par défaut, en
    rappelant que la PR reste en brouillon tant qu'ils sont ouverts ; les « Option prudente »
    appliquées, une ligne chacune, à relire en priorité ; ce
    que prévoit `ending-by-origin.md` ; un ADR proposé ; `/retro` si la session a été laborieuse
    (recherches longues, erreurs qu'un outil aurait vues). S'il reste des « À décider », proposer
    d'appliquer leurs choix par défaut dans une nouvelle vague du même plan : « sans avis de ta
-   part, c'est ce que je ferais ». La fusion attend l'utilisateur.
+   part, c'est ce que je ferais ». Hors fin locale, la fusion attend l'utilisateur.
 
 ## Quand ça ne va pas
 
 Seuls trois cas arrêtent l'exécution : un échec dont la suite dépend, un plan faux, un changement
-destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans le message final.
+destructeur ; avec la section `## Autonomie`, aussi ce qu'elle met dans « À demander ». Le reste se tranche, s'écrit dans le journal et remonte dans le message final.
 
-- **Échec d'une tâche** (un test qui ne passe pas après un effort raisonnable, une commande qui
+- **Déblocage**, avant de déclarer une tâche en échec :
+  1. diagnostiquer : lire l'erreur, la reproduire, lire le code et la documentation locale ;
+  2. si ça ne suffit pas, chercher dans les sources primaires (documentation officielle, notes de
+     version, issues du projet en cause) ;
+  3. retenir la solution propre, jamais un contournement, et l'écrire en décision autonome.
+
+  Pour passer au vert, ne jamais affaiblir un test ou un critère, ni contourner une règle de
+  sécurité ou un refus de permission : c'est un échec, pas un déblocage. Une action manuelle qui
+  ne bloque pas la suite (faire confiance à un certificat local, par exemple) va dans « À faire
+  par toi » sans arrêter le travail.
+- **Échec d'une tâche** (un test qui ne passe pas après le déblocage, une commande qui
   échoue, une contradiction avec le code) : écrire sous la tâche `> Échec (AAAA-MM-JJ) : …`. Si
   des tâches suivantes en dépendent, arrêter, rapporter et attendre. Sinon, retirer le travail de
   cette tâche seulement (code et test non commités, fichiers qu'elle a créés), pour que la
@@ -205,6 +238,9 @@ destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans le me
 - **Ambiguïté** : si le plan ne dit pas quoi faire, choisir l'option la plus petite, la plus
   réversible et la plus proche de l'existant, l'écrire dans le journal sous
   `> Décision autonome (AAAA-MM-JJ) : <choix> ; <alternative écartée> ; <raison>`, et continuer.
+  Avec la section `## Autonomie`, l'écrire aussi dans le journal du projet, au format de
+  [references/autonomy.md](references/autonomy.md). Ce que la section met dans « À demander »
+  arrête le travail au lieu de se trancher.
 - **Le plan a tort** (état de départ faux, dépendance manquante, tâche impossible telle
   qu'écrite) : s'arrêter, dire ce qui est faux et proposer l'amendement. Ne pas contourner en
   silence : un écart non dit rend le plan faux pour tous ceux qui le reliront.
@@ -215,5 +251,6 @@ destructeur. Le reste se tranche, s'écrit dans le journal et remonte dans le me
   l'enregistrer, et sur accord, appeler le Skill tool avec « adr ».
 - **Un changement destructeur** (suppression de données, migration irréversible, écriture vers un
   service tiers, réécriture de l'historique) : demander une confirmation explicite, même si le
-  plan le prévoit. Le push de la branche du plan et la PR en brouillon n'en sont pas : ils sont
-  autorisés (« Autorisation »).
+  plan le prévoit. Le push de la branche du plan, la PR en brouillon et, en fin locale, la
+  fermeture du ticket distant après le squash n'en sont pas : ils sont autorisés
+  (« Autorisation »).

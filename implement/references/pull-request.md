@@ -16,6 +16,8 @@ Toutes ces conditions, sinon ni push ni PR :
 - la branche n'est pas la branche principale (un dépôt qui commite sur `main` par convention n'a
   pas de PR) ;
 - il y a un dépôt distant (`git remote`).
+- la section `## Autonomie` du projet ne dit pas `Fin : fusion locale` : la fusion par squash
+  remplace alors la PR ([local-merge.md](local-merge.md)).
 
 Puis `git push -u origin <branche du plan>`, jamais `--force`. Un push refusé (un hook comme
 `git-guardrails` peut l'interdire) : ne pas insister, afficher le texte (plus bas).

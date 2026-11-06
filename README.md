@@ -69,6 +69,7 @@ bug qui résiste ──► debug ──┬── petit correctif ──► test 
 interview, research, adr, to-questionnaire et wizard sont appelés en cours de route.
 implement écrit le code avec tdd, le fait relire par /code-review et review, dont le juge classe
 les remarques, corrige, puis ouvre une PR en brouillon : la validation du plan est ton seul arrêt.
+Avec une section « Autonomie » dans le CLAUDE.md qui le dit, il fusionne lui-même par squash.
 Après une session difficile, /retro propose ce qu'il faudrait changer dans l'environnement.
 Perdu en chemin ? /next dit quel skill lancer.
 ```
@@ -122,6 +123,7 @@ Perdu en chemin ? /next dit quel skill lancer.
 | `docs/specs/`, `docs/tickets/`, `ROADMAP.md` | `to-spec`, `to-tickets`, via `tickets` (gestionnaire local) |
 | `docs/conventions.md` | `retro`, lu par `review` |
 | `docs/plans/` | `plan`, exécutés par `implement` |
+| `docs/journal.md` (ou celui que nomme la section `## Autonomie`) | `plan` et `implement`, pour les décisions prises seuls |
 
 Le gestionnaire de tickets se règle par projet, dans une section « Tickets » du `CLAUDE.md`,
 proposée automatiquement la première fois.

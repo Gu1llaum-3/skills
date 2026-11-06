@@ -241,7 +241,7 @@ part dans ce dépôt.
   gabarit et page (AC-1, AC-2, AC-10, AC-11) : vérification prévue : relecture contre AC-1 et
   AC-2, `git grep -n "validé par"` sur les skills qui lisent le statut, tests de la page,
   `git grep` des termes du brief
-- [ ] `implement` : règle de déblocage, journal du projet, mode `enchaîné`, fin locale,
+- [x] `implement` : règle de déblocage, journal du projet, mode `enchaîné`, fin locale,
   relecture de sécurité avant fusion ; `references/ending-by-origin.md` et
   `references/pull-request.md` alignés (pas de PR en fin locale), `README.md`, gabarit et page
   (AC-3, AC-4, AC-5, AC-10, AC-11, AC-12) : vérification prévue : relecture contre AC-3 à AC-5
