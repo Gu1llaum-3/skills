@@ -253,7 +253,7 @@ part dans ce dépôt.
 - [x] `agents/bug-hunter.md` générique, `install.sh` vérifié, `CREDITS.md` (AC-6, AC-11) :
   vérification prévue : relecture contre AC-6, `./install.sh` puis `ls -l ~/.claude/agents`,
   `git grep` des termes du brief
-- [ ] `ticket-chain/SKILL.md` et `ticket-chain/workflow.js`, `README.md`, `CREDITS.md`,
+- [x] `ticket-chain/SKILL.md` et `ticket-chain/workflow.js`, `README.md`, `CREDITS.md`,
   `TODO.md`, carte de `next`, gabarit (groupe dans `COLUMNS`) et page (AC-7, AC-8, AC-10,
   AC-11) : vérification prévue : `node --check`, relecture contre AC-7 et AC-8, tests de la
   page, `git grep` des termes du brief
@@ -299,3 +299,13 @@ part dans ce dépôt.
   > trouve deux mots déjà sur `main`, sans lien avec le projet d'origine (le nom d'un assistant
   > de GitHub dans `CREDITS.md` et la recherche du 19/10, un verbe de `wizard/template.sh`) ;
   > les réécrire est écarté, hors périmètre.
+- > Décision autonome (2026-11-06) : `/ticket-chain` exige aussi `Plan sans validation :
+  > tickets cadrés` ; s'en tenir aux trois refus d'AC-7 est écarté ; sans cette entrée, le plan
+  > du premier ticket attendrait l'utilisateur et l'enchaînement bloquerait aussitôt.
+- > Décision autonome (2026-11-06) : dans `workflow.js`, un « À décider » du juge qui relève de
+  > « À demander » arrête le ticket sans fusion ; les autres prennent le choix par défaut du juge,
+  > consigné au journal du projet ; c'est ce que faisait le workflow d'origine (« se tranche selon
+  > la section Autonomie »), borné par la liste « À demander ».
+- > Décision autonome (2026-11-06) : `/ticket-chain` est rangé sur la carte dans la colonne
+  > « Toi seul les lances », groupe « Enchaîner » ; le groupe « Construire » est écarté, sa colonne
+  > est celle des skills que Claude peut aussi lancer.

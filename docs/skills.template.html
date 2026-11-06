@@ -377,9 +377,10 @@ const DATA = /*DATA*/;
 
 /* Écrit à la main : colonne et groupe de chaque skill, et ce qu'on enchaîne après lui. */
 const COLUMNS = [
-  { title: "Toi seul les lances", sub: "cadrer, préparer, s'orienter", groups: [
+  { title: "Toi seul les lances", sub: "cadrer, préparer, enchaîner, s'orienter", groups: [
     ["Cadrer", ["brainstorming", "feature", "poc", "architecture"]],
     ["Préparer", ["onboard", "retro", "git-guardrails", "design", "naming"]],
+    ["Enchaîner", ["ticket-chain"]],
     ["Entretenir", ["upgrade"]],
     ["S'orienter", ["next", "wtf"]],
   ]},
@@ -401,6 +402,7 @@ const NEXT = {
   "to-spec": ["to-tickets", "implement"],
   "to-tickets": ["implement"],
   plan: ["implement"],
+  "ticket-chain": ["implement", "review"],
   implement: ["review", "retro"],
   retro: ["plan"],
   debug: ["plan"],
@@ -436,6 +438,7 @@ const FLOWS = [
   { id: "ticket", t: "Un ticket ou un bug", e: "/implement <ticket> · /debug", sub: "Un ticket de la roadmap, d'une PO ou d'un client ; un bug qui résiste.", steps: [
     { b: "Qu'est-ce que tu as devant toi ?", o: [
       { l: "Un ticket", st: [{ s: "implement", p: "Cherche un plan qui cite déjà le ticket ; sinon lit le ticket avec tickets et refuse s'il a des bloquants." }, { s: "plan", p: "Confronte le ticket au code. Écrit hors de ces skills, il est challengé, et les questions vont à son auteur." }, { s: "implement", p: "Exécute le plan, le fait relire et juger, corrige, puis ouvre une PR en brouillon." }] },
+      { l: "Les tickets d'une spec, sans toi", st: [{ s: "ticket-chain", p: "Dans un projet dont le CLAUDE.md a une section Autonomie (fusion locale, vérification) : un agent neuf par ticket, sur sa branche." }, { s: "implement", p: "En mode enchaîné : plan validé par la section, tests ciblés, ni relecture ni fusion." }, { p: "Quatre relecteurs (spec, conventions, bugs, sécurité) et le juge, puis une seule vérification, le squash et un contrôle. Arrêt au premier blocage." }] },
       { l: "Un bug qui résiste", st: [{ s: "debug", p: "Une boucle qui échoue sur ce bug avant toute hypothèse, puis la cause confirmée." }, { p: "Petit correctif : test de non-régression et commit. Plus gros : plan, puis implement." }] },
       { l: "Un bug à la cause connue", st: [{ s: "tdd", p: "Le test qui reproduit le bug d'abord, puis le correctif." }] },
     ]},
@@ -474,7 +477,7 @@ const FILES = [
   { p: "tickets/", d: "docs/", w: ["to-tickets", "to-spec"], r: ["plan", "implement", "next"], role: "Les tickets en local, par tranches verticales, avec leurs critères, leurs bloquants et leur statut.", tip: "Écrits par tickets, pour le compte de to-spec et to-tickets." },
   { p: "conventions.md", d: "docs/", w: ["retro"], r: ["review"], role: "Les règles de jugement pour la relecture : ce qu'aucun linter ne vérifie, comme la cohérence entre fichiers.", tip: "Lu par review, pas par implement : les règles mécaniques deviennent des contrôles automatiques." },
   { p: "audits/<date>-upgrade.md", d: "docs/", w: ["upgrade"], r: ["upgrade"], role: "Un audit des versions : ce qui est à traiter, par priorité, ce qui n'a pas pu être vérifié, et les montées écartées.", tip: "Le suivant dit ce qui est nouveau, réglé ou traîne depuis le dernier, et ne repropose pas ce qui a été écarté." },
-  { p: "journal.md", d: "docs/", w: ["plan", "implement"], r: [], role: "Le journal des décisions prises sans toi, quand le CLAUDE.md a une section Autonomie : contexte, décision, alternatives, sources, à revoir si.", tip: "Le journal du plan garde une ligne courte qui y renvoie." },
+  { p: "journal.md", d: "docs/", w: ["plan", "implement", "ticket-chain"], r: ["ticket-chain"], role: "Le journal des décisions prises sans toi, quand le CLAUDE.md a une section Autonomie : contexte, décision, alternatives, sources, à revoir si.", tip: "Le journal du plan garde une ligne courte qui y renvoie." },
   { p: "plans/", d: "docs/", w: ["plan"], r: ["implement", "review", "next"], role: "Les plans d'implémentation : vagues, tâches à cocher, critères, journal et bilan. La ligne « > Statut : » dit où il en est.", tip: "implement coche les cases au fil des commits : une reprise repart de la première case vide." },
 ];
 

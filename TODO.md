@@ -88,3 +88,13 @@
   champs que le script documente déjà ; partir des PR ouvertes de Renovate ou Dependabot quand
   le projet en a ; proposer `docker scout` ou trivy dans un conteneur épinglé pour les failles
   des images ; étendre le script à PyPI, Go et Composer (OSV et deps.dev les couvrent).
+- [x] **`/ticket-chain`** : les tickets d'une spec enchaînés en autonomie, d'après le workflow
+  d'un projet privé, dans un projet qui a une section `## Autonomie`.
+- [ ] Essayer `/ticket-chain` sur un dépôt jetable (une spec, deux tickets, `Fin : fusion
+  locale`) : deux squash sur `main` avec `Ticket: <ref>`, un contrôle qui ne relance pas la
+  vérification sur un arbre identique, un arrêt propre sur une question métier.
+- [ ] `/ticket-chain` avec une fin par PR (gestionnaire distant, une PR par ticket) : la v1
+  exige la fusion locale.
+- [ ] `/onboard` propose la section `## Autonomie` (et `## Audit du code`) quand le projet a
+  des tickets cadrés.
+- [ ] Le dépôt en plugin : espace de noms, workflows livrés par le plugin.

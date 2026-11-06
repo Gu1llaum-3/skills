@@ -58,6 +58,7 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 | Une spec ou un cahier des charges à découper en tickets | `/to-tickets` |
 | Un ticket (des skills, d'une PO, d'un client) à analyser avant de coder | `/plan <ticket>` |
 | Un plan validé, ou un ticket à attaquer directement | `/implement <plan ou ticket>` |
+| Les tickets d'une spec à enchaîner sans toi, dans un projet avec une section `## Autonomie` | `/ticket-chain <feature>` |
 | Une branche ou un travail à relire contre sa spec et les conventions | `/review` |
 | Des bugs à chercher dans un diff | `/code-review` |
 | Un bug dont la cause est connue | `/tdd` |
@@ -81,7 +82,8 @@ une seule question en texte : « Qu'est-ce que tu veux faire ? », puis orienter
 
 Le parcours principal : `/brainstorming` ou `/feature` → `/plan` → `/implement` (qui écrit le
 code avec `tdd`). Pour un gros travail, `/to-spec` → `/to-tickets` → un `/implement` par
-ticket. `interview`, `research`, `adr` et `to-questionnaire` se glissent en cours de route.
+ticket, ou `/ticket-chain` pour les enchaîner seul. `interview`, `research`, `adr` et
+`to-questionnaire` se glissent en cours de route.
 
 **Ce que la carte ne couvre pas** : le dire en une ligne, puis proposer ce qui s'en approche le plus. Ne
 recommander que des skills présents dans la liste de la session ; un skill de la carte absent se

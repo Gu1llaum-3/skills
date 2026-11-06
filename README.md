@@ -14,6 +14,7 @@ Mes skills personnels pour Claude Code.
 | `/onboard` | Préparer un projet existant pour Claude : créer ou mettre à l'épreuve `CLAUDE.md`, `ARCHITECTURE.md` |
 | `/architecture` | Chercher où approfondir les modules d'un projet existant : rapport HTML, puis entretien sur la piste choisie |
 | `/retro` | Après une session difficile : ce qu'il faudrait changer dans l'environnement (renvois, contrôles, conventions de relecture) |
+| `/ticket-chain` | Enchaîner les tickets d'une spec sans toi : un agent neuf par ticket, quatre relecteurs et un juge, une vérification, une fusion locale par squash (projet avec une section `## Autonomie`) |
 | `/upgrade` | Auditer les versions (Node, pnpm, paquets, images Docker, Postgres) : failles, fins de vie, paquets abandonnés, mises à jour compatibles, dans `docs/audits/` |
 | `/git-guardrails` | Bloquer les commandes git destructrices de Claude (push, reset --hard, clean…) par un hook |
 | `/next` | Quel skill lancer maintenant : lit la conversation, ou l'état du projet |
@@ -56,6 +57,9 @@ Mes skills personnels pour Claude Code.
 /poc ──► docs/poc/<slug>.md ──► plan ──► implement ──► verdict ──► /brainstorming ou /feature
 
 ticket de la roadmap, ou écrit ailleurs ──► /implement <ticket> ──► plan ──► implement ──► tickets
+
+tickets d'une spec, section Autonomie ──► /ticket-chain <feature> ──► par ticket : implement
+    (enchaîné) ──► 4 relecteurs + juge ──► corrections, vérification, squash ──► contrôle
 
 bug qui résiste ──► debug ──┬── petit correctif ──► test de non-régression, commit
                             └── plus gros ──► plan ──► implement
